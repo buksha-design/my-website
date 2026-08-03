@@ -1,6 +1,9 @@
+# Игнорировать локальную папку тяжелых бэкапов
+backup_large_files/
+
+# Временные файлы macOS
+.DS_Store
+
+# Исходники After Effects
 *.aep
 *.AEP
-*.mov
-*.MOV
-*.mp4
-*.MP4

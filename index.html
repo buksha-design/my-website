@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiktor Buksza | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <header class="header">
+        <a href="#" class="header__logo-container" id="logoLink" aria-label="Wiktor Buksza - Наверх">
+            <div class="header__logo" id="lottie-logo">
+                <!-- Lottie animation will be injected here -->
+            </div>
+            <span class="header__author-name">Wiktor Buksza</span>
+        </a>
+        <nav class="header__nav">
+            <a href="#works">Works</a>
+            <a href="#notus-type">Notus Type</a>
+            <a href="#services">Services</a>
+            <button class="nav-contact-trigger" id="contactTrigger" aria-expanded="false" aria-controls="contactSection">Contact</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1 class="hero__title">
+I craft brand experiences<br>
+that merge technology,<br>
+emotion and visual precision.
+            </h1>
+        </section>
+
+        <section class="projects" id="works">
+            <h2 class="display-button">Selected works</h2>
+
+            <!-- Проект Antigravity -->
+            <div class="project-antigravity reveal">
+                <div class="antigravity-media">
+                    <div class="antigravity-media__large">
+                        <video autoplay muted loop playsinline>
+                            <source src="optimized assets/Antigravity/Levitation Scene - Final Render.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="antigravity-media__row">
+                        <div class="antigravity-media__small">
+                            <img src="optimized assets/Antigravity/Image 2.jpg" alt="Antigravity Detail 1">
+                        </div>
+                        <div class="antigravity-media__small">
+                            <img src="optimized assets/Antigravity/Image 3.jpg" alt="Antigravity Detail 2">
+                        </div>
+                    </div>
+                </div>
+                <div class="antigravity-info">
+                    <div class="antigravity-info__meta">
+                        <span class="antigravity-info__category">Project</span>
+                        <div class="antigravity-info__title-group">
+                            <h3 class="antigravity-info__title">Antigravity</h3>
+                            <span class="antigravity-info__subtitle">Motion Exploration</span>
+                        </div>
+                    </div>
+                    <div></div> <!-- Пустая колонка для выравнивания с сеткой -->
+                    <div class="antigravity-info__details">
+                        <p class="antigravity-info__description">
+                            Antigravity — cinematic 3D animation exploring the feeling of mental overload and release. A calm minimalist workspace slowly breaks the laws of physics as everyday objects begin to float, symbolizing a moment of detachment from routine, pressure, and noise.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Проект DCLEX с бесконечным слайдером -->
+            <div class="project-dclex reveal">
+                <div class="dclex-slider">
+                    <div class="dclex-slider__track">
+                        <!-- Основной набор из 4 элементов -->
+                        <div class="dclex-slider__item">
+                            <video autoplay muted loop playsinline>
+                                <source src="optimized assets/dclex/DCLEX Dribbble 1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="dclex-slider__item">
+                            <img src="optimized assets/dclex/DCLEX Dribbble 2.jpg" alt="DCLEX Screen 1">
+                        </div>
+                        <div class="dclex-slider__item">
+                            <video autoplay muted loop playsinline>
+                                <source src="optimized assets/dclex/DCLEX Dribbble 3.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="dclex-slider__item">
+                            <img src="optimized assets/dclex/DCLEX Dribbble 4.jpg" alt="DCLEX Screen 2">
+                        </div>
+                        <!-- Дублирующий набор для бесшовного зацикливания -->
+                        <div class="dclex-slider__item">
+                            <video autoplay muted loop playsinline>
+                                <source src="optimized assets/dclex/DCLEX Dribbble 1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="dclex-slider__item">
+                            <img src="optimized assets/dclex/DCLEX Dribbble 2.jpg" alt="DCLEX Screen 1">
+                        </div>
+                        <div class="dclex-slider__item">
+                            <video autoplay muted loop playsinline>
+                                <source src="optimized assets/dclex/DCLEX Dribbble 3.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="dclex-slider__item">
+                            <img src="optimized assets/dclex/DCLEX Dribbble 4.jpg" alt="DCLEX Screen 2">
+                        </div>
+                    </div>
+                </div>
+                <div class="dclex-info">
+                    <div class="dclex-info__meta">
+                        <span class="dclex-info__category">Project</span>
+                        <div class="dclex-info__title-group">
+                            <h3 class="dclex-info__title">DCLEX</h3>
+                            <span class="dclex-info__subtitle">Financial Platform</span>
+                        </div>
+                    </div>
+                    <div></div> <!-- Пустая колонка для сохранения пропорций макета -->
+                    <div class="dclex-info__details">
+                        <p class="dclex-info__description">
+                            DCLEX is a modern financial platform that brings traditional stock markets to the decentralized finance (DeFi) market. It enables the legal purchase and tokenization of real stocks (e.g., Apple, Tesla).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Проект Verity -->
+            <div class="project-verity reveal">
+                <div class="dclex-slider">
+                    <div class="dclex-slider__track">
+                        <!-- Оригинальный набор (3 ассета) -->
+                        <div class="dclex-slider__item">
+                            <video autoplay muted loop playsinline>
+                                <source src="optimized assets/Verity/Verity Website 1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="dclex-slider__item">
+                            <video autoplay muted loop playsinline>
+                                <source src="optimized assets/Verity/Verity Website 2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="dclex-slider__item">
+                            <video autoplay muted loop playsinline>
+                                <source src="optimized assets/Verity/Verity Website 3.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <!-- Дублирующий набор для бесшовного зацикливания -->
+                        <div class="dclex-slider__item">
+                            <video autoplay muted loop playsinline>
+                                <source src="optimized assets/Verity/Verity Website 1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="dclex-slider__item">
+                            <video autoplay muted loop playsinline>
+                                <source src="optimized assets/Verity/Verity Website 2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="dclex-slider__item">
+                            <video autoplay muted loop playsinline>
+                                <source src="optimized assets/Verity/Verity Website 3.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <div class="dclex-info">
+                    <div class="dclex-info__meta">
+                        <span class="dclex-info__category">Project</span>
+                        <div class="dclex-info__title-group">
+                            <h3 class="dclex-info__title">Verity</h3>
+                            <span class="dclex-info__subtitle">Zero-touch warehouse intelligence</span>
+                        </div>
+                    </div>
+                    <div></div> <!-- Пустая колонка для сохранения пропорций макета -->
+                    <div class="dclex-info__details">
+                        <p class="dclex-info__description">
+                            Verity’s systems transform businesses across industries—enabling zero-error warehouses through automated inventory tracking, analytics, and process optimization. Engineered for reliability, performance, and lasting value, Verity continues to shape the future of AI-powered solutions, defining the future of mobile intelligence.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция Notus Type (Лаборатория шрифтов) -->
+        <section class="type-lab" id="notus-type">
+            <h2 class="display-button">Font</h2>
+            <div class="type-lab__header">
+                <h2 class="type-lab__title" style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
+                    Notus Type 
+                    <span class="badge-coming-soon badge-coming-soon--title">Coming Soon</span>
+                </h2>
+                <p class="type-lab__header-description">Notus Type – a “classic, elegant and light” serif family by Wiktor Buksza. It blends smooth, flowing serif endings (its signature motif) with high-contrast modern shapes. Notus comes in five styles (Display/Italic, Text/Italic, Caption) and supports full Latin and Cyrillic alphabets, including small caps and old-style figures. This refined type system is crafted for premium editorial use: bold enough for big headlines, yet crisp and legible in text and caption settings.</p>
+            </div>
+
+            <!-- Анимационный блок Notus Lottie (16:9) -->
+            <div class="type-lab__animation-container">
+                <div id="lottie-notus" class="type-lab__lottie-player"></div>
+            </div>
+
+            <!-- Витрина начертаний шрифта Notus Type -->
+            <div class="type-lab__showcase">
+                <div class="type-lab__showcase-header">
+                    <h3 class="type-lab__showcase-title">Notus</h3>
+                </div>
+                <div class="type-lab__showcase-item showcase-display">
+                    <span class="type-lab__showcase-meta">Display Regular</span>
+                    <div class="type-lab__showcase-text">Notus Display</div>
+                    <div class="type-lab__showcase-pangram">Jackdaws love my big sphinx of quartz. 0123456789</div>
+                </div>
+                <div class="type-lab__showcase-item showcase-display-italic">
+                    <span class="type-lab__showcase-meta">Display Italic</span>
+                    <div class="type-lab__showcase-text">Notus Display Italic</div>
+                    <div class="type-lab__showcase-pangram">Quiet nymphs gracefully build vexing puzzles. 0123456789</div>
+                </div>
+                <div class="type-lab__showcase-item showcase-text">
+                    <span class="type-lab__showcase-meta">Text Regular</span>
+                    <div class="type-lab__showcase-text">Notus Text</div>
+                    <div class="type-lab__showcase-pangram">The quick brown fox jumps over the lazy dog. 0123456789</div>
+                </div>
+                <div class="type-lab__showcase-item showcase-text-italic">
+                    <span class="type-lab__showcase-meta">Text Italic</span>
+                    <div class="type-lab__showcase-text">Notus Text Italic</div>
+                    <div class="type-lab__showcase-pangram">Pack my box with five dozen liquor jugs. 0123456789</div>
+                </div>
+                <div class="type-lab__showcase-item showcase-caption">
+                    <span class="type-lab__showcase-meta">Caption Regular</span>
+                    <div class="type-lab__showcase-text">Notus Caption</div>
+                    <div class="type-lab__showcase-pangram">Sphinx of black quartz, judge my vow. 0123456789</div>
+                </div>
+                <div class="type-lab__showcase-item showcase-symbols">
+                    <span class="type-lab__showcase-meta">Multilingual & Symbols</span>
+                    <div class="type-lab__showcase-text">Latin & Кириллица</div>
+                    <div class="type-lab__showcase-pangram">
+                        <span class="showcase-pangram-desc">Multilingual support with rich set of characters, specials, ligatures & symbols:</span>
+                        <span class="showcase-pangram-glyphs">@ % & * ? ! † ‡ § ¶ © ®</span>
+                    </div>
+                </div>
+                <div class="type-lab__showcase-item showcase-multilingual-wide">
+                    <span class="type-lab__showcase-meta">Extended Character Set</span>
+                    <div class="type-lab__showcase-text">Mülтiliñğúał</div>
+                    <div class="symbols-marquee">
+                        <div class="symbols-marquee__track">
+                            <span class="symbols-marquee__content">
+                                A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z А Б В Г Д Е Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я а б в г д е ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я 0 1 2 3 4 5 6 7 8 9 @ % & * ? ! ( ) [ ] { } € $ £ ¥ © ® † ‡ § ¶ №
+                            </span>
+                            <span class="symbols-marquee__content">
+                                A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z А Б В Г Д Е Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я а б в г д е ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я 0 1 2 3 4 5 6 7 8 9 @ % & * ? ! ( ) [ ] { } € $ £ ¥ © ® † ‡ § ¶ №
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Бесконечный слайдер для Notus Type -->
+            <div class="type-lab__slider-container-wide reveal" style="margin-top: 1rem; margin-bottom: 2rem;">
+                <div class="type-lab__slider-info">
+                    <h4 class="type-lab__slider-title">
+                        Visual specimens and editorial layouts
+                    </h4>
+                    <p class="type-lab__slider-text">
+                        Showcasing Notus Type in premium brand contexts and high-contrast typography compositions.
+                    </p>
+                </div>
+                <div class="dclex-slider">
+                    <div class="dclex-slider__track">
+                        <!-- Основной набор из 3 изображений -->
+                        <div class="dclex-slider__item">
+                            <img src="optimized assets/notus/Notus 1.png" alt="Notus Showcase 1">
+                        </div>
+                        <div class="dclex-slider__item">
+                            <img src="optimized assets/notus/Notus 2.png" alt="Notus Showcase 2">
+                        </div>
+                        <div class="dclex-slider__item">
+                            <img src="optimized assets/notus/Notus 3.png" alt="Notus Showcase 3">
+                        </div>
+                        <!-- Дублирующий набор для бесшовного зацикливания -->
+                        <div class="dclex-slider__item">
+                            <img src="optimized assets/notus/Notus 1.png" alt="Notus Showcase 1">
+                        </div>
+                        <div class="dclex-slider__item">
+                            <img src="optimized assets/notus/Notus 2.png" alt="Notus Showcase 2">
+                        </div>
+                        <div class="dclex-slider__item">
+                            <img src="optimized assets/notus/Notus 3.png" alt="Notus Showcase 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="type-lab__list">
+                <!-- Переключатель 01 — Spacing Control -->
+                <div class="type-lab__toggle" data-target="lab-kerning">
+                    <span class="type-lab__toggle-text">Fine-tune letter tracking and optical spacing.</span>
+                    <span class="type-lab__toggle-link">&rarr; Spacing Tool</span>
+                </div>
+                <!-- Скрываемый блок 01 — Spacing Control -->
+                <div class="type-lab__item type-lab__item--collapsible" id="lab-kerning">
+                    <div class="type-lab__item-inner">
+                        <div class="type-lab__meta">
+                            <span class="type-lab__number">01</span>
+                            <span class="type-lab__label">Spacing Control</span>
+                        </div>
+                        <div class="type-lab__display" id="kerning-text" style="cursor: pointer;">NOTUS</div>
+                        <div class="type-lab__controls" style="max-width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem;">
+                            <div class="type-lab__slider-wrapper" style="flex: 1; max-width: 400px; margin-top: 0;">
+                                <span class="type-lab__slider-label">TIGHT</span>
+                                <div class="type-lab__slider-container">
+                                    <div class="type-lab__slider-line"></div>
+                                    <input type="range" class="type-lab__slider" id="kerning-slider" min="0" max="15" step="0.5" value="7.5">
+                                </div>
+                                <span class="type-lab__slider-label">WIDE</span>
+                            </div>
+                            <div class="type-lab__toolbar">
+                                <div class="type-lab__pill-group type-lab__pill-group--case" id="kerning-case-group">
+                                    <button class="type-lab__pill-btn" data-case="mixed" title="Смешанный регистр">Aa</button>
+                                    <button class="type-lab__pill-btn is-active" data-case="upper" title="Верхний регистр">AA</button>
+                                </div>
+                                <div class="type-lab__pill-group type-lab__pill-group--align" id="kerning-align-group">
+                                    <button class="type-lab__pill-btn" data-align="left" title="Выравнивание по левому краю">
+                                        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <line x1="1" y1="1.5" x2="15" y2="1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            <line x1="1" y1="4.5" x2="11" y2="4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            <line x1="1" y1="7.5" x2="15" y2="7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            <line x1="1" y1="10.5" x2="7" y2="10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="type-lab__pill-btn is-active" data-align="center" title="Выравнивание по центру">
+                                        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <line x1="3" y1="1.5" x2="13" y2="1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            <line x1="1" y1="4.5" x2="15" y2="4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            <line x1="3" y1="7.5" x2="13" y2="7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            <line x1="5" y1="10.5" x2="11" y2="10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="type-lab__pill-btn" data-align="right" title="Выравнивание по правому краю">
+                                        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <line x1="1" y1="1.5" x2="15" y2="1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            <line x1="5" y1="4.5" x2="15" y2="4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            <line x1="1" y1="7.5" x2="15" y2="7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            <line x1="9" y1="10.5" x2="15" y2="10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Переключатель 02 — Weight Morphing -->
+                <div class="type-lab__toggle" data-target="lab-weight">
+                    <span class="type-lab__toggle-text">Morph variable weights from Display to Text.</span>
+                    <span class="type-lab__toggle-link">&rarr; Weight Tool</span>
+                </div>
+                <!-- Скрываемый блок 02 — Weight Morphing -->
+                <div class="type-lab__item type-lab__item--collapsible" id="lab-weight">
+                    <div class="type-lab__item-inner">
+                        <div class="type-lab__meta">
+                            <span class="type-lab__number">02</span>
+                            <span class="type-lab__label">Weight Morphing</span>
+                        </div>
+                        <div class="type-lab__display" id="weight-text">The quick brown fox jumps over the lazy dog</div>
+                        <div class="type-lab__controls" style="max-width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+                            <div class="type-lab__slider-wrapper" style="flex: 1; max-width: 400px; margin-top: 0;">
+                                <span class="type-lab__slider-label">LIGHT</span>
+                                <div class="type-lab__slider-container">
+                                    <div class="type-lab__slider-line"></div>
+                                    <input type="range" class="type-lab__slider" id="weight-slider" min="0" max="100" step="1" value="0">
+                                </div>
+                                <span class="type-lab__slider-label">BOLD</span>
+                            </div>
+                            
+                            <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+                                <div class="type-lab__toolbar">
+                                    <div class="type-lab__pill-group type-lab__pill-group--case" id="weight-case-group">
+                                        <button class="type-lab__pill-btn is-active" data-case="mixed" title="Смешанный регистр">Aa</button>
+                                        <button class="type-lab__pill-btn" data-case="upper" title="Верхний регистр">AA</button>
+                                    </div>
+                                    <div class="type-lab__pill-group type-lab__pill-group--align" id="weight-align-group">
+                                        <button class="type-lab__pill-btn is-active" data-align="left" title="Выравнивание по левому краю">
+                                            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <line x1="1" y1="1.5" x2="15" y2="1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                <line x1="1" y1="4.5" x2="11" y2="4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                <line x1="1" y1="7.5" x2="15" y2="7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                <line x1="1" y1="10.5" x2="7" y2="10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            </svg>
+                                        </button>
+                                        <button class="type-lab__pill-btn" data-align="center" title="Выравнивание по центру">
+                                            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <line x1="3" y1="1.5" x2="13" y2="1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                <line x1="1" y1="4.5" x2="15" y2="4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                <line x1="3" y1="7.5" x2="13" y2="7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                <line x1="5" y1="10.5" x2="11" y2="10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            </svg>
+                                        </button>
+                                        <button class="type-lab__pill-btn" data-align="right" title="Выравнивание по правому краю">
+                                            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <line x1="1" y1="1.5" x2="15" y2="1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                <line x1="5" y1="4.5" x2="15" y2="4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                <line x1="1" y1="7.5" x2="15" y2="7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                <line x1="9" y1="10.5" x2="15" y2="10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="type-lab__font-selector">
+                                    <button class="type-lab__font-btn is-active" data-font="regular">Display</button>
+                                    <button class="type-lab__font-btn" data-font="italic">Italic</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="type-lab__indicator-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 0.5rem; flex-wrap: wrap; gap: 1.5rem;">
+                            <div class="type-lab__indicator" id="weight-indicator">STROKE WEIGHT: 0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 03 — Type Anything (Temporarily hidden)
+                <div class="type-lab__item" id="lab-transform">
+                    <div class="type-lab__meta">
+                        <span class="type-lab__number">03</span>
+                        <span class="type-lab__label">Type Anything</span>
+                    </div>
+                    <div class="type-lab__display-container">
+                        <div class="type-lab__display type-lab__display--interactive" id="transform-text">
+                        </div>
+                    </div>
+                    <div class="type-lab__input-container">
+                        <input type="text" id="transform-input" class="type-lab__input-text" placeholder="Type anything..." value="KINETIC" maxlength="20">
+                    </div>
+                    <span class="type-lab__hint">Click anywhere on the block to morph form</span>
+                </div>
+                -->
+            </div>
+        </section>
+
+        <section class="stats" id="services">
+            <canvas id="stats-canvas" class="stats__canvas"></canvas>
+            <div class="stats__content">
+                <h2 class="stats__title">Designing<br>emotion<br>through<br>motion.</h2>
+            </div>
+            <div class="stats__list">
+                <div class="display-button">Services</div>
+                
+                <div class="stats__item" id="service-motion">
+                    <h3 class="stats__service-title">Motion Design</h3>
+                    <p class="stats__service-description">Creating high-fidelity motion graphics and designed to bring digital experiences to life.</p>
+                </div>
+                <div class="stats__item" id="service-3d">
+                    <h3 class="stats__service-title">3D Visualisation</h3>
+                    <p class="stats__service-description">Crafting high-end, tactile 3D visuals and detailed product renders.</p>
+                </div>
+                <div class="stats__item" id="service-brand">
+                    <h3 class="stats__service-title">Brand Identity</h3>
+                    <p class="stats__service-description">Building cohesive brand systems and motion-first guidelines.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-white">
+            <div class="stats-white__header">
+                <h2 class="stats-white__title">Pixel-perfect<br>motion crafted<br>frame by frame</h2>
+            </div>
+            <div class="stats-white__grid">
+                <div class="stats-white__item">
+                    <span class="stats-white__number">
+                        <svg class="stats-white__infinity-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Infinity">
+                            <path class="infinity-path" pathLength="100" d="M12 12 C9 7, 5.5 7, 5.5 12 C5.5 17, 9 17, 12 12 C15 7, 18.5 7, 18.5 12 C18.5 17, 15 17, 12 12 Z" />
+                        </svg>
+                    </span>
+                    <span class="stats-white__label">Ideas translated into motion</span>
+                </div>
+                <div class="stats-white__item">
+                    <span class="stats-white__number">4K</span>
+                    <span class="stats-white__label">Pixel-perfect motion crafted frame by frame</span>
+                </div>
+                <div class="stats-white__item">
+                    <span class="stats-white__number">0 Limits</span>
+                    <span class="stats-white__label">Between concept and execution</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="cta__top">
+                Let's build visuals that people feel. <a href="#contact" class="cta__link">&rarr; Contact</a>
+            </div>
+
+            <!-- Contact form — slides in before the CTA title -->
+            <div class="contact" id="contactSection" aria-hidden="true">
+                <div class="contact__inner">
+                    <div class="contact__header">
+                        <div class="contact__headline">
+                            <span class="contact__label">Contact</span>
+                            <div class="contact__title-group">
+                                <h2 class="contact__title">Let's work<br>together.</h2>
+                            </div>
+                        </div>
+                        <button class="contact__close" id="contactClose" aria-label="Close form">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Direct email delivery via FormSubmit.co to wiktor.buksza@gmail.com (requires confirmation upon first test submission) -->
+                    <form class="contact__form" id="contactForm" action="https://formsubmit.co/wiktor.buksza@gmail.com" method="POST" novalidate>
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_subject" value="New message from portfolio!">
+                        <div class="contact__fields">
+                            <!-- Name -->
+                            <div class="contact__row contact__row--full">
+                                <div class="contact__field" id="field-name">
+                                    <label class="contact__field-label" for="contactName">Name</label>
+                                    <input
+                                        class="contact__input"
+                                        type="text"
+                                        id="contactName"
+                                        name="name"
+                                        placeholder="Your name"
+                                        autocomplete="given-name"
+                                    >
+                                    <span class="contact__error" id="error-name" role="alert"></span>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="contact__row contact__row--full">
+                                <div class="contact__field" id="field-email">
+                                    <label class="contact__field-label" for="contactEmail">Email</label>
+                                    <input
+                                        class="contact__input"
+                                        type="email"
+                                        id="contactEmail"
+                                        name="email"
+                                        placeholder="your@email.com"
+                                        autocomplete="email"
+                                    >
+                                    <span class="contact__error" id="error-email" role="alert"></span>
+                                </div>
+                            </div>
+
+                            <!-- Project type -->
+                            <div class="contact__row contact__row--full">
+                                <div class="contact__field" id="field-type">
+                                    <label class="contact__field-label">Project Type</label>
+                                    <div class="contact__tags" role="group" aria-label="Select project type">
+                                        <button type="button" class="contact__tag" data-value="Motion Design">Motion Design</button>
+                                        <button type="button" class="contact__tag" data-value="3D Visualisation">3D Visualisation</button>
+                                        <button type="button" class="contact__tag" data-value="Brand Identity">Brand Identity</button>
+                                        <button type="button" class="contact__tag" data-value="Other">Other</button>
+                                    </div>
+                                    <input type="hidden" id="contactType" name="type">
+                                    <span class="contact__error" id="error-type" role="alert"></span>
+                                </div>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="contact__row contact__row--full">
+                                <div class="contact__field" id="field-message">
+                                    <label class="contact__field-label" for="contactMessage">Message</label>
+                                    <textarea
+                                        class="contact__input contact__textarea"
+                                        id="contactMessage"
+                                        name="message"
+                                        placeholder="Tell me about your project..."
+                                        rows="4"
+                                    ></textarea>
+                                    <span class="contact__error" id="error-message" role="alert"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form footer -->
+                        <div class="contact__footer">
+                            <button type="submit" class="contact__submit" id="contactSubmit">
+                                <span class="contact__submit-text">Send</span>
+                                <svg class="contact__submit-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <p class="contact__privacy">By submitting this form, you agree to the processing of your personal data.</p>
+                        </div>
+                    </form>
+
+                    <!-- Success state -->
+                    <div class="contact__success" id="contactSuccess" aria-hidden="true">
+                        <div class="contact__success-icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M11 20L17 26L29 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="contact__success-title">Message sent</h3>
+                        <p class="contact__success-text">I'll get back to you shortly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="cta__title">Designed for what’s next.</h2>
+        </section>
+    </main>
+
+
+    <footer class="footer">
+        <div class="footer__grid">
+            <div class="footer__logo-container">
+                <div id="lottie-logo-footer"></div>
+                <p class="footer__author-name">Wiktor Buksza</p>
+            </div>
+            <div class="footer__content">
+                <div class="footer__col footer__col--text">
+                    <p>Open for collaborations<br>in motion design, 3D,<br>and high-end visual<br>production.</p>
+                </div>
+                <div class="footer__col footer__col--contact">
+                    <h4>OFFICE</h4>
+                    <p>Wrocław, Mieszczańska 31</p>
+                    <h4 style="margin-top: 3rem;">CONTACT</h4>
+                    <a href="mailto:hello@buksha.design" class="footer__email">hello@buksha.design</a>
+                </div>
+                <div class="footer__col footer__col--social">
+                    <h4>SOCIAL</h4>
+                    <nav>
+                        <a href="#">Instagram</a>
+                        <a href="#">Behance</a>
+                        <a href="#">Spotify</a>
+                        <a href="#">LinkedIn</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="json/Notus/data.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -167,10 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const statsTitle = document.querySelector('.stats__title');
     if (statsTitle) splitTextToChars(statsTitle);
 
-    // Применяем анимацию символов к stats-white__title
-    const statsWhiteTitle = document.querySelector('.stats-white__title');
-    if (statsWhiteTitle) splitTextToChars(statsWhiteTitle);
-
     // Scroll Reveal Animation (IntersectionObserver)
     const observerOptions = {
         threshold: 0,

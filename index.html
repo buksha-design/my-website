@@ -507,10 +507,12 @@ emotion and visual precision.
                         </button>
                     </div>
 
-                    <!-- Direct email delivery via FormSubmit.co to wiktor.buksza@gmail.com (requires confirmation upon first test submission) -->
-                    <form class="contact__form" id="contactForm" action="https://formsubmit.co/wiktor.buksza@gmail.com" method="POST" novalidate>
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_subject" value="New message from portfolio!">
+                    <!-- Отправка через Web3Forms на wiktor.buksza@gmail.com -->
+                    <form class="contact__form" id="contactForm" novalidate>
+                        <input type="hidden" name="access_key" value="5a52640a-9343-48df-a69f-ecb0d05280b2">
+                        <input type="hidden" name="subject" value="New message from buksha.design portfolio">
+                        <input type="hidden" name="from_name" value="buksha.design Contact Form">
+                        <input type="checkbox" name="botcheck" style="display:none">
                         <div class="contact__fields">
                             <!-- Name -->
                             <div class="contact__row contact__row--full">

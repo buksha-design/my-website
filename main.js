@@ -413,30 +413,60 @@ document.addEventListener('DOMContentLoaded', () => {
         return valid;
     }
 
-    // --- Отправка формы ---
+    // --- Отправка формы через Web3Forms (AJAX) ---
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            if (!validateAll()) {
-                e.preventDefault();
-                return;
-            }
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-            // Устанавливаем скрытый input _next, чтобы FormSubmit перенаправил обратно на наш сайт с хэшем #success
-            let nextInput = contactForm.querySelector('input[name="_next"]');
-            if (!nextInput) {
-                nextInput = document.createElement('input');
-                nextInput.type = 'hidden';
-                nextInput.name = '_next';
-                contactForm.appendChild(nextInput);
-            }
-            nextInput.value = window.location.origin + window.location.pathname + '#success';
+            if (!validateAll()) return;
 
-            // Блокируем кнопку отправки и запускаем анимацию загрузки
             const submitBtn = document.getElementById('contactSubmit');
             if (submitBtn) {
                 submitBtn.disabled = true;
                 submitBtn.classList.add('contact__submit--loading');
                 submitBtn.querySelector('.contact__submit-text').textContent = 'Sending';
+            }
+
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Показываем встроенный success-state
+                    contactForm.style.display = 'none';
+                    const successEl = document.getElementById('contactSuccess');
+                    if (successEl) {
+                        successEl.removeAttribute('aria-hidden');
+                        successEl.style.display = 'flex';
+                    }
+                } else {
+                    // Возвращаем кнопку в исходное состояние при ошибке
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('contact__submit--loading');
+                        submitBtn.querySelector('.contact__submit-text').textContent = 'Send';
+                    }
+                    console.error('Web3Forms error:', result);
+                }
+            } catch (err) {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('contact__submit--loading');
+                    submitBtn.querySelector('.contact__submit-text').textContent = 'Send';
+                }
+                console.error('Network error:', err);
             }
         });
     }

@@ -450,6 +450,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (successEl) {
                         successEl.removeAttribute('aria-hidden');
                         successEl.style.display = 'flex';
+                        // Небольшая задержка чтобы сработал CSS-transition
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                successEl.classList.add('contact__success--visible');
+                            });
+                        });
+
+                        // Через 5 секунд возвращаем форму в исходное состояние
+                        setTimeout(() => {
+                            successEl.classList.remove('contact__success--visible');
+                            setTimeout(() => {
+                                successEl.style.display = 'none';
+                                successEl.setAttribute('aria-hidden', 'true');
+                                contactForm.style.display = '';
+                                contactForm.reset();
+                                // Сбрасываем кнопку
+                                if (submitBtn) {
+                                    submitBtn.disabled = false;
+                                    submitBtn.classList.remove('contact__submit--loading');
+                                    submitBtn.querySelector('.contact__submit-text').textContent = 'Send';
+                                }
+                            }, 500);
+                        }, 5000);
                     }
                 } else {
                     // Возвращаем кнопку в исходное состояние при ошибке

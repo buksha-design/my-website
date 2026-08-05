@@ -1348,26 +1348,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const allVideos = document.querySelectorAll('video');
         allVideos.forEach(video => {
-            const isHeroVideo = video.closest('.hero') || video.closest('.project-antigravity');
-            if (!isHeroVideo) {
-                video.setAttribute('preload', 'none');
-            } else {
-                video.setAttribute('preload', 'auto');
-            }
-
-            // Автоматическое скрытие лоадера при готовности кадров видео
-            const parentEl = video.parentElement;
-            const loader = parentEl ? parentEl.querySelector('.video-loader') : null;
-            if (loader) {
-                const hideLoader = () => loader.classList.add('is-loaded');
-                if (video.readyState >= 3) {
-                    hideLoader();
-                } else {
-                    video.addEventListener('canplay', hideLoader, { once: true });
-                    video.addEventListener('playing', hideLoader, { once: true });
-                }
-            }
-
+            video.setAttribute('preload', 'auto');
             videoObserver.observe(video);
         });
     }

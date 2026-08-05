@@ -2575,31 +2575,8 @@ body {
     }
 }
 
-/* Video Loader (Preloader Indicator) */
+/* Video Loader (Preloader Indicator Disabled) */
 .video-loader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 28px;
-    height: 28px;
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    border-top-color: #ffffff;
-    border-radius: 50%;
-    animation: videoSpinner 0.75s linear infinite;
-    pointer-events: none;
-    z-index: 2;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.video-loader.is-loaded {
-    opacity: 0;
-    visibility: hidden;
-}
-
-@keyframes videoSpinner {
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
+    display: none !important;
 }
 

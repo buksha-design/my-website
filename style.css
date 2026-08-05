@@ -711,13 +711,14 @@ body {
 }
 
 .cta__title {
-    font-size: clamp(2.4rem, 6.7vw, 10.4rem);
+    font-size: clamp(2rem, 5.8vw, 7.8rem);
     font-weight: 400;
     letter-spacing: -0.05em;
     line-height: 0.95;
     max-width: 100%;
     padding: 4rem 0;
     width: 100%;
+    white-space: nowrap;
     text-align: left;
     text-align-last: left;
 }
@@ -2496,8 +2497,9 @@ body {
     }
 
     .cta__title {
-        font-size: clamp(1.9rem, 6.8vw, 4.8rem);
+        font-size: clamp(1.5rem, 5.2vw, 4.8rem);
         padding: 3rem 0;
+        white-space: nowrap;
         text-align: left;
         text-align-last: left;
     }

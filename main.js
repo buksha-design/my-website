@@ -762,11 +762,62 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =============================================
-    // ИНТЕРАКТИВНЫЙ ЭФФЕКТ СФЕРЫ (CANVAS 2D)
+    // ЛОГИКА СЕКЦИИ УСЛУГ (SERVICES)
     // =============================================
     const statsSection = document.querySelector('.stats');
-    const canvas = document.getElementById('stats-canvas');
 
+    if (statsSection) {
+        const serviceMotion = document.getElementById('service-motion');
+        const service3D = document.getElementById('service-3d');
+        const serviceBrand = document.getElementById('service-brand');
+        
+        let activeService = 'motion';
+
+        const updateActiveService = (serviceName) => {
+            activeService = serviceName;
+            const items = [
+                { el: serviceMotion, name: 'motion' },
+                { el: service3D, name: '3d' },
+                { el: serviceBrand, name: 'brand' }
+            ];
+
+            items.forEach(item => {
+                if (item.el) {
+                    if (item.name === activeService) {
+                        item.el.classList.add('is-active');
+                    } else {
+                        item.el.classList.remove('is-active');
+                    }
+                }
+            });
+        };
+
+        if (serviceMotion) {
+            serviceMotion.addEventListener('mouseenter', () => updateActiveService('motion'));
+            serviceMotion.addEventListener('click', (e) => {
+                e.preventDefault();
+                updateActiveService('motion');
+            });
+        }
+        if (service3D) {
+            service3D.addEventListener('mouseenter', () => updateActiveService('3d'));
+            service3D.addEventListener('click', (e) => {
+                e.preventDefault();
+                updateActiveService('3d');
+            });
+        }
+        if (serviceBrand) {
+            serviceBrand.addEventListener('mouseenter', () => updateActiveService('brand'));
+            serviceBrand.addEventListener('click', (e) => {
+                e.preventDefault();
+                updateActiveService('brand');
+            });
+        }
+
+        updateActiveService('motion');
+    }
+
+    const canvas = document.getElementById('stats-canvas');
     if (statsSection && canvas) {
         const ctx = canvas.getContext('2d');
         const N = 900;

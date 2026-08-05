@@ -1354,6 +1354,20 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 video.setAttribute('preload', 'auto');
             }
+
+            // Автоматическое скрытие лоадера при готовности кадров видео
+            const parentEl = video.parentElement;
+            const loader = parentEl ? parentEl.querySelector('.video-loader') : null;
+            if (loader) {
+                const hideLoader = () => loader.classList.add('is-loaded');
+                if (video.readyState >= 3) {
+                    hideLoader();
+                } else {
+                    video.addEventListener('canplay', hideLoader, { once: true });
+                    video.addEventListener('playing', hideLoader, { once: true });
+                }
+            }
+
             videoObserver.observe(video);
         });
     }

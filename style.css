@@ -2459,6 +2459,11 @@ body {
     .stats__video-container {
         width: 100%;
         opacity: 0.35;
+        justify-content: center;
+    }
+
+    .stats__video {
+        object-position: center center;
     }
 
     .stats__list {

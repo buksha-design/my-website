@@ -429,14 +429,15 @@ body {
     position: relative;
     overflow: hidden;
     background-color: #080808; /* Всегда премиальный глубокий темный фон по умолчанию */
-    padding: var(--section-spacing) var(--container-padding) var(--section-spacing);
+    padding: var(--section-spacing) var(--container-padding);
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: flex-start;
     border-top: 1px solid rgba(255, 255, 255, 0.15); /* Светлая рамка сверху по умолчанию */
-    /* Выравниваем с CTA чтобы линии были на одном уровне */
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: calc(-1 * var(--container-padding));
+    margin-right: calc(-1 * var(--container-padding));
+    width: calc(100% + 2 * var(--container-padding));
+    box-sizing: border-box;
     transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -2450,6 +2451,9 @@ body {
         grid-template-columns: 1fr;
         gap: 3rem;
         border-top: 1px solid rgba(255, 255, 255, 0.15);
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
     }
 
     .stats__video-container {

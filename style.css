@@ -269,7 +269,8 @@ body {
 
 .hero__title.reveal-active .char {
     opacity: 1;
-    filter: blur(0);
+    filter: none;
+    will-change: auto;
     transform: translateY(0) scale(1);
 }
 

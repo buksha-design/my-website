@@ -519,7 +519,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0;
-    padding-left: 4rem;
+    padding-left: clamp(8rem, 28%, 20rem);
 }
 
 .stats__item {

@@ -7,3 +7,4 @@ backup_large_files/
 # Исходники After Effects
 *.aep
 *.AEP
+.DS_Store

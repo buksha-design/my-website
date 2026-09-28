@@ -1,5 +1,6 @@
-
 #!/bin/bash
+
+cd /Users/wiktorbuksza/Dropbox/www.buksha.design || exit 1
 
 git add .
 
@@ -9,4 +10,6 @@ if git diff --cached --quiet; then
 fi
 
 git commit -m "Update website"
+
 git push
+

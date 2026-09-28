@@ -270,6 +270,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Ссылка на контактную форму в футере
+    const footerContactTrigger = document.getElementById('footerContactTrigger');
+    if (footerContactTrigger) {
+        footerContactTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isOpen = contactSection.classList.contains('contact--open');
+            if (!isOpen) {
+                openContact();
+            } else {
+                contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }
+
     // --- Теги выбора типа проекта ---
     const tagButtons   = document.querySelectorAll('.contact__tag');
     const hiddenType   = document.getElementById('contactType');

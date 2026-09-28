@@ -719,12 +719,7 @@ body {
     max-width: 100%;
     padding: 4rem 0;
     width: 100%;
-    white-space: nowrap;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    text-align: justify;
-    text-align-last: justify;
+    text-align: left;
 }
 
 /* Footer */
@@ -2511,12 +2506,7 @@ body {
     .cta__title {
         font-size: clamp(1.1rem, 5.5vw, 4.8rem);
         padding: 3rem 0;
-        white-space: nowrap;
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        text-align: justify;
-        text-align-last: justify;
+        text-align: left;
     }
 
     /* Contact Form Section */

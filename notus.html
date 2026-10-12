@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVR219B845"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LVR219B845');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notus Type Specimen — Wiktor Buksza</title>
+    <meta name="description" content="Notus is a classic, elegant and light serif family engineered for high-contrast headlines and crystalline text rhythm across 3 optical sizes. Latin and Cyrillic.">
+    <meta property="og:title" content="Notus Type Specimen — Wiktor Buksza">
+    <meta property="og:description" content="High-contrast modern serif family with smooth, flowing serif endings. 5 styles, 3 optical sizes, full Latin & Cyrillic.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="notus.css">
+</head>
+<body>
+    <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <header class="specimen-nav">
+        <div class="container specimen-nav__inner">
+            <div class="specimen-nav__left">
+                <a href="index.html" class="specimen-nav__back" aria-label="Back to Portfolio">
+                    <span>&larr;</span>
+                    <span>Wiktor Buksza</span>
+                </a>
+                <span class="specimen-nav__badge">Type Specimen</span>
+            </div>
+            <div class="specimen-nav__center">
+                Notus Serif &middot; 5 Styles &middot; Latin &amp; Cyrillic
+            </div>
+            <div class="specimen-nav__actions">
+                <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark/light theme">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <a href="mailto:wiktor.buksza@gmail.com?subject=Notus%20Typeface%20Inquiry" class="display-button display-button--outline">Inquire</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-specimen">
+            <div class="container">
+                <div class="hero-specimen__top">
+                    <div class="hero-specimen__pill-group">
+                        <span class="display-button">Typeface</span>
+                        <span class="hero-specimen__status">Specimen 2026</span>
+                    </div>
+                    <div class="hero-specimen__pill-group">
+                        <span class="display-button display-button--outline">Display &middot; Text &middot; Caption</span>
+                    </div>
+                </div>
+
+                <h1 class="hero-specimen__headline">NOTUS</h1>
+
+                <div class="hero-specimen__grid">
+                    <div class="hero-specimen__manifesto">
+                        Notus is a <strong>classic, elegant and light</strong> serif family engineered by Wiktor Buksza. It fuses smooth, flowing serif endings with high-contrast contemporary architecture, delivering monumental drama in headlines and crystalline legibility in extended text settings.
+                    </div>
+                    <div class="hero-specimen__specs-list">
+                        <div class="hero-specimen__spec-item">
+                            <span>Optical Sizes</span>
+                            <strong>Display / Text / Caption</strong>
+                        </div>
+                        <div class="hero-specimen__spec-item">
+                            <span>Styles (5)</span>
+                            <strong>Display, Text, Caption (+Italics)</strong>
+                        </div>
+                        <div class="hero-specimen__spec-item">
+                            <span>Language Support</span>
+                            <strong>Extended Latin &amp; Cyrillic</strong>
+                        </div>
+                        <div class="hero-specimen__spec-item">
+                            <span>OpenType Features</span>
+                            <strong>Small Caps &middot; Oldstyle &middot; Ligatures</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lottie Motion Specimen -->
+                <div class="hero-lottie-wrapper">
+                    <div id="notusLottiePlayer" class="hero-lottie-player"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 01: Interactive Type Tester -->
+        <section class="tester-section" id="type-tester">
+            <div class="container">
+                <div class="section-meta">
+                    <div style="display: flex; align-items: baseline; gap: 1rem;">
+                        <span class="section-meta__num">01</span>
+                        <h2 class="section-meta__title">Interactive Specimen</h2>
+                    </div>
+                    <p class="section-meta__desc">Test Notus live. Select styles, adjust size, leading, tracking, and type your own copy.</p>
+                </div>
+
+                <div class="tester-card">
+                    <div class="tester-toolbar">
+                        <div class="tester-toolbar__row">
+                            <!-- Style pills -->
+                            <div class="tester-pill-group">
+                                <button class="tester-pill-btn is-active" data-font-style="'Notus Display', serif">Display Regular</button>
+                                <button class="tester-pill-btn" data-font-style="'Notus Display Italic', serif">Display Italic</button>
+                                <button class="tester-pill-btn" data-font-style="'Notus Text', serif">Text Regular</button>
+                                <button class="tester-pill-btn" data-font-style="'Notus Text Italic', serif">Text Italic</button>
+                                <button class="tester-pill-btn" data-font-style="'Notus Caption', serif">Caption</button>
+                            </div>
+
+                            <!-- Alignment & Case -->
+                            <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                                <div class="tester-pill-group">
+                                    <button class="tester-pill-btn is-active" data-tester-case="mixed">Aa</button>
+                                    <button class="tester-pill-btn" data-tester-case="upper">AA</button>
+                                    <button class="tester-pill-btn" data-tester-case="lower">aa</button>
+                                </div>
+                                <div class="tester-pill-group">
+                                    <button class="tester-pill-btn is-active" data-tester-align="left" title="Align Left">Left</button>
+                                    <button class="tester-pill-btn" data-tester-align="center" title="Align Center">Center</button>
+                                    <button class="tester-pill-btn" data-tester-align="right" title="Align Right">Right</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tester-toolbar__row">
+                            <!-- Sliders -->
+                            <div class="tester-controls-group">
+                                <div class="tester-slider-item">
+                                    <span class="tester-slider-label">Size</span>
+                                    <input type="range" class="tester-slider" id="sizeSlider" min="18" max="150" value="68">
+                                    <span class="tester-slider-val" id="sizeVal">68px</span>
+                                </div>
+                                <div class="tester-slider-item">
+                                    <span class="tester-slider-label">Leading</span>
+                                    <input type="range" class="tester-slider" id="leadingSlider" min="0.85" max="1.8" step="0.05" value="1.15">
+                                    <span class="tester-slider-val" id="leadingVal">1.15</span>
+                                </div>
+                                <div class="tester-slider-item">
+                                    <span class="tester-slider-label">Tracking</span>
+                                    <input type="range" class="tester-slider" id="trackingSlider" min="-0.04" max="0.25" step="0.01" value="0.00">
+                                    <span class="tester-slider-val" id="trackingVal">0.00em</span>
+                                </div>
+                            </div>
+
+                            <!-- Preset pangrams -->
+                            <div class="tester-presets">
+                                <span class="tester-presets-label">Presets:</span>
+                                <button class="tester-preset-tag" data-preset="headline-en">Headline EN</button>
+                                <button class="tester-preset-tag" data-preset="editorial-ru">Editorial RU</button>
+                                <button class="tester-preset-tag" data-preset="pangram-en">Pangram EN</button>
+                                <button class="tester-preset-tag" data-preset="pangram-ru">Pangram RU</button>
+                                <button class="tester-preset-tag" data-preset="numerals">Figures</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Editable live surface -->
+                    <div class="tester-canvas" id="testerCanvas" contenteditable="true" spellcheck="false" style="font-family: 'Notus Display', serif; font-size: 68px; line-height: 1.15; letter-spacing: 0em;">The architecture of stillness, rhythm and form.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02: Optical Sizing Hierarchy -->
+        <section class="optics-section">
+            <div class="container">
+                <div class="section-meta">
+                    <div style="display: flex; align-items: baseline; gap: 1rem;">
+                        <span class="section-meta__num">02</span>
+                        <h2 class="section-meta__title">Optical Hierarchy</h2>
+                    </div>
+                    <p class="section-meta__desc">Three engineered masters tailored for optical physics: Display for impact, Text for continuous reading, Caption for micro-clarity.</p>
+                </div>
+
+                <div class="optics-grid">
+                    <!-- Display Master -->
+                    <div class="optics-card">
+                        <div class="optics-card__header">
+                            <span class="optics-card__badge">Optical Size 01</span>
+                            <h3 class="optics-card__title">Notus Display</h3>
+                            <p class="optics-card__target">Optimized for 42pt and above</p>
+                        </div>
+                        <div class="optics-card__sample">
+                            <div class="sample-display">Elegance</div>
+                        </div>
+                        <div class="optics-card__footer">
+                            Extreme stroke contrast, hairline serifs, sculpted terminals, and narrow proportions crafted for dramatic titles, poster headlines, and editorial covers.
+                        </div>
+                    </div>
+
+                    <!-- Text Master -->
+                    <div class="optics-card">
+                        <div class="optics-card__header">
+                            <span class="optics-card__badge">Optical Size 02</span>
+                            <h3 class="optics-card__title">Notus Text</h3>
+                            <p class="optics-card__target">Optimized for 12pt to 24pt</p>
+                        </div>
+                        <div class="optics-card__sample">
+                            <div class="sample-text">Balanced rhythm, robust bracketed serifs, and proportional counters for effortless long-form reading.</div>
+                        </div>
+                        <div class="optics-card__footer">
+                            Tempered contrast and durable joins ensure the font holds strong ink-traps and maintains steady black-and-white balance in paragraphs.
+                        </div>
+                    </div>
+
+                    <!-- Caption Master -->
+                    <div class="optics-card">
+                        <div class="optics-card__header">
+                            <span class="optics-card__badge">Optical Size 03</span>
+                            <h3 class="optics-card__title">Notus Caption</h3>
+                            <p class="optics-card__target">Optimized for 6pt to 10pt</p>
+                        </div>
+                        <div class="optics-card__sample">
+                            <div class="sample-caption">Engineered for footnotes, data tables, packaging specifications, and legal micro-typography. Open apertures remain crisp even in dense environments.</div>
+                        </div>
+                        <div class="optics-card__footer">
+                            Generous x-height, widened apertures, sturdier hairlines, and loose natural tracking prevent clogging at minimal physical scales.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03: Distinctive Anatomy -->
+        <section class="anatomy-section">
+            <div class="container">
+                <div class="section-meta">
+                    <div style="display: flex; align-items: baseline; gap: 1rem;">
+                        <span class="section-meta__num">03</span>
+                        <h2 class="section-meta__title">Signature Anatomy</h2>
+                    </div>
+                    <p class="section-meta__desc">A closer inspection of the details that define Notus: flowing terminals, high-contrast modulation, and native Cyrillic drawing.</p>
+                </div>
+
+                <div class="anatomy-grid">
+                    <div class="anatomy-card">
+                        <div class="anatomy-card__glyph">Qg&amp;</div>
+                        <div class="anatomy-card__info">
+                            <h4>Flowing Serif Endings</h4>
+                            <p>The hallmark of Notus: graceful, fluid curved terminations that break the rigid conventions of neoclassical serifs, imbuing every letterform with kinetic warmth and organic elegance.</p>
+                        </div>
+                    </div>
+
+                    <div class="anatomy-card">
+                        <div class="anatomy-card__glyph">Жбя</div>
+                        <div class="anatomy-card__info">
+                            <h4>Authentic Cyrillic Architecture</h4>
+                            <p>Designed with native linguistic sensitivity. Complex Cyrillic characters like Ж, б, and я are crafted from foundational stroke logic rather than forced Latin adaptations, preserving cultural resonance.</p>
+                        </div>
+                    </div>
+
+                    <div class="anatomy-card">
+                        <div class="anatomy-card__glyph" style="font-family: var(--font-notus-display-it);">Vex</div>
+                        <div class="anatomy-card__info">
+                            <h4>Sculpted Fast Italics</h4>
+                            <p>The italics feature an agile, expressive slant with calligraphic entrance and exit terminals. They offer immediate visual contrast against the upright styles in editorial composition.</p>
+                        </div>
+                    </div>
+
+                    <div class="anatomy-card">
+                        <div class="anatomy-card__glyph">019&sect;</div>
+                        <div class="anatomy-card__info">
+                            <h4>Old-style Figures &amp; Symbols</h4>
+                            <p>Includes proportional old-style numerals tailored for body text, lining figures for headlines, tabular numerals for financial tables, and an extensive system of editorial symbols.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04: Waterfall Scale Ramp -->
+        <section class="waterfall-section">
+            <div class="container">
+                <div class="section-meta">
+                    <div style="display: flex; align-items: baseline; gap: 1rem;">
+                        <span class="section-meta__num">04</span>
+                        <h2 class="section-meta__title">Scale &amp; Hierarchy</h2>
+                    </div>
+                    <p class="section-meta__desc">From monumental display scales down to reading text, Notus maintains typographic authority.</p>
+                </div>
+
+                <div class="waterfall-list">
+                    <div class="waterfall-item">
+                        <div class="waterfall-meta"><span>120 pt</span><span>Display Regular</span></div>
+                        <div class="waterfall-text" style="font-family: var(--font-notus-display); font-size: clamp(3.5rem, 8vw, 7.5rem);">Resonance</div>
+                    </div>
+
+                    <div class="waterfall-item">
+                        <div class="waterfall-meta"><span>80 pt</span><span>Display Italic</span></div>
+                        <div class="waterfall-text" style="font-family: var(--font-notus-display-it); font-size: clamp(2.5rem, 5.5vw, 5rem);">Poetry in precise motion</div>
+                    </div>
+
+                    <div class="waterfall-item">
+                        <div class="waterfall-meta"><span>52 pt</span><span>Display Regular</span></div>
+                        <div class="waterfall-text" style="font-family: var(--font-notus-display); font-size: clamp(1.8rem, 3.5vw, 3.25rem);">Кинематографическая типографика</div>
+                    </div>
+
+                    <div class="waterfall-item">
+                        <div class="waterfall-meta"><span>36 pt</span><span>Text Regular</span></div>
+                        <div class="waterfall-text" style="font-family: var(--font-notus-text); font-size: clamp(1.4rem, 2.5vw, 2.25rem);">Jackdaws love my big sphinx of quartz. 0123456789</div>
+                    </div>
+
+                    <div class="waterfall-item">
+                        <div class="waterfall-meta"><span>24 pt</span><span>Text Italic</span></div>
+                        <div class="waterfall-text" style="font-family: var(--font-notus-text-it); font-size: clamp(1.1rem, 1.8vw, 1.5rem);">В чащах юга жил-был цитрус? Да, но фальшивый экземпляр!</div>
+                    </div>
+
+                    <div class="waterfall-item">
+                        <div class="waterfall-meta"><span>16 pt</span><span>Caption Regular</span></div>
+                        <div class="waterfall-text" style="font-family: var(--font-notus-caption); font-size: 1rem; line-height: 1.5; max-width: 900px;">
+                            Designed by Wiktor Buksza. Supporting extended Latin and Cyrillic character sets with small caps, oldstyle figures, contextual ligatures, and optical size variants engineered for digital and print media.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05: Editorial In-Use Gallery -->
+        <section class="gallery-section">
+            <div class="container">
+                <div class="section-meta">
+                    <div style="display: flex; align-items: baseline; gap: 1rem;">
+                        <span class="section-meta__num">05</span>
+                        <h2 class="section-meta__title">In Context</h2>
+                    </div>
+                    <p class="section-meta__desc">Visual specimens demonstrating Notus in premium brand identity, publication design, and high-contrast editorial layouts.</p>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-card">
+                        <img src="optimized_assets/Notus/Notus_1.webp" alt="Notus Editorial Specimen 1" loading="lazy" decoding="async">
+                        <div class="gallery-card__caption">01 &mdash; Editorial Magazine Cover &amp; Typographic System</div>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="optimized_assets/Notus/Notus_2.webp" alt="Notus Editorial Specimen 2" loading="lazy" decoding="async">
+                        <div class="gallery-card__caption">02 &mdash; High-contrast Poster &amp; Structural Grid Composition</div>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="optimized_assets/Notus/Notus_3.webp" alt="Notus Editorial Specimen 3" loading="lazy" decoding="async">
+                        <div class="gallery-card__caption">03 &mdash; Brand Identity &amp; Packaging Architecture</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06: Character Matrix & Glyphs -->
+        <section class="glyphs-section">
+            <div class="container">
+                <div class="section-meta">
+                    <div style="display: flex; align-items: baseline; gap: 1rem;">
+                        <span class="section-meta__num">06</span>
+                        <h2 class="section-meta__title">Character Set</h2>
+                    </div>
+                    <p class="section-meta__desc">Full glyph inventory. Click any character to copy to clipboard.</p>
+                </div>
+
+                <div class="glyph-tabs">
+                    <button class="display-button display-button--outline is-active" data-glyph-tab="all">All Glyphs</button>
+                    <button class="display-button display-button--outline" data-glyph-tab="latin">Latin</button>
+                    <button class="display-button display-button--outline" data-glyph-tab="cyrillic">Кириллица</button>
+                    <button class="display-button display-button--outline" data-glyph-tab="figures">Figures &amp; Math</button>
+                    <button class="display-button display-button--outline" data-glyph-tab="symbols">Symbols &amp; Punctuation</button>
+                </div>
+
+                <div class="glyph-grid" id="glyphGrid">
+                    <!-- Injected dynamically via notus.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer / Inquiry -->
+        <footer class="specimen-footer">
+            <div class="container">
+                <div class="specimen-footer__grid">
+                    <div>
+                        <h3 class="specimen-footer__title">Acquire Notus or Request Specimen PDF</h3>
+                        <p class="specimen-footer__text">
+                            Notus is currently in release candidate phase. For early commercial licensing, bespoke custom weights, or full PDF specimen requests, reach out directly.
+                        </p>
+                        <div class="specimen-footer__actions">
+                            <a href="mailto:wiktor.buksza@gmail.com?subject=Notus%20Commercial%20Licensing%20Inquiry" class="display-button">
+                                Request Commercial License &rarr;
+                            </a>
+                            <a href="index.html" class="display-button display-button--outline">
+                                &larr; Back to Portfolio
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="specimen-footer__meta">
+                        <div>
+                            <span>Design &amp; Direction</span>
+                            <strong>Wiktor Buksza</strong>
+                        </div>
+                        <div>
+                            <span>Current Version</span>
+                            <strong>1.0 Release Candidate</strong>
+                        </div>
+                        <div>
+                            <span>Format Availability</span>
+                            <strong>OTF, TTF, WOFF, WOFF2</strong>
+                        </div>
+                        <div>
+                            <span>Contact</span>
+                            <strong><a href="mailto:wiktor.buksza@gmail.com">wiktor.buksza@gmail.com</a></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="json/Notus/data.js"></script>
+    <script src="notus.js"></script>
+</body>
+</html>

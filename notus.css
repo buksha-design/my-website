@@ -1,0 +1,954 @@
+/* ==========================================================================
+   NOTUS TYPE SPECIMEN — STYLESHEET
+   Design System: Minimalist Editorial Luxury
+   Fonts: Instrument Sans (UI/Meta) + Notus Family (Specimen)
+   ========================================================================== */
+
+/* Font-face declarations (same as main site) */
+@font-face {
+    font-family: 'Notus Display';
+    src: url('notus/Notus-Display.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Notus Display Italic';
+    src: url('notus/Notus-Display Italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Notus Text';
+    src: url('notus/Notus-Text.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Notus Text Italic';
+    src: url('notus/Notus-Text-Italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Notus Caption';
+    src: url('notus/Notus-Caption.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Variables & Themes */
+:root {
+    --bg: #ffffff;
+    --text: #000000;
+    --text-muted: #666666;
+    --text-subtle: #999999;
+    --border: rgba(0, 0, 0, 0.1);
+    --border-strong: #000000;
+    --surface: #f9f9f9;
+    --surface-hover: #f0f0f0;
+    --pill-bg: #000000;
+    --pill-color: #ffffff;
+    --pill-border: #000000;
+    --accent: #000000;
+    --container-max: 1560px;
+    --pad-x: clamp(1.5rem, 5vw, 4rem);
+    --sec-pad: clamp(5rem, 10vw, 9rem);
+    --font-ui: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-notus-display: 'Notus Display', serif;
+    --font-notus-display-it: 'Notus Display Italic', serif;
+    --font-notus-text: 'Notus Text', serif;
+    --font-notus-text-it: 'Notus Text Italic', serif;
+    --font-notus-caption: 'Notus Caption', serif;
+}
+
+[data-theme="dark"] {
+    --bg: #0a0a0a;
+    --text: #ffffff;
+    --text-muted: #999999;
+    --text-subtle: #666666;
+    --border: rgba(255, 255, 255, 0.12);
+    --border-strong: #ffffff;
+    --surface: #141414;
+    --surface-hover: #1f1f1f;
+    --pill-bg: #ffffff;
+    --pill-color: #000000;
+    --pill-border: #ffffff;
+    --accent: #ffffff;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-ui);
+    line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+}
+
+::selection {
+    background-color: var(--text);
+    color: var(--bg);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+}
+
+/* Scroll progress */
+.scroll-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background-color: var(--text);
+    z-index: 10000;
+    transition: width 0.05s ease-out;
+}
+
+/* Container */
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-left: var(--pad-x);
+    padding-right: var(--pad-x);
+}
+
+/* Display Button Component (Unified Portfolio Component) */
+.display-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 1.1rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 100px;
+    background-color: var(--pill-bg);
+    color: var(--pill-color);
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.display-button:hover {
+    background-color: transparent;
+    color: var(--text);
+    border-color: var(--text);
+}
+
+.display-button--outline {
+    background-color: transparent;
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.display-button--outline:hover {
+    background-color: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+}
+
+.display-button--outline.is-active {
+    background-color: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+}
+
+/* Minimal Header */
+.specimen-nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .specimen-nav {
+    background-color: rgba(10, 10, 10, 0.88);
+}
+
+.specimen-nav__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    gap: 1.5rem;
+}
+
+.specimen-nav__left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.specimen-nav__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: opacity 0.2s ease;
+}
+
+.specimen-nav__back:hover {
+    opacity: 0.6;
+}
+
+.specimen-nav__badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--text-muted);
+}
+
+.specimen-nav__center {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+}
+
+.specimen-nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: all 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--text);
+}
+
+/* Section Header Meta */
+.section-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.section-meta__num {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.section-meta__title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.section-meta__desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    max-width: 600px;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero-specimen {
+    padding-top: clamp(4rem, 8vw, 7rem);
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+    border-bottom: 1px solid var(--border);
+}
+
+.hero-specimen__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.hero-specimen__pill-group {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.hero-specimen__status {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+
+.hero-specimen__headline {
+    font-family: var(--font-notus-display);
+    font-size: clamp(4rem, 16vw, 15rem);
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    font-weight: normal;
+    margin-bottom: clamp(2.5rem, 6vw, 5rem);
+    text-transform: uppercase;
+    user-select: text;
+    transition: transform 0.3s ease;
+}
+
+.hero-specimen__headline:hover {
+    letter-spacing: -0.01em;
+}
+
+.hero-specimen__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: end;
+}
+
+.hero-specimen__manifesto {
+    font-size: clamp(1.2rem, 2.5vw, 1.85rem);
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+    color: var(--text);
+}
+
+.hero-specimen__manifesto strong {
+    font-weight: 600;
+}
+
+.hero-specimen__specs-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+}
+
+.hero-specimen__spec-item span {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+}
+
+.hero-specimen__spec-item strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* Lottie Hero Block */
+.hero-lottie-wrapper {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    background-color: #000000;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    max-height: 700px;
+}
+
+.hero-lottie-player {
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================================================
+   INTERACTIVE TYPE TESTER
+   ========================================================================== */
+.tester-section {
+    padding-top: var(--sec-pad);
+    padding-bottom: var(--sec-pad);
+    border-bottom: 1px solid var(--border);
+}
+
+.tester-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.tester-toolbar {
+    padding: 1.5rem clamp(1.5rem, 3vw, 2.5rem);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: var(--bg);
+}
+
+.tester-toolbar__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.tester-pill-group {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.tester-pill-btn {
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+}
+
+.tester-pill-btn:hover {
+    color: var(--text);
+    border-color: var(--text);
+}
+
+.tester-pill-btn.is-active {
+    background-color: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+    font-weight: 600;
+}
+
+.tester-controls-group {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.tester-slider-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.tester-slider-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    min-width: 3.5rem;
+}
+
+.tester-slider-val {
+    font-size: 0.75rem;
+    font-weight: 600;
+    min-width: 2.8rem;
+    text-align: right;
+    color: var(--text);
+}
+
+/* Custom Range Slider */
+input[type="range"].tester-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 130px;
+    height: 2px;
+    background: var(--border);
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="range"].tester-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--text);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+input[type="range"].tester-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Presets bar */
+.tester-presets {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+}
+
+.tester-presets-label {
+    color: var(--text-subtle);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-right: 0.3rem;
+}
+
+.tester-preset-tag {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    border: 1px dashed var(--border);
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tester-preset-tag:hover {
+    color: var(--text);
+    border-color: var(--text);
+    background-color: var(--surface);
+}
+
+/* Editable Canvas */
+.tester-canvas {
+    padding: clamp(2rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 3.5rem);
+    min-height: 420px;
+    outline: none;
+    word-break: break-word;
+    white-space: pre-wrap;
+    user-select: text;
+    transition: color 0.2s ease;
+}
+
+.tester-canvas:focus {
+    outline: none;
+}
+
+/* ==========================================================================
+   OPTICAL SIZING SHOWCASE
+   ========================================================================== */
+.optics-section {
+    padding-top: var(--sec-pad);
+    padding-bottom: var(--sec-pad);
+    border-bottom: 1px solid var(--border);
+}
+
+.optics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.optics-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: clamp(2rem, 3.5vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 480px;
+    transition: all 0.3s ease;
+}
+
+.optics-card:hover {
+    border-color: var(--text);
+}
+
+.optics-card__header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.optics-card__badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.optics-card__title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.optics-card__target {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.optics-card__sample {
+    margin: auto 0;
+    padding: 1.5rem 0;
+    line-height: 1;
+}
+
+.sample-display {
+    font-family: var(--font-notus-display);
+    font-size: clamp(3.5rem, 6vw, 6.5rem);
+    letter-spacing: -0.02em;
+}
+
+.sample-text {
+    font-family: var(--font-notus-text);
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    line-height: 1.3;
+}
+
+.sample-caption {
+    font-family: var(--font-notus-caption);
+    font-size: clamp(0.95rem, 1.4vw, 1.3rem);
+    line-height: 1.45;
+}
+
+.optics-card__footer {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   ANATOMY & DETAILS
+   ========================================================================== */
+.anatomy-section {
+    padding-top: var(--sec-pad);
+    padding-bottom: var(--sec-pad);
+    border-bottom: 1px solid var(--border);
+}
+
+.anatomy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.anatomy-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: clamp(2rem, 4vw, 3.5rem);
+    background-color: var(--surface);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 400px;
+}
+
+.anatomy-card__glyph {
+    font-family: var(--font-notus-display);
+    font-size: clamp(6rem, 15vw, 13rem);
+    line-height: 0.85;
+    color: var(--text);
+    margin-bottom: 2rem;
+    user-select: text;
+}
+
+.anatomy-card__info h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+}
+
+.anatomy-card__info p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+}
+
+/* ==========================================================================
+   SPECIMEN WATERFALL
+   ========================================================================== */
+.waterfall-section {
+    padding-top: var(--sec-pad);
+    padding-bottom: var(--sec-pad);
+    border-bottom: 1px solid var(--border);
+}
+
+.waterfall-list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.waterfall-item {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.waterfall-meta {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.waterfall-text {
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    word-break: break-word;
+}
+
+/* ==========================================================================
+   EDITORIAL GALLERY
+   ========================================================================== */
+.gallery-section {
+    padding-top: var(--sec-pad);
+    padding-bottom: var(--sec-pad);
+    border-bottom: 1px solid var(--border);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.gallery-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-4px);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 4 / 5;
+    transition: transform 0.4s ease;
+}
+
+.gallery-card:hover img {
+    transform: scale(1.02);
+}
+
+.gallery-card__caption {
+    padding: 1.2rem 1.4rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    background-color: var(--bg);
+}
+
+/* ==========================================================================
+   GLYPH MATRIX & OPEN TYPE
+   ========================================================================== */
+.glyphs-section {
+    padding-top: var(--sec-pad);
+    padding-bottom: var(--sec-pad);
+    border-bottom: 1px solid var(--border);
+}
+
+.glyph-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.glyph-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+    gap: 1px;
+    background-color: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.glyph-cell {
+    background-color: var(--bg);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-notus-display);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.glyph-cell:hover {
+    background-color: var(--text);
+    color: var(--bg);
+    transform: scale(1.1);
+    z-index: 2;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* ==========================================================================
+   FOOTER & INQUIRE
+   ========================================================================== */
+.specimen-footer {
+    padding-top: clamp(4rem, 8vw, 7rem);
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.specimen-footer__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+}
+
+.specimen-footer__title {
+    font-family: var(--font-notus-display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+.specimen-footer__text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    max-width: 580px;
+    margin-bottom: 2rem;
+}
+
+.specimen-footer__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.specimen-footer__meta {
+    border-left: 1px solid var(--border);
+    padding-left: clamp(1.5rem, 3vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.specimen-footer__meta strong {
+    color: var(--text);
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .optics-grid {
+        grid-template-columns: 1fr;
+    }
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    .hero-specimen__grid {
+        grid-template-columns: 1fr;
+    }
+    .specimen-footer__grid {
+        grid-template-columns: 1fr;
+    }
+    .specimen-footer__meta {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-left: 0;
+        padding-top: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .anatomy-grid {
+        grid-template-columns: 1fr;
+    }
+    .hero-specimen__specs-list {
+        grid-template-columns: 1fr;
+    }
+    .specimen-nav__center {
+        display: none;
+    }
+    .tester-toolbar__row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .tester-controls-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

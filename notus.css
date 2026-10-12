@@ -1,10 +1,12 @@
 /* ==========================================================================
-   NOTUS TYPE SPECIMEN — STYLESHEET
-   Design System: Minimalist Editorial Luxury
-   Fonts: Instrument Sans (UI/Meta) + Notus Family (Specimen)
+   NOTUS TYPE SPECIMEN — DISPLAAY SERRIF AESTHETIC
+   Foundry Specimen System: Warm Ecru, Deep Obsidian, Architectural Precision
+   Fonts: Instrument Sans (UI/Meta) + Notus (Specimen)
    ========================================================================== */
 
-/* Font-face declarations (same as main site) */
+/* --------------------------------------------------------------------------
+   01. FONT-FACE DEFINITIONS
+   -------------------------------------------------------------------------- */
 @font-face {
     font-family: 'Notus Display';
     src: url('notus/Notus-Display.otf') format('opentype');
@@ -45,24 +47,41 @@
     font-display: swap;
 }
 
-/* Variables & Themes */
+/* --------------------------------------------------------------------------
+   02. DESIGN TOKENS & THEMES
+   -------------------------------------------------------------------------- */
 :root {
-    --bg: #ffffff;
-    --text: #000000;
+    /* Displaay Signature Palette */
+    --c-ecru: #ECE9DF;
+    --c-ecru-light: #F4F1E9;
+    --c-ecru-border: rgba(0, 0, 0, 0.12);
+    --c-black: #0C0C0C;
+    --c-black-surface: #141414;
+    --c-black-border: rgba(255, 255, 255, 0.14);
+    --c-white: #FFFFFF;
+    --c-gray-100: #F7F7F7;
+    --c-gray-200: #EBEBEB;
+    --c-gray-400: #9E9E9E;
+    --c-gray-600: #666666;
+    
+    /* Active Light Theme */
+    --bg-page: #FFFFFF;
+    --bg-cover: #ECE9DF;
+    --text-main: #0C0C0C;
     --text-muted: #666666;
     --text-subtle: #999999;
-    --border: rgba(0, 0, 0, 0.1);
-    --border-strong: #000000;
-    --surface: #f9f9f9;
-    --surface-hover: #f0f0f0;
-    --pill-bg: #000000;
-    --pill-color: #ffffff;
-    --pill-border: #000000;
-    --accent: #000000;
-    --container-max: 1560px;
-    --pad-x: clamp(1.5rem, 5vw, 4rem);
-    --sec-pad: clamp(5rem, 10vw, 9rem);
-    --font-ui: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --border-color: rgba(0, 0, 0, 0.12);
+    --border-strong: #0C0C0C;
+    --surface-card: #F9F8F5;
+    --surface-hover: #F2EFE8;
+    
+    /* Layout */
+    --container-max: 1540px;
+    --pad-x: clamp(1.25rem, 4vw, 3.5rem);
+    --sec-pad-y: clamp(5rem, 8vw, 8.5rem);
+    
+    /* Fonts */
+    --font-ui: 'Instrument Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-notus-display: 'Notus Display', serif;
     --font-notus-display-it: 'Notus Display Italic', serif;
     --font-notus-text: 'Notus Text', serif;
@@ -71,21 +90,20 @@
 }
 
 [data-theme="dark"] {
-    --bg: #0a0a0a;
-    --text: #ffffff;
-    --text-muted: #999999;
+    --bg-page: #0C0C0C;
+    --bg-cover: #121212;
+    --text-main: #FFFFFF;
+    --text-muted: #A0A0A0;
     --text-subtle: #666666;
-    --border: rgba(255, 255, 255, 0.12);
-    --border-strong: #ffffff;
-    --surface: #141414;
-    --surface-hover: #1f1f1f;
-    --pill-bg: #ffffff;
-    --pill-color: #000000;
-    --pill-border: #ffffff;
-    --accent: #ffffff;
+    --border-color: rgba(255, 255, 255, 0.14);
+    --border-strong: #FFFFFF;
+    --surface-card: #181818;
+    --surface-hover: #222222;
 }
 
-/* Reset & Base */
+/* --------------------------------------------------------------------------
+   03. BASE & RESET
+   -------------------------------------------------------------------------- */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -100,17 +118,17 @@ html {
 }
 
 body {
-    background-color: var(--bg);
-    color: var(--text);
+    background-color: var(--bg-page);
+    color: var(--text-main);
     font-family: var(--font-ui);
     line-height: 1.5;
-    transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
-    background-color: var(--text);
-    color: var(--bg);
+    background-color: var(--text-main);
+    color: var(--bg-page);
 }
 
 a {
@@ -127,828 +145,1267 @@ button {
 }
 
 /* Scroll progress */
-.scroll-bar {
+.scroll-progress-bar {
     position: fixed;
     top: 0;
     left: 0;
     width: 0%;
-    height: 1px;
-    background-color: var(--text);
-    z-index: 10000;
+    height: 2px;
+    background-color: var(--text-main);
+    z-index: 10001;
     transition: width 0.05s ease-out;
 }
 
-/* Container */
-.container {
+.site-container {
     max-width: var(--container-max);
     margin: 0 auto;
     padding-left: var(--pad-x);
     padding-right: var(--pad-x);
 }
 
-/* Display Button Component (Unified Portfolio Component) */
-.display-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.45rem 1.1rem;
-    border: 1px solid var(--border-strong);
-    border-radius: 100px;
-    background-color: var(--pill-bg);
-    color: var(--pill-color);
-    font-family: var(--font-ui);
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    white-space: nowrap;
-}
-
-.display-button:hover {
-    background-color: transparent;
-    color: var(--text);
-    border-color: var(--text);
-}
-
-.display-button--outline {
-    background-color: transparent;
-    color: var(--text);
-    border-color: var(--border);
-}
-
-.display-button--outline:hover {
-    background-color: var(--text);
-    color: var(--bg);
-    border-color: var(--text);
-}
-
-.display-button--outline.is-active {
-    background-color: var(--text);
-    color: var(--bg);
-    border-color: var(--text);
-}
-
-/* Minimal Header */
-.specimen-nav {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background-color: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-[data-theme="dark"] .specimen-nav {
-    background-color: rgba(10, 10, 10, 0.88);
-}
-
-.specimen-nav__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 4rem;
-    gap: 1.5rem;
-}
-
-.specimen-nav__left {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.specimen-nav__back {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text);
-    transition: opacity 0.2s ease;
-}
-
-.specimen-nav__back:hover {
-    opacity: 0.6;
-}
-
-.specimen-nav__badge {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    font-size: 0.68rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    background-color: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    color: var(--text-muted);
-}
-
-.specimen-nav__center {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    letter-spacing: 0.02em;
-}
-
-.specimen-nav__actions {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.theme-toggle-btn {
+/* --------------------------------------------------------------------------
+   04. DISPLAAY PILL & TAG SYSTEM
+   -------------------------------------------------------------------------- */
+.displaay-pill {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.2rem;
-    height: 2.2rem;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    color: var(--text);
-    transition: all 0.2s ease;
-}
-
-.theme-toggle-btn:hover {
-    border-color: var(--text);
-}
-
-/* Section Header Meta */
-.section-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 1.5rem;
-    margin-bottom: 2.5rem;
-    border-bottom: 1px solid var(--border);
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.section-meta__num {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-}
-
-.section-meta__title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
-
-.section-meta__desc {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    max-width: 600px;
-}
-
-/* ==========================================================================
-   HERO SECTION
-   ========================================================================== */
-.hero-specimen {
-    padding-top: clamp(4rem, 8vw, 7rem);
-    padding-bottom: clamp(4rem, 8vw, 7rem);
-    border-bottom: 1px solid var(--border);
-}
-
-.hero-specimen__top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: clamp(2rem, 5vw, 4rem);
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.hero-specimen__pill-group {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-}
-
-.hero-specimen__status {
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-}
-
-.hero-specimen__headline {
-    font-family: var(--font-notus-display);
-    font-size: clamp(4rem, 16vw, 15rem);
-    line-height: 0.88;
-    letter-spacing: -0.03em;
-    font-weight: normal;
-    margin-bottom: clamp(2.5rem, 6vw, 5rem);
-    text-transform: uppercase;
-    user-select: text;
-    transition: transform 0.3s ease;
-}
-
-.hero-specimen__headline:hover {
-    letter-spacing: -0.01em;
-}
-
-.hero-specimen__grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: end;
-}
-
-.hero-specimen__manifesto {
-    font-size: clamp(1.2rem, 2.5vw, 1.85rem);
-    line-height: 1.35;
-    letter-spacing: -0.015em;
-    font-weight: 400;
-    color: var(--text);
-}
-
-.hero-specimen__manifesto strong {
-    font-weight: 600;
-}
-
-.hero-specimen__specs-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.8rem;
-    border-top: 1px solid var(--border);
-    padding-top: 1.5rem;
-}
-
-.hero-specimen__spec-item span {
-    display: block;
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-bottom: 0.3rem;
-}
-
-.hero-specimen__spec-item strong {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--text);
-}
-
-/* Lottie Hero Block */
-.hero-lottie-wrapper {
-    margin-top: clamp(3rem, 6vw, 5rem);
-    background-color: #000000;
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    aspect-ratio: 16 / 9;
-    max-height: 700px;
-}
-
-.hero-lottie-player {
-    width: 100%;
-    height: 100%;
-}
-
-/* ==========================================================================
-   INTERACTIVE TYPE TESTER
-   ========================================================================== */
-.tester-section {
-    padding-top: var(--sec-pad);
-    padding-bottom: var(--sec-pad);
-    border-bottom: 1px solid var(--border);
-}
-
-.tester-card {
-    background-color: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.tester-toolbar {
-    padding: 1.5rem clamp(1.5rem, 3vw, 2.5rem);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    background-color: var(--bg);
-}
-
-.tester-toolbar__row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.tester-pill-group {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-}
-
-.tester-pill-btn {
-    padding: 0.45rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    font-size: 0.78rem;
+    gap: 0.35rem;
+    height: 32px;
+    padding: 0 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    background-color: transparent;
+    color: var(--text-main);
+    font-family: var(--font-ui);
+    font-size: 12px;
     font-weight: 500;
-    color: var(--text-muted);
+    letter-spacing: 0.03em;
+    cursor: pointer;
     transition: all 0.2s ease;
+    white-space: nowrap;
+    text-decoration: none;
+    user-select: none;
 }
 
-.tester-pill-btn:hover {
-    color: var(--text);
-    border-color: var(--text);
+.displaay-pill:hover {
+    border-color: var(--text-main);
 }
 
-.tester-pill-btn.is-active {
-    background-color: var(--text);
-    color: var(--bg);
-    border-color: var(--text);
-    font-weight: 600;
+.displaay-pill.is-active {
+    background-color: var(--text-main);
+    color: var(--bg-page);
+    border-color: var(--text-main);
 }
 
-.tester-controls-group {
-    display: flex;
+.displaay-pill--accent {
+    background-color: var(--text-main);
+    color: var(--bg-page);
+    border-color: var(--text-main);
+}
+
+.displaay-pill--accent:hover {
+    opacity: 0.85;
+}
+
+.displaay-pill--outline {
+    border-color: var(--border-color);
+}
+
+.displaay-pill--outline:hover {
+    border-color: var(--text-main);
+    background-color: var(--surface-hover);
+}
+
+.displaay-pill--subtle {
+    border-color: transparent;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .displaay-pill--subtle {
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.displaay-pill--subtle:hover {
+    border-color: var(--border-color);
+}
+
+.displaay-pill--subtle.is-active {
+    background-color: var(--text-main);
+    color: var(--bg-page);
+    border-color: var(--text-main);
+}
+
+.displaay-pill--sm {
+    height: 26px;
+    padding: 0 10px;
+    font-size: 11px;
+}
+
+.displaay-pill--icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    font-size: 13px;
+}
+
+.displaay-tag {
+    display: inline-flex;
     align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    background-color: rgba(0, 0, 0, 0.06);
+    color: var(--text-main);
+    white-space: nowrap;
 }
 
-.tester-slider-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+[data-theme="dark"] .displaay-tag {
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
-.tester-slider-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+.displaay-tag--outline {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+}
+
+.displaay-tag--subtle {
+    background-color: transparent;
     color: var(--text-muted);
-    min-width: 3.5rem;
 }
 
-.tester-slider-val {
-    font-size: 0.75rem;
-    font-weight: 600;
-    min-width: 2.8rem;
-    text-align: right;
-    color: var(--text);
-}
-
-/* Custom Range Slider */
-input[type="range"].tester-slider {
+/* Displaay Slider */
+.displaay-slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 130px;
+    width: 100%;
     height: 2px;
-    background: var(--border);
+    background: var(--border-color);
     outline: none;
+    border-radius: 2px;
     cursor: pointer;
+    transition: background 0.2s ease;
 }
 
-input[type="range"].tester-slider::-webkit-slider-thumb {
+.displaay-slider:hover {
+    background: var(--text-main);
+}
+
+.displaay-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: var(--text);
+    background: var(--text-main);
+    border: 2px solid var(--bg-page);
+    box-shadow: 0 0 0 1px var(--text-main);
     cursor: pointer;
     transition: transform 0.15s ease;
 }
 
-input[type="range"].tester-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
+.displaay-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.25);
 }
 
-/* Presets bar */
-.tester-presets {
+.displaay-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--text-main);
+    border: 2px solid var(--bg-page);
+    box-shadow: 0 0 0 1px var(--text-main);
+    cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   05. HEADER & STICKY DISPLAAY NAVIGATION
+   -------------------------------------------------------------------------- */
+.displaay-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .displaay-header {
+    background-color: rgba(12, 12, 12, 0.92);
+}
+
+.header-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+    height: 52px;
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0 0.5rem;
+}
+
+.header-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   06. SECTION 01: COVER (Warm Ecru Hero Displaay Aesthetic)
+   -------------------------------------------------------------------------- */
+.section-cover {
+    background-color: var(--bg-cover);
+    color: #0C0C0C;
+    border-bottom: 1px solid var(--border-color);
+    min-height: calc(100vh - 52px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    padding-top: clamp(2rem, 4vw, 4rem);
+}
+
+[data-theme="dark"] .section-cover {
+    color: #FFFFFF;
+}
+
+.cover-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.cover-badges {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
-    font-size: 0.75rem;
+    gap: 0.75rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
-.tester-presets-label {
-    color: var(--text-subtle);
-    font-size: 0.7rem;
+.cover-badges__left,
+.cover-badges__right {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.cover-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: auto 0;
+    padding: clamp(2rem, 6vw, 5rem) 0;
+}
+
+.cover-hero-title {
+    font-family: var(--font-notus-display);
+    font-size: clamp(4.5rem, 16vw, 16rem);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    font-weight: normal;
     text-transform: uppercase;
+    transition: opacity 0.25s ease;
+    cursor: default;
+    user-select: none;
+}
+
+.cover-hero-subtitle {
+    font-family: var(--font-notus-display-it);
+    font-size: clamp(1.25rem, 2.8vw, 2.4rem);
+    line-height: 1.25;
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+    max-width: 900px;
+    font-weight: normal;
+    opacity: 0.9;
+    transition: opacity 0.25s ease;
+}
+
+.cover-word-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.switcher-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.5;
+    margin-right: 0.4rem;
+}
+
+.cover-lottie-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.cover-lottie-player {
+    width: clamp(140px, 18vw, 220px);
+    height: clamp(140px, 18vw, 220px);
+    opacity: 0.85;
+}
+
+.cover-specs-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-top: 1px solid var(--border-color);
+    margin-top: clamp(3rem, 5vw, 5rem);
+    padding: 1.75rem 0 2.25rem;
+    gap: 1.5rem;
+}
+
+.specs-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    border-right: 1px solid var(--border-color);
+    padding-right: 1.25rem;
+}
+
+.specs-col:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+.specs-col__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+}
+
+.specs-col__value {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   07. SECTION 02: FAMILIES & OPTICAL STYLES (Displaay Obsidian Contrast)
+   -------------------------------------------------------------------------- */
+.section-families {
+    background-color: #0C0C0C;
+    color: #FFFFFF;
+    padding: var(--sec-pad-y) 0;
+    border-bottom: 1px solid var(--c-black-border);
+}
+
+.section-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid var(--c-black-border);
+}
+
+.section-top-bar__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.section-num {
+    font-size: 11px;
+    font-weight: 600;
     letter-spacing: 0.08em;
-    margin-right: 0.3rem;
+    opacity: 0.5;
+    text-transform: uppercase;
 }
 
-.tester-preset-tag {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    border: 1px dashed var(--border);
-    padding: 0.25rem 0.65rem;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.section-title {
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
 }
 
-.tester-preset-tag:hover {
-    color: var(--text);
-    border-color: var(--text);
-    background-color: var(--surface);
+.section-desc {
+    font-size: 14px;
+    opacity: 0.7;
+    max-width: 650px;
 }
 
-/* Editable Canvas */
-.tester-canvas {
-    padding: clamp(2rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 3.5rem);
-    min-height: 420px;
+.family-size-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 260px;
+}
+
+.control-label {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+.control-val {
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    min-width: 44px;
+}
+
+.family-rows {
+    display: flex;
+    flex-direction: column;
+}
+
+.family-row {
+    border-bottom: 1px solid var(--c-black-border);
+    padding: 2.5rem 0;
+    transition: background-color 0.2s ease;
+}
+
+.family-row:first-child {
+    padding-top: 0;
+}
+
+.family-row__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.family-row__tags {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.family-row__sample {
+    font-size: 54px;
+    line-height: 1.15;
     outline: none;
+    cursor: text;
+    transition: opacity 0.2s ease;
     word-break: break-word;
-    white-space: pre-wrap;
-    user-select: text;
-    transition: color 0.2s ease;
 }
 
-.tester-canvas:focus {
+.family-row__sample:focus {
+    opacity: 0.85;
+}
+
+.family-row__note {
+    font-size: 13px;
+    opacity: 0.5;
+    margin-top: 1.25rem;
+    max-width: 700px;
+}
+
+/* --------------------------------------------------------------------------
+   08. SECTION 03: INTERACTIVE TESTER (Displaay Studio Console)
+   -------------------------------------------------------------------------- */
+.section-tester {
+    padding: var(--sec-pad-y) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tester-module {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--surface-card);
+}
+
+.tester-controls-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding: 1.25rem 1.75rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-page);
+}
+
+.control-block {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.block-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.pill-segmented {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background-color: var(--surface-card);
+    padding: 3px;
+    border-radius: 9999px;
+    border: 1px solid var(--border-color);
+}
+
+.tester-sliders-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 1.25rem 1.75rem;
+    background-color: var(--bg-page);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.slider-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.slider-box__header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.slider-box__label {
+    color: var(--text-muted);
+}
+
+.slider-box__val {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.tester-presets-strip {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 1.75rem;
+    background-color: var(--surface-card);
+    border-bottom: 1px solid var(--border-color);
+    overflow-x: auto;
+}
+
+.presets-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.presets-pills {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+}
+
+.tester-viewport {
+    padding: clamp(2.5rem, 6vw, 5.5rem) clamp(1.5rem, 4vw, 3rem);
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tester-viewport.theme-sand {
+    background-color: #ECE9DF;
+    color: #0C0C0C;
+}
+
+.tester-viewport.theme-night {
+    background-color: #0C0C0C;
+    color: #FFFFFF;
+}
+
+.tester-viewport.theme-paper {
+    background-color: #FFFFFF;
+    color: #0C0C0C;
+}
+
+.tester-input-stage {
+    width: 100%;
     outline: none;
+    font-family: var(--font-notus-display);
+    font-size: 64px;
+    line-height: 1.15;
+    letter-spacing: 0.00em;
+    word-break: break-word;
+    cursor: text;
 }
 
-/* ==========================================================================
-   OPTICAL SIZING SHOWCASE
-   ========================================================================== */
-.optics-section {
-    padding-top: var(--sec-pad);
-    padding-bottom: var(--sec-pad);
-    border-bottom: 1px solid var(--border);
+.tester-meta-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.75rem;
+    background-color: var(--bg-page);
+    border-top: 1px solid var(--border-color);
+    font-size: 12px;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.meta-item strong {
+    color: var(--text-main);
+    margin-left: 0.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   09. SECTION 04: OPTICAL HIERARCHY MATRIX
+   -------------------------------------------------------------------------- */
+.section-optics {
+    padding: var(--sec-pad-y) 0;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .optics-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.5rem, 3vw, 2.5rem);
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
 }
 
 .optics-card {
-    background-color: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: clamp(2rem, 3.5vw, 3rem);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2.25rem;
+    background-color: var(--surface-card);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 480px;
-    transition: all 0.3s ease;
-}
-
-.optics-card:hover {
-    border-color: var(--text);
+    gap: 2rem;
 }
 
 .optics-card__header {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.optics-card__badge {
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    display: block;
-    margin-bottom: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .optics-card__title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
-.optics-card__target {
-    font-size: 0.8rem;
+.optics-card__sub {
+    font-size: 13px;
     color: var(--text-muted);
-    margin-top: 0.25rem;
 }
 
-.optics-card__sample {
-    margin: auto 0;
-    padding: 1.5rem 0;
+.optics-hero-glyph {
+    font-size: clamp(5rem, 8vw, 7.5rem);
     line-height: 1;
+    margin-bottom: 1rem;
 }
 
-.sample-display {
-    font-family: var(--font-notus-display);
-    font-size: clamp(3.5rem, 6vw, 6.5rem);
-    letter-spacing: -0.02em;
+.optics-sample-line {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
 }
 
-.sample-text {
-    font-family: var(--font-notus-text);
-    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
-    line-height: 1.3;
+.optics-spec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.25rem;
 }
 
-.sample-caption {
-    font-family: var(--font-notus-caption);
-    font-size: clamp(0.95rem, 1.4vw, 1.3rem);
-    line-height: 1.45;
+.spec-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
 }
 
-.optics-card__footer {
-    border-top: 1px solid var(--border);
-    padding-top: 1.5rem;
-    font-size: 0.85rem;
+.spec-row span {
     color: var(--text-muted);
-    line-height: 1.5;
 }
 
-/* ==========================================================================
-   ANATOMY & DETAILS
-   ========================================================================== */
-.anatomy-section {
-    padding-top: var(--sec-pad);
-    padding-bottom: var(--sec-pad);
-    border-bottom: 1px solid var(--border);
+.spec-row strong {
+    font-weight: 500;
+}
+
+.optics-sync-strip {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem 2.5rem;
+    background-color: var(--bg-page);
+}
+
+.sync-strip__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.sync-strip__words {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.sync-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sync-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    align-items: baseline;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.25rem;
+    gap: 1.5rem;
+}
+
+.sync-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.sync-row__label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.sync-row__display {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.1;
+}
+
+/* --------------------------------------------------------------------------
+   10. SECTION 05: SIGNATURE ANATOMY
+   -------------------------------------------------------------------------- */
+.section-anatomy {
+    padding: var(--sec-pad-y) 0;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--surface-card);
 }
 
 .anatomy-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(1.5rem, 4vw, 3rem);
-}
-
-.anatomy-card {
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: clamp(2rem, 4vw, 3.5rem);
-    background-color: var(--surface);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 400px;
-}
-
-.anatomy-card__glyph {
-    font-family: var(--font-notus-display);
-    font-size: clamp(6rem, 15vw, 13rem);
-    line-height: 0.85;
-    color: var(--text);
-    margin-bottom: 2rem;
-    user-select: text;
-}
-
-.anatomy-card__info h4 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.6rem;
-    letter-spacing: -0.01em;
-}
-
-.anatomy-card__info p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.55;
-}
-
-/* ==========================================================================
-   SPECIMEN WATERFALL
-   ========================================================================== */
-.waterfall-section {
-    padding-top: var(--sec-pad);
-    padding-bottom: var(--sec-pad);
-    border-bottom: 1px solid var(--border);
-}
-
-.waterfall-list {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(2rem, 4vw, 3.5rem);
-}
-
-.waterfall-item {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-.waterfall-meta {
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-bottom: 0.6rem;
-    display: flex;
     gap: 1.5rem;
 }
 
+.anatomy-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-page);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 360px;
+}
+
+.giant-glyph {
+    font-size: clamp(4.5rem, 9vw, 8rem);
+    line-height: 1;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.anatomy-card__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.anatomy-tag {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.anatomy-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.anatomy-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   11. SECTION 06: WATERFALL SCALE RAMP
+   -------------------------------------------------------------------------- */
+.section-waterfall {
+    padding: var(--sec-pad-y) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.waterfall-rows {
+    display: flex;
+    flex-direction: column;
+}
+
+.waterfall-line {
+    border-bottom: 1px solid var(--border-color);
+    padding: 2.25rem 0;
+}
+
+.waterfall-line:first-child {
+    padding-top: 0;
+}
+
+.waterfall-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    font-variant-numeric: tabular-nums;
+}
+
 .waterfall-text {
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: 1.15;
     word-break: break-word;
 }
 
-/* ==========================================================================
-   EDITORIAL GALLERY
-   ========================================================================== */
-.gallery-section {
-    padding-top: var(--sec-pad);
-    padding-bottom: var(--sec-pad);
-    border-bottom: 1px solid var(--border);
+.size-130 { font-size: clamp(3.5rem, 8.5vw, 8.125rem); }
+.size-84  { font-size: clamp(2.5rem, 5.5vw, 5.25rem); }
+.size-56  { font-size: clamp(1.8rem, 3.8vw, 3.5rem); }
+.size-38  { font-size: clamp(1.4rem, 2.6vw, 2.375rem); }
+.size-26  { font-size: clamp(1.15rem, 1.8vw, 1.625rem); }
+.size-18  { font-size: 1.125rem; line-height: 1.6; max-width: 950px; }
+.size-12  { font-size: 0.8125rem; line-height: 1.6; max-width: 900px; }
+
+/* --------------------------------------------------------------------------
+   12. SECTION 07: GLYPH MATRIX & INSPECTOR (Displaay Character Map)
+   -------------------------------------------------------------------------- */
+.section-glyphs {
+    padding: var(--sec-pad-y) 0;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.2rem, 2.5vw, 2rem);
-}
-
-.gallery-card {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: var(--surface);
-    border: 1px solid var(--border);
-    transition: transform 0.3s ease;
-}
-
-.gallery-card:hover {
-    transform: translateY(-4px);
-}
-
-.gallery-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    aspect-ratio: 4 / 5;
-    transition: transform 0.4s ease;
-}
-
-.gallery-card:hover img {
-    transform: scale(1.02);
-}
-
-.gallery-card__caption {
-    padding: 1.2rem 1.4rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    border-top: 1px solid var(--border);
-    background-color: var(--bg);
-}
-
-/* ==========================================================================
-   GLYPH MATRIX & OPEN TYPE
-   ========================================================================== */
-.glyphs-section {
-    padding-top: var(--sec-pad);
-    padding-bottom: var(--sec-pad);
-    border-bottom: 1px solid var(--border);
-}
-
-.glyph-tabs {
+.glyph-filter-pills {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
+    align-items: center;
+    gap: 0.35rem;
     flex-wrap: wrap;
 }
 
-.glyph-grid {
+.glyph-inspector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.25rem 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--surface-card);
+    margin-bottom: 2rem;
+}
+
+.inspector-glyph {
+    font-family: var(--font-notus-display);
+    font-size: 3.5rem;
+    line-height: 1;
+    min-width: 60px;
+    text-align: center;
+}
+
+.inspector-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex-grow: 1;
+}
+
+.inspector-name {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.inspector-unicode {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
+.displaay-glyph-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(62px, 1fr));
     gap: 1px;
-    background-color: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    background-color: var(--border-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
     overflow: hidden;
 }
 
 .glyph-cell {
-    background-color: var(--bg);
-    aspect-ratio: 1;
+    background-color: var(--bg-page);
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-notus-display);
-    font-size: 1.5rem;
+    font-size: 26px;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: background-color 0.15s ease, transform 0.15s ease;
     user-select: none;
 }
 
 .glyph-cell:hover {
-    background-color: var(--text);
-    color: var(--bg);
-    transform: scale(1.1);
-    z-index: 2;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    background-color: var(--surface-hover);
+    color: var(--text-main);
 }
 
-/* ==========================================================================
-   FOOTER & INQUIRE
-   ========================================================================== */
-.specimen-footer {
-    padding-top: clamp(4rem, 8vw, 7rem);
-    padding-bottom: clamp(4rem, 8vw, 7rem);
+.glyph-cell.is-selected {
+    background-color: var(--text-main);
+    color: var(--bg-page);
 }
 
-.specimen-footer__grid {
+/* --------------------------------------------------------------------------
+   13. SECTION 08: TECH SPECS & OPENTYPE
+   -------------------------------------------------------------------------- */
+.section-tech {
+    padding: var(--sec-pad-y) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tech-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
 }
 
-.specimen-footer__title {
-    font-family: var(--font-notus-display);
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+.tech-feature-card,
+.tech-specs-table-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2.5rem;
+    background-color: var(--surface-card);
+    display: flex;
+    flex-direction: column;
+}
+
+.tech-card-title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 0.5rem 0 0.35rem;
+}
+
+.tech-card-desc {
+    font-size: 13px;
+    color: var(--text-muted);
     margin-bottom: 1.5rem;
 }
 
-.specimen-footer__text {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    line-height: 1.5;
-    max-width: 580px;
+.feature-switches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
     margin-bottom: 2rem;
 }
 
-.specimen-footer__actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+.feature-sandbox {
+    margin-top: auto;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-page);
+    font-size: 1.6rem;
+    line-height: 1.4;
+    outline: none;
+    min-height: 140px;
+    cursor: text;
 }
 
-.specimen-footer__meta {
-    border-left: 1px solid var(--border);
-    padding-left: clamp(1.5rem, 3vw, 3rem);
+.tech-data-table {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
-    font-size: 0.85rem;
+    margin-top: 1.5rem;
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.85rem 0;
+    font-size: 13px;
+}
+
+.data-row:last-child {
+    border-bottom: none;
+}
+
+.data-key {
     color: var(--text-muted);
 }
 
-.specimen-footer__meta strong {
-    color: var(--text);
-    display: block;
-    margin-top: 0.2rem;
-    font-size: 0.95rem;
+.data-val {
+    font-weight: 500;
+    text-align: right;
 }
 
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   14. SECTION 09: IN USE & EDITORIAL GALLERY
+   -------------------------------------------------------------------------- */
+.section-gallery {
+    padding: var(--sec-pad-y) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.displaay-gallery-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    grid-auto-flow: dense;
+    gap: 2rem;
+}
+
+.gallery-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--surface-card);
+}
+
+.gallery-item--large {
+    grid-column: 1 / 2;
+    grid-row: span 2;
+}
+
+.gallery-image-wrap {
+    overflow: hidden;
+    background-color: #ECE9DF;
+}
+
+.gallery-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.02);
+}
+
+.gallery-meta {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 13px;
+    border-top: 1px solid var(--border-color);
+}
+
+.gallery-meta__num {
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.gallery-meta__title {
+    font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   15. SECTION 10: FOOTER & LICENSING
+   -------------------------------------------------------------------------- */
+.section-footer {
+    padding: clamp(5rem, 8vw, 7.5rem) 0 3rem;
+    background-color: var(--bg-page);
+}
+
+.footer-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.footer-headline {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 500;
+    line-height: 1.15;
+    margin: 1rem 0;
+    letter-spacing: -0.01em;
+}
+
+.footer-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 2.25rem;
+}
+
+.footer-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.footer-secondary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1.5rem;
+    border-left: 1px solid var(--border-color);
+    padding-left: 3rem;
+}
+
+.footer-info-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.footer-info-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.footer-info-val {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.footer-info-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.footer-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    font-size: 12px;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   16. TYPOGRAPHIC STYLE SHORTCUTS
+   -------------------------------------------------------------------------- */
+.style-display    { font-family: var(--font-notus-display); font-style: normal; }
+.style-display-it { font-family: var(--font-notus-display-it); font-style: italic; }
+.style-text       { font-family: var(--font-notus-text); font-style: normal; }
+.style-text-it    { font-family: var(--font-notus-text-it); font-style: italic; }
+.style-caption    { font-family: var(--font-notus-caption); font-style: normal; }
+
+/* --------------------------------------------------------------------------
+   17. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
+    .cover-specs-strip {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+    .specs-col:nth-child(3) {
+        border-right: none;
+    }
     .optics-grid {
         grid-template-columns: 1fr;
     }
-    .gallery-grid {
+    .tech-grid {
         grid-template-columns: 1fr;
     }
-    .hero-specimen__grid {
+    .footer-layout {
         grid-template-columns: 1fr;
+        gap: 2.5rem;
     }
-    .specimen-footer__grid {
-        grid-template-columns: 1fr;
-    }
-    .specimen-footer__meta {
+    .footer-secondary {
         border-left: none;
-        border-top: 1px solid var(--border);
         padding-left: 0;
+        border-top: 1px solid var(--border-color);
         padding-top: 2rem;
     }
 }
 
 @media (max-width: 768px) {
+    .header-nav {
+        display: none;
+    }
+    .cover-specs-strip {
+        grid-template-columns: 1fr 1fr;
+    }
+    .specs-col:nth-child(2) {
+        border-right: none;
+    }
+    .tester-sliders-bar {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
     .anatomy-grid {
         grid-template-columns: 1fr;
     }
-    .hero-specimen__specs-list {
+    .displaay-gallery-grid {
         grid-template-columns: 1fr;
     }
-    .specimen-nav__center {
-        display: none;
+    .gallery-item--large {
+        grid-column: 1 / -1;
     }
-    .tester-toolbar__row {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .tester-controls-group {
-        width: 100%;
-        justify-content: space-between;
+    .sync-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
     }
 }

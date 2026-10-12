@@ -195,11 +195,11 @@ function initTesterStudio() {
     }
 
     const presets = {
-        'headline-en': "The architecture of stillness, rhythm and form.",
-        'editorial-ru': "Плавность текучих засечек и точность высокого контраста.",
-        'pangram-en': "Jackdaws love my big sphinx of quartz. 0123456789",
-        'pangram-ru': "В чащах юга жил-был цитрус? Да, но фальшивый экземпляр!",
-        'numerals': "$1,450.80 & €2,390.00 — № 48/B (1892–2026) ⅓ ½ ¾"
+        'myth-en': "Notus brings the warmth of southern gales into rigid typographic stone.",
+        'editorial-ru': "Плавность текучих капель и непоколебимая строгость высокого контраста.",
+        'pangram-en': "The quick brown fox jumps over a lazy sphinx of quartz. 0123456789",
+        'pangram-ru': "В чащах юга жил-был цитрус? Да, но фальшивый экземпляр! № 1892",
+        'financial': "Quarterly Report § 48/B — €4,250.00 to ₽380,000 ($1,450.80) · ⅓ ½ ¾"
     };
 
     const presetBtns = document.querySelectorAll('.preset-btn');

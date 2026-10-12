@@ -1,15 +1,22 @@
 #!/bin/bash
 
+set -e
+
 cd /Users/wiktorbuksza/Dropbox/www.buksha.design || exit 1
 
+echo "📦 Проверка изменений..."
 git add .
 
 if git diff --cached --quiet; then
-    echo "Nothing to deploy."
+    echo "ℹ️ Нет новых изменений для деплоя."
     exit 0
 fi
 
-git commit -m "Update website"
+MSG="${1:-Update website}"
+echo "📝 Создание коммита: '$MSG'..."
+git commit -m "$MSG"
 
-git push
+echo "🚀 Отправка на GitHub..."
+git push origin main
 
+echo "✅ Готово! Сайт собирается и публикуется на https://www.buksha.design"

@@ -1,22 +1,18 @@
 /**
  * NOTUS TYPE SPECIMEN — DISPLAAY JAVASCRIPT CONTROLLER
- * Lightweight, zero dependencies, high performance.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     initScrollAndNav();
     initTheme();
-    initCoverSwitcher();
     initFamiliesScale();
     initTesterStudio();
-    initOpticsSync();
-    initGlyphMatrix();
+    initDisplaayGlyphs();
     initOpenTypeSandbox();
-    initLottie();
 });
 
 /* --------------------------------------------------------------------------
-   01. SCROLL PROGRESS & ACTIVE NAV TRACKER
+   01. SCROLL PROGRESS & ACTIVE NAV
    -------------------------------------------------------------------------- */
 function initScrollAndNav() {
     const progressBar = document.getElementById('scrollBar');
@@ -35,7 +31,6 @@ function initScrollAndNav() {
             progressBar.style.width = `${progress}%`;
         }
 
-        // Active nav pill highlight
         let currentSectionId = '';
         sections.forEach(sec => {
             const top = sec.offsetTop - 120;
@@ -58,7 +53,7 @@ function initScrollAndNav() {
 }
 
 /* --------------------------------------------------------------------------
-   02. THEME TOGGLE (Light / Dark)
+   02. THEME TOGGLE
    -------------------------------------------------------------------------- */
 function initTheme() {
     const toggleBtn = document.getElementById('themeToggle');
@@ -83,42 +78,7 @@ function initTheme() {
 }
 
 /* --------------------------------------------------------------------------
-   03. COVER HERO WORD SWITCHER
-   -------------------------------------------------------------------------- */
-function initCoverSwitcher() {
-    const titleEl = document.getElementById('coverHeroTitle');
-    const subEl = document.getElementById('coverHeroSubtitle');
-    const switcherBtns = document.querySelectorAll('.switcher-btn');
-
-    switcherBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            switcherBtns.forEach(b => b.classList.remove('is-active'));
-            btn.classList.add('is-active');
-
-            const word = btn.getAttribute('data-word');
-            const sub = btn.getAttribute('data-sub');
-
-            if (titleEl && word) {
-                titleEl.style.opacity = '0';
-                setTimeout(() => {
-                    titleEl.textContent = word;
-                    titleEl.style.opacity = '1';
-                }, 150);
-            }
-
-            if (subEl && sub) {
-                subEl.style.opacity = '0';
-                setTimeout(() => {
-                    subEl.textContent = sub;
-                    subEl.style.opacity = '1';
-                }, 150);
-            }
-        });
-    });
-}
-
-/* --------------------------------------------------------------------------
-   04. FAMILIES GLOBAL SCALE SLIDER
+   03. FAMILIES GLOBAL SCALE SLIDER
    -------------------------------------------------------------------------- */
 function initFamiliesScale() {
     const slider = document.getElementById('familySizeSlider');
@@ -136,7 +96,6 @@ function initFamiliesScale() {
         });
     }
 
-    // "Test in Studio" button on family rows
     testBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const font = btn.getAttribute('data-target-style');
@@ -153,7 +112,7 @@ function initFamiliesScale() {
 }
 
 /* --------------------------------------------------------------------------
-   05. INTERACTIVE TYPE TESTER (Displaay Studio Console)
+   04. INTERACTIVE TYPE TESTER
    -------------------------------------------------------------------------- */
 function initTesterStudio() {
     const inputStage = document.getElementById('testerInput');
@@ -162,7 +121,6 @@ function initTesterStudio() {
     const charCountDisplay = document.getElementById('testerCharCount');
     if (!inputStage) return;
 
-    // Font style selector
     const styleBtns = document.querySelectorAll('.tester-style-btn');
     styleBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -176,7 +134,6 @@ function initTesterStudio() {
         });
     });
 
-    // Alignment
     const alignBtns = document.querySelectorAll('.tester-align-btn');
     alignBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -186,7 +143,6 @@ function initTesterStudio() {
         });
     });
 
-    // Case
     const caseBtns = document.querySelectorAll('.tester-case-btn');
     caseBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -196,7 +152,6 @@ function initTesterStudio() {
         });
     });
 
-    // Background themes (Sand / Night / Paper)
     const bgBtns = document.querySelectorAll('.tester-bg-btn');
     bgBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -209,7 +164,6 @@ function initTesterStudio() {
         });
     });
 
-    // Sliders
     const sizeSlider = document.getElementById('testerSizeSlider');
     const sizeVal = document.getElementById('testerSizeVal');
     if (sizeSlider && sizeVal) {
@@ -240,7 +194,6 @@ function initTesterStudio() {
         });
     }
 
-    // Presets
     const presets = {
         'headline-en': "The architecture of stillness, rhythm and form.",
         'editorial-ru': "Плавность текучих засечек и точность высокого контраста.",
@@ -262,11 +215,9 @@ function initTesterStudio() {
         });
     });
 
-    // Character counter
     function updateCharCount() {
         if (charCountDisplay && inputStage) {
-            const count = inputStage.textContent.length;
-            charCountDisplay.textContent = `${count} chars`;
+            charCountDisplay.textContent = `${inputStage.textContent.length} chars`;
         }
     }
 
@@ -275,38 +226,17 @@ function initTesterStudio() {
 }
 
 /* --------------------------------------------------------------------------
-   06. SYNCHRONIZED OPTICAL SIZING PREVIEW
+   05. DISPLAAY DUAL-PANE GLYPH INSPECTOR (Yellow Highlight Box)
    -------------------------------------------------------------------------- */
-function initOpticsSync() {
-    const syncBtns = document.querySelectorAll('.sync-word-btn');
-    const displayEl = document.getElementById('syncDisplay');
-    const textEl = document.getElementById('syncText');
-    const captionEl = document.getElementById('syncCaption');
-
-    syncBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            syncBtns.forEach(b => b.classList.remove('is-active'));
-            btn.classList.add('is-active');
-            const word = btn.getAttribute('data-sync');
-            if (displayEl) displayEl.textContent = word;
-            if (textEl) textEl.textContent = word;
-            if (captionEl) captionEl.textContent = word;
-        });
-    });
-}
-
-/* --------------------------------------------------------------------------
-   07. GLYPH MATRIX & INSPECTOR (Displaay Character Map)
-   -------------------------------------------------------------------------- */
-function initGlyphMatrix() {
-    const grid = document.getElementById('displaayGlyphGrid');
-    const inspectorGlyph = document.getElementById('inspectorGlyph');
-    const inspectorName = document.getElementById('inspectorName');
-    const inspectorUnicode = document.getElementById('inspectorUnicode');
+function initDisplaayGlyphs() {
+    const grid = document.getElementById('displaayGlyphMatrix');
+    const giantChar = document.getElementById('inspectorGiantChar');
+    const charName = document.getElementById('inspectorCharName');
+    const charUnicode = document.getElementById('inspectorCharUnicode');
     const copyBtn = document.getElementById('inspectorCopyBtn');
     if (!grid) return;
 
-    let selectedChar = 'A';
+    let selectedChar = 'a';
 
     const sets = {
         'all': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя0123456789.,:;!?\'"—–-()[]{}/\\@#$%&*+=<>€$£¥₽§¶†‡©®™°¼½¾⅓⅔',
@@ -318,16 +248,12 @@ function initGlyphMatrix() {
 
     function updateInspector(char) {
         selectedChar = char;
-        if (inspectorGlyph) inspectorGlyph.textContent = char;
+        if (giantChar) giantChar.textContent = char;
         
         const codePoint = char.codePointAt(0);
         const hex = 'U+' + codePoint.toString(16).toUpperCase().padStart(4, '0');
-        if (inspectorUnicode) {
-            inspectorUnicode.textContent = `${hex} · Dec ${codePoint}`;
-        }
-        if (inspectorName) {
-            inspectorName.textContent = getCharacterDescription(char, codePoint);
-        }
+        if (charUnicode) charUnicode.textContent = `${hex} · Dec ${codePoint}`;
+        if (charName) charName.textContent = getCharacterDescription(char, codePoint);
     }
 
     function getCharacterDescription(char, code) {
@@ -349,17 +275,21 @@ function initGlyphMatrix() {
         const chars = Array.from(charString);
         chars.forEach((ch, idx) => {
             const cell = document.createElement('div');
-            cell.className = 'glyph-cell';
-            if (idx === 0) cell.classList.add('is-selected');
+            cell.className = 'glyph-box';
+            if (ch === 'a' || (idx === 0 && !chars.includes('a'))) {
+                cell.classList.add('is-active');
+            }
             cell.textContent = ch;
 
             cell.addEventListener('mouseenter', () => {
+                document.querySelectorAll('.glyph-box').forEach(c => c.classList.remove('is-active'));
+                cell.classList.add('is-active');
                 updateInspector(ch);
             });
 
             cell.addEventListener('click', () => {
-                document.querySelectorAll('.glyph-cell').forEach(c => c.classList.remove('is-selected'));
-                cell.classList.add('is-selected');
+                document.querySelectorAll('.glyph-box').forEach(c => c.classList.remove('is-active'));
+                cell.classList.add('is-active');
                 updateInspector(ch);
                 copyToClipboard(ch, cell);
             });
@@ -389,7 +319,6 @@ function initGlyphMatrix() {
         });
     }
 
-    // Tab buttons
     const tabBtns = document.querySelectorAll('.glyph-tab-btn');
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -400,13 +329,12 @@ function initGlyphMatrix() {
         });
     });
 
-    // Initial render
     renderMatrix(sets['all']);
-    updateInspector('A');
+    updateInspector('a');
 }
 
 /* --------------------------------------------------------------------------
-   08. OPENTYPE FEATURE SWITCHES SANDBOX
+   06. OPENTYPE FEATURE SWITCHES
    -------------------------------------------------------------------------- */
 function initOpenTypeSandbox() {
     const sandbox = document.getElementById('featureSandbox');
@@ -434,30 +362,4 @@ function initOpenTypeSandbox() {
     });
 
     updateFeatures();
-}
-
-/* --------------------------------------------------------------------------
-   09. LOTTIE MOTION SPECIMEN
-   -------------------------------------------------------------------------- */
-function initLottie() {
-    const container = document.getElementById('notusLottiePlayer');
-    if (container && typeof lottie !== 'undefined') {
-        if (window.notusAnimationData) {
-            lottie.loadAnimation({
-                container: container,
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                animationData: window.notusAnimationData
-            });
-        } else {
-            lottie.loadAnimation({
-                container: container,
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'json/Notus/data.json'
-            });
-        }
-    }
 }

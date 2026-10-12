@@ -1,11 +1,10 @@
 /* ==========================================================================
-   NOTUS TYPE SPECIMEN — DISPLAAY SERRIF AESTHETIC
-   Foundry Specimen System: Warm Ecru, Deep Obsidian, Architectural Precision
-   Fonts: Instrument Sans (UI/Meta) + Notus (Specimen)
+   NOTUS TYPE SPECIMEN — DISPLAAY SERRIF COMPLETE SPECIMEN STYLES
+   Direct visual reproduction of displaay.net/typeface/serrif
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   01. FONT-FACE DEFINITIONS
+   01. FONT DEFINITIONS
    -------------------------------------------------------------------------- */
 @font-face {
     font-family: 'Notus Display';
@@ -48,39 +47,27 @@
 }
 
 /* --------------------------------------------------------------------------
-   02. DESIGN TOKENS & THEMES
+   02. DESIGN VARIABLES
    -------------------------------------------------------------------------- */
 :root {
-    /* Displaay Signature Palette */
     --c-ecru: #ECE9DF;
-    --c-ecru-light: #F4F1E9;
-    --c-ecru-border: rgba(0, 0, 0, 0.12);
-    --c-black: #0C0C0C;
-    --c-black-surface: #141414;
-    --c-black-border: rgba(255, 255, 255, 0.14);
+    --c-ecru-card: #E5E2D8;
+    --c-yellow: #FAEA48;
+    --c-black: #000000;
     --c-white: #FFFFFF;
-    --c-gray-100: #F7F7F7;
-    --c-gray-200: #EBEBEB;
-    --c-gray-400: #9E9E9E;
-    --c-gray-600: #666666;
+    --c-gray-border: rgba(0, 0, 0, 0.14);
+    --c-gray-text: #666666;
+    --c-gray-subtle: #999999;
+    --c-cyan: #BEE9F7;
+    --c-mint: #C4F1C0;
     
-    /* Active Light Theme */
     --bg-page: #FFFFFF;
-    --bg-cover: #ECE9DF;
-    --text-main: #0C0C0C;
-    --text-muted: #666666;
-    --text-subtle: #999999;
+    --text-main: #000000;
     --border-color: rgba(0, 0, 0, 0.12);
-    --border-strong: #0C0C0C;
-    --surface-card: #F9F8F5;
-    --surface-hover: #F2EFE8;
     
-    /* Layout */
     --container-max: 1540px;
     --pad-x: clamp(1.25rem, 4vw, 3.5rem);
-    --sec-pad-y: clamp(5rem, 8vw, 8.5rem);
     
-    /* Fonts */
     --font-ui: 'Instrument Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-notus-display: 'Notus Display', serif;
     --font-notus-display-it: 'Notus Display Italic', serif;
@@ -91,18 +78,15 @@
 
 [data-theme="dark"] {
     --bg-page: #0C0C0C;
-    --bg-cover: #121212;
     --text-main: #FFFFFF;
-    --text-muted: #A0A0A0;
-    --text-subtle: #666666;
     --border-color: rgba(255, 255, 255, 0.14);
-    --border-strong: #FFFFFF;
-    --surface-card: #181818;
-    --surface-hover: #222222;
+    --c-ecru: #161616;
+    --c-ecru-card: #202020;
+    --c-gray-text: #A0A0A0;
 }
 
 /* --------------------------------------------------------------------------
-   03. BASE & RESET
+   03. BASE & RESETS
    -------------------------------------------------------------------------- */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -121,14 +105,14 @@ body {
     background-color: var(--bg-page);
     color: var(--text-main);
     font-family: var(--font-ui);
-    line-height: 1.5;
+    line-height: 1.45;
     overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 ::selection {
-    background-color: var(--text-main);
-    color: var(--bg-page);
+    background-color: var(--c-yellow);
+    color: #000000;
 }
 
 a {
@@ -144,35 +128,33 @@ button {
     color: inherit;
 }
 
-/* Scroll progress */
+.site-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+}
+
 .scroll-progress-bar {
     position: fixed;
     top: 0;
     left: 0;
     width: 0%;
-    height: 2px;
+    height: 3px;
     background-color: var(--text-main);
     z-index: 10001;
     transition: width 0.05s ease-out;
 }
 
-.site-container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding-left: var(--pad-x);
-    padding-right: var(--pad-x);
-}
-
 /* --------------------------------------------------------------------------
-   04. DISPLAAY PILL & TAG SYSTEM
+   04. PILLS & TAGS SYSTEM
    -------------------------------------------------------------------------- */
 .displaay-pill {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.35rem;
-    height: 32px;
-    padding: 0 14px;
+    height: 30px;
+    padding: 0 13px;
     border: 1px solid var(--border-color);
     border-radius: 9999px;
     background-color: transparent;
@@ -180,11 +162,10 @@ button {
     font-family: var(--font-ui);
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
     white-space: nowrap;
-    text-decoration: none;
     user-select: none;
 }
 
@@ -208,45 +189,31 @@ button {
     opacity: 0.85;
 }
 
-.displaay-pill--outline {
-    border-color: var(--border-color);
+.displaay-pill--sm {
+    height: 24px;
+    padding: 0 9px;
+    font-size: 11px;
 }
 
-.displaay-pill--outline:hover {
-    border-color: var(--text-main);
-    background-color: var(--surface-hover);
+.displaay-pill--icon {
+    width: 30px;
+    height: 30px;
+    padding: 0;
 }
 
 .displaay-pill--subtle {
     border-color: transparent;
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 [data-theme="dark"] .displaay-pill--subtle {
-    background-color: rgba(255, 255, 255, 0.06);
-}
-
-.displaay-pill--subtle:hover {
-    border-color: var(--border-color);
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
 .displaay-pill--subtle.is-active {
     background-color: var(--text-main);
     color: var(--bg-page);
     border-color: var(--text-main);
-}
-
-.displaay-pill--sm {
-    height: 26px;
-    padding: 0 10px;
-    font-size: 11px;
-}
-
-.displaay-pill--icon {
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    font-size: 13px;
 }
 
 .displaay-tag {
@@ -272,78 +239,39 @@ button {
     border: 1px solid var(--border-color);
 }
 
+.displaay-tag--dark {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
+}
+
 .displaay-tag--subtle {
     background-color: transparent;
-    color: var(--text-muted);
-}
-
-/* Displaay Slider */
-.displaay-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 2px;
-    background: var(--border-color);
-    outline: none;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.displaay-slider:hover {
-    background: var(--text-main);
-}
-
-.displaay-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--text-main);
-    border: 2px solid var(--bg-page);
-    box-shadow: 0 0 0 1px var(--text-main);
-    cursor: pointer;
-    transition: transform 0.15s ease;
-}
-
-.displaay-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.25);
-}
-
-.displaay-slider::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--text-main);
-    border: 2px solid var(--bg-page);
-    box-shadow: 0 0 0 1px var(--text-main);
-    cursor: pointer;
+    color: var(--c-gray-text);
 }
 
 /* --------------------------------------------------------------------------
-   05. HEADER & STICKY DISPLAAY NAVIGATION
+   05. HEADER (Sticky Displaay Bar)
    -------------------------------------------------------------------------- */
 .displaay-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background-color: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-color);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.25s ease;
 }
 
 [data-theme="dark"] .displaay-header {
-    background-color: rgba(12, 12, 12, 0.92);
+    background-color: rgba(12, 12, 12, 0.94);
 }
 
 .header-inner {
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 var(--pad-x);
-    height: 52px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -362,7 +290,6 @@ button {
     gap: 0.35rem;
     overflow-x: auto;
     scrollbar-width: none;
-    padding: 0 0.5rem;
 }
 
 .header-nav::-webkit-scrollbar {
@@ -376,25 +303,24 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   06. SECTION 01: COVER (Warm Ecru Hero Displaay Aesthetic)
+   06. SECTION 01: DISPLAAY MASTHEAD ("The Time's NOW")
    -------------------------------------------------------------------------- */
-.section-cover {
-    background-color: var(--bg-cover);
-    color: #0C0C0C;
+.section-displaay-masthead {
+    background-color: var(--c-ecru);
+    color: #000000;
     border-bottom: 1px solid var(--border-color);
-    min-height: calc(100vh - 52px);
+    min-height: calc(100vh - 48px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative;
-    padding-top: clamp(2rem, 4vw, 4rem);
+    padding: clamp(2rem, 4vw, 3.5rem) 0 0;
 }
 
-[data-theme="dark"] .section-cover {
+[data-theme="dark"] .section-displaay-masthead {
     color: #FFFFFF;
 }
 
-.cover-container {
+.masthead-container {
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 var(--pad-x);
@@ -405,129 +331,367 @@ button {
     justify-content: space-between;
 }
 
-.cover-badges {
+.masthead-top-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
-.cover-badges__left,
-.cover-badges__right {
+.masthead-tags {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
-.cover-stage {
+.masthead-stage {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     margin: auto 0;
-    padding: clamp(2rem, 6vw, 5rem) 0;
+    padding: clamp(3rem, 6vw, 6rem) 0;
 }
 
-.cover-hero-title {
+.masthead-title {
     font-family: var(--font-notus-display);
-    font-size: clamp(4.5rem, 16vw, 16rem);
+    font-size: clamp(4.5rem, 16vw, 15.5rem);
     line-height: 0.88;
-    letter-spacing: -0.01em;
-    font-weight: normal;
     text-transform: uppercase;
-    transition: opacity 0.25s ease;
-    cursor: default;
+    font-weight: normal;
+    letter-spacing: -0.015em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     user-select: none;
 }
 
-.cover-hero-subtitle {
-    font-family: var(--font-notus-display-it);
-    font-size: clamp(1.25rem, 2.8vw, 2.4rem);
-    line-height: 1.25;
-    margin-top: clamp(1.5rem, 3vw, 2.5rem);
-    max-width: 900px;
-    font-weight: normal;
-    opacity: 0.9;
-    transition: opacity 0.25s ease;
+.masthead-title-sub {
+    font-size: clamp(5.5rem, 20vw, 19.5rem);
+    line-height: 0.82;
+    margin-top: 0.1em;
 }
 
-.cover-word-switcher {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: clamp(2rem, 4vw, 3rem);
-}
-
-.switcher-label {
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
+/* Displaay Signature Vivid Yellow Ribbon */
+.masthead-yellow-sticker {
+    background-color: var(--c-yellow);
+    color: #000000;
+    font-family: var(--font-ui);
+    font-size: clamp(11px, 1.2vw, 13px);
+    font-weight: 700;
     letter-spacing: 0.05em;
-    opacity: 0.5;
-    margin-right: 0.4rem;
+    padding: 10px 22px;
+    border: 1px solid #000000;
+    margin-top: clamp(2rem, 3.5vw, 3.5rem);
+    display: inline-block;
+    box-shadow: 2px 2px 0 #000000;
+    user-select: none;
 }
 
-.cover-lottie-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1.5rem 0;
-}
-
-.cover-lottie-player {
-    width: clamp(140px, 18vw, 220px);
-    height: clamp(140px, 18vw, 220px);
-    opacity: 0.85;
-}
-
-.cover-specs-strip {
+.masthead-meta-strip {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     border-top: 1px solid var(--border-color);
-    margin-top: clamp(3rem, 5vw, 5rem);
-    padding: 1.75rem 0 2.25rem;
+    padding: 1.5rem 0 2rem;
     gap: 1.5rem;
 }
 
-.specs-col {
+.meta-strip-col {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0.25rem;
     border-right: 1px solid var(--border-color);
     padding-right: 1.25rem;
 }
 
-.specs-col:last-child {
+.meta-strip-col:last-child {
     border-right: none;
     padding-right: 0;
 }
 
-.specs-col__label {
+.meta-strip-label {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.6;
 }
 
-.specs-col__value {
+.meta-strip-val {
     font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.01em;
 }
 
 /* --------------------------------------------------------------------------
-   07. SECTION 02: FAMILIES & OPTICAL STYLES (Displaay Obsidian Contrast)
+   07. SECTION 02: BLACK BROADSHEET ("New serif in TOWN...")
+   -------------------------------------------------------------------------- */
+.section-black-broadsheet {
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: clamp(5rem, 8vw, 9rem) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.black-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 1.5rem;
+    margin-bottom: 4rem;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.black-meta-left {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.black-statement-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1200px;
+}
+
+.black-statement-title {
+    font-family: var(--font-notus-display);
+    font-size: clamp(3rem, 7.5vw, 7.5rem);
+    line-height: 1.05;
+    font-weight: normal;
+    letter-spacing: -0.01em;
+}
+
+.black-statement-title em {
+    font-family: var(--font-notus-display-it);
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.black-statement-desc {
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   08. SECTION 03: WHITE EDITORIAL COMPARISON STACK ("Conventional")
+   -------------------------------------------------------------------------- */
+.section-comparison-stack {
+    background-color: var(--bg-page);
+    padding: clamp(5rem, 8vw, 8rem) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.stack-block {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.stack-block--center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stack-meta-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--c-gray-text);
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.stack-hero-word {
+    font-size: clamp(4.5rem, 13vw, 13.5rem);
+    line-height: 0.95;
+    font-weight: normal;
+    letter-spacing: -0.02em;
+}
+
+.stack-question {
+    font-size: clamp(2.8rem, 6.5vw, 6rem);
+    line-height: 1.05;
+    font-weight: normal;
+    max-width: 900px;
+    margin: 1rem 0;
+}
+
+.stack-cascade-list {
+    font-size: clamp(1.3rem, 2.8vw, 2.5rem);
+    line-height: 1.35;
+    max-width: 1300px;
+}
+
+.stack-divider {
+    height: clamp(3rem, 5vw, 5rem);
+}
+
+/* --------------------------------------------------------------------------
+   09. SECTION 04: BROADSHEET POSTER & NEWSPAPER COLUMNS ("NO-FACE")
+   -------------------------------------------------------------------------- */
+.section-broadsheet {
+    padding: clamp(5rem, 8vw, 8.5rem) 0;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-page);
+}
+
+.broadsheet-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.broadsheet-header-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--c-gray-text);
+}
+
+.broadsheet-main-title {
+    font-size: clamp(3.2rem, 8vw, 8rem);
+    line-height: 0.98;
+    font-weight: normal;
+    margin-bottom: 1.75rem;
+    letter-spacing: -0.015em;
+}
+
+.broadsheet-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.8rem);
+    color: var(--c-gray-text);
+    max-width: 1000px;
+    line-height: 1.4;
+    margin-bottom: 3.5rem;
+}
+
+.broadsheet-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    padding: 3rem 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.15rem;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.newspaper-col p {
+    margin-bottom: 1.25rem;
+}
+
+.newspaper-dropcap {
+    float: left;
+    font-size: 4rem;
+    line-height: 0.8;
+    padding-right: 0.5rem;
+    padding-top: 0.2rem;
+    font-weight: normal;
+}
+
+.broadsheet-alphabet {
+    padding: 3rem 0;
+    font-size: clamp(1.2rem, 2.2vw, 2.1rem);
+    line-height: 1.5;
+    border-bottom: 1px solid var(--border-color);
+    word-break: break-word;
+}
+
+.broadsheet-giant-abc {
+    font-size: clamp(8rem, 25vw, 26rem);
+    line-height: 0.82;
+    padding: 2rem 0;
+    letter-spacing: -0.03em;
+    user-select: none;
+}
+
+.broadsheet-wordstream {
+    font-size: clamp(1.8rem, 4vw, 4rem);
+    line-height: 1.25;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* --------------------------------------------------------------------------
+   10. SECTION 05: DUAL OPTICAL SIZE CARDS ("Race / Regular")
+   -------------------------------------------------------------------------- */
+.section-optical-cards {
+    padding: clamp(5rem, 8vw, 8rem) 0;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--c-ecru);
+}
+
+.cards-section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.cards-header-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--c-gray-text);
+}
+
+.optical-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.optical-ecru-card {
+    background-color: var(--bg-page);
+    border: 1px solid var(--border-color);
+    padding: 3.5rem clamp(2rem, 4vw, 3.5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 440px;
+}
+
+.ecru-card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--c-gray-text);
+    margin-bottom: 2rem;
+}
+
+.ecru-card-sample {
+    font-size: clamp(4.5rem, 9vw, 9rem);
+    line-height: 0.95;
+    margin: auto 0;
+}
+
+.ecru-card-caption {
+    font-size: 14px;
+    color: #E24A32;
+    font-weight: 500;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* --------------------------------------------------------------------------
+   11. SECTION 06: FAMILIES TABLE
    -------------------------------------------------------------------------- */
 .section-families {
-    background-color: #0C0C0C;
+    background-color: #000000;
     color: #FFFFFF;
-    padding: var(--sec-pad-y) 0;
-    border-bottom: 1px solid var(--c-black-border);
+    padding: clamp(5rem, 8vw, 8rem) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .section-top-bar {
@@ -538,7 +702,11 @@ button {
     gap: 1.5rem;
     padding-bottom: 1.5rem;
     margin-bottom: 3.5rem;
-    border-bottom: 1px solid var(--c-black-border);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-families .section-top-bar {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .section-top-bar__info {
@@ -552,13 +720,11 @@ button {
     font-weight: 600;
     letter-spacing: 0.08em;
     opacity: 0.5;
-    text-transform: uppercase;
 }
 
 .section-title {
     font-size: clamp(1.4rem, 2.5vw, 2.2rem);
     font-weight: 500;
-    letter-spacing: -0.01em;
 }
 
 .section-desc {
@@ -588,15 +754,38 @@ button {
     min-width: 44px;
 }
 
+.displaay-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    cursor: pointer;
+}
+
+.section-tester .displaay-slider {
+    background: var(--border-color);
+}
+
+.displaay-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: currentColor;
+    cursor: pointer;
+}
+
 .family-rows {
     display: flex;
     flex-direction: column;
 }
 
 .family-row {
-    border-bottom: 1px solid var(--c-black-border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     padding: 2.5rem 0;
-    transition: background-color 0.2s ease;
 }
 
 .family-row:first-child {
@@ -612,7 +801,6 @@ button {
 
 .family-row__tags {
     display: flex;
-    align-items: center;
     gap: 0.5rem;
 }
 
@@ -620,35 +808,21 @@ button {
     font-size: 54px;
     line-height: 1.15;
     outline: none;
-    cursor: text;
-    transition: opacity 0.2s ease;
     word-break: break-word;
 }
 
-.family-row__sample:focus {
-    opacity: 0.85;
-}
-
-.family-row__note {
-    font-size: 13px;
-    opacity: 0.5;
-    margin-top: 1.25rem;
-    max-width: 700px;
-}
-
 /* --------------------------------------------------------------------------
-   08. SECTION 03: INTERACTIVE TESTER (Displaay Studio Console)
+   12. SECTION 07: INTERACTIVE TESTER CONSOLE
    -------------------------------------------------------------------------- */
 .section-tester {
-    padding: var(--sec-pad-y) 0;
+    padding: clamp(5rem, 8vw, 8rem) 0;
     border-bottom: 1px solid var(--border-color);
 }
 
 .tester-module {
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
-    background-color: var(--surface-card);
 }
 
 .tester-controls-bar {
@@ -659,7 +833,6 @@ button {
     gap: 1.25rem;
     padding: 1.25rem 1.75rem;
     border-bottom: 1px solid var(--border-color);
-    background-color: var(--bg-page);
 }
 
 .control-block {
@@ -674,14 +847,14 @@ button {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.05em;
-    color: var(--text-muted);
+    color: var(--c-gray-text);
 }
 
 .pill-segmented {
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
-    background-color: var(--surface-card);
+    background-color: rgba(0, 0, 0, 0.03);
     padding: 3px;
     border-radius: 9999px;
     border: 1px solid var(--border-color);
@@ -692,7 +865,6 @@ button {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     padding: 1.25rem 1.75rem;
-    background-color: var(--bg-page);
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -706,11 +878,10 @@ button {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    font-weight: 500;
 }
 
 .slider-box__label {
-    color: var(--text-muted);
+    color: var(--c-gray-text);
 }
 
 .slider-box__val {
@@ -723,7 +894,7 @@ button {
     align-items: center;
     gap: 1rem;
     padding: 0.85rem 1.75rem;
-    background-color: var(--surface-card);
+    background-color: rgba(0, 0, 0, 0.02);
     border-bottom: 1px solid var(--border-color);
     overflow-x: auto;
 }
@@ -733,38 +904,37 @@ button {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--text-muted);
+    color: var(--c-gray-text);
     white-space: nowrap;
 }
 
 .presets-pills {
     display: flex;
-    align-items: center;
     gap: 0.35rem;
     white-space: nowrap;
 }
 
 .tester-viewport {
-    padding: clamp(2.5rem, 6vw, 5.5rem) clamp(1.5rem, 4vw, 3rem);
-    min-height: 380px;
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+    min-height: 360px;
     display: flex;
     align-items: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.25s ease;
 }
 
 .tester-viewport.theme-sand {
-    background-color: #ECE9DF;
-    color: #0C0C0C;
+    background-color: var(--c-ecru);
+    color: #000000;
 }
 
 .tester-viewport.theme-night {
-    background-color: #0C0C0C;
+    background-color: #000000;
     color: #FFFFFF;
 }
 
 .tester-viewport.theme-paper {
     background-color: #FFFFFF;
-    color: #0C0C0C;
+    color: #000000;
 }
 
 .tester-input-stage {
@@ -773,9 +943,7 @@ button {
     font-family: var(--font-notus-display);
     font-size: 64px;
     line-height: 1.15;
-    letter-spacing: 0.00em;
     word-break: break-word;
-    cursor: text;
 }
 
 .tester-meta-strip {
@@ -783,350 +951,126 @@ button {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1.75rem;
-    background-color: var(--bg-page);
     border-top: 1px solid var(--border-color);
     font-size: 12px;
-    color: var(--text-muted);
-    flex-wrap: wrap;
-    gap: 1rem;
+    color: var(--c-gray-text);
 }
 
-.meta-item strong {
+.tester-meta-strip strong {
     color: var(--text-main);
-    margin-left: 0.25rem;
 }
 
 /* --------------------------------------------------------------------------
-   09. SECTION 04: OPTICAL HIERARCHY MATRIX
-   -------------------------------------------------------------------------- */
-.section-optics {
-    padding: var(--sec-pad-y) 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.optics-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 3.5rem;
-}
-
-.optics-card {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 2.25rem;
-    background-color: var(--surface-card);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 2rem;
-}
-
-.optics-card__header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.optics-card__title {
-    font-size: 1.5rem;
-    font-weight: 500;
-}
-
-.optics-card__sub {
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
-.optics-hero-glyph {
-    font-size: clamp(5rem, 8vw, 7.5rem);
-    line-height: 1;
-    margin-bottom: 1rem;
-}
-
-.optics-sample-line {
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-}
-
-.optics-spec-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    border-top: 1px solid var(--border-color);
-    padding-top: 1.25rem;
-}
-
-.spec-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-}
-
-.spec-row span {
-    color: var(--text-muted);
-}
-
-.spec-row strong {
-    font-weight: 500;
-}
-
-.optics-sync-strip {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 2rem 2.5rem;
-    background-color: var(--bg-page);
-}
-
-.sync-strip__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.sync-strip__words {
-    display: flex;
-    gap: 0.35rem;
-}
-
-.sync-rows {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.sync-row {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    align-items: baseline;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1.25rem;
-    gap: 1.5rem;
-}
-
-.sync-row:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.sync-row__label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-
-.sync-row__display {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 1.1;
-}
-
-/* --------------------------------------------------------------------------
-   10. SECTION 05: SIGNATURE ANATOMY
-   -------------------------------------------------------------------------- */
-.section-anatomy {
-    padding: var(--sec-pad-y) 0;
-    border-bottom: 1px solid var(--border-color);
-    background-color: var(--surface-card);
-}
-
-.anatomy-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-}
-
-.anatomy-card {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background-color: var(--bg-page);
-    padding: 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 360px;
-}
-
-.giant-glyph {
-    font-size: clamp(4.5rem, 9vw, 8rem);
-    line-height: 1;
-    display: inline-block;
-    margin-bottom: 2rem;
-}
-
-.anatomy-card__meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.anatomy-tag {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-}
-
-.anatomy-title {
-    font-size: 1.5rem;
-    font-weight: 500;
-}
-
-.anatomy-desc {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.6;
-}
-
-/* --------------------------------------------------------------------------
-   11. SECTION 06: WATERFALL SCALE RAMP
-   -------------------------------------------------------------------------- */
-.section-waterfall {
-    padding: var(--sec-pad-y) 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.waterfall-rows {
-    display: flex;
-    flex-direction: column;
-}
-
-.waterfall-line {
-    border-bottom: 1px solid var(--border-color);
-    padding: 2.25rem 0;
-}
-
-.waterfall-line:first-child {
-    padding-top: 0;
-}
-
-.waterfall-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-muted);
-    margin-bottom: 0.75rem;
-    font-variant-numeric: tabular-nums;
-}
-
-.waterfall-text {
-    line-height: 1.15;
-    word-break: break-word;
-}
-
-.size-130 { font-size: clamp(3.5rem, 8.5vw, 8.125rem); }
-.size-84  { font-size: clamp(2.5rem, 5.5vw, 5.25rem); }
-.size-56  { font-size: clamp(1.8rem, 3.8vw, 3.5rem); }
-.size-38  { font-size: clamp(1.4rem, 2.6vw, 2.375rem); }
-.size-26  { font-size: clamp(1.15rem, 1.8vw, 1.625rem); }
-.size-18  { font-size: 1.125rem; line-height: 1.6; max-width: 950px; }
-.size-12  { font-size: 0.8125rem; line-height: 1.6; max-width: 900px; }
-
-/* --------------------------------------------------------------------------
-   12. SECTION 07: GLYPH MATRIX & INSPECTOR (Displaay Character Map)
+   13. SECTION 08: DISPLAAY DUAL-PANE GLYPH INSPECTOR
    -------------------------------------------------------------------------- */
 .section-glyphs {
-    padding: var(--sec-pad-y) 0;
+    padding: clamp(5rem, 8vw, 8rem) 0;
     border-bottom: 1px solid var(--border-color);
 }
 
 .glyph-filter-pills {
     display: flex;
-    align-items: center;
     gap: 0.35rem;
     flex-wrap: wrap;
 }
 
-.glyph-inspector {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    padding: 1.25rem 2rem;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background-color: var(--surface-card);
-    margin-bottom: 2rem;
-}
-
-.inspector-glyph {
-    font-family: var(--font-notus-display);
-    font-size: 3.5rem;
-    line-height: 1;
-    min-width: 60px;
-    text-align: center;
-}
-
-.inspector-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    flex-grow: 1;
-}
-
-.inspector-name {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-}
-
-.inspector-unicode {
-    font-size: 12px;
-    color: var(--text-muted);
-    font-family: monospace;
-}
-
-.displaay-glyph-grid {
+.displaay-inspector-split {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(62px, 1fr));
-    gap: 1px;
-    background-color: var(--border-color);
+    grid-template-columns: 360px 1fr;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
 }
 
-.glyph-cell {
+.inspector-magnifier-pane {
+    padding: 3rem 2.5rem;
+    background-color: var(--c-ecru);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.magnifier-header {
+    text-align: left;
+}
+
+.magnifier-giant-char {
+    font-size: clamp(8rem, 14vw, 13rem);
+    line-height: 1;
+    margin: auto 0;
+    padding: 2rem 0;
+    user-select: none;
+}
+
+.magnifier-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.magnifier-name {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.magnifier-unicode {
+    font-size: 12px;
+    color: var(--c-gray-text);
+    font-family: monospace;
+}
+
+.inspector-grid-pane {
     background-color: var(--bg-page);
-    height: 70px;
+    padding: 1.5rem;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.displaay-glyph-matrix {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+    gap: 1px;
+    background-color: var(--border-color);
+    border: 1px solid var(--border-color);
+}
+
+.glyph-box {
+    background-color: var(--bg-page);
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-notus-display);
-    font-size: 26px;
+    font-size: 22px;
     cursor: pointer;
-    transition: background-color 0.15s ease, transform 0.15s ease;
     user-select: none;
+    transition: background-color 0.1s ease;
 }
 
-.glyph-cell:hover {
-    background-color: var(--surface-hover);
-    color: var(--text-main);
-}
-
-.glyph-cell.is-selected {
-    background-color: var(--text-main);
-    color: var(--bg-page);
+/* Displaay Signature Vivid Yellow Hover / Selection */
+.glyph-box:hover,
+.glyph-box.is-active {
+    background-color: var(--c-yellow) !important;
+    color: #000000 !important;
+    font-weight: bold;
 }
 
 /* --------------------------------------------------------------------------
-   13. SECTION 08: TECH SPECS & OPENTYPE
+   14. SECTION 09: OPENTYPE & THREE ACTION PILLS (Black, Cyan, Mint)
    -------------------------------------------------------------------------- */
 .section-tech {
-    padding: var(--sec-pad-y) 0;
+    padding: clamp(5rem, 8vw, 8rem) 0;
     border-bottom: 1px solid var(--border-color);
 }
 
 .tech-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2.5rem;
 }
 
 .tech-feature-card,
@@ -1134,21 +1078,9 @@ button {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 2.5rem;
-    background-color: var(--surface-card);
     display: flex;
     flex-direction: column;
-}
-
-.tech-card-title {
-    font-size: 1.4rem;
-    font-weight: 500;
-    margin: 0.5rem 0 0.35rem;
-}
-
-.tech-card-desc {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 1.5rem;
+    justify-content: space-between;
 }
 
 .feature-switches {
@@ -1159,22 +1091,19 @@ button {
 }
 
 .feature-sandbox {
-    margin-top: auto;
     padding: 2rem;
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    background-color: var(--bg-page);
-    font-size: 1.6rem;
-    line-height: 1.4;
+    font-size: 1.5rem;
+    line-height: 1.45;
     outline: none;
-    min-height: 140px;
-    cursor: text;
+    min-height: 160px;
 }
 
 .tech-data-table {
     display: flex;
     flex-direction: column;
-    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .data-row {
@@ -1190,36 +1119,72 @@ button {
 }
 
 .data-key {
-    color: var(--text-muted);
+    color: var(--c-gray-text);
 }
 
 .data-val {
     font-weight: 500;
-    text-align: right;
+}
+
+/* Displaay Iconic Three Action Pills */
+.displaay-action-pills-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.action-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+    user-select: none;
+    cursor: pointer;
+}
+
+.action-pill:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+.action-pill--black {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+.action-pill--cyan {
+    background-color: var(--c-cyan);
+    color: #000000;
+}
+
+.action-pill--mint {
+    background-color: var(--c-mint);
+    color: #000000;
 }
 
 /* --------------------------------------------------------------------------
-   14. SECTION 09: IN USE & EDITORIAL GALLERY
+   15. SECTION 10: IN USE
    -------------------------------------------------------------------------- */
 .section-gallery {
-    padding: var(--sec-pad-y) 0;
+    padding: clamp(5rem, 8vw, 8rem) 0;
     border-bottom: 1px solid var(--border-color);
 }
 
 .displaay-gallery-grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
-    grid-auto-flow: dense;
     gap: 2rem;
 }
 
 .gallery-item {
-    display: flex;
-    flex-direction: column;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
-    background-color: var(--surface-card);
 }
 
 .gallery-item--large {
@@ -1227,20 +1192,10 @@ button {
     grid-row: span 2;
 }
 
-.gallery-image-wrap {
-    overflow: hidden;
-    background-color: #ECE9DF;
-}
-
 .gallery-image-wrap img {
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.4s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.02);
 }
 
 .gallery-meta {
@@ -1254,82 +1209,80 @@ button {
 
 .gallery-meta__num {
     font-weight: 600;
-    color: var(--text-muted);
-}
-
-.gallery-meta__title {
-    font-weight: 500;
+    color: var(--c-gray-text);
 }
 
 /* --------------------------------------------------------------------------
-   15. SECTION 10: FOOTER & LICENSING
+   16. SECTION 11: MONUMENTAL FOOTER (Displaay Type Foundry Homage)
    -------------------------------------------------------------------------- */
-.section-footer {
-    padding: clamp(5rem, 8vw, 7.5rem) 0 3rem;
-    background-color: var(--bg-page);
+.section-displaay-footer {
+    background-color: #E7E4DC;
+    color: #000000;
+    padding: clamp(5rem, 8vw, 8rem) 0 3rem;
 }
 
-.footer-layout {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 4rem;
-    padding-bottom: 4rem;
-    border-bottom: 1px solid var(--border-color);
+[data-theme="dark"] .section-displaay-footer {
+    background-color: #141414;
+    color: #FFFFFF;
 }
 
-.footer-headline {
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 500;
-    line-height: 1.15;
-    margin: 1rem 0;
-    letter-spacing: -0.01em;
-}
-
-.footer-desc {
-    font-size: 15px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    max-width: 600px;
-    margin-bottom: 2.25rem;
-}
-
-.footer-actions {
+.footer-foundry-block {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 2rem;
+    margin-bottom: 3.5rem;
 }
 
-.footer-secondary {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 1.5rem;
-    border-left: 1px solid var(--border-color);
-    padding-left: 3rem;
-}
-
-.footer-info-col {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.footer-info-label {
-    font-size: 11px;
+.footer-foundry-title {
+    font-size: clamp(3.5rem, 9vw, 9.5rem);
+    line-height: 0.92;
+    font-weight: 700;
+    letter-spacing: -0.03em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
 }
 
-.footer-info-val {
-    font-size: 1.2rem;
-    font-weight: 500;
+.footer-split-year {
+    display: flex;
+    flex-direction: column;
+    font-size: clamp(3rem, 6vw, 6.5rem);
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    text-align: right;
 }
 
-.footer-info-sub {
-    font-size: 13px;
-    color: var(--text-muted);
+.footer-directory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .footer-directory-grid {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.dir-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: 14px;
+}
+
+.dir-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 0.5rem;
+}
+
+.dir-col a:hover {
+    text-decoration: underline;
 }
 
 .footer-bottom-bar {
@@ -1338,13 +1291,11 @@ button {
     align-items: center;
     padding-top: 2rem;
     font-size: 12px;
-    color: var(--text-muted);
-    flex-wrap: wrap;
-    gap: 1rem;
+    opacity: 0.6;
 }
 
 /* --------------------------------------------------------------------------
-   16. TYPOGRAPHIC STYLE SHORTCUTS
+   17. STYLES SHORTCUTS & RESPONSIVE
    -------------------------------------------------------------------------- */
 .style-display    { font-family: var(--font-notus-display); font-style: normal; }
 .style-display-it { font-family: var(--font-notus-display-it); font-style: italic; }
@@ -1352,60 +1303,22 @@ button {
 .style-text-it    { font-family: var(--font-notus-text-it); font-style: italic; }
 .style-caption    { font-family: var(--font-notus-caption); font-style: normal; }
 
-/* --------------------------------------------------------------------------
-   17. RESPONSIVE BREAKPOINTS
-   -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
-    .cover-specs-strip {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-    }
-    .specs-col:nth-child(3) {
-        border-right: none;
-    }
-    .optics-grid {
-        grid-template-columns: 1fr;
-    }
-    .tech-grid {
-        grid-template-columns: 1fr;
-    }
-    .footer-layout {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-    }
-    .footer-secondary {
-        border-left: none;
-        padding-left: 0;
-        border-top: 1px solid var(--border-color);
-        padding-top: 2rem;
-    }
+    .masthead-meta-strip { grid-template-columns: repeat(3, 1fr); }
+    .meta-strip-col:nth-child(3) { border-right: none; }
+    .broadsheet-columns { grid-template-columns: 1fr; }
+    .optical-cards-grid { grid-template-columns: 1fr; }
+    .displaay-inspector-split { grid-template-columns: 1fr; }
+    .inspector-magnifier-pane { border-right: none; border-bottom: 1px solid var(--border-color); }
+    .tech-grid { grid-template-columns: 1fr; }
+    .footer-directory-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-    .header-nav {
-        display: none;
-    }
-    .cover-specs-strip {
-        grid-template-columns: 1fr 1fr;
-    }
-    .specs-col:nth-child(2) {
-        border-right: none;
-    }
-    .tester-sliders-bar {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    .anatomy-grid {
-        grid-template-columns: 1fr;
-    }
-    .displaay-gallery-grid {
-        grid-template-columns: 1fr;
-    }
-    .gallery-item--large {
-        grid-column: 1 / -1;
-    }
-    .sync-row {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-    }
+    .header-nav { display: none; }
+    .masthead-meta-strip { grid-template-columns: 1fr 1fr; }
+    .tester-sliders-bar { grid-template-columns: 1fr; gap: 1rem; }
+    .displaay-gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item--large { grid-column: 1 / -1; }
+    .footer-directory-grid { grid-template-columns: 1fr; }
 }

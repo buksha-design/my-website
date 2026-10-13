@@ -491,6 +491,40 @@ function initBroadsheetInteractive() {
         });
     }
 
+        // 5 Design Slogan Presets Switching
+    const sloganPresets = {
+        'rigor': 'Architectural rigor,<br><em>fluid grace.</em>',
+        'sculpted': 'Sculpted form,<br><em>kinetic precision.</em>',
+        'discipline': 'Where discipline<br><em>learns to flow.</em>',
+        'tension': 'Monumental tension,<br><em>organic poetry.</em>',
+        'precision': 'Precision shaped<br><em>by emotion.</em>'
+    };
+
+    const sloganPills = document.querySelectorAll('.slogan-pill');
+    sloganPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            sloganPills.forEach(p => p.classList.remove('is-active'));
+            pill.classList.add('is-active');
+            const key = pill.getAttribute('data-slogan');
+            if (sloganPresets[key]) {
+                title.innerHTML = sloganPresets[key];
+                const isItalic = slantSlider ? slantSlider.value === '1' : false;
+                const optIdx = opticalSlider ? parseInt(opticalSlider.value, 10) : 0;
+                const em = title.querySelector('em');
+                if (em) {
+                    if (isItalic) {
+                        em.style.fontStyle = 'normal';
+                    } else {
+                        em.style.fontStyle = 'italic';
+                        if (optIdx === 0) em.style.fontFamily = '"Notus Display Italic", serif';
+                        else if (optIdx === 1) em.style.fontFamily = '"Notus Text Italic", serif';
+                        else em.style.fontFamily = '"Notus Caption", serif';
+                    }
+                }
+            }
+        });
+    });
+
     pills.forEach(pill => {
         pill.addEventListener('click', () => {
             const opt = parseInt(pill.getAttribute('data-optical'), 10);

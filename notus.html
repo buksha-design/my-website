@@ -779,8 +779,27 @@ button {
 .section-black-broadsheet {
     background-color: #000000;
     color: #FFFFFF;
-    padding: clamp(5rem, 8vw, 9rem) 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 150px;
+    margin: 3.5rem var(--pad-x);
+    padding: clamp(5.5rem, 8.5vw, 9.5rem) 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+@media (max-width: 1024px) {
+    .section-black-broadsheet {
+        border-radius: 100px;
+        margin: 2.5rem var(--pad-x);
+    }
+}
+
+@media (max-width: 768px) {
+    .section-black-broadsheet {
+        border-radius: 48px;
+        margin: 1.5rem 1rem;
+        padding: 4rem 0;
+    }
 }
 
 .black-header-bar {
@@ -811,7 +830,7 @@ button {
 
 .black-statement-title {
     font-family: var(--font-notus-display);
-    font-size: clamp(3.6rem, 9vw, 9rem);
+    font-size: clamp(4rem, 9.9vw, 10rem);
     line-height: 1.05;
     font-weight: normal;
     letter-spacing: -0.01em;
@@ -1756,51 +1775,27 @@ section[id] {
              ==================================================================== -->
         <section class="section-black-broadsheet" id="editorial-now">
             <div class="site-container">
-                <!-- Displaay Variable / Style Interactive Bar -->
-                <div class="broadsheet-controls-bar">
-                    <div class="broadsheet-controls-left">
-                        <span class="broadsheet-label">Variable Font: 3 Axes</span>
-                    </div>
-                    <div class="broadsheet-axes-sliders">
-                        <div class="axis-control-item">
-                            <span class="axis-name">Optical</span>
-                            <input type="range" min="0" max="2" value="0" step="1" class="displaay-range" id="broadsheetOpticalSlider" aria-label="Optical Size">
-                            <span class="axis-val" id="broadsheetOpticalVal">Display</span>
-                        </div>
-                        <div class="axis-control-item">
-                            <span class="axis-name">Slant</span>
-                            <input type="range" min="0" max="1" value="0" step="1" class="displaay-range" id="broadsheetSlantSlider" aria-label="Slant Italic">
-                            <span class="axis-val" id="broadsheetSlantVal">0°</span>
-                        </div>
-                        <div class="axis-control-item">
-                            <span class="axis-name">Size</span>
-                            <input type="range" min="36" max="130" value="100" step="2" class="displaay-range" id="broadsheetSizeSlider" aria-label="Font Size">
-                            <span class="axis-val" id="broadsheetSizeVal">100px</span>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- 5 Quick Style Selector Pills -->
                 <div class="broadsheet-style-pills" id="broadsheetPillsGroup">
-                    <button type="button" class="broadsheet-pill is-active" data-font="Notus Display" data-italic="false" data-optical="0">Display Regular</button>
-                    <button type="button" class="broadsheet-pill" data-font="Notus Display Italic" data-italic="true" data-optical="0">Display Italic</button>
-                    <button type="button" class="broadsheet-pill" data-font="Notus Text" data-italic="false" data-optical="1">Text Regular</button>
-                    <button type="button" class="broadsheet-pill" data-font="Notus Text Italic" data-italic="true" data-optical="1">Text Italic</button>
-                    <button type="button" class="broadsheet-pill" data-font="Notus Caption" data-italic="false" data-optical="2">Caption</button>
+                    <button type="button" class="broadsheet-pill is-active" data-font="Notus Display" data-italic="false">Display Regular</button>
+                    <button type="button" class="broadsheet-pill" data-font="Notus Display Italic" data-italic="true">Display Italic</button>
+                    <button type="button" class="broadsheet-pill" data-font="Notus Text" data-italic="false">Text Regular</button>
+                    <button type="button" class="broadsheet-pill" data-font="Notus Text Italic" data-italic="true">Text Italic</button>
+                    <button type="button" class="broadsheet-pill" data-font="Notus Caption" data-italic="false">Caption</button>
                 </div>
 
                 <!-- 5 Design Slogan Presets Row -->
                 <div class="slogan-preset-row" id="sloganPresetsGroup">
                     <span class="slogan-preset-label">Slogans:</span>
-                    <button type="button" class="slogan-pill is-active" data-slogan="rigor">1. Architectural Rigor</button>
-                    <button type="button" class="slogan-pill" data-slogan="sculpted">2. Sculpted Form</button>
-                    <button type="button" class="slogan-pill" data-slogan="discipline">3. Discipline &amp; Flow</button>
-                    <button type="button" class="slogan-pill" data-slogan="tension">4. Monumental Tension</button>
-                    <button type="button" class="slogan-pill" data-slogan="precision">5. Precision &amp; Emotion</button>
+                    <button type="button" class="slogan-pill is-active" data-slogan="precision">1. Precision &amp; Emotion</button>
+                    <button type="button" class="slogan-pill" data-slogan="poetry">2. Architecture &amp; Poetry</button>
+                    <button type="button" class="slogan-pill" data-slogan="warmth">3. Tension &amp; Warmth</button>
+                    <button type="button" class="slogan-pill" data-slogan="intent">4. Form &amp; Intent</button>
+                    <button type="button" class="slogan-pill" data-slogan="grace">5. Rhythm &amp; Grace</button>
                 </div>
 
                 <div class="black-statement-stage">
-                    <h2 class="black-statement-title" id="broadsheetHeroTitle" contenteditable="true" spellcheck="false" title="Click to edit headline text">Architectural rigor,<br><em>fluid grace.</em></h2>
+                    <h2 class="black-statement-title" id="broadsheetHeroTitle" contenteditable="true" spellcheck="false" title="Click to edit headline text">Precision shaped<br><em>by emotion.</em></h2>
                     <div class="black-statement-meta">
                         <span class="active-style-badge" id="broadsheetActiveBadge">Active Style: Notus Display Regular</span>
                         <span class="editable-hint">✎ Click text to edit headline</span>
@@ -2819,61 +2814,37 @@ function initOpenTypeSandbox() {
    -------------------------------------------------------------------------- */
 function initBroadsheetInteractive() {
     const title = document.getElementById('broadsheetHeroTitle');
-    const opticalSlider = document.getElementById('broadsheetOpticalSlider');
-    const opticalVal = document.getElementById('broadsheetOpticalVal');
-    const slantSlider = document.getElementById('broadsheetSlantSlider');
-    const slantVal = document.getElementById('broadsheetSlantVal');
-    const sizeSlider = document.getElementById('broadsheetSizeSlider');
-    const sizeVal = document.getElementById('broadsheetSizeVal');
     const badge = document.getElementById('broadsheetActiveBadge');
     const pills = document.querySelectorAll('.broadsheet-pill');
+    const sloganPills = document.querySelectorAll('.slogan-pill');
 
     if (!title) return;
 
-    const opticalNames = ['Display', 'Text', 'Caption'];
+    let currentFont = 'Notus Display';
+    let currentItalic = false;
 
-    function getStyle(opticalIdx, slantIdx) {
-        if (opticalIdx === 0) {
-            return slantIdx === 1 
-                ? { font: 'Notus Display Italic', name: 'Notus Display Italic', italic: true }
-                : { font: 'Notus Display', name: 'Notus Display Regular', italic: false };
-        } else if (opticalIdx === 1) {
-            return slantIdx === 1
-                ? { font: 'Notus Text Italic', name: 'Notus Text Italic', italic: true }
-                : { font: 'Notus Text', name: 'Notus Text Regular', italic: false };
-        } else {
-            return slantIdx === 1
-                ? { font: 'Notus Caption', name: 'Notus Caption Italic', italic: true }
-                : { font: 'Notus Caption', name: 'Notus Caption Regular', italic: false };
-        }
-    }
-
-    function applyStyle(styleObj, opticalIdx, slantIdx) {
-        title.style.fontFamily = `"${styleObj.font}", serif`;
-        title.style.fontStyle = styleObj.italic ? 'italic' : 'normal';
+    function applyStyle(font, isItalic, styleName) {
+        currentFont = font;
+        currentItalic = isItalic;
+        title.style.fontFamily = `"${font}", serif`;
+        title.style.fontStyle = isItalic ? 'italic' : 'normal';
 
         const em = title.querySelector('em');
         if (em) {
-            if (styleObj.italic) {
+            if (isItalic) {
                 em.style.fontStyle = 'normal';
             } else {
                 em.style.fontStyle = 'italic';
-                if (opticalIdx === 0) em.style.fontFamily = '"Notus Display Italic", serif';
-                else if (opticalIdx === 1) em.style.fontFamily = '"Notus Text Italic", serif';
+                if (font.includes('Display')) em.style.fontFamily = '"Notus Display Italic", serif';
+                else if (font.includes('Text')) em.style.fontFamily = '"Notus Text Italic", serif';
                 else em.style.fontFamily = '"Notus Caption", serif';
             }
         }
 
-        if (opticalVal) opticalVal.textContent = opticalNames[opticalIdx];
-        if (slantVal) slantVal.textContent = styleObj.italic ? '12°' : '0°';
-        if (opticalSlider) opticalSlider.value = opticalIdx;
-        if (slantSlider) slantSlider.value = slantIdx;
-        if (badge) badge.textContent = `Active Style: ${styleObj.name}`;
+        if (badge) badge.textContent = `Active Style: ${styleName}`;
 
         pills.forEach(pill => {
-            const pillOptical = parseInt(pill.getAttribute('data-optical'), 10);
-            const pillItalic = pill.getAttribute('data-italic') === 'true';
-            if (pillOptical === opticalIdx && pillItalic === styleObj.italic) {
+            if (pill.getAttribute('data-font') === font) {
                 pill.classList.add('is-active');
             } else {
                 pill.classList.remove('is-active');
@@ -2881,35 +2852,22 @@ function initBroadsheetInteractive() {
         });
     }
 
-    if (opticalSlider && slantSlider) {
-        const handleSliderChange = () => {
-            const opt = parseInt(opticalSlider.value, 10);
-            const sl = parseInt(slantSlider.value, 10);
-            const style = getStyle(opt, sl);
-            applyStyle(style, opt, sl);
-        };
-        opticalSlider.addEventListener('input', handleSliderChange);
-        slantSlider.addEventListener('input', handleSliderChange);
-    }
-
-    if (sizeSlider && sizeVal) {
-        sizeSlider.addEventListener('input', (e) => {
-            const sz = e.target.value;
-            title.style.fontSize = `${sz}px`;
-            sizeVal.textContent = `${sz}px`;
+    pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            const font = pill.getAttribute('data-font');
+            const isItalic = pill.getAttribute('data-italic') === 'true';
+            applyStyle(font, isItalic, pill.textContent.trim());
         });
-    }
+    });
 
-        // 5 Design Slogan Presets Switching
     const sloganPresets = {
-        'rigor': 'Architectural rigor,<br><em>fluid grace.</em>',
-        'sculpted': 'Sculpted form,<br><em>kinetic precision.</em>',
-        'discipline': 'Where discipline<br><em>learns to flow.</em>',
-        'tension': 'Monumental tension,<br><em>organic poetry.</em>',
-        'precision': 'Precision shaped<br><em>by emotion.</em>'
+        'precision': 'Precision shaped<br><em>by emotion.</em>',
+        'poetry': 'Architecture softened<br><em>by poetry.</em>',
+        'warmth': 'Pure tension,<br><em>human warmth.</em>',
+        'intent': 'Form crafted<br><em>with intent.</em>',
+        'grace': 'Silent rhythm,<br><em>tactile grace.</em>'
     };
 
-    const sloganPills = document.querySelectorAll('.slogan-pill');
     sloganPills.forEach(pill => {
         pill.addEventListener('click', () => {
             sloganPills.forEach(p => p.classList.remove('is-active'));
@@ -2917,33 +2875,12 @@ function initBroadsheetInteractive() {
             const key = pill.getAttribute('data-slogan');
             if (sloganPresets[key]) {
                 title.innerHTML = sloganPresets[key];
-                const isItalic = slantSlider ? slantSlider.value === '1' : false;
-                const optIdx = opticalSlider ? parseInt(opticalSlider.value, 10) : 0;
-                const em = title.querySelector('em');
-                if (em) {
-                    if (isItalic) {
-                        em.style.fontStyle = 'normal';
-                    } else {
-                        em.style.fontStyle = 'italic';
-                        if (optIdx === 0) em.style.fontFamily = '"Notus Display Italic", serif';
-                        else if (optIdx === 1) em.style.fontFamily = '"Notus Text Italic", serif';
-                        else em.style.fontFamily = '"Notus Caption", serif';
-                    }
-                }
+                applyStyle(currentFont, currentItalic, badge ? badge.textContent.replace('Active Style: ', '') : currentFont);
             }
         });
     });
-
-    pills.forEach(pill => {
-        pill.addEventListener('click', () => {
-            const opt = parseInt(pill.getAttribute('data-optical'), 10);
-            const isItalic = pill.getAttribute('data-italic') === 'true';
-            const sl = isItalic ? 1 : 0;
-            const style = getStyle(opt, sl);
-            applyStyle(style, opt, sl);
-        });
-    });
 }
+
 
     </script>
 </body>

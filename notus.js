@@ -410,61 +410,37 @@ function initOpenTypeSandbox() {
    -------------------------------------------------------------------------- */
 function initBroadsheetInteractive() {
     const title = document.getElementById('broadsheetHeroTitle');
-    const opticalSlider = document.getElementById('broadsheetOpticalSlider');
-    const opticalVal = document.getElementById('broadsheetOpticalVal');
-    const slantSlider = document.getElementById('broadsheetSlantSlider');
-    const slantVal = document.getElementById('broadsheetSlantVal');
-    const sizeSlider = document.getElementById('broadsheetSizeSlider');
-    const sizeVal = document.getElementById('broadsheetSizeVal');
     const badge = document.getElementById('broadsheetActiveBadge');
     const pills = document.querySelectorAll('.broadsheet-pill');
+    const sloganPills = document.querySelectorAll('.slogan-pill');
 
     if (!title) return;
 
-    const opticalNames = ['Display', 'Text', 'Caption'];
+    let currentFont = 'Notus Display';
+    let currentItalic = false;
 
-    function getStyle(opticalIdx, slantIdx) {
-        if (opticalIdx === 0) {
-            return slantIdx === 1 
-                ? { font: 'Notus Display Italic', name: 'Notus Display Italic', italic: true }
-                : { font: 'Notus Display', name: 'Notus Display Regular', italic: false };
-        } else if (opticalIdx === 1) {
-            return slantIdx === 1
-                ? { font: 'Notus Text Italic', name: 'Notus Text Italic', italic: true }
-                : { font: 'Notus Text', name: 'Notus Text Regular', italic: false };
-        } else {
-            return slantIdx === 1
-                ? { font: 'Notus Caption', name: 'Notus Caption Italic', italic: true }
-                : { font: 'Notus Caption', name: 'Notus Caption Regular', italic: false };
-        }
-    }
-
-    function applyStyle(styleObj, opticalIdx, slantIdx) {
-        title.style.fontFamily = `"${styleObj.font}", serif`;
-        title.style.fontStyle = styleObj.italic ? 'italic' : 'normal';
+    function applyStyle(font, isItalic, styleName) {
+        currentFont = font;
+        currentItalic = isItalic;
+        title.style.fontFamily = `"${font}", serif`;
+        title.style.fontStyle = isItalic ? 'italic' : 'normal';
 
         const em = title.querySelector('em');
         if (em) {
-            if (styleObj.italic) {
+            if (isItalic) {
                 em.style.fontStyle = 'normal';
             } else {
                 em.style.fontStyle = 'italic';
-                if (opticalIdx === 0) em.style.fontFamily = '"Notus Display Italic", serif';
-                else if (opticalIdx === 1) em.style.fontFamily = '"Notus Text Italic", serif';
+                if (font.includes('Display')) em.style.fontFamily = '"Notus Display Italic", serif';
+                else if (font.includes('Text')) em.style.fontFamily = '"Notus Text Italic", serif';
                 else em.style.fontFamily = '"Notus Caption", serif';
             }
         }
 
-        if (opticalVal) opticalVal.textContent = opticalNames[opticalIdx];
-        if (slantVal) slantVal.textContent = styleObj.italic ? '12°' : '0°';
-        if (opticalSlider) opticalSlider.value = opticalIdx;
-        if (slantSlider) slantSlider.value = slantIdx;
-        if (badge) badge.textContent = `Active Style: ${styleObj.name}`;
+        if (badge) badge.textContent = `Active Style: ${styleName}`;
 
         pills.forEach(pill => {
-            const pillOptical = parseInt(pill.getAttribute('data-optical'), 10);
-            const pillItalic = pill.getAttribute('data-italic') === 'true';
-            if (pillOptical === opticalIdx && pillItalic === styleObj.italic) {
+            if (pill.getAttribute('data-font') === font) {
                 pill.classList.add('is-active');
             } else {
                 pill.classList.remove('is-active');
@@ -472,35 +448,22 @@ function initBroadsheetInteractive() {
         });
     }
 
-    if (opticalSlider && slantSlider) {
-        const handleSliderChange = () => {
-            const opt = parseInt(opticalSlider.value, 10);
-            const sl = parseInt(slantSlider.value, 10);
-            const style = getStyle(opt, sl);
-            applyStyle(style, opt, sl);
-        };
-        opticalSlider.addEventListener('input', handleSliderChange);
-        slantSlider.addEventListener('input', handleSliderChange);
-    }
-
-    if (sizeSlider && sizeVal) {
-        sizeSlider.addEventListener('input', (e) => {
-            const sz = e.target.value;
-            title.style.fontSize = `${sz}px`;
-            sizeVal.textContent = `${sz}px`;
+    pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            const font = pill.getAttribute('data-font');
+            const isItalic = pill.getAttribute('data-italic') === 'true';
+            applyStyle(font, isItalic, pill.textContent.trim());
         });
-    }
+    });
 
-        // 5 Design Slogan Presets Switching
     const sloganPresets = {
-        'rigor': 'Architectural rigor,<br><em>fluid grace.</em>',
-        'sculpted': 'Sculpted form,<br><em>kinetic precision.</em>',
-        'discipline': 'Where discipline<br><em>learns to flow.</em>',
-        'tension': 'Monumental tension,<br><em>organic poetry.</em>',
-        'precision': 'Precision shaped<br><em>by emotion.</em>'
+        'precision': 'Precision shaped<br><em>by emotion.</em>',
+        'poetry': 'Architecture softened<br><em>by poetry.</em>',
+        'warmth': 'Pure tension,<br><em>human warmth.</em>',
+        'intent': 'Form crafted<br><em>with intent.</em>',
+        'grace': 'Silent rhythm,<br><em>tactile grace.</em>'
     };
 
-    const sloganPills = document.querySelectorAll('.slogan-pill');
     sloganPills.forEach(pill => {
         pill.addEventListener('click', () => {
             sloganPills.forEach(p => p.classList.remove('is-active'));
@@ -508,30 +471,9 @@ function initBroadsheetInteractive() {
             const key = pill.getAttribute('data-slogan');
             if (sloganPresets[key]) {
                 title.innerHTML = sloganPresets[key];
-                const isItalic = slantSlider ? slantSlider.value === '1' : false;
-                const optIdx = opticalSlider ? parseInt(opticalSlider.value, 10) : 0;
-                const em = title.querySelector('em');
-                if (em) {
-                    if (isItalic) {
-                        em.style.fontStyle = 'normal';
-                    } else {
-                        em.style.fontStyle = 'italic';
-                        if (optIdx === 0) em.style.fontFamily = '"Notus Display Italic", serif';
-                        else if (optIdx === 1) em.style.fontFamily = '"Notus Text Italic", serif';
-                        else em.style.fontFamily = '"Notus Caption", serif';
-                    }
-                }
+                applyStyle(currentFont, currentItalic, badge ? badge.textContent.replace('Active Style: ', '') : currentFont);
             }
         });
     });
-
-    pills.forEach(pill => {
-        pill.addEventListener('click', () => {
-            const opt = parseInt(pill.getAttribute('data-optical'), 10);
-            const isItalic = pill.getAttribute('data-italic') === 'true';
-            const sl = isItalic ? 1 : 0;
-            const style = getStyle(opt, sl);
-            applyStyle(style, opt, sl);
-        });
-    });
 }
+

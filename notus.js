@@ -4,8 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initScrollAndNav();
-    initTheme();
-    initSloganSwitcher();
+    initHeaderLogo();
     initFamiliesScale();
     initTesterStudio();
     initDisplaayGlyphs();
@@ -13,12 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --------------------------------------------------------------------------
-   01. SCROLL PROGRESS & ACTIVE NAV
+   01. SCROLL PROGRESS & ACTIVE GIANT SUB-NAV TRACKING
    -------------------------------------------------------------------------- */
 function initScrollAndNav() {
     const progressBar = document.getElementById('scrollBar');
-    const navPills = document.querySelectorAll('.nav-pill');
-    const sections = Array.from(navPills).map(pill => {
+    const giantPills = document.querySelectorAll('.giant-pill[href^="#"]');
+    const notusPill = document.querySelector('.giant-pill--dropdown');
+
+    const sections = Array.from(giantPills).map(pill => {
         const id = pill.getAttribute('href');
         return document.querySelector(id);
     }).filter(Boolean);
@@ -34,7 +35,7 @@ function initScrollAndNav() {
 
         let currentSectionId = '';
         sections.forEach(sec => {
-            const top = sec.offsetTop - 140;
+            const top = sec.offsetTop - 180;
             const height = sec.offsetHeight;
             if (scrollTop >= top && scrollTop < top + height) {
                 currentSectionId = `#${sec.id}`;
@@ -42,79 +43,42 @@ function initScrollAndNav() {
         });
 
         if (currentSectionId) {
-            navPills.forEach(pill => {
+            if (notusPill) notusPill.classList.remove('is-active', 'giant-pill--active');
+            giantPills.forEach(pill => {
                 if (pill.getAttribute('href') === currentSectionId) {
                     pill.classList.add('is-active');
                 } else {
                     pill.classList.remove('is-active');
                 }
             });
+        } else {
+            // At the top of the page
+            if (notusPill) notusPill.classList.add('is-active', 'giant-pill--active');
+            giantPills.forEach(pill => pill.classList.remove('is-active'));
         }
     }, { passive: true });
 }
 
 /* --------------------------------------------------------------------------
-   02. THEME TOGGLE
+   02. HEADER LOTTIE LOGO (Matches index.html)
    -------------------------------------------------------------------------- */
-function initTheme() {
-    const toggleBtn = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    if (!toggleBtn) return;
+function initHeaderLogo() {
+    const logoContainer = document.getElementById('siteLottieLogo');
+    if (logoContainer && typeof lottie !== 'undefined') {
+        const logoData = {"v":"5.12.1","fr":25,"ip":0,"op":100,"w":500,"h":500,"nm":"WB Animation","ddd":0,"assets":[],"layers":[{"ddd":0,"ind":1,"ty":4,"nm":"W3","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[250,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":1,"k":[{"i":{"x":0.667,"y":1},"o":{"x":1,"y":0},"t":0,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,-1.095],[50,150],[-50,150],[-49.818,-1.095]],"c":true}]},{"i":{"x":0.63,"y":1},"o":{"x":0.953,"y":0},"t":27,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true}]},{"i":{"x":1,"y":1},"o":{"x":0.333,"y":0},"t":49,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50.182,-148.905],[-49.818,-148.905],[-50,-150]],"c":true}]},{"i":{"x":0,"y":1},"o":{"x":0.333,"y":0},"t":50,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,148.905],[50.365,150],[-49.635,150],[-49.818,148.905]],"c":true}]},{"t":74,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.183,-2.19],[50.365,150],[-49.635,150],[-49.817,-2.19]],"c":true}]}],"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":2,"ty":4,"nm":"W2","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[370,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":3,"ty":4,"nm":"W1","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[130,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0}],"markers":[],"props":{}};
 
-    const savedTheme = localStorage.getItem('notus-theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    if (themeIcon) {
-        themeIcon.textContent = savedTheme === 'dark' ? '☀' : '☾';
-    }
-
-    toggleBtn.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('notus-theme', next);
-        if (themeIcon) {
-            themeIcon.textContent = next === 'dark' ? '☀' : '☾';
-        }
-    });
-}
-
-/* --------------------------------------------------------------------------
-   03. SLOGAN SWITCHER (Interactive Editorial Headlines)
-   -------------------------------------------------------------------------- */
-function initSloganSwitcher() {
-    const topEl = document.getElementById('headlineTop');
-    const bottomEl = document.getElementById('headlineBottom');
-    const switcherBtns = document.querySelectorAll('.slogan-pill');
-
-    switcherBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            switcherBtns.forEach(b => b.classList.remove('is-active'));
-            btn.classList.add('is-active');
-
-            const topText = btn.getAttribute('data-slogan-top');
-            const bottomText = btn.getAttribute('data-slogan-bottom');
-
-            if (topEl && topText) {
-                topEl.style.opacity = '0';
-                setTimeout(() => {
-                    topEl.textContent = topText;
-                    topEl.style.opacity = '1';
-                }, 150);
-            }
-
-            if (bottomEl && bottomText) {
-                bottomEl.style.opacity = '0';
-                setTimeout(() => {
-                    bottomEl.textContent = bottomText;
-                    bottomEl.style.opacity = '1';
-                }, 150);
-            }
+        lottie.loadAnimation({
+            container: logoContainer,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: logoData
         });
-    });
+    }
 }
 
 /* --------------------------------------------------------------------------
-   04. FAMILIES GLOBAL SCALE SLIDER
+   03. FAMILIES GLOBAL SCALE SLIDER
    -------------------------------------------------------------------------- */
 function initFamiliesScale() {
     const slider = document.getElementById('familySizeSlider');
@@ -148,7 +112,7 @@ function initFamiliesScale() {
 }
 
 /* --------------------------------------------------------------------------
-   05. INTERACTIVE TYPE TESTER
+   04. INTERACTIVE TYPE TESTER
    -------------------------------------------------------------------------- */
 function initTesterStudio() {
     const inputStage = document.getElementById('testerInput');
@@ -262,7 +226,7 @@ function initTesterStudio() {
 }
 
 /* --------------------------------------------------------------------------
-   06. DISPLAAY DUAL-PANE GLYPH INSPECTOR (Yellow Highlight Box)
+   05. DISPLAAY DUAL-PANE GLYPH INSPECTOR
    -------------------------------------------------------------------------- */
 function initDisplaayGlyphs() {
     const grid = document.getElementById('displaayGlyphMatrix');
@@ -370,7 +334,7 @@ function initDisplaayGlyphs() {
 }
 
 /* --------------------------------------------------------------------------
-   07. OPENTYPE FEATURE SWITCHES
+   06. OPENTYPE FEATURE SWITCHES
    -------------------------------------------------------------------------- */
 function initOpenTypeSandbox() {
     const sandbox = document.getElementById('featureSandbox');

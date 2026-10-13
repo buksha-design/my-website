@@ -12,9 +12,9 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notus Typeface — Editorial Specimen — Wiktor Buksza</title>
-    <meta name="description" content="Notus is a high-contrast serif family across 3 optical sizes by Wiktor Buksza. Neoclassical architecture softened by fluid, flowing serif terminations. Latin and Cyrillic.">
-    <meta property="og:title" content="Notus Typeface — Wiktor Buksza">
+    <title>The Notus Times — Editorial Specimen — Wiktor Buksza</title>
+    <meta name="description" content="The Notus Times: High-contrast modern serif family across 3 optical sizes by Wiktor Buksza. Neoclassical architecture softened by fluid, flowing serif terminations. Latin and Cyrillic.">
+    <meta property="og:title" content="The Notus Times — Wiktor Buksza">
     <meta property="og:description" content="Sculptured high-contrast serif with fluid terminations. 5 styles, 3 optical sizes, full Latin & Cyrillic.">
     <meta property="og:image" content="optimized_assets/Notus/Notus_1.webp">
 
@@ -171,8 +171,170 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   04. PILL BUTTONS SYSTEM (Direct match to reference image)
+   04. PRIMARY HEADER (Exact style from index.html)
    -------------------------------------------------------------------------- */
+.site-main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.92);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.25s ease;
+}
+
+[data-theme="dark"] .site-main-header {
+    background: rgba(12, 12, 12, 0.92);
+}
+
+.site-main-header__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 1.25rem var(--pad-x);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    text-decoration: none;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+}
+
+.site-logo-container:hover {
+    opacity: 0.75;
+}
+
+.site-logo-svg {
+    width: 38px;
+    height: 38px;
+    display: block;
+}
+
+.site-author-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+
+.site-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.site-nav-links a {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--text-main);
+    transition: opacity 0.2s ease;
+    position: relative;
+}
+
+.site-nav-links a:hover {
+    opacity: 0.6;
+}
+
+.site-nav-links a.is-current {
+    font-weight: 600;
+}
+
+.site-nav-links a.is-current::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--text-main);
+}
+
+/* --------------------------------------------------------------------------
+   05. GIANT 2X SUB-NAVIGATION BAR (Directly below main menu)
+   -------------------------------------------------------------------------- */
+.notus-giant-subnav-wrapper {
+    position: sticky;
+    top: 68px;
+    z-index: 999;
+    background-color: var(--c-ecru);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.25s ease;
+}
+
+[data-theme="dark"] .notus-giant-subnav-wrapper {
+    background-color: #161616;
+}
+
+.notus-giant-subnav {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 1.1rem var(--pad-x);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.notus-giant-subnav::-webkit-scrollbar {
+    display: none;
+}
+
+/* The 2X Enlarged Giant Pills */
+.giant-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    height: 56px;
+    padding: 0 26px;
+    border: 1.5px solid var(--c-gray-border);
+    border-radius: 9999px;
+    background-color: transparent;
+    color: var(--text-main);
+    font-family: var(--font-ui);
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    white-space: nowrap;
+    text-decoration: none;
+    user-select: none;
+}
+
+.giant-pill:hover {
+    border-color: var(--text-main);
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .giant-pill:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.giant-pill--active,
+.giant-pill.is-active {
+    background-color: var(--text-main) !important;
+    color: var(--bg-page) !important;
+    border-color: var(--text-main) !important;
+}
+
+.giant-pill__indicator {
+    font-size: 19px;
+    margin-left: 2px;
+    opacity: 0.85;
+}
+
+/* Standard small pills for other sections */
 .displaay-pill {
     display: inline-flex;
     align-items: center;
@@ -204,28 +366,6 @@ button {
     background-color: var(--text-main) !important;
     color: var(--bg-page) !important;
     border-color: var(--text-main) !important;
-}
-
-.displaay-pill--dropdown {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-}
-
-.pill-indicator {
-    font-size: 11px;
-    opacity: 0.85;
-}
-
-.arrow-down {
-    font-size: 11px;
-    margin-right: 1px;
-}
-
-.displaay-pill--icon {
-    width: 28px;
-    height: 28px;
-    padding: 0;
 }
 
 .displaay-pill--sm {
@@ -278,70 +418,17 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   05. TWO-TIER DISPLAAY HEADER (Exact structure from reference image)
-   -------------------------------------------------------------------------- */
-.displaay-nav-wrapper {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: var(--c-ecru);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    transition: background-color 0.25s ease;
-}
-
-[data-theme="dark"] .displaay-nav-wrapper {
-    background-color: #121212;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.nav-tier {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--pad-x);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.nav-tier--primary {
-    padding-top: 10px;
-    padding-bottom: 5px;
-}
-
-.nav-tier--secondary {
-    padding-top: 5px;
-    padding-bottom: 10px;
-}
-
-.nav-tier__left,
-.nav-tier__right {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: nowrap;
-}
-
-.nav-tier__left {
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-.nav-tier__left::-webkit-scrollbar {
-    display: none;
-}
-
-/* --------------------------------------------------------------------------
-   06. SECTION 01: MONUMENTAL DISPLAAY MASTHEAD ("The Daily NOTUS")
+   06. SECTION 01: "The Notus TIMES" (+15% INCREASED HEADLINE)
    -------------------------------------------------------------------------- */
 .section-displaay-masthead {
     background-color: var(--c-ecru);
     color: #000000;
     border-bottom: 1px solid var(--border-color);
-    min-height: calc(100vh - 84px);
+    min-height: calc(100vh - 145px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: clamp(2rem, 5vw, 4rem) 0 2rem;
+    padding: clamp(3rem, 7vw, 6rem) 0 2.5rem;
     position: relative;
 }
 
@@ -367,15 +454,16 @@ button {
     justify-content: center;
     text-align: center;
     margin: auto 0;
-    padding: clamp(2rem, 5vw, 5rem) 0;
+    padding: clamp(2rem, 5vw, 4rem) 0;
     width: 100%;
 }
 
+/* The Notus TIMES — Scaled Up by +15% */
 .masthead-title {
     font-family: var(--font-notus-display);
-    line-height: 0.88;
+    line-height: 0.86;
     font-weight: normal;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -384,38 +472,17 @@ button {
 }
 
 .masthead-title-top {
-    font-size: clamp(4.5rem, 16vw, 16.5rem);
+    font-size: clamp(5.2rem, 18.5vw, 19rem);
     line-height: 0.88;
     text-transform: none;
-    transition: opacity 0.2s ease;
 }
 
 .masthead-title-bottom {
-    font-size: clamp(5.5rem, 21vw, 21.5rem);
+    font-size: clamp(6.3rem, 24vw, 24.75rem);
     line-height: 0.82;
     text-transform: uppercase;
     letter-spacing: -0.015em;
-    margin-top: 0.05em;
-    transition: opacity 0.2s ease;
-}
-
-/* Interactive Slogan Switcher Pills */
-.masthead-slogan-switcher {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    margin-top: clamp(2rem, 3.5vw, 3rem);
-    flex-wrap: wrap;
-}
-
-.slogan-switcher-label {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    opacity: 0.5;
-    margin-right: 4px;
+    margin-top: 0.04em;
 }
 
 /* Bottom Micro-Ticker matching reference screenshot */
@@ -424,12 +491,12 @@ button {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 0.25rem;
+    gap: 0.35rem;
     margin-top: auto;
-    padding-top: 2.5rem;
+    padding-top: 3.5rem;
     font-family: var(--font-ui);
-    font-size: 11px;
-    letter-spacing: 0.03em;
+    font-size: 11.5px;
+    letter-spacing: 0.035em;
     color: var(--c-gray-text);
 }
 
@@ -1327,10 +1394,12 @@ button {
     .inspector-magnifier-pane { border-right: none; border-bottom: 1px solid var(--border-color); }
     .tech-grid { grid-template-columns: 1fr; }
     .footer-directory-grid { grid-template-columns: repeat(2, 1fr); }
+    .giant-pill { height: 48px; padding: 0 20px; font-size: 18px; }
 }
 
 @media (max-width: 768px) {
-    .nav-tier--secondary { display: none; }
+    .site-nav-links { gap: 1.25rem; }
+    .giant-pill { height: 44px; padding: 0 16px; font-size: 16px; }
     .tester-sliders-bar { grid-template-columns: 1fr; gap: 1rem; }
     .displaay-gallery-grid { grid-template-columns: 1fr; }
     .gallery-item--large { grid-column: 1 / -1; }
@@ -1343,83 +1412,54 @@ button {
     <!-- Top Scroll Bar -->
     <div class="scroll-progress-bar" id="scrollBar" aria-hidden="true"></div>
 
-    <!-- Sticky Two-Tier Displaay Header (Exact match to reference screenshot) -->
-    <header class="displaay-nav-wrapper">
-        <!-- Tier 1: Main Foundry Navigation -->
-        <div class="nav-tier nav-tier--primary">
-            <div class="nav-tier__left">
-                <a href="index.html" class="displaay-pill">Wiktor Buksza<sup>&reg;</sup></a>
-                <a href="#top" class="displaay-pill displaay-pill--active">Typefaces</a>
-                <a href="index.html#work" class="displaay-pill">Portfolio</a>
-                <a href="index.html#about" class="displaay-pill">About</a>
-                <a href="mailto:wiktor.buksza@gmail.com" class="displaay-pill">Contact</a>
-            </div>
-            <div class="nav-tier__right">
-                <button class="displaay-pill displaay-pill--icon" id="themeToggle" title="Toggle dark/light theme" aria-label="Toggle theme">
-                    <span id="themeIcon">☾</span>
-                </button>
-                <a href="index.html" class="displaay-pill displaay-pill--icon" title="Menu" aria-label="Menu">
-                    <svg width="14" height="10" viewBox="0 0 14 10" fill="currentColor">
-                        <rect width="14" height="1.8" rx="0.9"/>
-                        <rect y="4.1" width="14" height="1.8" rx="0.9"/>
-                        <rect y="8.2" width="14" height="1.8" rx="0.9"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- Tier 2: Specimen Sub-Navigation -->
-        <div class="nav-tier nav-tier--secondary">
-            <div class="nav-tier__left">
-                <div class="displaay-pill displaay-pill--active displaay-pill--dropdown" id="typefaceSelectPill">
-                    <span>Notus</span>
-                    <span class="pill-indicator">&#8597;</span>
-                </div>
-                <a href="#comparison" class="displaay-pill nav-pill">Display</a>
-                <a href="#broadsheet" class="displaay-pill nav-pill">Text</a>
-                <a href="#optical-cards" class="displaay-pill nav-pill">Caption</a>
-                <a href="#families" class="displaay-pill nav-pill">Families</a>
-                <a href="#tester" class="displaay-pill nav-pill">Tester</a>
-                <a href="#glyphs" class="displaay-pill nav-pill">Glyphs</a>
-                <a href="#info" class="displaay-pill nav-pill">Info</a>
-            </div>
-            <div class="nav-tier__right">
-                <a href="mailto:wiktor.buksza@gmail.com?subject=Notus%20Trial%20Fonts%20Request" class="displaay-pill">
-                    <span class="arrow-down">&darr;</span> Trials
-                </a>
-                <a href="#tester" class="displaay-pill">Tester</a>
-                <a href="mailto:wiktor.buksza@gmail.com?subject=Notus%20Commercial%20License%20Inquiry" class="displaay-pill displaay-pill--active">
-                    Buy
-                </a>
-            </div>
+    <!-- 01. PRIMARY SITE HEADER (Identical to index.html) -->
+    <header class="site-main-header">
+        <div class="site-main-header__inner">
+            <a href="index.html" class="site-logo-container" aria-label="Wiktor Buksza - Home">
+                <div class="site-logo-svg" id="siteLottieLogo"></div>
+                <span class="site-author-name">Wiktor Buksza</span>
+            </a>
+            <nav class="site-nav-links">
+                <a href="index.html#works">Works</a>
+                <a href="notus.html" class="is-current">Notus</a>
+                <a href="index.html#services">Services</a>
+                <a href="mailto:wiktor.buksza@gmail.com">Contact</a>
+            </nav>
         </div>
     </header>
 
+    <!-- 02. GIANT 2X SUB-NAVIGATION BAR (Directly below main menu) -->
+    <nav class="notus-giant-subnav-wrapper" aria-label="Notus Specimen Navigation">
+        <div class="notus-giant-subnav">
+            <div class="giant-pill giant-pill--active giant-pill--dropdown">
+                <span>Notus</span>
+                <span class="giant-pill__indicator">&#8597;</span>
+            </div>
+            <a href="#comparison" class="giant-pill">Display</a>
+            <a href="#broadsheet" class="giant-pill">Text</a>
+            <a href="#optical-cards" class="giant-pill">Caption</a>
+            <a href="#families" class="giant-pill">Families</a>
+            <a href="#tester" class="giant-pill">Tester</a>
+            <a href="#glyphs" class="giant-pill">Glyphs</a>
+            <a href="#info" class="giant-pill">Info</a>
+        </div>
+    </nav>
+
     <main>
         <!-- ====================================================================
-             01. THE COVER: "The Daily NOTUS" MONUMENTAL MASTHEAD (Warm Ecru)
+             01. THE COVER: "The Notus TIMES" (+15% INCREASED HEADLINE)
              ==================================================================== -->
         <section class="section-displaay-masthead" id="cover">
             <div class="masthead-container">
-                <!-- Monumental Broadsheet Masthead Stage -->
+                <!-- Monumental Broadsheet Masthead Stage (+15% Larger) -->
                 <div class="masthead-stage">
-                    <h1 class="masthead-title" id="mastheadHeadline">
-                        <span class="masthead-title-top" id="headlineTop">The Daily</span>
-                        <span class="masthead-title-bottom" id="headlineBottom">NOTUS</span>
+                    <h1 class="masthead-title">
+                        <span class="masthead-title-top">The Notus</span>
+                        <span class="masthead-title-bottom">TIMES</span>
                     </h1>
-
-                    <!-- Interactive Editorial Slogan Switcher Pills -->
-                    <div class="masthead-slogan-switcher">
-                        <span class="slogan-switcher-label">Masthead Slogan:</span>
-                        <button class="displaay-pill displaay-pill--sm slogan-pill is-active" data-slogan-top="The Daily" data-slogan-bottom="NOTUS">The Daily NOTUS</button>
-                        <button class="displaay-pill displaay-pill--sm slogan-pill" data-slogan-top="The Notus" data-slogan-bottom="TIMES">The Notus TIMES</button>
-                        <button class="displaay-pill displaay-pill--sm slogan-pill" data-slogan-top="The Time’s" data-slogan-bottom="NOW">The Time’s NOW</button>
-                        <button class="displaay-pill displaay-pill--sm slogan-pill" data-slogan-top="The South" data-slogan-bottom="WIND">The South WIND</button>
-                        <button class="displaay-pill displaay-pill--sm slogan-pill" data-slogan-top="The Paper of" data-slogan-bottom="RECORD">Paper of RECORD</button>
-                    </div>
                 </div>
 
-                <!-- Bottom Micro-Ticker matching the screenshot -->
+                <!-- Bottom Micro-Ticker matching the Displaay reference screenshot -->
                 <div class="masthead-bottom-ticker">
                     <div class="ticker-line-1">Notus Collection: 3 Optical Sizes, 5 Styles, Latin &amp; Cyrillic</div>
                     <div class="ticker-line-2">Architectural, Classical, Elegant, Fluid, High-Contrast, Neoclassical, Kinetic, Sculptural, Universal</div>
@@ -2018,9 +2058,9 @@ button {
                     <div class="dir-col">
                         <span class="dir-col-title">Studio</span>
                         <a href="index.html">Portfolio Home</a>
-                        <a href="index.html#work">Selected Projects</a>
+                        <a href="index.html#works">Selected Projects</a>
                         <a href="index.html#about">About Wiktor Buksza</a>
-                        <a href="index.html#contact">Get in Touch</a>
+                        <a href="mailto:wiktor.buksza@gmail.com">Get in Touch</a>
                     </div>
                     <div class="dir-col">
                         <span class="dir-col-title">Licensing</span>
@@ -2055,8 +2095,7 @@ button {
 
 document.addEventListener('DOMContentLoaded', () => {
     initScrollAndNav();
-    initTheme();
-    initSloganSwitcher();
+    initHeaderLogo();
     initFamiliesScale();
     initTesterStudio();
     initDisplaayGlyphs();
@@ -2064,12 +2103,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --------------------------------------------------------------------------
-   01. SCROLL PROGRESS & ACTIVE NAV
+   01. SCROLL PROGRESS & ACTIVE GIANT SUB-NAV TRACKING
    -------------------------------------------------------------------------- */
 function initScrollAndNav() {
     const progressBar = document.getElementById('scrollBar');
-    const navPills = document.querySelectorAll('.nav-pill');
-    const sections = Array.from(navPills).map(pill => {
+    const giantPills = document.querySelectorAll('.giant-pill[href^="#"]');
+    const notusPill = document.querySelector('.giant-pill--dropdown');
+
+    const sections = Array.from(giantPills).map(pill => {
         const id = pill.getAttribute('href');
         return document.querySelector(id);
     }).filter(Boolean);
@@ -2085,7 +2126,7 @@ function initScrollAndNav() {
 
         let currentSectionId = '';
         sections.forEach(sec => {
-            const top = sec.offsetTop - 140;
+            const top = sec.offsetTop - 180;
             const height = sec.offsetHeight;
             if (scrollTop >= top && scrollTop < top + height) {
                 currentSectionId = `#${sec.id}`;
@@ -2093,79 +2134,42 @@ function initScrollAndNav() {
         });
 
         if (currentSectionId) {
-            navPills.forEach(pill => {
+            if (notusPill) notusPill.classList.remove('is-active', 'giant-pill--active');
+            giantPills.forEach(pill => {
                 if (pill.getAttribute('href') === currentSectionId) {
                     pill.classList.add('is-active');
                 } else {
                     pill.classList.remove('is-active');
                 }
             });
+        } else {
+            // At the top of the page
+            if (notusPill) notusPill.classList.add('is-active', 'giant-pill--active');
+            giantPills.forEach(pill => pill.classList.remove('is-active'));
         }
     }, { passive: true });
 }
 
 /* --------------------------------------------------------------------------
-   02. THEME TOGGLE
+   02. HEADER LOTTIE LOGO (Matches index.html)
    -------------------------------------------------------------------------- */
-function initTheme() {
-    const toggleBtn = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    if (!toggleBtn) return;
+function initHeaderLogo() {
+    const logoContainer = document.getElementById('siteLottieLogo');
+    if (logoContainer && typeof lottie !== 'undefined') {
+        const logoData = {"v":"5.12.1","fr":25,"ip":0,"op":100,"w":500,"h":500,"nm":"WB Animation","ddd":0,"assets":[],"layers":[{"ddd":0,"ind":1,"ty":4,"nm":"W3","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[250,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":1,"k":[{"i":{"x":0.667,"y":1},"o":{"x":1,"y":0},"t":0,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,-1.095],[50,150],[-50,150],[-49.818,-1.095]],"c":true}]},{"i":{"x":0.63,"y":1},"o":{"x":0.953,"y":0},"t":27,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true}]},{"i":{"x":1,"y":1},"o":{"x":0.333,"y":0},"t":49,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50.182,-148.905],[-49.818,-148.905],[-50,-150]],"c":true}]},{"i":{"x":0,"y":1},"o":{"x":0.333,"y":0},"t":50,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,148.905],[50.365,150],[-49.635,150],[-49.818,148.905]],"c":true}]},{"t":74,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.183,-2.19],[50.365,150],[-49.635,150],[-49.817,-2.19]],"c":true}]}],"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":2,"ty":4,"nm":"W2","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[370,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":3,"ty":4,"nm":"W1","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[130,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0}],"markers":[],"props":{}};
 
-    const savedTheme = localStorage.getItem('notus-theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    if (themeIcon) {
-        themeIcon.textContent = savedTheme === 'dark' ? '☀' : '☾';
-    }
-
-    toggleBtn.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('notus-theme', next);
-        if (themeIcon) {
-            themeIcon.textContent = next === 'dark' ? '☀' : '☾';
-        }
-    });
-}
-
-/* --------------------------------------------------------------------------
-   03. SLOGAN SWITCHER (Interactive Editorial Headlines)
-   -------------------------------------------------------------------------- */
-function initSloganSwitcher() {
-    const topEl = document.getElementById('headlineTop');
-    const bottomEl = document.getElementById('headlineBottom');
-    const switcherBtns = document.querySelectorAll('.slogan-pill');
-
-    switcherBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            switcherBtns.forEach(b => b.classList.remove('is-active'));
-            btn.classList.add('is-active');
-
-            const topText = btn.getAttribute('data-slogan-top');
-            const bottomText = btn.getAttribute('data-slogan-bottom');
-
-            if (topEl && topText) {
-                topEl.style.opacity = '0';
-                setTimeout(() => {
-                    topEl.textContent = topText;
-                    topEl.style.opacity = '1';
-                }, 150);
-            }
-
-            if (bottomEl && bottomText) {
-                bottomEl.style.opacity = '0';
-                setTimeout(() => {
-                    bottomEl.textContent = bottomText;
-                    bottomEl.style.opacity = '1';
-                }, 150);
-            }
+        lottie.loadAnimation({
+            container: logoContainer,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: logoData
         });
-    });
+    }
 }
 
 /* --------------------------------------------------------------------------
-   04. FAMILIES GLOBAL SCALE SLIDER
+   03. FAMILIES GLOBAL SCALE SLIDER
    -------------------------------------------------------------------------- */
 function initFamiliesScale() {
     const slider = document.getElementById('familySizeSlider');
@@ -2199,7 +2203,7 @@ function initFamiliesScale() {
 }
 
 /* --------------------------------------------------------------------------
-   05. INTERACTIVE TYPE TESTER
+   04. INTERACTIVE TYPE TESTER
    -------------------------------------------------------------------------- */
 function initTesterStudio() {
     const inputStage = document.getElementById('testerInput');
@@ -2313,7 +2317,7 @@ function initTesterStudio() {
 }
 
 /* --------------------------------------------------------------------------
-   06. DISPLAAY DUAL-PANE GLYPH INSPECTOR (Yellow Highlight Box)
+   05. DISPLAAY DUAL-PANE GLYPH INSPECTOR
    -------------------------------------------------------------------------- */
 function initDisplaayGlyphs() {
     const grid = document.getElementById('displaayGlyphMatrix');
@@ -2421,7 +2425,7 @@ function initDisplaayGlyphs() {
 }
 
 /* --------------------------------------------------------------------------
-   07. OPENTYPE FEATURE SWITCHES
+   06. OPENTYPE FEATURE SWITCHES
    -------------------------------------------------------------------------- */
 function initOpenTypeSandbox() {
     const sandbox = document.getElementById('featureSandbox');

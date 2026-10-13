@@ -554,6 +554,167 @@ button {
     opacity: 0.85;
 }
 
+
+/* --------------------------------------------------------------------------
+   BROADSHEET INTERACTIVE CONTROLS (Displaay Variable / Style Studio)
+   -------------------------------------------------------------------------- */
+.broadsheet-controls-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 1.5rem;
+    font-size: 12px;
+}
+
+.broadsheet-label {
+    font-family: var(--font-notus-display);
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+}
+
+.broadsheet-axes-sliders {
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
+    flex-wrap: wrap;
+}
+
+.axis-control-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.axis-name {
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.6);
+    min-width: 44px;
+}
+
+.axis-val {
+    color: #FFFFFF;
+    min-width: 48px;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    font-weight: 500;
+}
+
+.displaay-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 110px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.25);
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.displaay-range:hover {
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.displaay-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 9px;
+    height: 9px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.displaay-range::-webkit-slider-thumb:hover {
+    transform: scale(1.35);
+}
+
+.displaay-range::-moz-range-thumb {
+    width: 9px;
+    height: 9px;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.broadsheet-style-pills {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 3.5rem;
+}
+
+.broadsheet-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 0 14px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 9999px;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.broadsheet-pill:hover {
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.broadsheet-pill.is-active {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border-color: #FFFFFF !important;
+}
+
+.black-statement-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: -0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.active-style-badge {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
+
+.editable-hint {
+    opacity: 0.6;
+}
+
+.black-statement-title {
+    cursor: text;
+    transition: font-size 0.12s ease;
+    outline: none;
+}
+
+.black-statement-title:focus {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
 /* --------------------------------------------------------------------------
    07. SECTION 02: BLACK BROADSHEET ("Statues carved in marble...")
    -------------------------------------------------------------------------- */
@@ -1516,21 +1677,45 @@ button {
              ==================================================================== -->
         <section class="section-black-broadsheet" id="editorial-now">
             <div class="site-container">
-                <div class="black-header-bar">
-                    <div class="black-meta-left">
-                        <span class="displaay-tag displaay-tag--dark">Optical Range: 6pt — 160pt</span>
-                        <span class="displaay-tag displaay-tag--dark">Native Cyrillic Drawing</span>
+                <!-- Displaay Variable / Style Interactive Bar -->
+                <div class="broadsheet-controls-bar">
+                    <div class="broadsheet-controls-left">
+                        <span class="broadsheet-label">Variable Font: 3 Axes</span>
                     </div>
-                    <div class="black-meta-right">
-                        <span>Release Candidate 2026</span>
+                    <div class="broadsheet-axes-sliders">
+                        <div class="axis-control-item">
+                            <span class="axis-name">Optical</span>
+                            <input type="range" min="0" max="2" value="0" step="1" class="displaay-range" id="broadsheetOpticalSlider" aria-label="Optical Size">
+                            <span class="axis-val" id="broadsheetOpticalVal">Display</span>
+                        </div>
+                        <div class="axis-control-item">
+                            <span class="axis-name">Slant</span>
+                            <input type="range" min="0" max="1" value="0" step="1" class="displaay-range" id="broadsheetSlantSlider" aria-label="Slant Italic">
+                            <span class="axis-val" id="broadsheetSlantVal">0°</span>
+                        </div>
+                        <div class="axis-control-item">
+                            <span class="axis-name">Size</span>
+                            <input type="range" min="36" max="130" value="84" step="2" class="displaay-range" id="broadsheetSizeSlider" aria-label="Font Size">
+                            <span class="axis-val" id="broadsheetSizeVal">84px</span>
+                        </div>
                     </div>
                 </div>
 
+                <!-- 5 Quick Style Selector Pills -->
+                <div class="broadsheet-style-pills" id="broadsheetPillsGroup">
+                    <button type="button" class="broadsheet-pill is-active" data-font="Notus Display" data-italic="false" data-optical="0">Display Regular</button>
+                    <button type="button" class="broadsheet-pill" data-font="Notus Display Italic" data-italic="true" data-optical="0">Display Italic</button>
+                    <button type="button" class="broadsheet-pill" data-font="Notus Text" data-italic="false" data-optical="1">Text Regular</button>
+                    <button type="button" class="broadsheet-pill" data-font="Notus Text Italic" data-italic="true" data-optical="1">Text Italic</button>
+                    <button type="button" class="broadsheet-pill" data-font="Notus Caption" data-italic="false" data-optical="2">Caption</button>
+                </div>
+
                 <div class="black-statement-stage">
-                    <h2 class="black-statement-title">
-                        Statues carved in marble,<br>
-                        <em>softened by a warm wind.</em>
-                    </h2>
+                    <h2 class="black-statement-title" id="broadsheetHeroTitle" contenteditable="true" spellcheck="false" title="Click to edit headline text">Statues carved in marble,<br><em>softened by a warm wind.</em></h2>
+                    <div class="black-statement-meta">
+                        <span class="active-style-badge" id="broadsheetActiveBadge">Active Style: Notus Display Regular</span>
+                        <span class="editable-hint">✎ Click text to edit headline</span>
+                    </div>
                     <p class="black-statement-desc">
                         Named after the ancient deity of the southern gale, Notus dissolves the cold severity of neoclassical letterforms with fluid, kinetic terminations. Engineered for monumental presence in editorial headlines and crystalline legibility in prolonged text.
                     </p>
@@ -2139,6 +2324,7 @@ button {
 
 document.addEventListener('DOMContentLoaded', () => {
     initScrollAndNav();
+    initBroadsheetInteractive();
     initHeaderLogo();
     initFamiliesScale();
     initTesterStudio();
@@ -2506,6 +2692,103 @@ function initOpenTypeSandbox() {
     });
 
     updateFeatures();
+}
+
+/* --------------------------------------------------------------------------
+   02-B. BROADSHEET VARIABLE / STYLE INTERACTIVE STUDIO
+   -------------------------------------------------------------------------- */
+function initBroadsheetInteractive() {
+    const title = document.getElementById('broadsheetHeroTitle');
+    const opticalSlider = document.getElementById('broadsheetOpticalSlider');
+    const opticalVal = document.getElementById('broadsheetOpticalVal');
+    const slantSlider = document.getElementById('broadsheetSlantSlider');
+    const slantVal = document.getElementById('broadsheetSlantVal');
+    const sizeSlider = document.getElementById('broadsheetSizeSlider');
+    const sizeVal = document.getElementById('broadsheetSizeVal');
+    const badge = document.getElementById('broadsheetActiveBadge');
+    const pills = document.querySelectorAll('.broadsheet-pill');
+
+    if (!title) return;
+
+    const opticalNames = ['Display', 'Text', 'Caption'];
+
+    function getStyle(opticalIdx, slantIdx) {
+        if (opticalIdx === 0) {
+            return slantIdx === 1 
+                ? { font: 'Notus Display Italic', name: 'Notus Display Italic', italic: true }
+                : { font: 'Notus Display', name: 'Notus Display Regular', italic: false };
+        } else if (opticalIdx === 1) {
+            return slantIdx === 1
+                ? { font: 'Notus Text Italic', name: 'Notus Text Italic', italic: true }
+                : { font: 'Notus Text', name: 'Notus Text Regular', italic: false };
+        } else {
+            return slantIdx === 1
+                ? { font: 'Notus Caption', name: 'Notus Caption Italic', italic: true }
+                : { font: 'Notus Caption', name: 'Notus Caption Regular', italic: false };
+        }
+    }
+
+    function applyStyle(styleObj, opticalIdx, slantIdx) {
+        title.style.fontFamily = `"${styleObj.font}", serif`;
+        title.style.fontStyle = styleObj.italic ? 'italic' : 'normal';
+
+        const em = title.querySelector('em');
+        if (em) {
+            if (styleObj.italic) {
+                em.style.fontStyle = 'normal';
+            } else {
+                em.style.fontStyle = 'italic';
+                if (opticalIdx === 0) em.style.fontFamily = '"Notus Display Italic", serif';
+                else if (opticalIdx === 1) em.style.fontFamily = '"Notus Text Italic", serif';
+                else em.style.fontFamily = '"Notus Caption", serif';
+            }
+        }
+
+        if (opticalVal) opticalVal.textContent = opticalNames[opticalIdx];
+        if (slantVal) slantVal.textContent = styleObj.italic ? '12°' : '0°';
+        if (opticalSlider) opticalSlider.value = opticalIdx;
+        if (slantSlider) slantSlider.value = slantIdx;
+        if (badge) badge.textContent = `Active Style: ${styleObj.name}`;
+
+        pills.forEach(pill => {
+            const pillOptical = parseInt(pill.getAttribute('data-optical'), 10);
+            const pillItalic = pill.getAttribute('data-italic') === 'true';
+            if (pillOptical === opticalIdx && pillItalic === styleObj.italic) {
+                pill.classList.add('is-active');
+            } else {
+                pill.classList.remove('is-active');
+            }
+        });
+    }
+
+    if (opticalSlider && slantSlider) {
+        const handleSliderChange = () => {
+            const opt = parseInt(opticalSlider.value, 10);
+            const sl = parseInt(slantSlider.value, 10);
+            const style = getStyle(opt, sl);
+            applyStyle(style, opt, sl);
+        };
+        opticalSlider.addEventListener('input', handleSliderChange);
+        slantSlider.addEventListener('input', handleSliderChange);
+    }
+
+    if (sizeSlider && sizeVal) {
+        sizeSlider.addEventListener('input', (e) => {
+            const sz = e.target.value;
+            title.style.fontSize = `${sz}px`;
+            sizeVal.textContent = `${sz}px`;
+        });
+    }
+
+    pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            const opt = parseInt(pill.getAttribute('data-optical'), 10);
+            const isItalic = pill.getAttribute('data-italic') === 'true';
+            const sl = isItalic ? 1 : 0;
+            const style = getStyle(opt, sl);
+            applyStyle(style, opt, sl);
+        });
+    });
 }
 
     </script>

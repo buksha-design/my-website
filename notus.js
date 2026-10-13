@@ -4,6 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initScrollAndNav();
+    initBroadsheetInteractive();
     initHeaderLogo();
     initFamiliesScale();
     initTesterStudio();
@@ -371,4 +372,101 @@ function initOpenTypeSandbox() {
     });
 
     updateFeatures();
+}
+
+/* --------------------------------------------------------------------------
+   02-B. BROADSHEET VARIABLE / STYLE INTERACTIVE STUDIO
+   -------------------------------------------------------------------------- */
+function initBroadsheetInteractive() {
+    const title = document.getElementById('broadsheetHeroTitle');
+    const opticalSlider = document.getElementById('broadsheetOpticalSlider');
+    const opticalVal = document.getElementById('broadsheetOpticalVal');
+    const slantSlider = document.getElementById('broadsheetSlantSlider');
+    const slantVal = document.getElementById('broadsheetSlantVal');
+    const sizeSlider = document.getElementById('broadsheetSizeSlider');
+    const sizeVal = document.getElementById('broadsheetSizeVal');
+    const badge = document.getElementById('broadsheetActiveBadge');
+    const pills = document.querySelectorAll('.broadsheet-pill');
+
+    if (!title) return;
+
+    const opticalNames = ['Display', 'Text', 'Caption'];
+
+    function getStyle(opticalIdx, slantIdx) {
+        if (opticalIdx === 0) {
+            return slantIdx === 1 
+                ? { font: 'Notus Display Italic', name: 'Notus Display Italic', italic: true }
+                : { font: 'Notus Display', name: 'Notus Display Regular', italic: false };
+        } else if (opticalIdx === 1) {
+            return slantIdx === 1
+                ? { font: 'Notus Text Italic', name: 'Notus Text Italic', italic: true }
+                : { font: 'Notus Text', name: 'Notus Text Regular', italic: false };
+        } else {
+            return slantIdx === 1
+                ? { font: 'Notus Caption', name: 'Notus Caption Italic', italic: true }
+                : { font: 'Notus Caption', name: 'Notus Caption Regular', italic: false };
+        }
+    }
+
+    function applyStyle(styleObj, opticalIdx, slantIdx) {
+        title.style.fontFamily = `"${styleObj.font}", serif`;
+        title.style.fontStyle = styleObj.italic ? 'italic' : 'normal';
+
+        const em = title.querySelector('em');
+        if (em) {
+            if (styleObj.italic) {
+                em.style.fontStyle = 'normal';
+            } else {
+                em.style.fontStyle = 'italic';
+                if (opticalIdx === 0) em.style.fontFamily = '"Notus Display Italic", serif';
+                else if (opticalIdx === 1) em.style.fontFamily = '"Notus Text Italic", serif';
+                else em.style.fontFamily = '"Notus Caption", serif';
+            }
+        }
+
+        if (opticalVal) opticalVal.textContent = opticalNames[opticalIdx];
+        if (slantVal) slantVal.textContent = styleObj.italic ? '12°' : '0°';
+        if (opticalSlider) opticalSlider.value = opticalIdx;
+        if (slantSlider) slantSlider.value = slantIdx;
+        if (badge) badge.textContent = `Active Style: ${styleObj.name}`;
+
+        pills.forEach(pill => {
+            const pillOptical = parseInt(pill.getAttribute('data-optical'), 10);
+            const pillItalic = pill.getAttribute('data-italic') === 'true';
+            if (pillOptical === opticalIdx && pillItalic === styleObj.italic) {
+                pill.classList.add('is-active');
+            } else {
+                pill.classList.remove('is-active');
+            }
+        });
+    }
+
+    if (opticalSlider && slantSlider) {
+        const handleSliderChange = () => {
+            const opt = parseInt(opticalSlider.value, 10);
+            const sl = parseInt(slantSlider.value, 10);
+            const style = getStyle(opt, sl);
+            applyStyle(style, opt, sl);
+        };
+        opticalSlider.addEventListener('input', handleSliderChange);
+        slantSlider.addEventListener('input', handleSliderChange);
+    }
+
+    if (sizeSlider && sizeVal) {
+        sizeSlider.addEventListener('input', (e) => {
+            const sz = e.target.value;
+            title.style.fontSize = `${sz}px`;
+            sizeVal.textContent = `${sz}px`;
+        });
+    }
+
+    pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            const opt = parseInt(pill.getAttribute('data-optical'), 10);
+            const isItalic = pill.getAttribute('data-italic') === 'true';
+            const sl = isItalic ? 1 : 0;
+            const style = getStyle(opt, sl);
+            applyStyle(style, opt, sl);
+        });
+    });
 }

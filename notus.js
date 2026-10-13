@@ -458,7 +458,7 @@ function initBroadsheetInteractive() {
 }
 
 /* --------------------------------------------------------------------------
-   02-C. BROADSHEET ATMOSPHERIC BREATHING AURA (Delicate Ambient & Cursor Fluid Glow)
+   02-C. BROADSHEET SCULPTURAL MARBLE DUST (Delicate Micro-Canvas Particles on Wind)
    -------------------------------------------------------------------------- */
 function initBroadsheetAmbientGlow() {
     const section = document.getElementById('editorial-now');
@@ -472,60 +472,73 @@ function initBroadsheetAmbientGlow() {
     let height = 0;
     let dpr = 1;
     let animId = null;
-    let isVisible = true; // Start immediately active
+    let isVisible = true;
     let isHovered = false;
 
-    // Node 1: Primary Warm Amber/Champagne Light (follows cursor with gentle damping, breathes autonomously)
-    const node1 = {
-        x: 0,
-        y: 0,
-        targetX: 0,
-        targetY: 0,
-        radius: 480,
-        baseRadius: 480,
-        colorInner: 'rgba(255, 205, 140, 0.35)',
-        colorMid: 'rgba(215, 145, 65, 0.14)',
-        colorOuter: 'rgba(0, 0, 0, 0)'
-    };
+    const mouse = { x: -9999, y: -9999 };
+    let mouseVelocity = { x: 0, y: 0 };
+    let lastMouseX = -9999;
+    let lastMouseY = -9999;
+    let lastMoveTime = performance.now();
 
-    // Node 2: Secondary Soft Alabaster Breeze (counter-drifts organically in a quiet rhythm)
-    const node2 = {
-        x: 0,
-        y: 0,
-        radius: 400,
-        baseRadius: 400,
-        colorInner: 'rgba(220, 230, 255, 0.20)',
-        colorMid: 'rgba(160, 185, 225, 0.08)',
-        colorOuter: 'rgba(0, 0, 0, 0)'
-    };
+    // 80 Sculptural Marble Dust particles across 3 optical depth layers
+    const PARTICLE_COUNT = 80;
+    const particles = [];
+    const trailSparks = [];
 
-    // Node 3: Deep Sculptural Hearth (subtle breathing center warmth under headline)
-    const node3 = {
-        x: 0,
-        y: 0,
-        radius: 540,
-        baseRadius: 540,
-        colorInner: 'rgba(240, 180, 100, 0.22)',
-        colorMid: 'rgba(190, 120, 45, 0.08)',
-        colorOuter: 'rgba(0, 0, 0, 0)'
-    };
+    function createParticle(initialX) {
+        // Layer: 0 = background (fine/slow), 1 = midground, 2 = foreground (luminous/close)
+        const depthRoll = Math.random();
+        let depth = 0;
+        let radius = 0.9;
+        let baseOpacity = 0.35;
+        let baseVx = 0.45;
 
-    // Node 4: Dynamic Cursor Spotlight (vivid when hovering / moving)
-    const cursorNode = {
-        x: 0,
-        y: 0,
-        radius: 360,
-        baseRadius: 360,
-        colorInner: 'rgba(255, 225, 175, 0.42)',
-        colorMid: 'rgba(225, 160, 90, 0.16)',
-        colorOuter: 'rgba(0, 0, 0, 0)'
-    };
+        if (depthRoll > 0.78) {
+            // Foreground: close luminous marble grains
+            depth = 2;
+            radius = 2.2 + Math.random() * 1.1;
+            baseOpacity = 0.85 + Math.random() * 0.12;
+            baseVx = 1.1 + Math.random() * 0.55;
+        } else if (depthRoll > 0.42) {
+            // Midground: floating marble dust
+            depth = 1;
+            radius = 1.3 + Math.random() * 0.7;
+            baseOpacity = 0.55 + Math.random() * 0.22;
+            baseVx = 0.65 + Math.random() * 0.40;
+        } else {
+            // Background: distant micro-haze
+            depth = 0;
+            radius = 0.75 + Math.random() * 0.5;
+            baseOpacity = 0.25 + Math.random() * 0.20;
+            baseVx = 0.35 + Math.random() * 0.25;
+        }
 
-    const mouse = { x: 0, y: 0 };
-    let mouseInfluence = 0; // 0 (autonomous drift) -> 1 (cursor focus)
-    let pointerVelocity = 0;
-    let lastMouseX = 0;
-    let lastMouseY = 0;
+        return {
+            x: initialX !== undefined ? initialX : Math.random() * (width || 1200),
+            y: Math.random() * (height || 600),
+            vx: baseVx,
+            vy: (Math.random() - 0.5) * 0.15,
+            baseVx: baseVx,
+            baseVy: 0,
+            radius: radius,
+            depth: depth,
+            baseOpacity: baseOpacity,
+            waveFreq: 0.35 + Math.random() * 0.45,
+            waveAmp: 0.25 + Math.random() * 0.45,
+            phase: Math.random() * Math.PI * 2,
+            twinkleSpeed: 0.8 + Math.random() * 1.4,
+            // Warm marble tones: alabaster cream, sunlit champagne, and warm amber gold
+            hueType: Math.random()
+        };
+    }
+
+    function initParticles() {
+        particles.length = 0;
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push(createParticle(Math.random() * width));
+        }
+    }
 
     function resize() {
         const rect = section.getBoundingClientRect();
@@ -541,25 +554,8 @@ function initBroadsheetAmbientGlow() {
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
 
-        const baseRad = Math.max(width * 0.4, 420);
-        node1.baseRadius = baseRad;
-        node2.baseRadius = baseRad * 0.85;
-        node3.baseRadius = baseRad * 1.15;
-        cursorNode.baseRadius = baseRad * 0.75;
-
-        if (node1.x === 0 && node1.y === 0) {
-            node1.x = width * 0.5;
-            node1.y = height * 0.5;
-            node1.targetX = node1.x;
-            node1.targetY = node1.y;
-            node2.x = width * 0.4;
-            node2.y = height * 0.45;
-            node3.x = width * 0.5;
-            node3.y = height * 0.5;
-            cursorNode.x = width * 0.5;
-            cursorNode.y = height * 0.5;
-            mouse.x = width * 0.5;
-            mouse.y = height * 0.5;
+        if (particles.length === 0) {
+            initParticles();
         }
     }
 
@@ -573,21 +569,39 @@ function initBroadsheetAmbientGlow() {
         const rect = section.getBoundingClientRect();
         const curX = clientX - rect.left;
         const curY = clientY - rect.top;
-        const dx = curX - lastMouseX;
-        const dy = curY - lastMouseY;
-        const speed = Math.sqrt(dx * dx + dy * dy);
-        pointerVelocity = Math.min(pointerVelocity + speed * 0.25, 80);
+        const now = performance.now();
+        const dt = Math.max((now - lastMoveTime) * 0.001, 0.016);
+
+        if (lastMouseX !== -9999) {
+            mouseVelocity.x = (curX - lastMouseX) / dt * 0.05;
+            mouseVelocity.y = (curY - lastMouseY) / dt * 0.05;
+        }
 
         lastMouseX = curX;
         lastMouseY = curY;
+        lastMoveTime = now;
         mouse.x = curX;
         mouse.y = curY;
+
+        // Occasionally spawn subtle momentary luminous sparks at cursor
+        if (Math.hypot(mouseVelocity.x, mouseVelocity.y) > 8 && trailSparks.length < 18) {
+            trailSparks.push({
+                x: curX + (Math.random() - 0.5) * 16,
+                y: curY + (Math.random() - 0.5) * 16,
+                vx: mouseVelocity.x * 0.08 + (Math.random() * 0.8 + 0.4),
+                vy: mouseVelocity.y * 0.08 + (Math.random() - 0.5) * 0.8,
+                radius: 1.5 + Math.random() * 1.5,
+                opacity: 0.85,
+                life: 1.0,
+                decay: 0.02 + Math.random() * 0.025
+            });
+        }
     }
 
     section.addEventListener('mouseenter', (e) => {
         isHovered = true;
-        lastMouseX = e.clientX - section.getBoundingClientRect().left;
-        lastMouseY = e.clientY - section.getBoundingClientRect().top;
+        lastMouseX = -9999;
+        lastMouseY = -9999;
         updatePointer(e.clientX, e.clientY);
     });
 
@@ -598,13 +612,15 @@ function initBroadsheetAmbientGlow() {
 
     section.addEventListener('mouseleave', () => {
         isHovered = false;
+        mouse.x = -9999;
+        mouse.y = -9999;
     });
 
     section.addEventListener('touchstart', (e) => {
         if (e.touches.length > 0) {
             isHovered = true;
-            lastMouseX = e.touches[0].clientX - section.getBoundingClientRect().left;
-            lastMouseY = e.touches[0].clientY - section.getBoundingClientRect().top;
+            lastMouseX = -9999;
+            lastMouseY = -9999;
             updatePointer(e.touches[0].clientX, e.touches[0].clientY);
         }
     }, { passive: true });
@@ -618,18 +634,21 @@ function initBroadsheetAmbientGlow() {
 
     section.addEventListener('touchend', () => {
         isHovered = false;
+        mouse.x = -9999;
+        mouse.y = -9999;
     });
 
-    function drawGlow(x, y, radius, colorInner, colorMid, colorOuter) {
-        if (radius <= 0) return;
-        const grad = ctx.createRadialGradient(x, y, 0, x, y, radius);
-        grad.addColorStop(0, colorInner);
-        grad.addColorStop(0.45, colorMid);
-        grad.addColorStop(1, colorOuter);
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(x, y, radius, 0, Math.PI * 2);
-        ctx.fill();
+    function getParticleColor(hueType, opacity) {
+        if (hueType > 0.65) {
+            // Warm golden amber flecks
+            return `rgba(248, 208, 148, ${opacity})`;
+        } else if (hueType > 0.3) {
+            // Sunlit champagne marble
+            return `rgba(255, 238, 212, ${opacity})`;
+        } else {
+            // Alabaster white dust
+            return `rgba(255, 252, 245, ${opacity})`;
+        }
     }
 
     function render(currentTime) {
@@ -640,70 +659,129 @@ function initBroadsheetAmbientGlow() {
 
         const t = (currentTime || performance.now()) * 0.001;
 
-        // Fill solid black canvas base so additive light operates on opaque pixels
+        // Clear with pure pitch black base
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, width, height);
 
-        // Smooth transition of cursor influence
-        const targetInfluence = isHovered ? 1.0 : 0.0;
-        mouseInfluence += (targetInfluence - mouseInfluence) * 0.055;
+        // Soft ambient beam of light through the studio center (sculptor's light shaft)
+        const centerGrad = ctx.createRadialGradient(width * 0.5, height * 0.48, 0, width * 0.5, height * 0.48, Math.max(width * 0.45, 450));
+        centerGrad.addColorStop(0, 'rgba(235, 195, 140, 0.075)');
+        centerGrad.addColorStop(0.5, 'rgba(185, 135, 75, 0.025)');
+        centerGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = centerGrad;
+        ctx.fillRect(0, 0, width, height);
 
-        // Velocity decay for gentle dynamic expansion on motion
-        pointerVelocity *= 0.92;
+        // Decay mouse velocity
+        mouseVelocity.x *= 0.92;
+        mouseVelocity.y *= 0.92;
 
-        // Autonomous breathing trajectories (Silent rhythm / Southern Gale)
-        const autoX1 = width * 0.5 + Math.sin(t * 0.45) * (width * 0.25);
-        const autoY1 = height * 0.5 + Math.cos(t * 0.55) * (height * 0.20);
+        const MOUSE_RADIUS = 180;
+        const MOUSE_RADIUS_SQ = MOUSE_RADIUS * MOUSE_RADIUS;
 
-        // Node 1: smooth blend between autonomous drift and cursor position
-        node1.targetX = autoX1 * (1 - mouseInfluence) + mouse.x * mouseInfluence;
-        node1.targetY = autoY1 * (1 - mouseInfluence) + mouse.y * mouseInfluence;
+        // Update and draw particles
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
 
-        // Smooth damping (lerp)
-        node1.x += (node1.targetX - node1.x) * 0.055;
-        node1.y += (node1.targetY - node1.y) * 0.055;
+            // 1. Natural wind drift & wave
+            const waveY = Math.sin(t * p.waveFreq + p.phase) * p.waveAmp;
+            p.x += p.vx;
+            p.y += p.vy + waveY;
 
-        // Breathing pulsation (organic rhythm + motion bloom)
-        const breathe1 = 1 + 0.16 * Math.sin(t * 0.5) + (pointerVelocity * 0.003);
-        node1.radius = node1.baseRadius * breathe1;
+            // 2. Mouse deflection & fluid wind reaction
+            if (isHovered && mouse.x !== -9999) {
+                const dx = p.x - mouse.x;
+                const dy = p.y - mouse.y;
+                const distSq = dx * dx + dy * dy;
 
-        // Node 2: Counter-drifting alabaster wind
-        node2.x = width * 0.5 + Math.sin(t * 0.38 + 2.4) * (width * 0.3);
-        node2.y = height * 0.5 + Math.cos(t * 0.48 + 1.2) * (height * 0.22);
-        const breathe2 = 1 + 0.18 * Math.cos(t * 0.44 + 1.5);
-        node2.radius = node2.baseRadius * breathe2;
+                if (distSq < MOUSE_RADIUS_SQ && distSq > 1) {
+                    const dist = Math.sqrt(distSq);
+                    const normalX = dx / dist;
+                    const normalY = dy / dist;
+                    const force = Math.pow(1 - dist / MOUSE_RADIUS, 1.8) * 3.8;
 
-        // Node 3: Central warm hearth pulsation
-        node3.x = width * 0.5 + Math.sin(t * 0.22) * (width * 0.08);
-        node3.y = height * 0.5 + Math.cos(t * 0.28) * (height * 0.08);
-        const breathe3 = 1 + 0.12 * Math.sin(t * 0.35);
-        node3.radius = node3.baseRadius * breathe3;
+                    // Deflection away from cursor + gentle lift in mouse direction
+                    p.vx += normalX * force + mouseVelocity.x * 0.04;
+                    p.vy += normalY * force + mouseVelocity.y * 0.04;
+                }
+            }
 
-        // Update CSS fallback variables as well
-        section.style.setProperty('--glow-x', `${Math.round(node1.x)}px`);
-        section.style.setProperty('--glow-y', `${Math.round(node1.y)}px`);
+            // Smooth damping back to steady-state wind speed
+            p.vx += (p.baseVx - p.vx) * 0.045;
+            p.vy += (p.baseVy - p.vy) * 0.045;
 
-        // Composite glow layers using physical additive light
-        ctx.save();
-        ctx.globalCompositeOperation = 'lighter';
+            // Wrap boundaries smoothly
+            if (p.x > width + 25) {
+                p.x = -25;
+                p.y = Math.random() * height;
+                p.vx = p.baseVx;
+                p.vy = 0;
+            } else if (p.x < -25) {
+                p.x = width + 25;
+            }
 
-        drawGlow(node3.x, node3.y, node3.radius, node3.colorInner, node3.colorMid, node3.colorOuter);
-        drawGlow(node2.x, node2.y, node2.radius, node2.colorInner, node2.colorMid, node2.colorOuter);
-        drawGlow(node1.x, node1.y, node1.radius, node1.colorInner, node1.colorMid, node1.colorOuter);
+            if (p.y > height + 20) p.y = -20;
+            else if (p.y < -20) p.y = height + 20;
 
-        if (mouseInfluence > 0.02) {
-            cursorNode.x += (mouse.x - cursorNode.x) * 0.12;
-            cursorNode.y += (mouse.y - cursorNode.y) * 0.12;
-            cursorNode.radius = cursorNode.baseRadius * (0.9 + mouseInfluence * 0.2 + pointerVelocity * 0.003);
-            drawGlow(cursorNode.x, cursorNode.y, cursorNode.radius, cursorNode.colorInner, cursorNode.colorMid, cursorNode.colorOuter);
+            // Twinkle pulsation
+            const twinkle = 0.8 + 0.2 * Math.sin(t * p.twinkleSpeed + p.phase);
+            const currentOpacity = Math.min(Math.max(p.baseOpacity * twinkle, 0.1), 0.98);
+            const particleColor = getParticleColor(p.hueType, currentOpacity);
+
+            // Draw particle
+            if (p.depth === 2) {
+                // Foreground: draw with soft luminous bloom halo
+                const glowRad = p.radius * 2.8;
+                const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, glowRad);
+                halo.addColorStop(0, particleColor);
+                halo.addColorStop(0.35, getParticleColor(p.hueType, currentOpacity * 0.5));
+                halo.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = halo;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, glowRad, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Bright crystalline core
+                ctx.fillStyle = `rgba(255, 255, 255, ${currentOpacity})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius * 0.7, 0, Math.PI * 2);
+                ctx.fill();
+            } else {
+                // Midground & Background: crisp, delicate micro-dust dots
+                ctx.fillStyle = particleColor;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
 
-        ctx.restore();
+        // Draw and update fleeting trail sparks
+        for (let i = trailSparks.length - 1; i >= 0; i--) {
+            const sp = trailSparks[i];
+            sp.x += sp.vx;
+            sp.y += sp.vy;
+            sp.vx *= 0.96;
+            sp.vy *= 0.96;
+            sp.life -= sp.decay;
+
+            if (sp.life <= 0) {
+                trailSparks.splice(i, 1);
+                continue;
+            }
+
+            const spAlpha = sp.opacity * sp.life;
+            const spGrad = ctx.createRadialGradient(sp.x, sp.y, 0, sp.x, sp.y, sp.radius * 2.4);
+            spGrad.addColorStop(0, `rgba(255, 240, 205, ${spAlpha})`);
+            spGrad.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = spGrad;
+            ctx.beginPath();
+            ctx.arc(sp.x, sp.y, sp.radius * 2.4, 0, Math.PI * 2);
+            ctx.fill();
+        }
 
         animId = requestAnimationFrame(render);
     }
 
-    // Start render loop immediately!
+    // Start immediately!
     animId = requestAnimationFrame(render);
 
     const observer = new IntersectionObserver((entries) => {

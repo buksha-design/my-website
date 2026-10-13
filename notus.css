@@ -320,7 +320,7 @@ button {
     align-items: center;
     justify-content: center;
     border: 1px solid var(--c-gray-border);
-    border-radius: 9999px;
+    border-radius: 17px;
     background-color: transparent;
     color: var(--text-main);
     font-family: var(--font-ui);
@@ -355,6 +355,7 @@ button {
     font-weight: 500;
     letter-spacing: -0.01em;
     gap: 0.45rem;
+    border-radius: 17px;
 }
 
 .subnav-pill--primary .giant-pill__indicator {
@@ -371,6 +372,7 @@ button {
     font-weight: 500;
     letter-spacing: 0.01em;
     gap: 0.35rem;
+    border-radius: 17px;
 }
 
 @media (max-width: 1024px) {
@@ -1727,12 +1729,10 @@ button {
     .inspector-magnifier-pane { border-right: none; border-bottom: 1px solid var(--border-color); }
     .tech-grid { grid-template-columns: 1fr; }
     .footer-directory-grid { grid-template-columns: repeat(2, 1fr); }
-    .giant-pill { height: 32px; padding: 0 14px; font-size: 12px; }
 }
 
 @media (max-width: 768px) {
     .header__nav { gap: 1.25rem; }
-    .giant-pill { height: 30px; padding: 0 12px; font-size: 11px; }
     .tester-sliders-bar { grid-template-columns: 1fr; gap: 1rem; }
     .displaay-gallery-grid { grid-template-columns: 1fr; }
     .gallery-item--large { grid-column: 1 / -1; }

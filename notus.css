@@ -808,9 +808,9 @@ button {
 .section-black-broadsheet {
     background-color: #000000;
     color: #FFFFFF;
-    border-radius: 51px;
+    border-radius: 41px;
     margin: 3.5rem var(--pad-x);
-    padding: clamp(5.5rem, 8.5vw, 9.5rem) 0;
+    padding: clamp(4.7rem, 7.2vw, 8.1rem) 0;
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
     position: relative;
@@ -834,16 +834,16 @@ button {
 
 @media (max-width: 1024px) {
     .section-black-broadsheet {
-        border-radius: 34px;
+        border-radius: 27px;
         margin: 2.5rem var(--pad-x);
     }
 }
 
 @media (max-width: 768px) {
     .section-black-broadsheet {
-        border-radius: 20px;
+        border-radius: 16px;
         margin: 1.5rem 1rem;
-        padding: 4rem 0;
+        padding: 3.4rem 0;
     }
 }
 

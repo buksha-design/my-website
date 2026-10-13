@@ -830,6 +830,8 @@ button {
    -------------------------------------------------------------------------- */
 .section-black-broadsheet {
     background-color: #000000;
+    background-image: radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(240, 190, 125, 0.20) 0%, rgba(190, 130, 60, 0.08) 40%, rgba(0, 0, 0, 0) 72%);
+    background-repeat: no-repeat;
     color: #FFFFFF;
     border-radius: 51px;
     margin: 3.5rem var(--pad-x);
@@ -2939,19 +2941,19 @@ function initBroadsheetAmbientGlow() {
     let height = 0;
     let dpr = 1;
     let animId = null;
-    let isVisible = false;
+    let isVisible = true; // Start immediately active
     let isHovered = false;
 
-    // Node 1: Primary Warm Amber/Champagne Light (follows cursor with gentle damping, drifts when idle)
+    // Node 1: Primary Warm Amber/Champagne Light (follows cursor with gentle damping, breathes autonomously)
     const node1 = {
         x: 0,
         y: 0,
         targetX: 0,
         targetY: 0,
-        radius: 420,
-        baseRadius: 420,
-        colorInner: 'rgba(238, 210, 175, 0.09)',
-        colorMid: 'rgba(205, 160, 110, 0.04)',
+        radius: 480,
+        baseRadius: 480,
+        colorInner: 'rgba(255, 205, 140, 0.35)',
+        colorMid: 'rgba(215, 145, 65, 0.14)',
         colorOuter: 'rgba(0, 0, 0, 0)'
     };
 
@@ -2959,10 +2961,10 @@ function initBroadsheetAmbientGlow() {
     const node2 = {
         x: 0,
         y: 0,
-        radius: 360,
-        baseRadius: 360,
-        colorInner: 'rgba(220, 225, 235, 0.045)',
-        colorMid: 'rgba(175, 185, 200, 0.02)',
+        radius: 400,
+        baseRadius: 400,
+        colorInner: 'rgba(220, 230, 255, 0.20)',
+        colorMid: 'rgba(160, 185, 225, 0.08)',
         colorOuter: 'rgba(0, 0, 0, 0)'
     };
 
@@ -2970,10 +2972,21 @@ function initBroadsheetAmbientGlow() {
     const node3 = {
         x: 0,
         y: 0,
-        radius: 500,
-        baseRadius: 500,
-        colorInner: 'rgba(240, 195, 145, 0.035)',
-        colorMid: 'rgba(200, 150, 100, 0.015)',
+        radius: 540,
+        baseRadius: 540,
+        colorInner: 'rgba(240, 180, 100, 0.22)',
+        colorMid: 'rgba(190, 120, 45, 0.08)',
+        colorOuter: 'rgba(0, 0, 0, 0)'
+    };
+
+    // Node 4: Dynamic Cursor Spotlight (vivid when hovering / moving)
+    const cursorNode = {
+        x: 0,
+        y: 0,
+        radius: 360,
+        baseRadius: 360,
+        colorInner: 'rgba(255, 225, 175, 0.42)',
+        colorMid: 'rgba(225, 160, 90, 0.16)',
         colorOuter: 'rgba(0, 0, 0, 0)'
     };
 
@@ -2997,10 +3010,11 @@ function initBroadsheetAmbientGlow() {
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
 
-        const baseRad = Math.max(width * 0.38, 380);
+        const baseRad = Math.max(width * 0.4, 420);
         node1.baseRadius = baseRad;
         node2.baseRadius = baseRad * 0.85;
         node3.baseRadius = baseRad * 1.15;
+        cursorNode.baseRadius = baseRad * 0.75;
 
         if (node1.x === 0 && node1.y === 0) {
             node1.x = width * 0.5;
@@ -3011,6 +3025,10 @@ function initBroadsheetAmbientGlow() {
             node2.y = height * 0.45;
             node3.x = width * 0.5;
             node3.y = height * 0.5;
+            cursorNode.x = width * 0.5;
+            cursorNode.y = height * 0.5;
+            mouse.x = width * 0.5;
+            mouse.y = height * 0.5;
         }
     }
 
@@ -3027,7 +3045,7 @@ function initBroadsheetAmbientGlow() {
         const dx = curX - lastMouseX;
         const dy = curY - lastMouseY;
         const speed = Math.sqrt(dx * dx + dy * dy);
-        pointerVelocity = Math.min(pointerVelocity + speed * 0.15, 60);
+        pointerVelocity = Math.min(pointerVelocity + speed * 0.25, 80);
 
         lastMouseX = curX;
         lastMouseY = curY;
@@ -3075,7 +3093,7 @@ function initBroadsheetAmbientGlow() {
         if (radius <= 0) return;
         const grad = ctx.createRadialGradient(x, y, 0, x, y, radius);
         grad.addColorStop(0, colorInner);
-        grad.addColorStop(0.5, colorMid);
+        grad.addColorStop(0.45, colorMid);
         grad.addColorStop(1, colorOuter);
         ctx.fillStyle = grad;
         ctx.beginPath();
@@ -3089,58 +3107,73 @@ function initBroadsheetAmbientGlow() {
             return;
         }
 
-        const t = currentTime * 0.001;
+        const t = (currentTime || performance.now()) * 0.001;
 
-        // Clear canvas
-        ctx.clearRect(0, 0, width, height);
+        // Fill solid black canvas base so additive light operates on opaque pixels
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, width, height);
 
         // Smooth transition of cursor influence
         const targetInfluence = isHovered ? 1.0 : 0.0;
-        mouseInfluence += (targetInfluence - mouseInfluence) * 0.045;
+        mouseInfluence += (targetInfluence - mouseInfluence) * 0.055;
 
         // Velocity decay for gentle dynamic expansion on motion
         pointerVelocity *= 0.92;
 
         // Autonomous breathing trajectories (Silent rhythm / Southern Gale)
-        const autoX1 = width * 0.5 + Math.sin(t * 0.32) * (width * 0.22);
-        const autoY1 = height * 0.5 + Math.cos(t * 0.42) * (height * 0.16);
+        const autoX1 = width * 0.5 + Math.sin(t * 0.45) * (width * 0.25);
+        const autoY1 = height * 0.5 + Math.cos(t * 0.55) * (height * 0.20);
 
         // Node 1: smooth blend between autonomous drift and cursor position
         node1.targetX = autoX1 * (1 - mouseInfluence) + mouse.x * mouseInfluence;
         node1.targetY = autoY1 * (1 - mouseInfluence) + mouse.y * mouseInfluence;
 
         // Smooth damping (lerp)
-        node1.x += (node1.targetX - node1.x) * 0.045;
-        node1.y += (node1.targetY - node1.y) * 0.045;
+        node1.x += (node1.targetX - node1.x) * 0.055;
+        node1.y += (node1.targetY - node1.y) * 0.055;
 
-        // Breathing pulsation (14-second organic rhythm + motion bloom)
-        const breathe1 = 1 + 0.12 * Math.sin(t * 0.42) + (pointerVelocity * 0.002);
+        // Breathing pulsation (organic rhythm + motion bloom)
+        const breathe1 = 1 + 0.16 * Math.sin(t * 0.5) + (pointerVelocity * 0.003);
         node1.radius = node1.baseRadius * breathe1;
 
         // Node 2: Counter-drifting alabaster wind
-        node2.x = width * 0.5 + Math.sin(t * 0.26 + 2.4) * (width * 0.26);
-        node2.y = height * 0.5 + Math.cos(t * 0.36 + 1.2) * (height * 0.2);
-        const breathe2 = 1 + 0.14 * Math.cos(t * 0.34 + 1.5);
+        node2.x = width * 0.5 + Math.sin(t * 0.38 + 2.4) * (width * 0.3);
+        node2.y = height * 0.5 + Math.cos(t * 0.48 + 1.2) * (height * 0.22);
+        const breathe2 = 1 + 0.18 * Math.cos(t * 0.44 + 1.5);
         node2.radius = node2.baseRadius * breathe2;
 
         // Node 3: Central warm hearth pulsation
-        node3.x = width * 0.5 + Math.sin(t * 0.15) * (width * 0.06);
-        node3.y = height * 0.5 + Math.cos(t * 0.2) * (height * 0.06);
-        const breathe3 = 1 + 0.09 * Math.sin(t * 0.24);
+        node3.x = width * 0.5 + Math.sin(t * 0.22) * (width * 0.08);
+        node3.y = height * 0.5 + Math.cos(t * 0.28) * (height * 0.08);
+        const breathe3 = 1 + 0.12 * Math.sin(t * 0.35);
         node3.radius = node3.baseRadius * breathe3;
 
-        // Composite layers with 'screen' blend mode on black
+        // Update CSS fallback variables as well
+        section.style.setProperty('--glow-x', `${Math.round(node1.x)}px`);
+        section.style.setProperty('--glow-y', `${Math.round(node1.y)}px`);
+
+        // Composite glow layers using physical additive light
         ctx.save();
-        ctx.globalCompositeOperation = 'screen';
+        ctx.globalCompositeOperation = 'lighter';
 
         drawGlow(node3.x, node3.y, node3.radius, node3.colorInner, node3.colorMid, node3.colorOuter);
         drawGlow(node2.x, node2.y, node2.radius, node2.colorInner, node2.colorMid, node2.colorOuter);
         drawGlow(node1.x, node1.y, node1.radius, node1.colorInner, node1.colorMid, node1.colorOuter);
 
+        if (mouseInfluence > 0.02) {
+            cursorNode.x += (mouse.x - cursorNode.x) * 0.12;
+            cursorNode.y += (mouse.y - cursorNode.y) * 0.12;
+            cursorNode.radius = cursorNode.baseRadius * (0.9 + mouseInfluence * 0.2 + pointerVelocity * 0.003);
+            drawGlow(cursorNode.x, cursorNode.y, cursorNode.radius, cursorNode.colorInner, cursorNode.colorMid, cursorNode.colorOuter);
+        }
+
         ctx.restore();
 
         animId = requestAnimationFrame(render);
     }
+
+    // Start render loop immediately!
+    animId = requestAnimationFrame(render);
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -3157,7 +3190,7 @@ function initBroadsheetAmbientGlow() {
                 }
             }
         });
-    }, { threshold: 0.05 });
+    }, { threshold: 0.0, rootMargin: '250px 0px' });
 
     observer.observe(section);
 }

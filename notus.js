@@ -412,7 +412,6 @@ function initBroadsheetInteractive() {
     const title = document.getElementById('broadsheetHeroTitle');
     const badge = document.getElementById('broadsheetActiveBadge');
     const pills = document.querySelectorAll('.broadsheet-pill');
-    const sloganPills = document.querySelectorAll('.slogan-pill');
 
     if (!title) return;
 
@@ -453,26 +452,6 @@ function initBroadsheetInteractive() {
             const font = pill.getAttribute('data-font');
             const isItalic = pill.getAttribute('data-italic') === 'true';
             applyStyle(font, isItalic, pill.textContent.trim());
-        });
-    });
-
-    const sloganPresets = {
-        'precision': 'Precision shaped<br><em>by emotion.</em>',
-        'poetry': 'Architecture softened<br><em>by poetry.</em>',
-        'warmth': 'Pure tension,<br><em>human warmth.</em>',
-        'intent': 'Form crafted<br><em>with intent.</em>',
-        'grace': 'Silent rhythm,<br><em>tactile grace.</em>'
-    };
-
-    sloganPills.forEach(pill => {
-        pill.addEventListener('click', () => {
-            sloganPills.forEach(p => p.classList.remove('is-active'));
-            pill.classList.add('is-active');
-            const key = pill.getAttribute('data-slogan');
-            if (sloganPresets[key]) {
-                title.innerHTML = sloganPresets[key];
-                applyStyle(currentFont, currentItalic, badge ? badge.textContent.replace('Active Style: ', '') : currentFont);
-            }
         });
     });
 }

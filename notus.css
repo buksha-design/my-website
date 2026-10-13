@@ -755,7 +755,7 @@ button {
 .section-black-broadsheet {
     background-color: #000000;
     color: #FFFFFF;
-    border-radius: 150px;
+    border-radius: 60px;
     margin: 3.5rem var(--pad-x);
     padding: clamp(5.5rem, 8.5vw, 9.5rem) 0;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -765,14 +765,14 @@ button {
 
 @media (max-width: 1024px) {
     .section-black-broadsheet {
-        border-radius: 100px;
+        border-radius: 40px;
         margin: 2.5rem var(--pad-x);
     }
 }
 
 @media (max-width: 768px) {
     .section-black-broadsheet {
-        border-radius: 48px;
+        border-radius: 24px;
         margin: 1.5rem 1rem;
         padding: 4rem 0;
     }

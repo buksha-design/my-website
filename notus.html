@@ -779,7 +779,7 @@ button {
 .section-black-broadsheet {
     background-color: #000000;
     color: #FFFFFF;
-    border-radius: 150px;
+    border-radius: 60px;
     margin: 3.5rem var(--pad-x);
     padding: clamp(5.5rem, 8.5vw, 9.5rem) 0;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -789,14 +789,14 @@ button {
 
 @media (max-width: 1024px) {
     .section-black-broadsheet {
-        border-radius: 100px;
+        border-radius: 40px;
         margin: 2.5rem var(--pad-x);
     }
 }
 
 @media (max-width: 768px) {
     .section-black-broadsheet {
-        border-radius: 48px;
+        border-radius: 24px;
         margin: 1.5rem 1rem;
         padding: 4rem 0;
     }
@@ -1784,18 +1784,8 @@ section[id] {
                     <button type="button" class="broadsheet-pill" data-font="Notus Caption" data-italic="false">Caption</button>
                 </div>
 
-                <!-- 5 Design Slogan Presets Row -->
-                <div class="slogan-preset-row" id="sloganPresetsGroup">
-                    <span class="slogan-preset-label">Slogans:</span>
-                    <button type="button" class="slogan-pill is-active" data-slogan="precision">1. Precision &amp; Emotion</button>
-                    <button type="button" class="slogan-pill" data-slogan="poetry">2. Architecture &amp; Poetry</button>
-                    <button type="button" class="slogan-pill" data-slogan="warmth">3. Tension &amp; Warmth</button>
-                    <button type="button" class="slogan-pill" data-slogan="intent">4. Form &amp; Intent</button>
-                    <button type="button" class="slogan-pill" data-slogan="grace">5. Rhythm &amp; Grace</button>
-                </div>
-
                 <div class="black-statement-stage">
-                    <h2 class="black-statement-title" id="broadsheetHeroTitle" contenteditable="true" spellcheck="false" title="Click to edit headline text">Precision shaped<br><em>by emotion.</em></h2>
+                    <h2 class="black-statement-title" id="broadsheetHeroTitle" contenteditable="true" spellcheck="false" title="Click to edit headline text">Silent rhythm,<br><em>tactile grace.</em></h2>
                     <div class="black-statement-meta">
                         <span class="active-style-badge" id="broadsheetActiveBadge">Active Style: Notus Display Regular</span>
                         <span class="editable-hint">✎ Click text to edit headline</span>
@@ -2816,7 +2806,6 @@ function initBroadsheetInteractive() {
     const title = document.getElementById('broadsheetHeroTitle');
     const badge = document.getElementById('broadsheetActiveBadge');
     const pills = document.querySelectorAll('.broadsheet-pill');
-    const sloganPills = document.querySelectorAll('.slogan-pill');
 
     if (!title) return;
 
@@ -2857,26 +2846,6 @@ function initBroadsheetInteractive() {
             const font = pill.getAttribute('data-font');
             const isItalic = pill.getAttribute('data-italic') === 'true';
             applyStyle(font, isItalic, pill.textContent.trim());
-        });
-    });
-
-    const sloganPresets = {
-        'precision': 'Precision shaped<br><em>by emotion.</em>',
-        'poetry': 'Architecture softened<br><em>by poetry.</em>',
-        'warmth': 'Pure tension,<br><em>human warmth.</em>',
-        'intent': 'Form crafted<br><em>with intent.</em>',
-        'grace': 'Silent rhythm,<br><em>tactile grace.</em>'
-    };
-
-    sloganPills.forEach(pill => {
-        pill.addEventListener('click', () => {
-            sloganPills.forEach(p => p.classList.remove('is-active'));
-            pill.classList.add('is-active');
-            const key = pill.getAttribute('data-slogan');
-            if (sloganPresets[key]) {
-                title.innerHTML = sloganPresets[key];
-                applyStyle(currentFont, currentItalic, badge ? badge.textContent.replace('Active Style: ', '') : currentFont);
-            }
         });
     });
 }

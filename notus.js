@@ -495,21 +495,21 @@ function initBroadsheetAmbientGlow() {
         let baseVx = 0.45;
 
         if (depthRoll > 0.78) {
-            // Foreground: close luminous marble grains
+            // Foreground: close luminous marble grains (reduced by 40%)
             depth = 2;
-            radius = 2.2 + Math.random() * 1.1;
+            radius = 1.32 + Math.random() * 0.66;
             baseOpacity = 0.85 + Math.random() * 0.12;
             baseVx = 1.1 + Math.random() * 0.55;
         } else if (depthRoll > 0.42) {
-            // Midground: floating marble dust
+            // Midground: floating marble dust (reduced by 40%)
             depth = 1;
-            radius = 1.3 + Math.random() * 0.7;
+            radius = 0.78 + Math.random() * 0.42;
             baseOpacity = 0.55 + Math.random() * 0.22;
             baseVx = 0.65 + Math.random() * 0.40;
         } else {
-            // Background: distant micro-haze
+            // Background: distant micro-haze (reduced by 40%)
             depth = 0;
-            radius = 0.75 + Math.random() * 0.5;
+            radius = 0.45 + Math.random() * 0.30;
             baseOpacity = 0.25 + Math.random() * 0.20;
             baseVx = 0.35 + Math.random() * 0.25;
         }
@@ -590,7 +590,7 @@ function initBroadsheetAmbientGlow() {
                 y: curY + (Math.random() - 0.5) * 16,
                 vx: mouseVelocity.x * 0.08 + (Math.random() * 0.8 + 0.4),
                 vy: mouseVelocity.y * 0.08 + (Math.random() - 0.5) * 0.8,
-                radius: 1.5 + Math.random() * 1.5,
+                radius: 0.9 + Math.random() * 0.9,
                 opacity: 0.85,
                 life: 1.0,
                 decay: 0.02 + Math.random() * 0.025

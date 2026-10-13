@@ -71,7 +71,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   02. DESIGN VARIABLES
+   02. DESIGN VARIABLES (+15% WIDER PAGE: 1800px MAX-WIDTH)
    -------------------------------------------------------------------------- */
 :root {
     --c-ecru: #ECE9DF;
@@ -86,13 +86,18 @@
     --c-mint: #C4F1C0;
     
     --bg-page: #FFFFFF;
-    --text-main: #000000;
+    --text-main: #121212;
+    --bg-color: #FFFFFF;
+    --text-color: #121212;
     --border-color: rgba(0, 0, 0, 0.14);
     
-    --container-max: 1540px;
-    --pad-x: clamp(1.25rem, 4vw, 3.5rem);
+    /* Increased by 15% to 1800px to match index.html and fit the masthead */
+    --container-max: 1800px;
+    --container-padding: clamp(1.5rem, 4vw, 4.5rem);
+    --pad-x: clamp(1.5rem, 4vw, 4.5rem);
     
     --font-ui: 'Instrument Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-main: 'Instrument Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-notus-display: 'Notus Display', serif;
     --font-notus-display-it: 'Notus Display Italic', serif;
     --font-notus-text: 'Notus Text', serif;
@@ -103,6 +108,8 @@
 [data-theme="dark"] {
     --bg-page: #0C0C0C;
     --text-main: #FFFFFF;
+    --bg-color: #0C0C0C;
+    --text-color: #FFFFFF;
     --border-color: rgba(255, 255, 255, 0.16);
     --c-ecru: #141414;
     --c-ecru-card: #1E1E1E;
@@ -131,7 +138,10 @@ body {
     color: var(--text-main);
     font-family: var(--font-ui);
     line-height: 1.45;
-    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 1800px;
+    margin: 0 auto;
+    position: relative;
     transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -171,101 +181,130 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   04. PRIMARY HEADER (Exact style from index.html)
+   04. PRIMARY SITE HEADER (Exact copy and style from index.html)
    -------------------------------------------------------------------------- */
-.site-main-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.92);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border-color);
-    transition: background-color 0.25s ease;
-}
-
-[data-theme="dark"] .site-main-header {
-    background: rgba(12, 12, 12, 0.92);
-}
-
-.site-main-header__inner {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 1.25rem var(--pad-x);
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 2rem var(--container-padding);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1800px;
+    background: rgba(255, 255, 255, 0.88);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    transition: background-color 0.3s ease;
 }
 
-.site-logo-container {
+[data-theme="dark"] .header {
+    background: rgba(12, 12, 12, 0.88);
+}
+
+.header__logo-container {
     display: flex;
     align-items: center;
-    gap: 1.1rem;
+    gap: 1.2rem;
     text-decoration: none;
-    color: var(--text-main);
+    color: var(--text-color);
     cursor: pointer;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.3s ease;
 }
 
-.site-logo-container:hover {
-    opacity: 0.75;
+.header__logo-container:hover {
+    opacity: 0.8;
 }
 
-.site-logo-svg {
-    width: 38px;
-    height: 38px;
+.header__logo {
+    display: flex;
+    gap: 1rem;
+    width: 40px;
+    height: 40px;
+}
+
+#lottie-logo {
+    width: 40px;
+    height: 40px;
     display: block;
 }
 
-.site-author-name {
+.header__author-name {
     font-size: 0.95rem;
     font-weight: 500;
+    color: var(--text-color);
     letter-spacing: -0.01em;
     white-space: nowrap;
+    line-height: 1.0;
+    display: inline-block;
+    overflow: hidden;
+    max-width: 150px;
+    opacity: 1;
+    transform: translateX(0);
+    transition: max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.site-nav-links {
+.header--scrolled .header__logo-container {
+    gap: 0;
+}
+
+.header--scrolled .header__author-name {
+    max-width: 0;
+    opacity: 0;
+    transform: translateX(-15px);
+}
+
+.header__nav {
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
-.site-nav-links a {
-    font-size: 0.92rem;
+.header__nav a {
+    text-decoration: none;
+    color: var(--text-color);
     font-weight: 500;
-    color: var(--text-main);
-    transition: opacity 0.2s ease;
+    font-size: 0.9rem;
+    transition: opacity 0.3s;
     position: relative;
 }
 
-.site-nav-links a:hover {
-    opacity: 0.6;
-}
-
-.site-nav-links a.is-current {
-    font-weight: 600;
-}
-
-.site-nav-links a.is-current::after {
+.header__nav a::after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: -2px;
     left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--text-color);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header__nav a:hover::after,
+.header__nav a.is-active::after {
     width: 100%;
-    height: 1.5px;
-    background-color: var(--text-main);
+}
+
+.header__nav a:hover {
+    opacity: 0.6;
 }
 
 /* --------------------------------------------------------------------------
    05. GIANT 2X SUB-NAVIGATION BAR (Directly below main menu)
    -------------------------------------------------------------------------- */
 .notus-giant-subnav-wrapper {
+    margin-top: 88px;
     position: sticky;
-    top: 68px;
+    top: 88px;
     z-index: 999;
     background-color: var(--c-ecru);
     border-bottom: 1px solid var(--border-color);
+    width: 100%;
     transition: background-color 0.25s ease;
 }
 
@@ -276,10 +315,10 @@ button {
 .notus-giant-subnav {
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: 1.1rem var(--pad-x);
+    padding: 1.15rem var(--pad-x);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     overflow-x: auto;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
@@ -418,17 +457,17 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   06. SECTION 01: "The Notus TIMES" (+15% INCREASED HEADLINE)
+   06. SECTION 01: "The Notus TIMES" (STRICT 2 LINES, +15% WIDER)
    -------------------------------------------------------------------------- */
 .section-displaay-masthead {
     background-color: var(--c-ecru);
     color: #000000;
     border-bottom: 1px solid var(--border-color);
-    min-height: calc(100vh - 145px);
+    min-height: calc(100vh - 160px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: clamp(3rem, 7vw, 6rem) 0 2.5rem;
+    padding: clamp(3rem, 6vw, 6rem) 0 2.5rem;
     position: relative;
 }
 
@@ -454,14 +493,14 @@ button {
     justify-content: center;
     text-align: center;
     margin: auto 0;
-    padding: clamp(2rem, 5vw, 4rem) 0;
+    padding: clamp(2rem, 5vw, 4.5rem) 0;
     width: 100%;
 }
 
-/* The Notus TIMES — Scaled Up by +15% */
+/* The Notus TIMES — Strict 2-line Masthead */
 .masthead-title {
     font-family: var(--font-notus-display);
-    line-height: 0.86;
+    line-height: 0.88;
     font-weight: normal;
     letter-spacing: -0.025em;
     display: flex;
@@ -469,20 +508,25 @@ button {
     align-items: center;
     user-select: none;
     cursor: default;
+    width: 100%;
 }
 
 .masthead-title-top {
-    font-size: clamp(5.2rem, 18.5vw, 19rem);
-    line-height: 0.88;
+    font-size: clamp(3.8rem, 13vw, 15.5rem);
+    line-height: 0.9;
     text-transform: none;
+    white-space: nowrap;
+    display: block;
 }
 
 .masthead-title-bottom {
-    font-size: clamp(6.3rem, 24vw, 24.75rem);
-    line-height: 0.82;
+    font-size: clamp(5.2rem, 18.5vw, 22rem);
+    line-height: 0.84;
     text-transform: uppercase;
     letter-spacing: -0.015em;
-    margin-top: 0.04em;
+    margin-top: 0.05em;
+    white-space: nowrap;
+    display: block;
 }
 
 /* Bottom Micro-Ticker matching reference screenshot */
@@ -538,7 +582,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    max-width: 1200px;
+    max-width: 1400px;
 }
 
 .black-statement-title {
@@ -558,7 +602,7 @@ button {
 .black-statement-desc {
     font-size: clamp(1.1rem, 2vw, 1.6rem);
     color: rgba(255, 255, 255, 0.7);
-    max-width: 800px;
+    max-width: 900px;
     line-height: 1.5;
 }
 
@@ -612,7 +656,7 @@ button {
 .stack-cascade-list {
     font-size: clamp(1.3rem, 2.8vw, 2.5rem);
     line-height: 1.35;
-    max-width: 1300px;
+    max-width: 1400px;
 }
 
 .stack-divider {
@@ -653,7 +697,7 @@ button {
 .broadsheet-subtitle {
     font-size: clamp(1.1rem, 2vw, 1.8rem);
     color: var(--c-gray-text);
-    max-width: 1000px;
+    max-width: 1100px;
     line-height: 1.4;
     margin-bottom: 3.5rem;
 }
@@ -1398,7 +1442,7 @@ button {
 }
 
 @media (max-width: 768px) {
-    .site-nav-links { gap: 1.25rem; }
+    .header__nav { gap: 1.25rem; }
     .giant-pill { height: 44px; padding: 0 16px; font-size: 16px; }
     .tester-sliders-bar { grid-template-columns: 1fr; gap: 1rem; }
     .displaay-gallery-grid { grid-template-columns: 1fr; }
@@ -1413,28 +1457,26 @@ button {
     <div class="scroll-progress-bar" id="scrollBar" aria-hidden="true"></div>
 
     <!-- 01. PRIMARY SITE HEADER (Identical to index.html) -->
-    <header class="site-main-header">
-        <div class="site-main-header__inner">
-            <a href="index.html" class="site-logo-container" aria-label="Wiktor Buksza - Home">
-                <div class="site-logo-svg" id="siteLottieLogo"></div>
-                <span class="site-author-name">Wiktor Buksza</span>
-            </a>
-            <nav class="site-nav-links">
-                <a href="index.html#works">Works</a>
-                <a href="notus.html" class="is-current">Notus</a>
-                <a href="index.html#services">Services</a>
-                <a href="mailto:wiktor.buksza@gmail.com">Contact</a>
-            </nav>
-        </div>
+    <header class="header">
+        <a href="index.html" class="header__logo-container" id="logoLink" aria-label="Wiktor Buksza - Home">
+            <div class="header__logo" id="lottie-logo"></div>
+            <span class="header__author-name">Wiktor Buksza</span>
+        </a>
+        <nav class="header__nav">
+            <a href="index.html#works">Works</a>
+            <a href="notus.html" class="is-active">Notus</a>
+            <a href="index.html#services">Services</a>
+            <a href="mailto:wiktor.buksza@gmail.com">Contact</a>
+        </nav>
     </header>
 
     <!-- 02. GIANT 2X SUB-NAVIGATION BAR (Directly below main menu) -->
     <nav class="notus-giant-subnav-wrapper" aria-label="Notus Specimen Navigation">
         <div class="notus-giant-subnav">
-            <div class="giant-pill giant-pill--active giant-pill--dropdown">
+            <a href="#cover" class="giant-pill giant-pill--active giant-pill--dropdown">
                 <span>Notus</span>
                 <span class="giant-pill__indicator">&#8597;</span>
-            </div>
+            </a>
             <a href="#comparison" class="giant-pill">Display</a>
             <a href="#broadsheet" class="giant-pill">Text</a>
             <a href="#optical-cards" class="giant-pill">Caption</a>
@@ -2107,6 +2149,7 @@ document.addEventListener('DOMContentLoaded', () => {
    -------------------------------------------------------------------------- */
 function initScrollAndNav() {
     const progressBar = document.getElementById('scrollBar');
+    const header = document.querySelector('.header');
     const giantPills = document.querySelectorAll('.giant-pill[href^="#"]');
     const notusPill = document.querySelector('.giant-pill--dropdown');
 
@@ -2122,6 +2165,14 @@ function initScrollAndNav() {
         
         if (progressBar) {
             progressBar.style.width = `${progress}%`;
+        }
+
+        if (header) {
+            if (scrollTop > 100) {
+                header.classList.add('header--scrolled');
+            } else {
+                header.classList.remove('header--scrolled');
+            }
         }
 
         let currentSectionId = '';
@@ -2154,7 +2205,7 @@ function initScrollAndNav() {
    02. HEADER LOTTIE LOGO (Matches index.html)
    -------------------------------------------------------------------------- */
 function initHeaderLogo() {
-    const logoContainer = document.getElementById('siteLottieLogo');
+    const logoContainer = document.getElementById('lottie-logo') || document.getElementById('siteLottieLogo');
     if (logoContainer && typeof lottie !== 'undefined') {
         const logoData = {"v":"5.12.1","fr":25,"ip":0,"op":100,"w":500,"h":500,"nm":"WB Animation","ddd":0,"assets":[],"layers":[{"ddd":0,"ind":1,"ty":4,"nm":"W3","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[250,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":1,"k":[{"i":{"x":0.667,"y":1},"o":{"x":1,"y":0},"t":0,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,-1.095],[50,150],[-50,150],[-49.818,-1.095]],"c":true}]},{"i":{"x":0.63,"y":1},"o":{"x":0.953,"y":0},"t":27,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true}]},{"i":{"x":1,"y":1},"o":{"x":0.333,"y":0},"t":49,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50.182,-148.905],[-49.818,-148.905],[-50,-150]],"c":true}]},{"i":{"x":0,"y":1},"o":{"x":0.333,"y":0},"t":50,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,148.905],[50.365,150],[-49.635,150],[-49.818,148.905]],"c":true}]},{"t":74,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.183,-2.19],[50.365,150],[-49.635,150],[-49.817,-2.19]],"c":true}]}],"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":2,"ty":4,"nm":"W2","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[370,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":3,"ty":4,"nm":"W1","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[130,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0}],"markers":[],"props":{}};
 
@@ -2455,6 +2506,6 @@ function initOpenTypeSandbox() {
     updateFeatures();
 }
 
-</script>
+    </script>
 </body>
 </html>

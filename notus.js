@@ -5,6 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initScrollAndNav();
     initBroadsheetInteractive();
+    initBroadsheetAmbientGlow();
     initHeaderLogo();
     initFamiliesScale();
     initTesterStudio();
@@ -455,4 +456,243 @@ function initBroadsheetInteractive() {
         });
     });
 }
+
+/* --------------------------------------------------------------------------
+   02-C. BROADSHEET ATMOSPHERIC BREATHING AURA (Delicate Ambient & Cursor Fluid Glow)
+   -------------------------------------------------------------------------- */
+function initBroadsheetAmbientGlow() {
+    const section = document.getElementById('editorial-now');
+    const canvas = document.getElementById('broadsheetAmbientCanvas');
+    if (!section || !canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let animId = null;
+    let isVisible = false;
+    let isHovered = false;
+
+    // Node 1: Primary Warm Amber/Champagne Light (follows cursor with gentle damping, drifts when idle)
+    const node1 = {
+        x: 0,
+        y: 0,
+        targetX: 0,
+        targetY: 0,
+        radius: 420,
+        baseRadius: 420,
+        colorInner: 'rgba(238, 210, 175, 0.09)',
+        colorMid: 'rgba(205, 160, 110, 0.04)',
+        colorOuter: 'rgba(0, 0, 0, 0)'
+    };
+
+    // Node 2: Secondary Soft Alabaster Breeze (counter-drifts organically in a quiet rhythm)
+    const node2 = {
+        x: 0,
+        y: 0,
+        radius: 360,
+        baseRadius: 360,
+        colorInner: 'rgba(220, 225, 235, 0.045)',
+        colorMid: 'rgba(175, 185, 200, 0.02)',
+        colorOuter: 'rgba(0, 0, 0, 0)'
+    };
+
+    // Node 3: Deep Sculptural Hearth (subtle breathing center warmth under headline)
+    const node3 = {
+        x: 0,
+        y: 0,
+        radius: 500,
+        baseRadius: 500,
+        colorInner: 'rgba(240, 195, 145, 0.035)',
+        colorMid: 'rgba(200, 150, 100, 0.015)',
+        colorOuter: 'rgba(0, 0, 0, 0)'
+    };
+
+    const mouse = { x: 0, y: 0 };
+    let mouseInfluence = 0; // 0 (autonomous drift) -> 1 (cursor focus)
+    let pointerVelocity = 0;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+
+    function resize() {
+        const rect = section.getBoundingClientRect();
+        width = Math.max(rect.width, 300);
+        height = Math.max(rect.height, 300);
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+
+        const baseRad = Math.max(width * 0.38, 380);
+        node1.baseRadius = baseRad;
+        node2.baseRadius = baseRad * 0.85;
+        node3.baseRadius = baseRad * 1.15;
+
+        if (node1.x === 0 && node1.y === 0) {
+            node1.x = width * 0.5;
+            node1.y = height * 0.5;
+            node1.targetX = node1.x;
+            node1.targetY = node1.y;
+            node2.x = width * 0.4;
+            node2.y = height * 0.45;
+            node3.x = width * 0.5;
+            node3.y = height * 0.5;
+        }
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
+        resize();
+    });
+    resizeObserver.observe(section);
+    resize();
+
+    function updatePointer(clientX, clientY) {
+        const rect = section.getBoundingClientRect();
+        const curX = clientX - rect.left;
+        const curY = clientY - rect.top;
+        const dx = curX - lastMouseX;
+        const dy = curY - lastMouseY;
+        const speed = Math.sqrt(dx * dx + dy * dy);
+        pointerVelocity = Math.min(pointerVelocity + speed * 0.15, 60);
+
+        lastMouseX = curX;
+        lastMouseY = curY;
+        mouse.x = curX;
+        mouse.y = curY;
+    }
+
+    section.addEventListener('mouseenter', (e) => {
+        isHovered = true;
+        lastMouseX = e.clientX - section.getBoundingClientRect().left;
+        lastMouseY = e.clientY - section.getBoundingClientRect().top;
+        updatePointer(e.clientX, e.clientY);
+    });
+
+    section.addEventListener('mousemove', (e) => {
+        isHovered = true;
+        updatePointer(e.clientX, e.clientY);
+    });
+
+    section.addEventListener('mouseleave', () => {
+        isHovered = false;
+    });
+
+    section.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 0) {
+            isHovered = true;
+            lastMouseX = e.touches[0].clientX - section.getBoundingClientRect().left;
+            lastMouseY = e.touches[0].clientY - section.getBoundingClientRect().top;
+            updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, { passive: true });
+
+    section.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+            isHovered = true;
+            updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, { passive: true });
+
+    section.addEventListener('touchend', () => {
+        isHovered = false;
+    });
+
+    function drawGlow(x, y, radius, colorInner, colorMid, colorOuter) {
+        if (radius <= 0) return;
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, radius);
+        grad.addColorStop(0, colorInner);
+        grad.addColorStop(0.5, colorMid);
+        grad.addColorStop(1, colorOuter);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    function render(currentTime) {
+        if (!isVisible) {
+            animId = null;
+            return;
+        }
+
+        const t = currentTime * 0.001;
+
+        // Clear canvas
+        ctx.clearRect(0, 0, width, height);
+
+        // Smooth transition of cursor influence
+        const targetInfluence = isHovered ? 1.0 : 0.0;
+        mouseInfluence += (targetInfluence - mouseInfluence) * 0.045;
+
+        // Velocity decay for gentle dynamic expansion on motion
+        pointerVelocity *= 0.92;
+
+        // Autonomous breathing trajectories (Silent rhythm / Southern Gale)
+        const autoX1 = width * 0.5 + Math.sin(t * 0.32) * (width * 0.22);
+        const autoY1 = height * 0.5 + Math.cos(t * 0.42) * (height * 0.16);
+
+        // Node 1: smooth blend between autonomous drift and cursor position
+        node1.targetX = autoX1 * (1 - mouseInfluence) + mouse.x * mouseInfluence;
+        node1.targetY = autoY1 * (1 - mouseInfluence) + mouse.y * mouseInfluence;
+
+        // Smooth damping (lerp)
+        node1.x += (node1.targetX - node1.x) * 0.045;
+        node1.y += (node1.targetY - node1.y) * 0.045;
+
+        // Breathing pulsation (14-second organic rhythm + motion bloom)
+        const breathe1 = 1 + 0.12 * Math.sin(t * 0.42) + (pointerVelocity * 0.002);
+        node1.radius = node1.baseRadius * breathe1;
+
+        // Node 2: Counter-drifting alabaster wind
+        node2.x = width * 0.5 + Math.sin(t * 0.26 + 2.4) * (width * 0.26);
+        node2.y = height * 0.5 + Math.cos(t * 0.36 + 1.2) * (height * 0.2);
+        const breathe2 = 1 + 0.14 * Math.cos(t * 0.34 + 1.5);
+        node2.radius = node2.baseRadius * breathe2;
+
+        // Node 3: Central warm hearth pulsation
+        node3.x = width * 0.5 + Math.sin(t * 0.15) * (width * 0.06);
+        node3.y = height * 0.5 + Math.cos(t * 0.2) * (height * 0.06);
+        const breathe3 = 1 + 0.09 * Math.sin(t * 0.24);
+        node3.radius = node3.baseRadius * breathe3;
+
+        // Composite layers with 'screen' blend mode on black
+        ctx.save();
+        ctx.globalCompositeOperation = 'screen';
+
+        drawGlow(node3.x, node3.y, node3.radius, node3.colorInner, node3.colorMid, node3.colorOuter);
+        drawGlow(node2.x, node2.y, node2.radius, node2.colorInner, node2.colorMid, node2.colorOuter);
+        drawGlow(node1.x, node1.y, node1.radius, node1.colorInner, node1.colorMid, node1.colorOuter);
+
+        ctx.restore();
+
+        animId = requestAnimationFrame(render);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (!isVisible) {
+                    isVisible = true;
+                    if (!animId) animId = requestAnimationFrame(render);
+                }
+            } else {
+                isVisible = false;
+                if (animId) {
+                    cancelAnimationFrame(animId);
+                    animId = null;
+                }
+            }
+        });
+    }, { threshold: 0.05 });
+
+    observer.observe(section);
+}
+
 

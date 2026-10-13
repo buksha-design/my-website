@@ -68,6 +68,8 @@
     --border-color: rgba(0, 0, 0, 0.14);
     
     /* Increased by 15% to 1800px to match index.html and fit the masthead */
+    --header-height: 104px;
+    --subnav-height: 56px;
     --container-max: 1800px;
     --container-padding: clamp(1.5rem, 4vw, 4.5rem);
     --pad-x: clamp(1.5rem, 4vw, 4.5rem);
@@ -274,9 +276,9 @@ button {
    05. GIANT 2X SUB-NAVIGATION BAR (Directly below main menu)
    -------------------------------------------------------------------------- */
 .notus-giant-subnav-wrapper {
-    margin-top: 88px;
+    margin-top: var(--header-height, 104px);
     position: sticky;
-    top: 88px;
+    top: var(--header-height, 104px);
     z-index: 999;
     background: rgba(255, 255, 255, 0.92);
     -webkit-backdrop-filter: blur(12px);
@@ -293,7 +295,7 @@ button {
 .notus-giant-subnav {
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0.7rem var(--pad-x);
+    padding: 0.85rem var(--pad-x);
     display: flex;
     align-items: center;
     gap: 9px;
@@ -1587,4 +1589,18 @@ button {
     .displaay-gallery-grid { grid-template-columns: 1fr; }
     .gallery-item--large { grid-column: 1 / -1; }
     .footer-directory-grid { grid-template-columns: 1fr; }
+}
+
+/* Prevent sticky header and subnav from overlapping section titles */
+#cover,
+#editorial-now,
+#comparison,
+#broadsheet,
+#optical-cards,
+#families,
+#tester,
+#glyphs,
+#info,
+section[id] {
+    scroll-margin-top: calc(var(--header-height, 104px) + 70px);
 }

@@ -20,6 +20,37 @@ function initScrollAndNav() {
     const header = document.querySelector('.header');
     const giantPills = document.querySelectorAll('.giant-pill[href^="#"]');
     const notusPill = document.querySelector('.giant-pill--dropdown');
+    // Dynamically calculate and sync exact header height
+    function syncHeaderHeight() {
+        if (header) {
+            const h = header.offsetHeight;
+            document.documentElement.style.setProperty('--header-height', `${h}px`);
+        }
+    }
+    syncHeaderHeight();
+    window.addEventListener('resize', syncHeaderHeight, { passive: true });
+
+    // Smooth scrolling for giant pills with precise offset
+    giantPills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+            const href = pill.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                const headerH = header ? header.offsetHeight : 104;
+                const subnav = document.querySelector('.notus-giant-subnav-wrapper');
+                const subnavH = subnav ? subnav.offsetHeight : 56;
+                const totalOffset = headerH + subnavH + 16;
+                const targetTop = target.getBoundingClientRect().top + window.pageYOffset - totalOffset;
+                window.scrollTo({
+                    top: Math.max(0, targetTop),
+                    behavior: 'smooth'
+                });
+                history.pushState(null, null, href);
+            }
+        });
+    });
 
     const sections = Array.from(giantPills).map(pill => {
         const id = pill.getAttribute('href');

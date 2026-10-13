@@ -5,6 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initScrollAndNav();
     initTheme();
+    initSloganSwitcher();
     initFamiliesScale();
     initTesterStudio();
     initDisplaayGlyphs();
@@ -33,7 +34,7 @@ function initScrollAndNav() {
 
         let currentSectionId = '';
         sections.forEach(sec => {
-            const top = sec.offsetTop - 120;
+            const top = sec.offsetTop - 140;
             const height = sec.offsetHeight;
             if (scrollTop >= top && scrollTop < top + height) {
                 currentSectionId = `#${sec.id}`;
@@ -78,7 +79,42 @@ function initTheme() {
 }
 
 /* --------------------------------------------------------------------------
-   03. FAMILIES GLOBAL SCALE SLIDER
+   03. SLOGAN SWITCHER (Interactive Editorial Headlines)
+   -------------------------------------------------------------------------- */
+function initSloganSwitcher() {
+    const topEl = document.getElementById('headlineTop');
+    const bottomEl = document.getElementById('headlineBottom');
+    const switcherBtns = document.querySelectorAll('.slogan-pill');
+
+    switcherBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            switcherBtns.forEach(b => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
+
+            const topText = btn.getAttribute('data-slogan-top');
+            const bottomText = btn.getAttribute('data-slogan-bottom');
+
+            if (topEl && topText) {
+                topEl.style.opacity = '0';
+                setTimeout(() => {
+                    topEl.textContent = topText;
+                    topEl.style.opacity = '1';
+                }, 150);
+            }
+
+            if (bottomEl && bottomText) {
+                bottomEl.style.opacity = '0';
+                setTimeout(() => {
+                    bottomEl.textContent = bottomText;
+                    bottomEl.style.opacity = '1';
+                }, 150);
+            }
+        });
+    });
+}
+
+/* --------------------------------------------------------------------------
+   04. FAMILIES GLOBAL SCALE SLIDER
    -------------------------------------------------------------------------- */
 function initFamiliesScale() {
     const slider = document.getElementById('familySizeSlider');
@@ -112,7 +148,7 @@ function initFamiliesScale() {
 }
 
 /* --------------------------------------------------------------------------
-   04. INTERACTIVE TYPE TESTER
+   05. INTERACTIVE TYPE TESTER
    -------------------------------------------------------------------------- */
 function initTesterStudio() {
     const inputStage = document.getElementById('testerInput');
@@ -226,7 +262,7 @@ function initTesterStudio() {
 }
 
 /* --------------------------------------------------------------------------
-   05. DISPLAAY DUAL-PANE GLYPH INSPECTOR (Yellow Highlight Box)
+   06. DISPLAAY DUAL-PANE GLYPH INSPECTOR (Yellow Highlight Box)
    -------------------------------------------------------------------------- */
 function initDisplaayGlyphs() {
     const grid = document.getElementById('displaayGlyphMatrix');
@@ -334,7 +370,7 @@ function initDisplaayGlyphs() {
 }
 
 /* --------------------------------------------------------------------------
-   06. OPENTYPE FEATURE SWITCHES
+   07. OPENTYPE FEATURE SWITCHES
    -------------------------------------------------------------------------- */
 function initOpenTypeSandbox() {
     const sandbox = document.getElementById('featureSandbox');

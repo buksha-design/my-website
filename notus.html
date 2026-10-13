@@ -79,7 +79,7 @@
     --c-yellow: #FAEA48;
     --c-black: #000000;
     --c-white: #FFFFFF;
-    --c-gray-border: rgba(0, 0, 0, 0.14);
+    --c-gray-border: rgba(0, 0, 0, 0.18);
     --c-gray-text: #666666;
     --c-gray-subtle: #999999;
     --c-cyan: #BEE9F7;
@@ -87,7 +87,7 @@
     
     --bg-page: #FFFFFF;
     --text-main: #000000;
-    --border-color: rgba(0, 0, 0, 0.12);
+    --border-color: rgba(0, 0, 0, 0.14);
     
     --container-max: 1540px;
     --pad-x: clamp(1.25rem, 4vw, 3.5rem);
@@ -103,10 +103,11 @@
 [data-theme="dark"] {
     --bg-page: #0C0C0C;
     --text-main: #FFFFFF;
-    --border-color: rgba(255, 255, 255, 0.14);
-    --c-ecru: #161616;
-    --c-ecru-card: #202020;
+    --border-color: rgba(255, 255, 255, 0.16);
+    --c-ecru: #141414;
+    --c-ecru-card: #1E1E1E;
     --c-gray-text: #A0A0A0;
+    --c-gray-border: rgba(255, 255, 255, 0.2);
 }
 
 /* --------------------------------------------------------------------------
@@ -170,16 +171,16 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   04. PILLS & TAGS SYSTEM
+   04. PILL BUTTONS SYSTEM (Direct match to reference image)
    -------------------------------------------------------------------------- */
 .displaay-pill {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.35rem;
-    height: 30px;
-    padding: 0 13px;
-    border: 1px solid var(--border-color);
+    height: 28px;
+    padding: 0 11px;
+    border: 1px solid var(--c-gray-border);
     border-radius: 9999px;
     background-color: transparent;
     color: var(--text-main);
@@ -191,38 +192,46 @@ button {
     transition: all 0.15s ease;
     white-space: nowrap;
     user-select: none;
+    text-decoration: none;
 }
 
 .displaay-pill:hover {
     border-color: var(--text-main);
 }
 
+.displaay-pill--active,
 .displaay-pill.is-active {
-    background-color: var(--text-main);
-    color: var(--bg-page);
-    border-color: var(--text-main);
+    background-color: var(--text-main) !important;
+    color: var(--bg-page) !important;
+    border-color: var(--text-main) !important;
 }
 
-.displaay-pill--accent {
-    background-color: var(--text-main);
-    color: var(--bg-page);
-    border-color: var(--text-main);
+.displaay-pill--dropdown {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
 }
 
-.displaay-pill--accent:hover {
+.pill-indicator {
+    font-size: 11px;
     opacity: 0.85;
+}
+
+.arrow-down {
+    font-size: 11px;
+    margin-right: 1px;
+}
+
+.displaay-pill--icon {
+    width: 28px;
+    height: 28px;
+    padding: 0;
 }
 
 .displaay-pill--sm {
     height: 24px;
     padding: 0 9px;
     font-size: 11px;
-}
-
-.displaay-pill--icon {
-    width: 30px;
-    height: 30px;
-    padding: 0;
 }
 
 .displaay-pill--subtle {
@@ -268,76 +277,72 @@ button {
     color: #FFFFFF;
 }
 
-.displaay-tag--subtle {
-    background-color: transparent;
-    color: var(--c-gray-text);
-}
-
 /* --------------------------------------------------------------------------
-   05. HEADER (Sticky Displaay Bar)
+   05. TWO-TIER DISPLAAY HEADER (Exact structure from reference image)
    -------------------------------------------------------------------------- */
-.displaay-header {
+.displaay-nav-wrapper {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color);
+    background-color: var(--c-ecru);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     transition: background-color 0.25s ease;
 }
 
-[data-theme="dark"] .displaay-header {
-    background-color: rgba(12, 12, 12, 0.94);
+[data-theme="dark"] .displaay-nav-wrapper {
+    background-color: #121212;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.header-inner {
+.nav-tier {
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 var(--pad-x);
-    height: 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
 }
 
-.header-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.nav-tier--primary {
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
 
-.header-nav {
+.nav-tier--secondary {
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+.nav-tier__left,
+.nav-tier__right {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 6px;
+    flex-wrap: nowrap;
+}
+
+.nav-tier__left {
     overflow-x: auto;
     scrollbar-width: none;
 }
-
-.header-nav::-webkit-scrollbar {
+.nav-tier__left::-webkit-scrollbar {
     display: none;
 }
 
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
 /* --------------------------------------------------------------------------
-   06. SECTION 01: DISPLAAY MASTHEAD ("The Time's NOW")
+   06. SECTION 01: MONUMENTAL DISPLAAY MASTHEAD ("The Daily NOTUS")
    -------------------------------------------------------------------------- */
 .section-displaay-masthead {
     background-color: var(--c-ecru);
     color: #000000;
     border-bottom: 1px solid var(--border-color);
-    min-height: calc(100vh - 48px);
+    min-height: calc(100vh - 84px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: clamp(2rem, 4vw, 3.5rem) 0 0;
+    padding: clamp(2rem, 5vw, 4rem) 0 2rem;
+    position: relative;
 }
 
 [data-theme="dark"] .section-displaay-masthead {
@@ -355,100 +360,89 @@ button {
     justify-content: space-between;
 }
 
-.masthead-top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-}
-
-.masthead-tags {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
-
 .masthead-stage {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
     margin: auto 0;
-    padding: clamp(3rem, 6vw, 6rem) 0;
+    padding: clamp(2rem, 5vw, 5rem) 0;
+    width: 100%;
 }
 
 .masthead-title {
     font-family: var(--font-notus-display);
-    font-size: clamp(4.5rem, 16vw, 15.5rem);
     line-height: 0.88;
-    text-transform: uppercase;
     font-weight: normal;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
     display: flex;
     flex-direction: column;
     align-items: center;
     user-select: none;
+    cursor: default;
 }
 
-.masthead-title-sub {
-    font-size: clamp(5.5rem, 20vw, 19.5rem);
+.masthead-title-top {
+    font-size: clamp(4.5rem, 16vw, 16.5rem);
+    line-height: 0.88;
+    text-transform: none;
+    transition: opacity 0.2s ease;
+}
+
+.masthead-title-bottom {
+    font-size: clamp(5.5rem, 21vw, 21.5rem);
     line-height: 0.82;
-    margin-top: 0.1em;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    margin-top: 0.05em;
+    transition: opacity 0.2s ease;
 }
 
-/* Displaay Signature Vivid Yellow Ribbon */
-.masthead-yellow-sticker {
-    background-color: var(--c-yellow);
-    color: #000000;
-    font-family: var(--font-ui);
-    font-size: clamp(11px, 1.2vw, 13px);
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    padding: 10px 22px;
-    border: 1px solid #000000;
-    margin-top: clamp(2rem, 3.5vw, 3.5rem);
-    display: inline-block;
-    box-shadow: 2px 2px 0 #000000;
-    user-select: none;
-}
-
-.masthead-meta-strip {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    border-top: 1px solid var(--border-color);
-    padding: 1.5rem 0 2rem;
-    gap: 1.5rem;
-}
-
-.meta-strip-col {
+/* Interactive Slogan Switcher Pills */
+.masthead-slogan-switcher {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    border-right: 1px solid var(--border-color);
-    padding-right: 1.25rem;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: clamp(2rem, 3.5vw, 3rem);
+    flex-wrap: wrap;
 }
 
-.meta-strip-col:last-child {
-    border-right: none;
-    padding-right: 0;
-}
-
-.meta-strip-label {
+.slogan-switcher-label {
     font-size: 11px;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    opacity: 0.6;
+    opacity: 0.5;
+    margin-right: 4px;
 }
 
-.meta-strip-val {
-    font-size: 13px;
-    font-weight: 600;
+/* Bottom Micro-Ticker matching reference screenshot */
+.masthead-bottom-ticker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.25rem;
+    margin-top: auto;
+    padding-top: 2.5rem;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    color: var(--c-gray-text);
+}
+
+.masthead-bottom-ticker .ticker-line-1 {
+    font-weight: 500;
+}
+
+.masthead-bottom-ticker .ticker-line-2 {
+    opacity: 0.85;
 }
 
 /* --------------------------------------------------------------------------
-   07. SECTION 02: BLACK BROADSHEET ("New serif in TOWN...")
+   07. SECTION 02: BLACK BROADSHEET ("Statues carved in marble...")
    -------------------------------------------------------------------------- */
 .section-black-broadsheet {
     background-color: #000000;
@@ -502,7 +496,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   08. SECTION 03: WHITE EDITORIAL COMPARISON STACK ("Conventional")
+   08. SECTION 03: WHITE EDITORIAL COMPARISON STACK ("Metamorphosis")
    -------------------------------------------------------------------------- */
 .section-comparison-stack {
     background-color: var(--bg-page);
@@ -559,7 +553,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   09. SECTION 04: BROADSHEET POSTER & NEWSPAPER COLUMNS ("NO-FACE")
+   09. SECTION 04: BROADSHEET POSTER & NEWSPAPER COLUMNS
    -------------------------------------------------------------------------- */
 .section-broadsheet {
     padding: clamp(5rem, 8vw, 8.5rem) 0;
@@ -646,7 +640,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   10. SECTION 05: DUAL OPTICAL SIZE CARDS ("Race / Regular")
+   10. SECTION 05: DUAL OPTICAL SIZE CARDS ("Display / Text")
    -------------------------------------------------------------------------- */
 .section-optical-cards {
     padding: clamp(5rem, 8vw, 8rem) 0;
@@ -1150,7 +1144,6 @@ button {
     font-weight: 500;
 }
 
-/* Displaay Iconic Three Action Pills */
 .displaay-action-pills-row {
     display: flex;
     flex-direction: column;
@@ -1328,8 +1321,6 @@ button {
 .style-caption    { font-family: var(--font-notus-caption); font-style: normal; }
 
 @media (max-width: 1024px) {
-    .masthead-meta-strip { grid-template-columns: repeat(3, 1fr); }
-    .meta-strip-col:nth-child(3) { border-right: none; }
     .broadsheet-columns { grid-template-columns: 1fr; }
     .optical-cards-grid { grid-template-columns: 1fr; }
     .displaay-inspector-split { grid-template-columns: 1fr; }
@@ -1339,8 +1330,7 @@ button {
 }
 
 @media (max-width: 768px) {
-    .header-nav { display: none; }
-    .masthead-meta-strip { grid-template-columns: 1fr 1fr; }
+    .nav-tier--secondary { display: none; }
     .tester-sliders-bar { grid-template-columns: 1fr; gap: 1rem; }
     .displaay-gallery-grid { grid-template-columns: 1fr; }
     .gallery-item--large { grid-column: 1 / -1; }
@@ -1353,95 +1343,86 @@ button {
     <!-- Top Scroll Bar -->
     <div class="scroll-progress-bar" id="scrollBar" aria-hidden="true"></div>
 
-    <!-- Sticky Displaay Header -->
-    <header class="displaay-header">
-        <div class="header-inner">
-            <div class="header-brand">
-                <a href="index.html" class="displaay-pill displaay-pill--back" title="Return to portfolio">
-                    <span class="pill-arrow">&larr;</span>
-                    <span class="pill-label">Wiktor Buksza</span>
-                </a>
-                <span class="displaay-pill displaay-pill--title">Notus Serif</span>
+    <!-- Sticky Two-Tier Displaay Header (Exact match to reference screenshot) -->
+    <header class="displaay-nav-wrapper">
+        <!-- Tier 1: Main Foundry Navigation -->
+        <div class="nav-tier nav-tier--primary">
+            <div class="nav-tier__left">
+                <a href="index.html" class="displaay-pill">Wiktor Buksza<sup>&reg;</sup></a>
+                <a href="#top" class="displaay-pill displaay-pill--active">Typefaces</a>
+                <a href="index.html#work" class="displaay-pill">Portfolio</a>
+                <a href="index.html#about" class="displaay-pill">About</a>
+                <a href="mailto:wiktor.buksza@gmail.com" class="displaay-pill">Contact</a>
             </div>
+            <div class="nav-tier__right">
+                <button class="displaay-pill displaay-pill--icon" id="themeToggle" title="Toggle dark/light theme" aria-label="Toggle theme">
+                    <span id="themeIcon">☾</span>
+                </button>
+                <a href="index.html" class="displaay-pill displaay-pill--icon" title="Menu" aria-label="Menu">
+                    <svg width="14" height="10" viewBox="0 0 14 10" fill="currentColor">
+                        <rect width="14" height="1.8" rx="0.9"/>
+                        <rect y="4.1" width="14" height="1.8" rx="0.9"/>
+                        <rect y="8.2" width="14" height="1.8" rx="0.9"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
 
-            <!-- Sticky Sub-Navigation Pills -->
-            <nav class="header-nav" aria-label="Page navigation">
-                <a href="#cover" class="displaay-pill nav-pill is-active">Cover</a>
-                <a href="#editorial-now" class="displaay-pill nav-pill">Manifesto</a>
-                <a href="#comparison" class="displaay-pill nav-pill">Metamorphosis</a>
-                <a href="#broadsheet" class="displaay-pill nav-pill">Broadsheet</a>
-                <a href="#optical-cards" class="displaay-pill nav-pill">Optics</a>
+        <!-- Tier 2: Specimen Sub-Navigation -->
+        <div class="nav-tier nav-tier--secondary">
+            <div class="nav-tier__left">
+                <div class="displaay-pill displaay-pill--active displaay-pill--dropdown" id="typefaceSelectPill">
+                    <span>Notus</span>
+                    <span class="pill-indicator">&#8597;</span>
+                </div>
+                <a href="#comparison" class="displaay-pill nav-pill">Display</a>
+                <a href="#broadsheet" class="displaay-pill nav-pill">Text</a>
+                <a href="#optical-cards" class="displaay-pill nav-pill">Caption</a>
                 <a href="#families" class="displaay-pill nav-pill">Families</a>
                 <a href="#tester" class="displaay-pill nav-pill">Tester</a>
                 <a href="#glyphs" class="displaay-pill nav-pill">Glyphs</a>
-                <a href="#in-use" class="displaay-pill nav-pill">In Use</a>
-            </nav>
-
-            <div class="header-actions">
-                <button class="displaay-pill displaay-pill--icon" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
-                    <span id="themeIcon">☾</span>
-                </button>
-                <a href="mailto:wiktor.buksza@gmail.com?subject=Notus%20Commercial%20Inquiry" class="displaay-pill displaay-pill--accent">Inquire</a>
+                <a href="#info" class="displaay-pill nav-pill">Info</a>
+            </div>
+            <div class="nav-tier__right">
+                <a href="mailto:wiktor.buksza@gmail.com?subject=Notus%20Trial%20Fonts%20Request" class="displaay-pill">
+                    <span class="arrow-down">&darr;</span> Trials
+                </a>
+                <a href="#tester" class="displaay-pill">Tester</a>
+                <a href="mailto:wiktor.buksza@gmail.com?subject=Notus%20Commercial%20License%20Inquiry" class="displaay-pill displaay-pill--active">
+                    Buy
+                </a>
             </div>
         </div>
     </header>
 
     <main>
         <!-- ====================================================================
-             01. THE COVER: "The South WIND" DISPLAAY MASTHEAD (Warm Ecru)
+             01. THE COVER: "The Daily NOTUS" MONUMENTAL MASTHEAD (Warm Ecru)
              ==================================================================== -->
         <section class="section-displaay-masthead" id="cover">
             <div class="masthead-container">
-                <!-- Top Micro Meta Row -->
-                <div class="masthead-top-row">
-                    <div class="masthead-tags">
-                        <span class="displaay-tag">Typeface</span>
-                        <span class="displaay-tag">Notus</span>
-                        <span class="displaay-tag">By Wiktor Buksza</span>
-                        <span class="displaay-tag">2026</span>
-                    </div>
-                    <div class="masthead-tags">
-                        <span class="displaay-tag displaay-tag--outline">3 Optical Sizes</span>
-                        <span class="displaay-tag displaay-tag--outline">5 Styles</span>
-                        <span class="displaay-tag displaay-tag--outline">Latin &amp; Cyrillic</span>
-                    </div>
-                </div>
-
-                <!-- Giant Displaay Headline: "The South WIND" -->
+                <!-- Monumental Broadsheet Masthead Stage -->
                 <div class="masthead-stage">
-                    <h1 class="masthead-title">
-                        <span>The South</span>
-                        <span class="masthead-title-sub">WIND</span>
+                    <h1 class="masthead-title" id="mastheadHeadline">
+                        <span class="masthead-title-top" id="headlineTop">The Daily</span>
+                        <span class="masthead-title-bottom" id="headlineBottom">NOTUS</span>
                     </h1>
 
-                    <!-- Displaay Iconic Vivid Yellow Sticker / Ribbon -->
-                    <div class="masthead-yellow-sticker">
-                        NEOCLASSICAL ARCHITECTURE SOFTENED BY A WARM BREEZE &middot; 5 STYLES &middot; LATIN &amp; CYRILLIC
+                    <!-- Interactive Editorial Slogan Switcher Pills -->
+                    <div class="masthead-slogan-switcher">
+                        <span class="slogan-switcher-label">Masthead Slogan:</span>
+                        <button class="displaay-pill displaay-pill--sm slogan-pill is-active" data-slogan-top="The Daily" data-slogan-bottom="NOTUS">The Daily NOTUS</button>
+                        <button class="displaay-pill displaay-pill--sm slogan-pill" data-slogan-top="The Notus" data-slogan-bottom="TIMES">The Notus TIMES</button>
+                        <button class="displaay-pill displaay-pill--sm slogan-pill" data-slogan-top="The Time’s" data-slogan-bottom="NOW">The Time’s NOW</button>
+                        <button class="displaay-pill displaay-pill--sm slogan-pill" data-slogan-top="The South" data-slogan-bottom="WIND">The South WIND</button>
+                        <button class="displaay-pill displaay-pill--sm slogan-pill" data-slogan-top="The Paper of" data-slogan-bottom="RECORD">Paper of RECORD</button>
                     </div>
                 </div>
 
-                <!-- Bottom Meta Columns -->
-                <div class="masthead-meta-strip">
-                    <div class="meta-strip-col">
-                        <span class="meta-strip-label">Classification</span>
-                        <strong class="meta-strip-val">Transitional / Modern Serif</strong>
-                    </div>
-                    <div class="meta-strip-col">
-                        <span class="meta-strip-label">Optical Hierarchy</span>
-                        <strong class="meta-strip-val">Display &middot; Text &middot; Caption</strong>
-                    </div>
-                    <div class="meta-strip-col">
-                        <span class="meta-strip-label">Styles (5)</span>
-                        <strong class="meta-strip-val">Display, Text, Caption (+Italics)</strong>
-                    </div>
-                    <div class="meta-strip-col">
-                        <span class="meta-strip-label">Character Scope</span>
-                        <strong class="meta-strip-val">480+ Glyphs (Latin &amp; Cyrillic)</strong>
-                    </div>
-                    <div class="meta-strip-col">
-                        <span class="meta-strip-label">Design &amp; Direction</span>
-                        <strong class="meta-strip-val">Wiktor Buksza</strong>
-                    </div>
+                <!-- Bottom Micro-Ticker matching the screenshot -->
+                <div class="masthead-bottom-ticker">
+                    <div class="ticker-line-1">Notus Collection: 3 Optical Sizes, 5 Styles, Latin &amp; Cyrillic</div>
+                    <div class="ticker-line-2">Architectural, Classical, Elegant, Fluid, High-Contrast, Neoclassical, Kinetic, Sculptural, Universal</div>
                 </div>
             </div>
         </section>
@@ -2075,6 +2056,7 @@ button {
 document.addEventListener('DOMContentLoaded', () => {
     initScrollAndNav();
     initTheme();
+    initSloganSwitcher();
     initFamiliesScale();
     initTesterStudio();
     initDisplaayGlyphs();
@@ -2103,7 +2085,7 @@ function initScrollAndNav() {
 
         let currentSectionId = '';
         sections.forEach(sec => {
-            const top = sec.offsetTop - 120;
+            const top = sec.offsetTop - 140;
             const height = sec.offsetHeight;
             if (scrollTop >= top && scrollTop < top + height) {
                 currentSectionId = `#${sec.id}`;
@@ -2148,7 +2130,42 @@ function initTheme() {
 }
 
 /* --------------------------------------------------------------------------
-   03. FAMILIES GLOBAL SCALE SLIDER
+   03. SLOGAN SWITCHER (Interactive Editorial Headlines)
+   -------------------------------------------------------------------------- */
+function initSloganSwitcher() {
+    const topEl = document.getElementById('headlineTop');
+    const bottomEl = document.getElementById('headlineBottom');
+    const switcherBtns = document.querySelectorAll('.slogan-pill');
+
+    switcherBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            switcherBtns.forEach(b => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
+
+            const topText = btn.getAttribute('data-slogan-top');
+            const bottomText = btn.getAttribute('data-slogan-bottom');
+
+            if (topEl && topText) {
+                topEl.style.opacity = '0';
+                setTimeout(() => {
+                    topEl.textContent = topText;
+                    topEl.style.opacity = '1';
+                }, 150);
+            }
+
+            if (bottomEl && bottomText) {
+                bottomEl.style.opacity = '0';
+                setTimeout(() => {
+                    bottomEl.textContent = bottomText;
+                    bottomEl.style.opacity = '1';
+                }, 150);
+            }
+        });
+    });
+}
+
+/* --------------------------------------------------------------------------
+   04. FAMILIES GLOBAL SCALE SLIDER
    -------------------------------------------------------------------------- */
 function initFamiliesScale() {
     const slider = document.getElementById('familySizeSlider');
@@ -2182,7 +2199,7 @@ function initFamiliesScale() {
 }
 
 /* --------------------------------------------------------------------------
-   04. INTERACTIVE TYPE TESTER
+   05. INTERACTIVE TYPE TESTER
    -------------------------------------------------------------------------- */
 function initTesterStudio() {
     const inputStage = document.getElementById('testerInput');
@@ -2296,7 +2313,7 @@ function initTesterStudio() {
 }
 
 /* --------------------------------------------------------------------------
-   05. DISPLAAY DUAL-PANE GLYPH INSPECTOR (Yellow Highlight Box)
+   06. DISPLAAY DUAL-PANE GLYPH INSPECTOR (Yellow Highlight Box)
    -------------------------------------------------------------------------- */
 function initDisplaayGlyphs() {
     const grid = document.getElementById('displaayGlyphMatrix');
@@ -2404,7 +2421,7 @@ function initDisplaayGlyphs() {
 }
 
 /* --------------------------------------------------------------------------
-   06. OPENTYPE FEATURE SWITCHES
+   07. OPENTYPE FEATURE SWITCHES
    -------------------------------------------------------------------------- */
 function initOpenTypeSandbox() {
     const sandbox = document.getElementById('featureSandbox');

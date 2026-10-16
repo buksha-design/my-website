@@ -4,6 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initScrollAndNav();
+    initMastheadDelicateAnimation();
     initBroadsheetInteractive();
     initBroadsheetAmbientGlow();
     initHeaderLogo();
@@ -407,7 +408,7 @@ function initOpenTypeSandbox() {
 }
 
 /* --------------------------------------------------------------------------
-   02-B. BROADSHEET VARIABLE / STYLE INTERACTIVE STUDIO
+   02-B. BROADSHEET VARIABLE / STYLE INTERACTIVE STUDIO & SLOGAN SCRAMBLE
    -------------------------------------------------------------------------- */
 function initBroadsheetInteractive() {
     const title = document.getElementById('broadsheetHeroTitle');
@@ -416,8 +417,107 @@ function initBroadsheetInteractive() {
 
     if (!title) return;
 
+    // Ensure headline is strictly non-editable
+    title.removeAttribute('contenteditable');
+
+    const slogans = [
+        { line1: 'Silent rhythm,', line2: 'tactile grace.' },
+        { line1: 'Жыве Беларусь,', line2: 'жыве вечна!' }
+    ];
+
+    const MAX_LEN_1 = Math.max(...slogans.map(s => s.line1.length));
+    const MAX_LEN_2 = Math.max(...slogans.map(s => s.line2.length));
+
+    // Build fixed two-line DOM structure with dedicated character slots
+    title.innerHTML = '';
+    const line1El = document.createElement('span');
+    line1El.className = 'broadsheet-line';
+    line1El.id = 'broadsheetLine1';
+
+    const line2El = document.createElement('em');
+    line2El.className = 'broadsheet-line';
+    line2El.id = 'broadsheetLine2';
+
+    const slots1 = [];
+    const slots2 = [];
+
+    for (let i = 0; i < MAX_LEN_1; i++) {
+        const sp = document.createElement('span');
+        sp.className = 'broadsheet-char';
+        line1El.appendChild(sp);
+        slots1.push(sp);
+    }
+
+    for (let i = 0; i < MAX_LEN_2; i++) {
+        const sp = document.createElement('span');
+        sp.className = 'broadsheet-char';
+        line2El.appendChild(sp);
+        slots2.push(sp);
+    }
+
+    title.appendChild(line1El);
+    title.appendChild(line2El);
+
+    // Hidden measurement nodes inside each line so they inherit exact font/size/style
+    const measure1 = document.createElement('span');
+    measure1.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;white-space:pre;left:-9999px;top:0;';
+    line1El.appendChild(measure1);
+
+    const measure2 = document.createElement('span');
+    measure2.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;white-space:pre;left:-9999px;top:0;';
+    line2El.appendChild(measure2);
+
     let currentFont = 'Notus Display';
     let currentItalic = false;
+    let currentSloganIdx = 0;
+    let isTransitioning = false;
+
+    // Pre-measured character advance widths for each slogan: widthsCache[sloganIdx].line1[i], .line2[i]
+    const widthsCache = [
+        { line1: new Array(MAX_LEN_1).fill(0), line2: new Array(MAX_LEN_2).fill(0) },
+        { line1: new Array(MAX_LEN_1).fill(0), line2: new Array(MAX_LEN_2).fill(0) }
+    ];
+
+    function measureCharAdvance(measureNode, ch) {
+        if (!ch) return 0;
+        measureNode.textContent = 'о' + 'о';
+        const baseW = measureNode.getBoundingClientRect().width;
+        measureNode.textContent = 'о' + ch + 'о';
+        const fullW = measureNode.getBoundingClientRect().width;
+        return Math.max(0, fullW - baseW);
+    }
+
+    function recalcAllWidths() {
+        for (let sIdx = 0; sIdx < slogans.length; sIdx++) {
+            const s = slogans[sIdx];
+            for (let i = 0; i < MAX_LEN_1; i++) {
+                widthsCache[sIdx].line1[i] = measureCharAdvance(measure1, s.line1[i] || '');
+            }
+            for (let i = 0; i < MAX_LEN_2; i++) {
+                widthsCache[sIdx].line2[i] = measureCharAdvance(measure2, s.line2[i] || '');
+            }
+        }
+        if (!isTransitioning) {
+            applyStaticSlogan(currentSloganIdx);
+        }
+    }
+
+    function applyStaticSlogan(sIdx) {
+        const s = slogans[sIdx];
+        const w1 = widthsCache[sIdx].line1;
+        const w2 = widthsCache[sIdx].line2;
+
+        for (let i = 0; i < MAX_LEN_1; i++) {
+            const ch = s.line1[i] || '';
+            slots1[i].textContent = ch;
+            slots1[i].style.width = ch ? `${w1[i].toFixed(2)}px` : '0px';
+        }
+        for (let i = 0; i < MAX_LEN_2; i++) {
+            const ch = s.line2[i] || '';
+            slots2[i].textContent = ch;
+            slots2[i].style.width = ch ? `${w2[i].toFixed(2)}px` : '0px';
+        }
+    }
 
     function applyStyle(font, isItalic, styleName) {
         currentFont = font;
@@ -425,16 +525,14 @@ function initBroadsheetInteractive() {
         title.style.fontFamily = `"${font}", serif`;
         title.style.fontStyle = isItalic ? 'italic' : 'normal';
 
-        const em = title.querySelector('em');
-        if (em) {
-            if (isItalic) {
-                em.style.fontStyle = 'normal';
-            } else {
-                em.style.fontStyle = 'italic';
-                if (font.includes('Display')) em.style.fontFamily = '"Notus Display Italic", serif';
-                else if (font.includes('Text')) em.style.fontFamily = '"Notus Text Italic", serif';
-                else em.style.fontFamily = '"Notus Caption", serif';
-            }
+        if (isItalic) {
+            line2El.style.fontStyle = 'normal';
+            line2El.style.fontFamily = `"${font}", serif`;
+        } else {
+            line2El.style.fontStyle = 'italic';
+            if (font.includes('Display')) line2El.style.fontFamily = '"Notus Display Italic", serif';
+            else if (font.includes('Text')) line2El.style.fontFamily = '"Notus Text Italic", serif';
+            else line2El.style.fontFamily = '"Notus Caption", serif';
         }
 
         if (badge) badge.textContent = `Active Style: ${styleName}`;
@@ -446,6 +544,8 @@ function initBroadsheetInteractive() {
                 pill.classList.remove('is-active');
             }
         });
+
+        recalcAllWidths();
     }
 
     pills.forEach(pill => {
@@ -455,6 +555,123 @@ function initBroadsheetInteractive() {
             applyStyle(font, isItalic, pill.textContent.trim());
         });
     });
+
+    // Clean character pools without overhanging diacritics or tall ascenders
+    const UPPER_CHARS = 'ACEGHIKLMNORSTUVWXZАБВГДЕЖЗИКЛМНОПРСТУХЧШЭЮЯ';
+    const LOWER_CHARS = 'acemnorsuvwxzавгежзиклмнопстухцчшыьэюя';
+
+    const HOLD_DURATION_MS = 4000;
+    const SCRAMBLE_DURATION_MS = 475;
+    const SCRAMBLE_STEP_MS = 35;
+
+    function isUpperCaseChar(ch) {
+        return ch && ch !== ch.toLowerCase() && ch === ch.toUpperCase();
+    }
+
+    function buildLineQueue(fromText, toText, fromWidths, toWidths, maxLen) {
+        const queue = [];
+        for (let i = 0; i < maxLen; i++) {
+            const fromCh = fromText[i] || '';
+            const toCh = toText[i] || '';
+            const start = (i / Math.max(maxLen, 1)) * 0.18 + Math.random() * 0.12;
+            const end = 0.48 + (i / Math.max(maxLen, 1)) * 0.32 + Math.random() * 0.16;
+            const useUpper = isUpperCaseChar(toCh) || isUpperCaseChar(fromCh);
+            queue.push({
+                fromCh,
+                toCh,
+                fromW: fromWidths[i] || 0,
+                toW: toWidths[i] || 0,
+                start,
+                end: Math.min(end, 0.96),
+                useUpper,
+                randCh: fromCh || toCh || 'a',
+                lastStep: -1
+            });
+        }
+        return queue;
+    }
+
+    function updateLineSlots(slots, queue, progress, globalEase, stepTick) {
+        for (let i = 0; i < queue.length; i++) {
+            const item = queue[i];
+            const slot = slots[i];
+
+            // Smoothly interpolate slot width so characters never jump horizontally
+            const curW = item.fromW + (item.toW - item.fromW) * globalEase;
+            slot.style.width = curW > 0.2 ? `${curW.toFixed(2)}px` : '0px';
+
+            if (progress >= item.end) {
+                slot.textContent = item.toCh;
+            } else if (progress < item.start) {
+                slot.textContent = item.fromCh;
+            } else {
+                const localP = (progress - item.start) / Math.max(0.01, item.end - item.start);
+                if (!item.toCh && localP > 0.5) {
+                    slot.textContent = '';
+                } else if (!item.fromCh && localP < 0.35) {
+                    slot.textContent = '';
+                } else if ((localP < 0.5 && item.fromCh === ' ') || (localP >= 0.5 && item.toCh === ' ')) {
+                    slot.textContent = ' ';
+                } else {
+                    if (item.lastStep !== stepTick) {
+                        const pool = item.useUpper ? UPPER_CHARS : LOWER_CHARS;
+                        item.randCh = pool[Math.floor(Math.random() * pool.length)];
+                        item.lastStep = stepTick;
+                    }
+                    slot.textContent = item.randCh;
+                }
+            }
+        }
+    }
+
+    function transitionToNextSlogan() {
+        isTransitioning = true;
+        const fromIdx = currentSloganIdx;
+        const nextIdx = (currentSloganIdx + 1) % slogans.length;
+        const fromSlogan = slogans[fromIdx];
+        const toSlogan = slogans[nextIdx];
+
+        const q1 = buildLineQueue(fromSlogan.line1, toSlogan.line1, widthsCache[fromIdx].line1, widthsCache[nextIdx].line1, MAX_LEN_1);
+        const q2 = buildLineQueue(fromSlogan.line2, toSlogan.line2, widthsCache[fromIdx].line2, widthsCache[nextIdx].line2, MAX_LEN_2);
+
+        const startTime = performance.now();
+
+        function tick(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / SCRAMBLE_DURATION_MS, 1);
+            const globalEase = progress * progress * (3 - 2 * progress);
+            const stepTick = Math.floor(elapsed / SCRAMBLE_STEP_MS);
+
+            if (progress < 1) {
+                updateLineSlots(slots1, q1, progress, globalEase, stepTick);
+                updateLineSlots(slots2, q2, progress, globalEase, stepTick);
+                requestAnimationFrame(tick);
+            } else {
+                currentSloganIdx = nextIdx;
+                isTransitioning = false;
+                applyStaticSlogan(currentSloganIdx);
+                // Force clean full-container repaint to eliminate any residual subpixel glyph artifacts
+                title.style.opacity = '0.999';
+                requestAnimationFrame(() => {
+                    title.style.opacity = '';
+                });
+                setTimeout(transitionToNextSlogan, HOLD_DURATION_MS);
+            }
+        }
+
+        requestAnimationFrame(tick);
+    }
+
+    // Initial calculation & re-measure after custom fonts finish loading / on resize
+    recalcAllWidths();
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+            recalcAllWidths();
+        });
+    }
+    window.addEventListener('resize', recalcAllWidths, { passive: true });
+
+    setTimeout(transitionToNextSlogan, HOLD_DURATION_MS);
 }
 
 /* --------------------------------------------------------------------------
@@ -803,5 +1020,176 @@ function initBroadsheetAmbientGlow() {
 
     observer.observe(section);
 }
+
+/* --------------------------------------------------------------------------
+   01-B. MASTHEAD PRISMATIC RGB DISPERSION & BLUR ON HOVER ("The Notus TIMES")
+   -------------------------------------------------------------------------- */
+function initMastheadDelicateAnimation() {
+    const coverSection = document.getElementById('cover');
+    const mastheadTitle = document.querySelector('.masthead-title');
+    const topLine = document.querySelector('.masthead-title-top');
+    const bottomLine = document.querySelector('.masthead-title-bottom');
+    if (!coverSection || !mastheadTitle || !topLine || !bottomLine) return;
+
+    const topText = topLine.textContent.trim();
+    const bottomText = bottomLine.textContent.trim();
+
+    // Build un-split core layer (preserves native kerning, ligatures, and full 'h' ascender)
+    // and radial-masked background glow layer so only the local mouse region glows
+    mastheadTitle.innerHTML = '';
+
+    const glowMask = document.createElement('div');
+    glowMask.className = 'masthead-glow-mask';
+    glowMask.setAttribute('aria-hidden', 'true');
+
+    const glowLayer = document.createElement('div');
+    glowLayer.className = 'masthead-glow-layer';
+
+    const glowTop = document.createElement('span');
+    glowTop.className = 'masthead-title-top';
+    glowTop.textContent = topText;
+
+    const glowBottom = document.createElement('span');
+    glowBottom.className = 'masthead-title-bottom';
+    glowBottom.textContent = bottomText;
+
+    glowLayer.appendChild(glowTop);
+    glowLayer.appendChild(glowBottom);
+    glowMask.appendChild(glowLayer);
+
+    const coreLayer = document.createElement('div');
+    coreLayer.className = 'masthead-core-layer';
+
+    const coreTop = document.createElement('span');
+    coreTop.className = 'masthead-title-top';
+    coreTop.textContent = topText;
+
+    const coreBottom = document.createElement('span');
+    coreBottom.className = 'masthead-title-bottom';
+    coreBottom.textContent = bottomText;
+
+    coreLayer.appendChild(coreTop);
+    coreLayer.appendChild(coreBottom);
+
+    mastheadTitle.appendChild(glowMask);
+    mastheadTitle.appendChild(coreLayer);
+
+    let isHovered = false;
+    let targetX = 0;
+    let targetY = 0;
+    let smoothX = 0;
+    let smoothY = 0;
+    let vx = 0;
+    let vy = 0;
+    let lastClientX = null;
+    let lastClientY = null;
+    let intensity = 0;
+    let shiftX = 14;
+    let shiftY = 7;
+    let animId = null;
+
+    const SPOT_RADIUS = 260;
+
+    function startLoop() {
+        if (!animId) {
+            animId = requestAnimationFrame(animate);
+        }
+    }
+
+    function updatePointerFromEvent(e, snap) {
+        const maskRect = glowMask.getBoundingClientRect();
+        const nx = e.clientX - maskRect.left;
+        const ny = e.clientY - maskRect.top;
+
+        if (lastClientX !== null && !snap) {
+            vx = (e.clientX - lastClientX) * 0.35;
+            vy = (e.clientY - lastClientY) * 0.35;
+        }
+        lastClientX = e.clientX;
+        lastClientY = e.clientY;
+
+        targetX = nx;
+        targetY = ny;
+        if (snap) {
+            smoothX = nx;
+            smoothY = ny;
+        }
+    }
+
+    coverSection.addEventListener('mouseenter', (e) => {
+        updatePointerFromEvent(e, true);
+        isHovered = true;
+        startLoop();
+    }, { passive: true });
+
+    coverSection.addEventListener('mousemove', (e) => {
+        updatePointerFromEvent(e, !isHovered);
+        isHovered = true;
+        startLoop();
+    }, { passive: true });
+
+    coverSection.addEventListener('mouseleave', () => {
+        isHovered = false;
+        lastClientX = null;
+        lastClientY = null;
+        startLoop();
+    }, { passive: true });
+
+    function animate() {
+        vx *= 0.88;
+        vy *= 0.88;
+
+        smoothX += (targetX - smoothX) * 0.22;
+        smoothY += (targetY - smoothY) * 0.22;
+
+        const targetIntensity = isHovered ? 1 : 0;
+        intensity += (targetIntensity - intensity) * 0.12;
+
+        const clampedVx = Math.max(-16, Math.min(16, vx));
+        const clampedVy = Math.max(-12, Math.min(12, vy));
+        const targetShiftX = 14.0 + Math.abs(clampedVx) * 0.65;
+        const targetShiftY = 7.0 + clampedVy * 0.42;
+
+        shiftX += (targetShiftX - shiftX) * 0.12;
+        shiftY += (targetShiftY - shiftY) * 0.12;
+
+        if (intensity > 0.005) {
+            const a = Math.min(1, intensity);
+            const sx = shiftX * a;
+            const sy = shiftY * a;
+
+            // Radial mask spotlight centered on the mouse cursor so only the local region glows
+            const maskGrad = `radial-gradient(circle ${SPOT_RADIUS}px at ${smoothX.toFixed(1)}px ${smoothY.toFixed(1)}px, rgba(0,0,0,1) 0%, rgba(0,0,0,0.78) 34%, rgba(0,0,0,0.32) 66%, rgba(0,0,0,0) 100%)`;
+            glowMask.style.opacity = '1';
+            glowMask.style.webkitMaskImage = maskGrad;
+            glowMask.style.maskImage = maskGrad;
+
+            // Soft optical blur on the background glow layer (-20% additional intensity reduction)
+            const blurPx = (a * 4.15).toFixed(2);
+            glowLayer.style.filter = `blur(${blurPx}px)`;
+
+            // Multi-spectrum RGB/prismatic dispersion layers (-20% additional intensity reduction)
+            const sAmber   = `${(-sx * 1.50).toFixed(1)}px ${(sy * 1.20).toFixed(1)}px ${(15.4 * a + 2.5).toFixed(1)}px rgba(255, 178, 38, ${(a * 0.42).toFixed(3)})`;
+            const sMagenta = `${(-sx * 0.82).toFixed(1)}px ${(sy * 0.58).toFixed(1)}px ${(9.0 * a + 1.3).toFixed(1)}px rgba(255, 38, 108, ${(a * 0.43).toFixed(3)})`;
+            const sViolet  = `${(-sx * 0.18).toFixed(1)}px ${(-sy * 0.88).toFixed(1)}px ${(9.6 * a + 1.3).toFixed(1)}px rgba(112, 16, 255, ${(a * 0.42).toFixed(3)})`;
+            const sBlue    = `${(sx * 0.82).toFixed(1)}px ${(-sy * 0.32).toFixed(1)}px ${(9.0 * a + 1.3).toFixed(1)}px rgba(12, 88, 255, ${(a * 0.43).toFixed(3)})`;
+            const sCyan    = `${(sx * 1.60).toFixed(1)}px ${(sy * 0.22).toFixed(1)}px ${(16.6 * a + 2.5).toFixed(1)}px rgba(0, 228, 255, ${(a * 0.43).toFixed(3)})`;
+
+            glowLayer.style.textShadow = `${sAmber}, ${sMagenta}, ${sViolet}, ${sBlue}, ${sCyan}`;
+
+            animId = requestAnimationFrame(animate);
+        } else {
+            intensity = 0;
+            glowMask.style.opacity = '0';
+            glowMask.style.webkitMaskImage = 'none';
+            glowMask.style.maskImage = 'none';
+            glowLayer.style.filter = 'none';
+            glowLayer.style.textShadow = 'none';
+            animId = null;
+        }
+    }
+}
+
+
 
 

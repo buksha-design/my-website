@@ -1174,12 +1174,18 @@ function initMastheadDelicateAnimation() {
     }
 
     // Show Pacman eating dots, then seamlessly reveal The Notus TIMES
-    const MIN_PACMAN_TIME_MS = 1400; // Let user enjoy Pacman chomping dots for ~1.4s
+    const MIN_PACMAN_TIME_MS = 1500; // Let user enjoy Pacman chomping dots for ~1.5s
     const startTime = performance.now();
 
-    const fontCheck = (document.fonts && document.fonts.load)
-        ? document.fonts.load('1em "Notus Display"')
-        : Promise.resolve();
+    const fontCheck = (document.fonts && document.fonts.ready)
+        ? Promise.race([
+            Promise.all([
+                document.fonts.load('1em "Notus Display"'),
+                document.fonts.ready
+            ]),
+            new Promise(r => setTimeout(r, 2000))
+        ])
+        : new Promise(r => setTimeout(r, 1500));
 
     fontCheck.finally(() => {
         const elapsed = performance.now() - startTime;
@@ -1187,8 +1193,8 @@ function initMastheadDelicateAnimation() {
         setTimeout(revealMasthead, remaining);
     });
 
-    // Fallback safeguard so masthead is guaranteed visible within 2s even on slow network
-    setTimeout(revealMasthead, 2200);
+    // Fallback safeguard so masthead is guaranteed visible within 2.5s even on slow network
+    setTimeout(revealMasthead, 2500);
 
     let isHovered = false;
     let isVisible = true;

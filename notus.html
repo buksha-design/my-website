@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 
     <!-- Critical Font Preloads for Instant Render (No Flash of Unstyled Text) -->
-    <link rel="preload" href="notus/Notus-Display.otf?v=7" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="notus/Notus-Display.otf?v=8" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="notus/Notus-Text.otf" as="font" type="font/otf" crossorigin>
     <style>
 /* ==========================================================================
@@ -36,10 +36,14 @@
    -------------------------------------------------------------------------- */
 @font-face {
     font-family: 'Notus Display';
-    src: url('notus/Notus-Display.otf?v=7') format('opentype');
+    src: local('Notus-Display'),
+         local('Notus Display'),
+         local('Notus-Thin'),
+         local('Notus Thin'),
+         url('notus/Notus-Display.otf?v=8') format('opentype');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
+    font-display: block;
 }
 
 @font-face {
@@ -601,7 +605,6 @@ button {
     opacity: 0;
     transform: scale(0.92);
     pointer-events: none;
-    display: none;
 }
 
 .pacman-track {
@@ -5429,12 +5432,18 @@ function initMastheadDelicateAnimation() {
     }
 
     // Show Pacman eating dots, then seamlessly reveal The Notus TIMES
-    const MIN_PACMAN_TIME_MS = 1400; // Let user enjoy Pacman chomping dots for ~1.4s
+    const MIN_PACMAN_TIME_MS = 1500; // Let user enjoy Pacman chomping dots for ~1.5s
     const startTime = performance.now();
 
-    const fontCheck = (document.fonts && document.fonts.load)
-        ? document.fonts.load('1em "Notus Display"')
-        : Promise.resolve();
+    const fontCheck = (document.fonts && document.fonts.ready)
+        ? Promise.race([
+            Promise.all([
+                document.fonts.load('1em "Notus Display"'),
+                document.fonts.ready
+            ]),
+            new Promise(r => setTimeout(r, 2000))
+        ])
+        : new Promise(r => setTimeout(r, 1500));
 
     fontCheck.finally(() => {
         const elapsed = performance.now() - startTime;
@@ -5442,8 +5451,8 @@ function initMastheadDelicateAnimation() {
         setTimeout(revealMasthead, remaining);
     });
 
-    // Fallback safeguard so masthead is guaranteed visible within 2s even on slow network
-    setTimeout(revealMasthead, 2200);
+    // Fallback safeguard so masthead is guaranteed visible within 2.5s even on slow network
+    setTimeout(revealMasthead, 2500);
     let isVisible = true;
     let targetX = 0;
     let targetY = 0;

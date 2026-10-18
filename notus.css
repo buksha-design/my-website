@@ -8,10 +8,14 @@
    -------------------------------------------------------------------------- */
 @font-face {
     font-family: 'Notus Display';
-    src: url('notus/Notus-Display.otf?v=7') format('opentype');
+    src: local('Notus-Display'),
+         local('Notus Display'),
+         local('Notus-Thin'),
+         local('Notus Thin'),
+         url('notus/Notus-Display.otf?v=8') format('opentype');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
+    font-display: block;
 }
 
 @font-face {
@@ -573,7 +577,6 @@ button {
     opacity: 0;
     transform: scale(0.92);
     pointer-events: none;
-    display: none;
 }
 
 .pacman-track {

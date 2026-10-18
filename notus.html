@@ -587,6 +587,108 @@ button {
     width: 100%;
 }
 
+/* Pacman Eating Dots Loader */
+.masthead-pacman-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: clamp(280px, 32vw, 480px);
+    width: 100%;
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.masthead-pacman-loader.is-faded-out {
+    opacity: 0;
+    transform: scale(0.92);
+    pointer-events: none;
+    display: none;
+}
+
+.pacman-track {
+    position: relative;
+    width: 280px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.pacman-character {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+.pacman-mouth-top,
+.pacman-mouth-bottom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--text-main);
+}
+
+[data-theme="dark"] .pacman-mouth-top,
+[data-theme="dark"] .pacman-mouth-bottom {
+    background-color: #FAEA48; /* Classic retro yellow in dark mode */
+}
+
+.pacman-mouth-top {
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 50%, 0 50%);
+    animation: pacmanChompTop 0.32s infinite alternate ease-in-out;
+}
+
+.pacman-mouth-bottom {
+    clip-path: polygon(0 50%, 50% 50%, 100% 50%, 100% 100%, 0 100%);
+    animation: pacmanChompBottom 0.32s infinite alternate ease-in-out;
+}
+
+@keyframes pacmanChompTop {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-35deg); }
+}
+
+@keyframes pacmanChompBottom {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(35deg); }
+}
+
+.pacman-dots {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+    margin-left: 20px;
+    position: absolute;
+    left: 50px;
+    animation: pacmanDotsMove 0.85s linear infinite;
+}
+
+.pacman-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background-color: var(--text-main);
+    flex-shrink: 0;
+    opacity: 0.85;
+}
+
+[data-theme="dark"] .pacman-dot {
+    background-color: #FFFFFF;
+}
+
+@keyframes pacmanDotsMove {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-49px);
+    }
+}
+
 /* The Notus TIMES — Strict 2-line Masthead */
 .masthead-title {
     font-family: var(--font-notus-display);
@@ -600,6 +702,24 @@ button {
     cursor: default;
     width: 100%;
     position: relative;
+    overflow: visible;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.masthead-title.is-hidden {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+    filter: blur(8px);
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+}
+
+.masthead-title.is-revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    height: auto;
     overflow: visible;
 }
 
@@ -3444,7 +3564,24 @@ section[id] {
             <div class="masthead-container">
                 <!-- Monumental Broadsheet Masthead Stage (+15% Larger) -->
                 <div class="masthead-stage">
-                    <h1 class="masthead-title">
+                    <!-- Pacman Eating Dots Loader -->
+                    <div class="masthead-pacman-loader" id="mastheadPacmanLoader" aria-label="Loading The Notus Times">
+                        <div class="pacman-track">
+                            <div class="pacman-character">
+                                <div class="pacman-mouth-top"></div>
+                                <div class="pacman-mouth-bottom"></div>
+                            </div>
+                            <div class="pacman-dots">
+                                <span class="pacman-dot"></span>
+                                <span class="pacman-dot"></span>
+                                <span class="pacman-dot"></span>
+                                <span class="pacman-dot"></span>
+                                <span class="pacman-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 class="masthead-title is-hidden" id="mastheadTitleMain">
                         <span class="masthead-title-top">The Notus</span>
                         <span class="masthead-title-bottom">TIMES</span>
                     </h1>
@@ -5274,7 +5411,39 @@ function initMastheadDelicateAnimation() {
     mastheadTitle.appendChild(glowMask);
     mastheadTitle.appendChild(coreLayer);
 
-    let isHovered = false;
+    // Pacman Loader Transition & Font Ready synchronization
+    const pacmanLoader = document.getElementById('mastheadPacmanLoader');
+    let hasRevealed = false;
+
+    function revealMasthead() {
+        if (hasRevealed) return;
+        hasRevealed = true;
+        if (pacmanLoader) {
+            pacmanLoader.classList.add('is-faded-out');
+            setTimeout(() => {
+                pacmanLoader.style.display = 'none';
+            }, 450);
+        }
+        mastheadTitle.classList.remove('is-hidden');
+        mastheadTitle.classList.add('is-revealed');
+    }
+
+    // Show Pacman eating dots, then seamlessly reveal The Notus TIMES
+    const MIN_PACMAN_TIME_MS = 1400; // Let user enjoy Pacman chomping dots for ~1.4s
+    const startTime = performance.now();
+
+    const fontCheck = (document.fonts && document.fonts.load)
+        ? document.fonts.load('1em "Notus Display"')
+        : Promise.resolve();
+
+    fontCheck.finally(() => {
+        const elapsed = performance.now() - startTime;
+        const remaining = Math.max(0, MIN_PACMAN_TIME_MS - elapsed);
+        setTimeout(revealMasthead, remaining);
+    });
+
+    // Fallback safeguard so masthead is guaranteed visible within 2s even on slow network
+    setTimeout(revealMasthead, 2200);
     let isVisible = true;
     let targetX = 0;
     let targetY = 0;

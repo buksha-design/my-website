@@ -559,6 +559,108 @@ button {
     width: 100%;
 }
 
+/* Pacman Eating Dots Loader */
+.masthead-pacman-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: clamp(280px, 32vw, 480px);
+    width: 100%;
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.masthead-pacman-loader.is-faded-out {
+    opacity: 0;
+    transform: scale(0.92);
+    pointer-events: none;
+    display: none;
+}
+
+.pacman-track {
+    position: relative;
+    width: 280px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.pacman-character {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+.pacman-mouth-top,
+.pacman-mouth-bottom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--text-main);
+}
+
+[data-theme="dark"] .pacman-mouth-top,
+[data-theme="dark"] .pacman-mouth-bottom {
+    background-color: #FAEA48; /* Classic retro yellow in dark mode */
+}
+
+.pacman-mouth-top {
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 50%, 0 50%);
+    animation: pacmanChompTop 0.32s infinite alternate ease-in-out;
+}
+
+.pacman-mouth-bottom {
+    clip-path: polygon(0 50%, 50% 50%, 100% 50%, 100% 100%, 0 100%);
+    animation: pacmanChompBottom 0.32s infinite alternate ease-in-out;
+}
+
+@keyframes pacmanChompTop {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-35deg); }
+}
+
+@keyframes pacmanChompBottom {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(35deg); }
+}
+
+.pacman-dots {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+    margin-left: 20px;
+    position: absolute;
+    left: 50px;
+    animation: pacmanDotsMove 0.85s linear infinite;
+}
+
+.pacman-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background-color: var(--text-main);
+    flex-shrink: 0;
+    opacity: 0.85;
+}
+
+[data-theme="dark"] .pacman-dot {
+    background-color: #FFFFFF;
+}
+
+@keyframes pacmanDotsMove {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-49px);
+    }
+}
+
 /* The Notus TIMES — Strict 2-line Masthead */
 .masthead-title {
     font-family: var(--font-notus-display);
@@ -572,6 +674,24 @@ button {
     cursor: default;
     width: 100%;
     position: relative;
+    overflow: visible;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.masthead-title.is-hidden {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+    filter: blur(8px);
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+}
+
+.masthead-title.is-revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    height: auto;
     overflow: visible;
 }
 

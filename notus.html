@@ -32,7 +32,7 @@
    -------------------------------------------------------------------------- */
 @font-face {
     font-family: 'Notus Display';
-    src: url('notus/Notus-Display.otf?v=3') format('opentype');
+    src: url('notus/Notus-Display.otf?v=7') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -207,6 +207,28 @@ button {
     background: rgba(12, 12, 12, 0.88);
 }
 
+.header__left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-width: 0;
+}
+
+.header__subnav-pills {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.header .subnav-pill--primary {
+    height: 36px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    border-radius: 14px;
+}
+
 .header__logo-container {
     display: flex;
     align-items: center;
@@ -215,6 +237,7 @@ button {
     color: var(--text-color);
     cursor: pointer;
     transition: opacity 0.3s ease;
+    flex-shrink: 0;
 }
 
 .header__logo-container:hover {
@@ -449,7 +472,13 @@ button {
     transition: all 0.15s ease;
     white-space: nowrap;
     user-select: none;
+    -webkit-user-select: none;
     text-decoration: none;
+}
+
+.displaay-pill > *,
+.ot-feature-toggle-btn > * {
+    pointer-events: none;
 }
 
 .displaay-pill:hover {
@@ -516,14 +545,15 @@ button {
    06. SECTION 01: "The Notus TIMES" (STRICT 2 LINES, +15% WIDER)
    -------------------------------------------------------------------------- */
 .section-displaay-masthead {
+    margin-top: var(--header-height, 104px);
     background-color: var(--bg-page);
     color: var(--text-main);
     border-bottom: 1px solid var(--border-color);
-    min-height: calc(100vh - 160px);
+    min-height: calc(100vh - 170px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: clamp(3rem, 6vw, 6rem) 0 2.5rem;
+    padding: clamp(1.8rem, 3.8vw, 3.8rem) 0 1.8rem;
     position: relative;
 }
 
@@ -549,7 +579,7 @@ button {
     justify-content: center;
     text-align: center;
     margin: auto 0;
-    padding: clamp(2rem, 5vw, 4.5rem) 0;
+    padding: clamp(1rem, 2.5vw, 2.2rem) 0;
     width: 100%;
 }
 
@@ -594,6 +624,13 @@ button {
     will-change: opacity, -webkit-mask-image, mask-image;
 }
 
+.masthead-glow-grain {
+    width: 100%;
+    overflow: visible;
+    filter: url(#masthead-grain-filter);
+    -webkit-filter: url(#masthead-grain-filter);
+}
+
 .masthead-glow-layer {
     display: flex;
     flex-direction: column;
@@ -633,11 +670,11 @@ button {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 0.35rem;
-    margin-top: auto;
-    padding-top: 3.5rem;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+    padding-top: 1.2rem;
     font-family: var(--font-ui);
-    font-size: 11.5px;
+    font-size: 13.8px;
     letter-spacing: 0.035em;
     color: var(--c-gray-text);
 }
@@ -941,7 +978,7 @@ button {
     text-align: center;
     width: 100%;
     padding: 0.15em 0;
-    margin: -0.15em 0 -0.40em;
+    margin: calc(-0.15em + 25px) 0 calc(-0.40em - 25px);
 }
 
 .broadsheet-line {
@@ -985,13 +1022,280 @@ button {
    -------------------------------------------------------------------------- */
 .section-comparison-stack {
     background-color: var(--bg-page);
-    padding: clamp(5rem, 8vw, 8rem) 0;
-    border-bottom: 1px solid var(--border-color);
+    padding: clamp(5rem, 8vw, 8rem) 0 0;
+    border-bottom: none;
+}
+
+.notus-intro-block {
+    padding-bottom: 3.5rem;
+    margin-bottom: 1rem;
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.notus-intro-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    align-self: flex-start;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.45rem 1.1rem;
+    border-radius: 100px;
+    background: var(--text-main);
+    border: 1px solid var(--text-main);
+    color: var(--bg-page);
+    margin-bottom: 2.5rem;
+}
+
+.notus-intro-title {
+    font-family: var(--font-notus-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: normal;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0;
+    color: var(--text-main);
+}
+
+.notus-intro-description {
+    font-family: var(--font-ui);
+    font-size: 1.02rem;
+    color: var(--text-main);
+    margin-top: 0.8rem;
+    margin-bottom: 0;
+    max-width: 600px;
+    line-height: 1.4;
+}
+
+/* Витрина начертаний шрифтов Notus (скопировано из index.html / style.css) */
+.type-lab__showcase {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 0;
+    width: 100%;
+    border-top: none;
+    margin-top: 1.5rem;
+    margin-bottom: 3.5rem;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1, "clig" 1;
+}
+
+.type-lab__showcase-header {
+    grid-column: span 2;
+    border-bottom: 1px solid #000;
+    padding: 3rem 0;
+    margin-bottom: 1rem;
+}
+
+.type-lab__showcase-title {
+    font-family: 'Notus Display', serif;
+    font-size: clamp(5.625rem, 13.125vw, 11.25rem);
+    font-weight: normal;
+    color: var(--text-color);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.type-lab__showcase-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 2.2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.type-lab__showcase-item:nth-child(even) {
+    padding-right: 2.5rem;
+}
+
+.type-lab__showcase-item:nth-child(odd) {
+    padding-left: 2.5rem;
+}
+
+.type-lab__showcase-item:hover {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.type-lab__showcase-meta {
+    font-family: var(--font-main);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-gray-text);
+}
+
+.type-lab__showcase-text {
+    font-weight: normal;
+    color: var(--text-color);
+    line-height: 1.1;
+}
+
+.type-lab__showcase-pangram {
+    font-weight: normal;
+    color: var(--text-color);
+    opacity: 0.75;
+    line-height: 1.45;
+    margin-top: 0.3rem;
+    word-break: break-word;
+}
+
+.showcase-display .type-lab__showcase-text,
+.showcase-display-italic .type-lab__showcase-text {
+    font-size: clamp(3.0rem, 5.2vw, 4.5rem);
+    line-height: 1.0;
+}
+.showcase-display .type-lab__showcase-pangram,
+.showcase-display-italic .type-lab__showcase-pangram {
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+}
+
+.showcase-text .type-lab__showcase-text,
+.showcase-text-italic .type-lab__showcase-text {
+    font-size: clamp(1.4rem, 2.3vw, 1.9rem);
+}
+.showcase-text .type-lab__showcase-pangram,
+.showcase-text-italic .type-lab__showcase-pangram {
+    font-size: clamp(0.85rem, 1.1vw, 1.0rem);
+}
+
+.showcase-caption .type-lab__showcase-text {
+    font-size: clamp(1.0rem, 1.4vw, 1.25rem);
+    letter-spacing: 0.02em;
+}
+.showcase-caption .type-lab__showcase-pangram {
+    font-size: clamp(0.75rem, 0.9vw, 0.85rem);
+    letter-spacing: 0.01em;
+}
+
+.showcase-symbols .type-lab__showcase-text {
+    font-size: clamp(1.4rem, 2.3vw, 1.9rem);
+}
+.showcase-symbols .type-lab__showcase-pangram {
+    font-size: clamp(0.85rem, 1.1vw, 1.0rem);
+    letter-spacing: normal;
+}
+.showcase-symbols .showcase-pangram-desc {
+    display: block;
+    margin-bottom: 0.5rem;
+    letter-spacing: normal;
+}
+.showcase-symbols .showcase-pangram-glyphs {
+    display: block;
+    font-size: clamp(1.0rem, 1.3vw, 1.25rem);
+    letter-spacing: 0.18em;
+    color: var(--text-color);
+}
+
+.showcase-multilingual-wide {
+    grid-column: span 2;
+    width: 100%;
+    border-right: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+
+.showcase-multilingual-wide .type-lab__showcase-text {
+    font-size: clamp(3.6rem, 9.8vw, 10.2rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    word-break: break-all;
+    margin-top: 4.5rem;
+}
+
+.showcase-display .type-lab__showcase-text,
+.showcase-display .type-lab__showcase-pangram {
+    font-family: 'Notus Display', serif;
+    font-style: normal;
+}
+
+.showcase-display-italic .type-lab__showcase-text,
+.showcase-display-italic .type-lab__showcase-pangram {
+    font-family: 'Notus Display Italic', serif;
+    font-style: italic;
+}
+
+.showcase-text .type-lab__showcase-text,
+.showcase-text .type-lab__showcase-pangram {
+    font-family: 'Notus Text', serif;
+    font-style: normal;
+}
+
+.showcase-text-italic .type-lab__showcase-text,
+.showcase-text-italic .type-lab__showcase-pangram {
+    font-family: 'Notus Text Italic', serif;
+    font-style: italic;
+}
+
+.showcase-caption .type-lab__showcase-text,
+.showcase-caption .type-lab__showcase-pangram {
+    font-family: 'Notus Caption', serif;
+    font-style: normal;
+}
+
+.showcase-symbols .type-lab__showcase-text,
+.showcase-symbols .type-lab__showcase-pangram {
+    font-family: 'Notus Caption', serif;
+    font-style: normal;
+}
+
+.showcase-multilingual-wide .type-lab__showcase-text,
+.showcase-multilingual-wide .type-lab__showcase-pangram {
+    font-family: 'Notus Display', serif;
+    font-style: normal;
+}
+
+@media (max-width: 1024px) {
+    .type-lab__showcase {
+        grid-template-columns: 1fr;
+        margin-bottom: 2.5rem;
+    }
+    .type-lab__showcase-header {
+        grid-column: span 1;
+        padding: 2rem 0;
+        margin-bottom: 0.5rem;
+    }
+    .type-lab__showcase-title {
+        font-size: clamp(3.75rem, 12vw, 5.25rem);
+    }
+    .type-lab__showcase-item {
+        padding: 1.5rem 0;
+        gap: 0.5rem;
+    }
+    .type-lab__showcase-item:nth-child(even) {
+        border-right: none;
+        padding-right: 0;
+    }
+    .type-lab__showcase-item:nth-child(odd) {
+        padding-left: 0;
+    }
+    .showcase-multilingual-wide {
+        grid-column: span 1 !important;
+    }
 }
 
 .stack-block {
     padding: 3rem 0;
     border-bottom: 1px solid var(--border-color);
+}
+
+.stack-block:last-child {
+    border-bottom: none;
 }
 
 .stack-block--center {
@@ -1004,12 +1308,26 @@ button {
 .stack-meta-line {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.08em;
     color: var(--c-gray-text);
     margin-bottom: 1.5rem;
     width: 100%;
+}
+
+.stack-meta-switcher-group {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.stack-style-switchers {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
 }
 
 .stack-hero-word {
@@ -1020,11 +1338,16 @@ button {
 }
 
 .stack-question {
-    font-size: clamp(2.8rem, 6.5vw, 6rem);
+    font-size: clamp(3.15rem, 7.3vw, 6.75rem);
     line-height: 1.05;
     font-weight: normal;
     max-width: 900px;
     margin: 1rem 0;
+}
+
+.stack-question--nowrap {
+    max-width: 100%;
+    white-space: nowrap;
 }
 
 .stack-cascade-list {
@@ -1038,75 +1361,705 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   09. SECTION 04: BROADSHEET POSTER & NEWSPAPER COLUMNS
+   08B. OPENTYPE LIGATURES (liga/dlig) & SMALL CAPS (smcp/onum) SPECIMEN
    -------------------------------------------------------------------------- */
-.section-broadsheet {
-    padding: clamp(5rem, 8vw, 8.5rem) 0;
-    border-bottom: 1px solid var(--border-color);
-    background-color: var(--bg-page);
-}
-
-.broadsheet-header {
-    display: flex;
+.ot-feature-toggles {
+    display: inline-flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: 0.4rem;
+    flex-wrap: wrap;
 }
 
-.broadsheet-header-label {
+.ot-feature-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--c-gray-text);
+    font-family: var(--font-ui);
     font-size: 11px;
     font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ot-feature-toggle-btn:hover {
+    border-color: var(--text-main);
+    color: var(--text-main);
+}
+
+.ot-feature-toggle-btn.is-active {
+    background: var(--text-main);
+    border-color: var(--text-main);
+    color: var(--bg-page);
+}
+
+.ot-feature-tag {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 10px;
+    padding: 0.1rem 0.38rem;
+    border-radius: 4px;
+    background: rgba(128, 128, 128, 0.16);
+    letter-spacing: 0.02em;
+}
+
+.ot-feature-toggle-btn.is-active .ot-feature-tag {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.ot-specimen-intro {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.35fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: end;
+    margin-bottom: 2.25rem;
+}
+
+.ot-specimen-note {
+    font-family: var(--font-ui);
+    font-size: 0.96rem;
+    line-height: 1.55;
+    color: var(--c-gray-text);
+    margin: 0;
+    max-width: 560px;
+}
+
+.ot-specimen-note strong {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.ot-specimen-stream {
+    font-size: clamp(1.85rem, 3.4vw, 3.1rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--text-main);
+    text-align: right;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+    font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
+    transition: font-feature-settings 0.2s ease;
+}
+
+.ot-ligature-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-top: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+}
+
+.ot-ligature-card {
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.25rem 1.2rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 210px;
+    position: relative;
+    transition: background-color 0.25s ease;
+}
+
+.ot-ligature-card:hover {
+    background-color: rgba(0, 0, 0, 0.018);
+}
+
+.ot-ligature-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--c-gray-text);
+}
+
+.ot-ligature-card__glyph-id {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    opacity: 0.75;
+}
+
+.ot-ligature-card__badge {
+    padding: 0.12rem 0.42rem;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.ot-ligature-card__pair {
+    font-size: clamp(3.3rem, 5.2vw, 5.1rem);
+    line-height: 1;
+    color: var(--text-main);
+    text-align: center;
+    margin: 1.2rem 0 1rem;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+    font-variant-ligatures: common-ligatures discretionary-ligatures;
+    user-select: none;
+}
+
+.ot-ligature-card__word {
+    font-family: 'Notus Caption', serif !important;
+    font-size: 1.05rem;
+    line-height: 1.2;
+    color: var(--c-gray-text);
+    text-align: center;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+    font-variant-ligatures: common-ligatures discretionary-ligatures;
+}
+
+.ot-ligature-card__word mark {
+    background: none;
+    color: var(--text-main);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+
+/* State classes toggled by JS on the Ligature block */
+.ot-ligatures-stage.is-liga-off .ot-specimen-stream,
+.ot-ligatures-stage.is-liga-off .ot-ligature-card[data-ot="liga"] .ot-ligature-card__pair,
+.ot-ligatures-stage.is-liga-off .ot-ligature-card[data-ot="liga"] .ot-ligature-card__word {
+    font-feature-settings: "kern" 1, "liga" 0, "clig" 0, "dlig" 0 !important;
+    font-variant-ligatures: no-common-ligatures no-discretionary-ligatures !important;
+}
+
+.ot-ligatures-stage.is-dlig-off .ot-specimen-stream {
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 0 !important;
+    font-variant-ligatures: common-ligatures no-discretionary-ligatures !important;
+}
+
+.ot-ligatures-stage.is-liga-off.is-dlig-off .ot-specimen-stream {
+    font-feature-settings: "kern" 1, "liga" 0, "clig" 0, "dlig" 0 !important;
+    font-variant-ligatures: none !important;
+}
+
+.ot-ligatures-stage.is-dlig-off .ot-ligature-card[data-ot="dlig"] .ot-ligature-card__pair,
+.ot-ligatures-stage.is-dlig-off .ot-ligature-card[data-ot="dlig"] .ot-ligature-card__word {
+    font-feature-settings: "kern" 1, "liga" 0, "dlig" 0 !important;
+    font-variant-ligatures: no-discretionary-ligatures !important;
+}
+
+/* Small Caps & Old-Style Figures Specimen */
+.ot-smcp-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+}
+
+.ot-smcp-editorial {
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+}
+
+.ot-smcp-dateline {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-gray-text);
+}
+
+.ot-smcp-headline {
+    font-size: clamp(2.3rem, 4.4vw, 4.1rem);
+    line-height: 1.04;
+    letter-spacing: 0.015em;
+    color: var(--text-main);
+    font-feature-settings: "kern" 1, "smcp" 1, "onum" 1;
+    font-variant-caps: small-caps;
+    font-variant-numeric: oldstyle-nums;
+}
+
+.ot-smcp-prose {
+    font-size: clamp(1.18rem, 1.65vw, 1.48rem);
+    line-height: 1.52;
+    color: var(--text-main);
+    margin: 0;
+    font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+    font-variant-numeric: oldstyle-nums;
+}
+
+.ot-smcp-lead {
+    font-feature-settings: "kern" 1, "smcp" 1, "onum" 1;
+    font-variant-caps: small-caps;
+    letter-spacing: 0.03em;
+}
+
+.ot-smcp-alphabet-box {
+    margin-top: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.ot-smcp-alphabet-label {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-gray-text);
+}
+
+.ot-smcp-alphabet-line {
+    font-size: clamp(1.35rem, 2vw, 1.85rem);
+    line-height: 1.45;
+    letter-spacing: 0.06em;
+    color: var(--text-main);
+    font-feature-settings: "kern" 1, "smcp" 1, "onum" 1;
+    font-variant-caps: small-caps;
+    font-variant-numeric: oldstyle-nums;
+}
+
+.ot-smcp-char {
+    display: inline-block;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.38);
+    transition: color 0.15s ease;
+    padding: 0 0.04em;
+    user-select: none;
+}
+
+[data-theme="dark"] .ot-smcp-char {
+    color: rgba(255, 255, 255, 0.38);
+}
+
+.ot-smcp-char:hover,
+.ot-smcp-char.is-active {
+    color: var(--text-main);
+}
+
+/* Right Column: Minimalist Magnified Small Cap / Figure Stage with Glyphs Metric Grid */
+.ot-smcp-magnifier {
+    --smcp-em: clamp(14.5rem, 24.5vw, 23.5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    background: transparent;
+    border: none;
+}
+
+.ot-smcp-magnifier__stage {
+    position: relative;
+    width: 100%;
+    height: calc(var(--smcp-em) * 1.12);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: visible;
+    user-select: none;
+}
+
+.ot-smcp-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Horizontal Metric Lines (c, a, x, baseline -) */
+.ot-smcp-grid__hline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-top: 1px dashed rgba(0, 0, 0, 0.16);
+}
+
+[data-theme="dark"] .ot-smcp-grid__hline {
+    border-top-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Default CSS fallback positions relative to --smcp-em before JS subpixel lock */
+.ot-smcp-grid__hline--base {
+    bottom: calc(var(--smcp-em) * 0.175);
+}
+
+.ot-smcp-grid__hline--x {
+    bottom: calc(var(--smcp-em) * (0.175 + 0.518));
+}
+
+.ot-smcp-grid__overshoot {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 0;
+    bottom: calc(var(--smcp-em) * (0.175 + 0.538));
+    border-top: 1px solid rgba(0, 0, 0, 0.055);
+}
+
+[data-theme="dark"] .ot-smcp-grid__overshoot {
+    border-top-color: rgba(255, 255, 255, 0.07);
+}
+
+.ot-smcp-grid__hline--a {
+    bottom: calc(var(--smcp-em) * (0.175 + 0.772));
+}
+
+.ot-smcp-grid__hline--c {
+    bottom: calc(var(--smcp-em) * (0.175 + 0.858));
+}
+
+/* Baseline alignment zone strip */
+.ot-smcp-grid__base-zone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--smcp-em) * 0.018);
+    min-height: 6px;
+    background: rgba(162, 196, 190, 0.15);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .ot-smcp-grid__base-zone {
+    background: rgba(162, 196, 190, 0.08);
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Left pointed metric tag badge (c, a, x, -) */
+.ot-smcp-grid__tag {
+    position: absolute;
+    left: 0;
+    top: -7px;
+    width: 22px;
+    height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-page);
+    padding-right: 4px;
+}
+
+.ot-smcp-grid__tag svg {
+    position: absolute;
+    inset: 0;
+    width: 22px;
+    height: 14px;
+    fill: var(--bg-page);
+    stroke: rgba(0, 0, 0, 0.25);
+    stroke-width: 1;
+}
+
+[data-theme="dark"] .ot-smcp-grid__tag svg {
+    stroke: rgba(255, 255, 255, 0.28);
+}
+
+.ot-smcp-grid__tag span {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.42);
+    text-transform: lowercase;
+    letter-spacing: 0;
+}
+
+[data-theme="dark"] .ot-smcp-grid__tag span {
+    color: rgba(255, 255, 255, 0.48);
+}
+
+/* Vertical Sidebearing Lines */
+.ot-smcp-grid__vline {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-left: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+[data-theme="dark"] .ot-smcp-grid__vline {
+    border-left-color: rgba(255, 255, 255, 0.18);
+}
+
+.ot-smcp-grid__vline--left {
+    left: calc(50% - var(--smcp-em) * 0.278);
+}
+
+.ot-smcp-grid__vline--right {
+    left: calc(50% + var(--smcp-em) * 0.278);
+}
+
+/* Sidebearing markers at bottom of vertical lines: <| 10 and 10 |> */
+.ot-smcp-grid__sb {
+    position: absolute;
+    bottom: 6px;
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-ui);
+    font-size: 9.5px;
+    font-weight: 500;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.55);
+    white-space: nowrap;
+}
+
+[data-theme="dark"] .ot-smcp-grid__sb {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.ot-smcp-grid__sb--left {
+    left: -11px;
+    gap: 4px;
+}
+
+.ot-smcp-grid__sb--right {
+    right: -11px;
+    gap: 4px;
+}
+
+.ot-smcp-grid__sb-tri {
+    width: 10px;
+    height: 11px;
+    fill: none;
+    stroke: rgba(0, 0, 0, 0.52);
+    stroke-width: 1.1;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+[data-theme="dark"] .ot-smcp-grid__sb-tri {
+    stroke: rgba(255, 255, 255, 0.55);
+}
+
+.ot-smcp-magnifier__char-wrap {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    margin-bottom: calc(var(--smcp-em) * 0.045);
+}
+
+.ot-smcp-magnifier__baseline-probe {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    vertical-align: baseline;
+}
+
+.ot-smcp-magnifier__char {
+    display: inline-block;
+    font-size: var(--smcp-em);
+    line-height: 1;
+    color: var(--text-main);
+    -webkit-text-stroke: 0;
+    padding: 0;
+    letter-spacing: 0;
+    font-feature-settings: "kern" 1, "smcp" 1, "onum" 1;
+    font-variant-caps: small-caps;
+    font-variant-numeric: oldstyle-nums;
+    user-select: none;
+    vertical-align: baseline;
+}
+
+.ot-smcp-magnifier__meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--c-gray-text);
 }
 
-.broadsheet-main-title {
-    font-size: clamp(3.2rem, 8vw, 8rem);
-    line-height: 0.98;
-    font-weight: normal;
-    margin-bottom: 1.75rem;
-    letter-spacing: -0.015em;
+/* Toggle states for Small Caps & Old-Style Figures */
+.ot-smcp-stage.is-smcp-off .ot-smcp-headline,
+.ot-smcp-stage.is-smcp-off .ot-smcp-lead,
+.ot-smcp-stage.is-smcp-off .ot-smcp-alphabet-line,
+.ot-smcp-stage.is-smcp-off .ot-smcp-magnifier__char {
+    font-feature-settings: "kern" 1, "smcp" 0, "onum" 1 !important;
+    font-variant-caps: normal !important;
 }
 
-.broadsheet-subtitle {
-    font-size: clamp(1.1rem, 2vw, 1.8rem);
-    color: var(--c-gray-text);
-    max-width: 1100px;
-    line-height: 1.4;
-    margin-bottom: 3.5rem;
+.ot-smcp-stage.is-onum-off .ot-smcp-headline,
+.ot-smcp-stage.is-onum-off .ot-smcp-prose,
+.ot-smcp-stage.is-onum-off .ot-smcp-lead,
+.ot-smcp-stage.is-onum-off .ot-smcp-alphabet-line,
+.ot-smcp-stage.is-onum-off .ot-smcp-magnifier__char {
+    font-feature-settings: "kern" 1, "smcp" 1, "onum" 0 !important;
+    font-variant-numeric: lining-nums !important;
 }
 
-.broadsheet-columns {
+.ot-smcp-stage.is-smcp-off.is-onum-off .ot-smcp-headline,
+.ot-smcp-stage.is-smcp-off.is-onum-off .ot-smcp-prose,
+.ot-smcp-stage.is-smcp-off.is-onum-off .ot-smcp-lead,
+.ot-smcp-stage.is-smcp-off.is-onum-off .ot-smcp-alphabet-line,
+.ot-smcp-stage.is-smcp-off.is-onum-off .ot-smcp-magnifier__char {
+    font-feature-settings: "kern" 1, "smcp" 0, "onum" 0 !important;
+    font-variant-caps: normal !important;
+    font-variant-numeric: lining-nums !important;
+}
+
+@media (max-width: 1024px) {
+    .ot-specimen-intro {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    .ot-specimen-stream {
+        text-align: left;
+    }
+    .ot-ligature-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .ot-smcp-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .ot-ligature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* --------------------------------------------------------------------------
+   09. SECTION 04: BILINGUAL EDITORIAL SPREAD (EN / RU PARALLEL SET)
+   -------------------------------------------------------------------------- */
+.section-broadsheet {
+    padding: 0 0 clamp(4rem, 6vw, 6rem);
+    border-bottom: none;
+    background-color: var(--bg-page);
+}
+
+.bilingual-spread-wrapper {
+    margin: 0;
+    padding: 1rem 0 0;
+}
+
+.bilingual-spread-stage {
+    padding-top: 0.5rem;
+}
+
+.bilingual-spread-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 5vw, 5rem);
-    padding: 3rem 0;
-    border-top: 1px solid var(--border-color);
+    gap: clamp(2.5rem, 6vw, 6.5rem);
+    align-items: stretch;
+    position: relative;
+}
+
+.bilingual-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.75rem;
+}
+
+.bilingual-page__running-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-gray-text);
+    padding-bottom: 1rem;
     border-bottom: 1px solid var(--border-color);
-    font-size: 1.15rem;
-    line-height: 1.7;
-    text-align: justify;
 }
 
-.newspaper-col p {
-    margin-bottom: 1.25rem;
-}
-
-.newspaper-dropcap {
-    float: left;
-    font-size: 4rem;
-    line-height: 0.8;
-    padding-right: 0.5rem;
-    padding-top: 0.2rem;
+.bilingual-page__title {
+    font-family: 'Notus Display', serif;
+    font-size: clamp(2.52rem, 4.32vw, 4.08rem);
+    line-height: 1.06;
     font-weight: normal;
+    letter-spacing: -0.01em;
+    color: var(--text-main);
+    margin: 0;
 }
 
-.broadsheet-alphabet {
-    padding: 3rem 0;
-    font-size: clamp(1.2rem, 2.2vw, 2.1rem);
-    line-height: 1.5;
-    border-bottom: 1px solid var(--border-color);
-    word-break: break-word;
+.bilingual-spread-stage.style-text-it .bilingual-page__title {
+    font-family: 'Notus Display Italic', serif;
+    font-style: italic;
+}
+
+.bilingual-page__deck {
+    font-family: 'Notus Text Italic', serif !important;
+    font-style: italic !important;
+    font-size: clamp(1.75rem, 2.52vw, 2.24rem);
+    line-height: 1.32;
+    color: var(--text-main);
+    opacity: 0.88;
+    margin: 0;
+}
+
+.bilingual-page__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    font-family: 'Notus Text', serif;
+    font-style: normal;
+    font-size: clamp(1.08rem, 1.35vw, 1.24rem);
+    line-height: 1.62;
+    color: var(--text-main);
+    text-align: left;
+    font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+    font-variant-numeric: oldstyle-nums;
+}
+
+.bilingual-page__body p {
+    margin: 0;
+    font-family: 'Notus Text', serif;
+    font-style: normal;
+}
+
+.bilingual-page__body p.bilingual-page__caption-para {
+    font-family: 'Notus Caption', serif !important;
+    font-style: normal !important;
+    font-size: clamp(0.62rem, 0.74vw, 0.69rem);
+    line-height: 1.56;
+    letter-spacing: 0.015em;
+    color: var(--text-main);
+    opacity: 0.78;
+}
+
+.bilingual-page__footnote {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1.25rem;
+    margin-top: auto;
+    border-top: 1px solid var(--border-color);
+    font-family: 'Notus Caption', serif;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--c-gray-text);
+    font-feature-settings: "kern" 1, "onum" 1;
+}
+
+@media (max-width: 1024px) {
+    .bilingual-spread-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+    }
+    .bilingual-spread-grid::after {
+        display: none;
+    }
 }
 
 .broadsheet-giant-abc {
@@ -1228,6 +2181,13 @@ button {
 .section-title {
     font-size: clamp(1.4rem, 2.5vw, 2.2rem);
     font-weight: 500;
+}
+
+.section-glyphs .section-title {
+    font-family: var(--font-notus-display);
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    font-weight: normal;
+    letter-spacing: -0.015em;
 }
 
 .section-desc {
@@ -1464,7 +2424,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   13. SECTION 08: DISPLAAY DUAL-PANE GLYPH INSPECTOR
+   13. SECTION 08: MINIMALIST 50/50 GLYPH INSPECTOR
    -------------------------------------------------------------------------- */
 .section-glyphs {
     padding: clamp(5rem, 8vw, 8rem) 0;
@@ -1479,87 +2439,159 @@ button {
 
 .displaay-inspector-split {
     display: grid;
-    grid-template-columns: 360px 1fr;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    position: relative;
 }
 
 .inspector-magnifier-pane {
-    padding: 3rem 2.5rem;
-    background-color: var(--c-ecru);
-    border-right: 1px solid var(--border-color);
+    padding: clamp(1rem, 3vw, 2.5rem) 0;
+    background: transparent;
+    border: none;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-}
-
-.magnifier-header {
-    text-align: left;
+    min-height: clamp(420px, 46vw, 680px);
+    position: sticky;
+    top: calc(var(--header-height, 104px) + 2rem);
+    align-self: start;
+    z-index: 2;
+    transform: translateY(50px);
+    overflow: visible;
 }
 
 .magnifier-giant-char {
-    font-size: clamp(8rem, 14vw, 13rem);
-    line-height: 1;
+    font-size: clamp(20.16rem, 37.4vw, 36rem);
+    line-height: 1.05;
     margin: auto 0;
-    padding: 2rem 0;
+    padding: 0.15em 0.1em;
+    color: var(--text-main);
     user-select: none;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .magnifier-meta {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
     align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: calc(2rem + 10px);
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-gray-text);
 }
 
 .magnifier-name {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    font-size: inherit;
+    font-weight: 400;
+    letter-spacing: 0.08em;
 }
 
 .magnifier-unicode {
-    font-size: 12px;
+    font-size: inherit;
     color: var(--c-gray-text);
-    font-family: monospace;
+    font-family: var(--font-ui);
+    opacity: 0.75;
 }
 
 .inspector-grid-pane {
-    background-color: var(--bg-page);
-    padding: 1.5rem;
-    max-height: 600px;
+    background: transparent;
+    padding: 0;
+    max-height: calc(100vh - var(--header-height, 104px) - 4rem);
     overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+[data-theme="dark"] .inspector-grid-pane {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.inspector-grid-pane::-webkit-scrollbar {
+    width: 4px;
+}
+
+.inspector-grid-pane::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.inspector-grid-pane::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+[data-theme="dark"] .inspector-grid-pane::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .displaay-glyph-matrix {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
-    gap: 1px;
-    background-color: var(--border-color);
-    border: 1px solid var(--border-color);
+    grid-template-columns: repeat(auto-fill, minmax(62px, 1fr));
+    gap: 0;
+    background: transparent;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .displaay-glyph-matrix {
+    border-top-color: rgba(255, 255, 255, 0.08);
+    border-left-color: rgba(255, 255, 255, 0.08);
 }
 
 .glyph-box {
-    background-color: var(--bg-page);
-    height: 56px;
+    background: transparent;
+    height: 62px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-notus-display);
-    font-size: 22px;
+    font-size: 31px;
+    color: #000000;
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.1s ease;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-/* Displaay Signature Vivid Yellow Hover / Selection */
-.glyph-box:hover,
-.glyph-box.is-active {
-    background-color: var(--c-yellow) !important;
+[data-theme="dark"] .glyph-box {
+    color: #ffffff;
+    border-right-color: rgba(255, 255, 255, 0.08);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.glyph-box:hover {
+    background: rgba(0, 0, 0, 0.04) !important;
     color: #000000 !important;
-    font-weight: bold;
+}
+
+.glyph-box.is-active {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .glyph-box:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .glyph-box.is-active {
+    background: #ffffff !important;
+    color: #000000 !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -1670,140 +2702,655 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   15. SECTION 10: IN USE
+   14B. SECTION: DOWNLOAD & REQUEST FONT (Interactive Expandable Bar)
+   -------------------------------------------------------------------------- */
+.section-download {
+    padding: 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-page);
+    position: relative;
+}
+
+.download-cta__bar {
+    width: auto;
+    margin: 0 calc(-1 * var(--pad-x));
+    padding: 1.35rem var(--pad-x);
+    font-family: var(--font-main);
+    font-size: clamp(1.2rem, 2.5vw, 1.85rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.download-cta__bar:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.download-cta__text {
+    color: inherit;
+    transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.download-cta__link {
+    font-family: var(--font-main);
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    color: inherit;
+    margin-left: auto;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s ease;
+}
+
+.download-cta__bar:hover .download-cta__text,
+.download-cta__bar:hover .download-cta__link {
+    color: #ffffff;
+}
+
+.download-cta__bar:hover .download-cta__link {
+    transform: translateX(4px);
+}
+
+.download-cta__bar.is-open {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.download-cta__bar.is-open .download-cta__text,
+.download-cta__bar.is-open .download-cta__link {
+    color: #ffffff;
+}
+
+.download-cta__bar.is-open .download-cta__link {
+    transform: none;
+}
+
+/* Collapsible Form Container with Smooth Height Animation */
+.download-form-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+    will-change: max-height, opacity;
+    border-top: 0px solid transparent;
+}
+
+.download-form-wrapper.is-open {
+    max-height: 1200px;
+    opacity: 1;
+    border-top: 1px solid var(--border-color);
+}
+
+.download-form__inner {
+    padding: 3rem 0 3.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.download-form-wrapper.is-open .download-form__inner {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.download-form__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.download-form__title-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 620px;
+}
+
+.download-form__title {
+    font-family: var(--font-notus-display);
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    font-weight: normal;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0.8rem 0 0.5rem;
+    color: var(--text-main);
+}
+
+.download-form__subtitle {
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--c-gray-text);
+    margin: 0;
+}
+
+.download-form__close {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-main);
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.download-form__close:hover {
+    background: var(--text-main);
+    color: var(--bg-page);
+    border-color: var(--text-main);
+    transform: rotate(90deg);
+}
+
+/* Fields Layout */
+.download-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 820px;
+}
+
+.download-form__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.download-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+}
+
+.download-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.download-form__label {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-gray-text);
+}
+
+.download-form__optional {
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: normal;
+    opacity: 0.65;
+}
+
+.download-form__input {
+    font-family: var(--font-ui);
+    font-size: 0.98rem;
+    color: var(--text-main);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 0 0.65rem;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.25s ease;
+}
+
+.download-form__input::placeholder {
+    color: var(--c-gray-text);
+    opacity: 0.45;
+}
+
+.download-form__input:focus {
+    border-bottom-color: var(--text-main);
+}
+
+.download-form__textarea {
+    resize: vertical;
+    min-height: 70px;
+    line-height: 1.5;
+}
+
+/* License tags pills */
+.download-form__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    padding-top: 0.2rem;
+}
+
+.download-form__tag {
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 0.4rem 0.85rem;
+    border-radius: 100px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.download-form__tag:hover {
+    border-color: var(--text-main);
+}
+
+.download-form__tag.is-active {
+    background: var(--text-main);
+    border-color: var(--text-main);
+    color: var(--bg-page);
+}
+
+.download-form__footer {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    padding-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.download-form__submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--bg-page);
+    background: var(--text-main);
+    border: 1px solid var(--text-main);
+    border-radius: 100px;
+    padding: 0.75rem 1.75rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.download-form__submit:hover {
+    background: transparent;
+    color: var(--text-main);
+}
+
+.download-form__submit-arrow {
+    transition: transform 0.25s ease;
+}
+
+.download-form__submit:hover .download-form__submit-arrow {
+    transform: translateX(3px);
+}
+
+.download-form__privacy {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    color: var(--c-gray-text);
+    margin: 0;
+    max-width: 380px;
+    line-height: 1.45;
+}
+
+.download-form__error {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    color: #d05a4f;
+    min-height: 1rem;
+    margin-top: 0.2rem;
+}
+
+/* Success state */
+.download-form__success {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 1.5rem 0;
+}
+
+.download-form__success.is-visible {
+    display: flex;
+}
+
+.download-form__success-icon {
+    color: #2e8b57;
+}
+
+.download-form__success-title {
+    font-family: var(--font-notus-display);
+    font-size: 1.8rem;
+    font-weight: normal;
+    margin: 0;
+    color: var(--text-main);
+}
+
+.download-form__success-text {
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    color: var(--c-gray-text);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .download-form__row {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    .download-cta__bar {
+        font-size: 1.05rem;
+    }
+    .download-cta__link {
+        font-size: 0.95rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   15. SECTION 10: IN CONTEXT (Homepage Marquee Slider)
    -------------------------------------------------------------------------- */
 .section-gallery {
     padding: clamp(5rem, 8vw, 8rem) 0;
     border-bottom: 1px solid var(--border-color);
 }
 
-.displaay-gallery-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 2rem;
-}
-
-.gallery-item {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.gallery-item--large {
-    grid-column: 1 / 2;
-    grid-row: span 2;
-}
-
-.gallery-image-wrap img {
+.type-lab__slider-container-wide {
     width: 100%;
-    height: auto;
-    display: block;
+    margin-top: 0.5rem;
 }
 
-.gallery-meta {
-    padding: 1.25rem 1.5rem;
+.type-lab__slider-info {
+    margin-bottom: 2rem;
+    text-align: left;
+    max-width: 600px;
+}
+
+.type-lab__slider-title {
+    font-family: var(--font-main);
+    font-size: 1.9rem;
+    font-weight: 400;
+    letter-spacing: -0.05em;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.type-lab__slider-text {
+    font-family: var(--font-main);
+    font-size: 1.02rem;
+    line-height: 1.4;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.dclex-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.dclex-slider__track {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 13px;
-    border-top: 1px solid var(--border-color);
+    width: max-content;
+    -webkit-animation: dclexMarquee 35s linear infinite;
+    animation: dclexMarquee 35s linear infinite;
+    will-change: transform;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
-.gallery-meta__num {
-    font-weight: 600;
-    color: var(--c-gray-text);
+.dclex-slider:hover .dclex-slider__track {
+    animation-play-state: paused;
+}
+
+.dclex-slider__item {
+    flex: 0 0 calc((min(100vw, var(--container-max, 1800px)) - 2 * var(--pad-x) - 2 * 1.2rem) / 3);
+    width: calc((min(100vw, var(--container-max, 1800px)) - 2 * var(--pad-x) - 2 * 1.2rem) / 3);
+    height: calc((min(100vw, var(--container-max, 1800px)) - 2 * var(--pad-x) - 2 * 1.2rem) / 3);
+    margin-right: 1.2rem;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f5f5f5;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.dclex-slider__item img,
+.dclex-slider__item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dclex-slider__item:hover img,
+.dclex-slider__item:hover video {
+    transform: scale(1.03);
+}
+
+@-webkit-keyframes dclexMarquee {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(-50%, 0, 0);
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+@keyframes dclexMarquee {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(-50%, 0, 0);
+        transform: translate3d(-50%, 0, 0);
+    }
 }
 
 /* --------------------------------------------------------------------------
-   16. SECTION 11: MONUMENTAL FOOTER (Displaay Type Foundry Homage)
+   16. SECTION 11: MINIMALIST FOOTER (Matches index.html)
    -------------------------------------------------------------------------- */
-.section-displaay-footer {
-    background-color: #E7E4DC;
+.footer {
+    padding: 3.5rem var(--pad-x) 2.5rem;
+    background: #ffffff;
     color: #000000;
-    padding: clamp(5rem, 8vw, 8rem) 0 3rem;
+    border-top: 1px solid #000000;
+    font-family: var(--font-sans);
 }
 
-[data-theme="dark"] .section-displaay-footer {
-    background-color: #141414;
-    color: #FFFFFF;
+[data-theme="dark"] .footer {
+    background: #0a0a0a;
+    color: #ffffff;
+    border-top-color: rgba(255, 255, 255, 0.2);
 }
 
-.footer-foundry-block {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-bottom: 2px solid currentColor;
-    padding-bottom: 2rem;
-    margin-bottom: 3.5rem;
-}
-
-.footer-foundry-title {
-    font-size: clamp(3.5rem, 9vw, 9.5rem);
-    line-height: 0.92;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-}
-
-.footer-split-year {
-    display: flex;
-    flex-direction: column;
-    font-size: clamp(3rem, 6vw, 6.5rem);
-    font-weight: 700;
-    line-height: 0.85;
-    letter-spacing: -0.03em;
-    text-align: right;
-}
-
-.footer-directory-grid {
+.footer__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2.5rem;
-    padding-bottom: 4rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    grid-template-columns: 0.65fr 1.35fr;
+    gap: 4rem;
+    align-items: flex-start;
 }
 
-[data-theme="dark"] .footer-directory-grid {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.dir-col {
+.footer__brand {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    font-size: 14px;
+    justify-content: space-between;
+    gap: 1.5rem;
 }
 
-.dir-col-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+.footer__logo-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.2rem;
+    text-decoration: none;
+    color: inherit;
+    width: fit-content;
+}
+
+#lottie-logo-footer {
+    width: 40px;
+    height: 40px;
+    display: block;
+    flex-shrink: 0;
+}
+
+.footer__author-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: inherit;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    line-height: 1;
+    margin: 0;
+}
+
+.footer__brand-meta {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.55);
+    margin: 0;
+}
+
+[data-theme="dark"] .footer__brand-meta {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.footer__content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+.footer__col h4 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    opacity: 0.5;
-    margin-bottom: 0.5rem;
+    color: inherit;
+    margin: 0 0 1rem 0;
 }
 
-.dir-col a:hover {
-    text-decoration: underline;
+.footer__col p,
+.footer__col span {
+    display: block;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(0, 0, 0, 0.65);
+    margin: 0;
 }
 
-.footer-bottom-bar {
+[data-theme="dark"] .footer__col p,
+[data-theme="dark"] .footer__col span {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.footer__col nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.footer__col nav a,
+.footer__col a,
+.footer__back-top {
+    display: inline-block;
+    width: fit-content;
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    transition: opacity 0.3s ease;
+    position: relative;
+}
+
+.footer__col nav a::after,
+.footer__col a::after,
+.footer__back-top::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer__col nav a:hover::after,
+.footer__col a:hover::after,
+.footer__back-top:hover::after {
+    width: 100%;
+}
+
+.footer__col nav a:hover,
+.footer__col a:hover,
+.footer__back-top:hover {
+    opacity: 0.6;
+}
+
+.footer__bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 2rem;
-    font-size: 12px;
-    opacity: 0.6;
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.82rem;
+    color: rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="dark"] .footer__bottom {
+    border-top-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.footer__back-top {
+    font-size: 0.82rem;
+    color: #000000;
+}
+
+[data-theme="dark"] .footer__back-top {
+    color: #ffffff;
 }
 
 /* --------------------------------------------------------------------------
    17. STYLES SHORTCUTS & RESPONSIVE
    -------------------------------------------------------------------------- */
-.style-display    { font-family: var(--font-notus-display); font-style: normal; }
-.style-display-it { font-family: var(--font-notus-display-it); font-style: italic; }
-.style-text       { font-family: var(--font-notus-text); font-style: normal; }
-.style-text-it    { font-family: var(--font-notus-text-it); font-style: italic; }
-.style-caption    { font-family: var(--font-notus-caption); font-style: normal; }
+.style-display    { font-family: 'Notus Display', serif !important; font-style: normal !important; }
+.style-display-it { font-family: 'Notus Display Italic', serif !important; font-style: italic !important; }
+.style-text       { font-family: 'Notus Text', serif !important; font-style: normal !important; }
+.style-text-it    { font-family: 'Notus Text Italic', serif !important; font-style: italic !important; }
+.style-caption    { font-family: 'Notus Caption', serif !important; font-style: normal !important; }
+.style-caption-it { font-family: 'Notus Caption', serif !important; font-style: italic !important; }
 
 @media (max-width: 1024px) {
     .broadsheet-columns { grid-template-columns: 1fr; }
@@ -1811,29 +3358,47 @@ button {
     .displaay-inspector-split { grid-template-columns: 1fr; }
     .inspector-magnifier-pane { border-right: none; border-bottom: 1px solid var(--border-color); }
     .tech-grid { grid-template-columns: 1fr; }
-    .footer-directory-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer__content { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
+    .header__left { gap: 0.75rem; }
+    .header .subnav-pill--primary { height: 30px; padding: 0 12px; font-size: 12px; border-radius: 12px; }
     .header__nav { gap: 1.25rem; }
     .tester-sliders-bar { grid-template-columns: 1fr; gap: 1rem; }
-    .displaay-gallery-grid { grid-template-columns: 1fr; }
-    .gallery-item--large { grid-column: 1 / -1; }
-    .footer-directory-grid { grid-template-columns: 1fr; }
+    .dclex-slider__item {
+        flex: 0 0 calc(100vw - 2 * var(--pad-x) - 1.2rem);
+        width: calc(100vw - 2 * var(--pad-x) - 1.2rem);
+        height: calc(100vw - 2 * var(--pad-x) - 1.2rem);
+    }
+    .type-lab__slider-title {
+        font-size: clamp(0.95rem, 4.2vw, 1.3rem) !important;
+        white-space: nowrap !important;
+        letter-spacing: -0.04em !important;
+    }
+    .footer { padding: 2.5rem var(--pad-x) 2rem; }
+    .footer__content { grid-template-columns: 1fr; gap: 2rem; }
+    .footer__bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; margin-top: 2.5rem; }
 }
 
-/* Prevent sticky header and subnav from overlapping section titles */
+/* Prevent sticky header from overlapping section titles */
 #cover,
 #editorial-now,
 #comparison,
+#opentype-ligatures,
+#small-capitals,
+#script,
 #broadsheet,
 #optical-cards,
 #families,
 #tester,
 #glyphs,
+#download,
+#in-use,
 #info,
 section[id] {
-    scroll-margin-top: calc(var(--header-height, 104px) + 120px);
+    scroll-margin-top: calc(var(--header-height, 104px) + 24px);
 }
 
 </style>
@@ -1842,12 +3407,23 @@ section[id] {
     <!-- Top Scroll Bar -->
     <div class="scroll-progress-bar" id="scrollBar" aria-hidden="true"></div>
 
-    <!-- 01. PRIMARY SITE HEADER (Identical to index.html) -->
+    <!-- 01. PRIMARY SITE HEADER -->
     <header class="header">
-        <a href="index.html" class="header__logo-container" id="logoLink" aria-label="Wiktor Buksza - Home">
-            <div class="header__logo" id="lottie-logo"></div>
-            <span class="header__author-name">Wiktor Buksza</span>
-        </a>
+        <div class="header__left">
+            <a href="index.html" class="header__logo-container" id="logoLink" aria-label="Wiktor Buksza - Home">
+                <div class="header__logo" id="lottie-logo"></div>
+                <span class="header__author-name">Wiktor Buksza</span>
+            </a>
+            <div class="subnav-row subnav-row--primary header__subnav-pills" aria-label="Notus Specimen Navigation">
+                <a href="#script" class="giant-pill subnav-pill--primary giant-pill--active">Script</a>
+                <a href="#comparison" class="giant-pill subnav-pill--primary">Font</a>
+                <a href="#opentype-ligatures" class="giant-pill subnav-pill--primary">OpenType Ligatures</a>
+                <a href="#small-capitals" class="giant-pill subnav-pill--primary">Small Capitals</a>
+                <a href="#glyphs" class="giant-pill subnav-pill--primary">Character Set</a>
+                <a href="#download" class="giant-pill subnav-pill--primary">Download</a>
+                <a href="#in-use" class="giant-pill subnav-pill--primary">In Context</a>
+            </div>
+        </div>
         <nav class="header__nav">
             <a href="index.html#works">Works</a>
             <a href="notus.html" class="is-active">Notus</a>
@@ -1855,29 +3431,6 @@ section[id] {
             <a href="mailto:wiktor.buksza@gmail.com">Contact</a>
         </nav>
     </header>
-
-    <!-- 02. GIANT 2X SUB-NAVIGATION BAR (Directly below main menu) -->
-    <nav class="notus-giant-subnav-wrapper" aria-label="Notus Specimen Navigation">
-        <div class="notus-subnav-two-tier">
-            <!-- Row 1: Optical Sizes (+35% larger) -->
-            <div class="subnav-row subnav-row--primary">
-                <a href="#cover" class="giant-pill subnav-pill--primary giant-pill--active giant-pill--dropdown">
-                    <span>Notus</span>
-                    <span class="giant-pill__indicator">&#8597;</span>
-                </a>
-                <a href="#comparison" class="giant-pill subnav-pill--primary">Display</a>
-                <a href="#broadsheet" class="giant-pill subnav-pill--primary">Text</a>
-                <a href="#optical-cards" class="giant-pill subnav-pill--primary">Caption</a>
-            </div>
-            <!-- Row 2: Specimen Tools & Directory (-10% smaller) -->
-            <div class="subnav-row subnav-row--secondary">
-                <a href="#families" class="giant-pill subnav-pill--secondary">Families</a>
-                <a href="#tester" class="giant-pill subnav-pill--secondary">Tester</a>
-                <a href="#glyphs" class="giant-pill subnav-pill--secondary">Glyphs</a>
-                <a href="#info" class="giant-pill subnav-pill--secondary">Info</a>
-            </div>
-        </div>
-    </nav>
 
     <main>
         <!-- ====================================================================
@@ -1929,173 +3482,120 @@ section[id] {
         </section>
 
         <!-- ====================================================================
-             03. WHITE EDITORIAL COMPARISON STACK ("Metamorphosis")
+             03A. SCRIPT & BILINGUAL EDITORIAL SPREAD
              ==================================================================== -->
-        <section class="section-comparison-stack" id="comparison">
+        <section class="section-comparison-stack" id="script">
             <div class="site-container">
                 <!-- Stack A: Upright / Regular -->
-                <div class="stack-block">
+                <div class="stack-block" style="padding-top: 55px;">
+                    <span class="notus-intro-pill">SCRIPT</span>
                     <div class="stack-meta-line">
-                        <span>NOTUS DISPLAY REGULAR</span>
+                        <div class="stack-meta-switcher-group">
+                            <span class="stack-meta-label" id="stackHeroMetaLabel">NOTUS DISPLAY REGULAR</span>
+                            <div class="stack-style-switchers" role="group" aria-label="Switch optical size">
+                                <button type="button" class="displaay-pill displaay-pill--sm is-active" data-style-class="style-display" data-label="NOTUS DISPLAY REGULAR">Display</button>
+                                <button type="button" class="displaay-pill displaay-pill--sm" data-style-class="style-text" data-label="NOTUS TEXT REGULAR">Text</button>
+                                <button type="button" class="displaay-pill displaay-pill--sm" data-style-class="style-caption" data-label="NOTUS CAPTION REGULAR">Caption</button>
+                            </div>
+                        </div>
                         <span>120 PT</span>
                     </div>
-                    <div class="stack-hero-word style-display">
+                    <div class="stack-hero-word style-display" id="stackHeroWord">
                         Metamorphosis
                     </div>
                 </div>
 
                 <div class="stack-block stack-block--center">
                     <div class="stack-meta-line">
-                        <span>NOTUS DISPLAY REGULAR</span>
-                        <span>64 PT</span>
+                        <div class="stack-meta-switcher-group">
+                            <span class="stack-meta-label">NOTUS DISPLAY ITALIC</span>
+                            <div class="stack-style-switchers" role="group" aria-label="Switch optical size">
+                                <button type="button" class="displaay-pill displaay-pill--sm is-active" data-style-class="style-display-it" data-label="NOTUS DISPLAY ITALIC">Display</button>
+                                <button type="button" class="displaay-pill displaay-pill--sm" data-style-class="style-text-it" data-label="NOTUS TEXT ITALIC">Text</button>
+                                <button type="button" class="displaay-pill displaay-pill--sm" data-style-class="style-caption-it" data-label="NOTUS CAPTION ITALIC">Caption</button>
+                            </div>
+                        </div>
+                        <span>72 PT</span>
                     </div>
-                    <div class="stack-question style-display">
-                        Can discipline<br>learn to flow?
-                    </div>
-                </div>
-
-                <div class="stack-block">
-                    <div class="stack-meta-line">
-                        <span>NOTUS TEXT REGULAR</span>
-                        <span>24 PT</span>
-                    </div>
-                    <div class="stack-cascade-list style-text">
-                        Marble pillars, Southern gale, Kinetic silence, Amber light, Crystalline punctuation, Neoclassical balance, Fluid drops, Architectural grandeur, Slavic cadence.
-                    </div>
-                </div>
-
-                <div class="stack-divider"></div>
-
-                <!-- Stack B: Italic Dialogue -->
-                <div class="stack-block">
-                    <div class="stack-meta-line">
-                        <span>NOTUS DISPLAY ITALIC</span>
-                        <span>120 PT</span>
-                    </div>
-                    <div class="stack-hero-word style-display-it">
-                        Metamorphosis
-                    </div>
-                </div>
-
-                <div class="stack-block stack-block--center">
-                    <div class="stack-meta-line">
-                        <span>NOTUS DISPLAY ITALIC</span>
-                        <span>64 PT</span>
-                    </div>
-                    <div class="stack-question style-display-it">
-                        Где геометрия<br>обретает голос?
-                    </div>
-                </div>
-
-                <div class="stack-block">
-                    <div class="stack-meta-line">
-                        <span>NOTUS TEXT ITALIC</span>
-                        <span>24 PT</span>
-                    </div>
-                    <div class="stack-cascade-list style-text-it">
-                        Тёплый полуденный бриз, Кинематографическая антиква, Текучие капли засечек, Роскошь контраста, Аутентичная кириллица, Римский канон, Золотое сечение 1892 &sect; 2026.
+                    <div class="stack-question stack-question--nowrap style-display-it">
+                        Can discipline learn to flow?
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ====================================================================
-             04. BROADSHEET POSTER & NEWSPAPER EDITORIAL COLUMNS
+             04. BILINGUAL EDITORIAL SPREAD (EN / RU PARALLEL SET)
              ==================================================================== -->
         <section class="section-broadsheet" id="broadsheet">
             <div class="site-container">
-                <div class="broadsheet-header">
-                    <span class="displaay-tag">Manifesto</span>
-                    <span class="broadsheet-header-label">EDITORIAL BROADSHEET</span>
-                </div>
-
-                <!-- Broadsheet Main Headline -->
-                <div class="broadsheet-main-title style-display">
-                    KINETIC GEOMETRY<br>
-                    Architectural, Human
-                </div>
-
-                <!-- Sub-manifesto Words -->
-                <div class="broadsheet-subtitle style-text">
-                    Monumental, Tempestuous, Radiant, Fluid, Architectural, Nuanced, Sovereign, Resonant, Authentic
-                </div>
-
-                <!-- Two-Column Newspaper Reading Columns (Displaay Layout) -->
-                <div class="broadsheet-columns style-text">
-                    <div class="newspaper-col">
-                        <p>
-                            <span class="newspaper-dropcap style-display">I</span>n ancient Mediterranean mythology, Notus was the south wind &mdash; a sudden, tempestuous gale that carried warm air across the Aegean, thawing the frozen stillness of the north. In contemporary typography, Notus embodies that very transformation: neoclassical serif architecture softened by fluid, calligraphic grace.
-                        </p>
-                        <p>
-                            Where orthodox high-contrast serifs remain brittle and distant, Notus breathes. Its terminal endings do not terminate abruptly in razor-sharp brackets; they curve into liquid, organic drops that catch the light and gently steer the reading cadence across three dedicated optical masters: Display, Text, and Caption.
-                        </p>
+                <div class="stack-block bilingual-spread-wrapper">
+                    <div class="stack-meta-line">
+                        <span class="stack-meta-label">BILINGUAL EDITORIAL SPREAD &mdash; NOTUS FAMILY</span>
+                        <span>EN / RU &middot; PARALLEL SET</span>
                     </div>
 
-                    <div class="newspaper-col">
-                        <p>
-                            Особое внимание в гарнитуре уделено кириллической системе знаков. Созданная дизайнером-носителем языка, кириллица Notus избавлена от механических заимствований из латинских форм. Строение знаков «Ж», «б», «ф», «я» и «ц» следует собственной исторической логике пера и пластики штриха.
-                        </p>
-                        <p>
-                            Это делает Notus редким явлением в современной типографике: шрифтом с подлинной двуязычной душой, одинаково убедительным как в монументальном заголовке издания, так и в плотном тексте литературного журнала. Поддерживает капитель, минускульные цифры и полные лигатуры.
-                        </p>
-                    </div>
-                </div>
+                    <div class="bilingual-spread-stage style-text">
+                        <div class="bilingual-spread-grid">
+                            <!-- Left Page: Latin (English) -->
+                            <article class="bilingual-page" lang="en">
+                                <header class="bilingual-page__running-head">
+                                    <span>01 &mdash; LATIN SCRIPT</span>
+                                    <span>NOTES ON ARCHITECTURE &amp; LIGHT</span>
+                                </header>
 
-                <!-- Full Character Set Banner -->
-                <div class="broadsheet-alphabet style-text">
-                    AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz<br>
-                    АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя<br>
-                    1234567890 &middot; $ &euro; &pound; &yen; &#8381; &sect; &para; &copy; &reg;
-                </div>
+                                <h3 class="bilingual-page__title">
+                                    On the quiet weight of afternoon light
+                                </h3>
 
-                <!-- Monumental Lowercase "notus" -->
-                <div class="broadsheet-giant-abc style-display">
-                    notus
-                </div>
+                                <p class="bilingual-page__deck">
+                                    A room remembers the hour by the angle at which sunlight touches its walls, turning rough lime plaster into warm alabaster.
+                                </p>
 
-                <!-- Bespoke A–Z Word Stream Curated for Notus -->
-                <div class="broadsheet-wordstream style-display">
-                    Architecture, Breeze, Cadence, Discipline, Equilibrium, Fluidity, Geometry, Horizon, Intuition, Juxtaposition, Kinetic, Liquid, Marble, Notus, Optical, Poetry, Quartz, Rhythm, Sculpture, Terminals, Unspoken, Velocity, Warmth, X-height, Yearning, Zephyr 42:15:01
-                </div>
-            </div>
-        </section>
+                                <div class="bilingual-page__body">
+                                    <p>
+                                        By four o&rsquo;clock the shutters along the courtyard are half-drawn against the glare. Inside, the heat loses its urgency; shadows lengthen across the stone floor with the slow precision of a sundial. When you open an old book in that half-light, you notice how much a page resembles a room: the margins act as tall windows, and the spaces between letters hold the air that lets a sentence breathe.
+                                    </p>
+                                    <p class="bilingual-page__caption-para">
+                                        Good book typography never raises its voice. It neither begs for attention with brittle hairlines nor crowds the eye with rigid geometry. Instead, it settles into a steady, unhurried cadence &mdash; allowing the reader to forget the ink entirely and hear only the human voice behind the words.
+                                    </p>
+                                </div>
 
-        <!-- ====================================================================
-             05. DUAL OPTICAL SIZE COMPARISON CARDS
-             ==================================================================== -->
-        <section class="section-optical-cards" id="optical-cards">
-            <div class="site-container">
-                <div class="cards-section-header">
-                    <span class="displaay-tag">Optics</span>
-                    <span class="cards-header-label">OPTICAL SIZE COMPARISON</span>
-                </div>
+                                <footer class="bilingual-page__footnote">
+                                    <span>Fig. 14 &mdash; Mediterranean Notebook, pp. 42&ndash;48</span>
+                                    <span>Optical Density: 18 / 28 pt</span>
+                                </footer>
+                            </article>
 
-                <div class="optical-cards-grid">
-                    <!-- Card 1: Display Master -->
-                    <div class="optical-ecru-card">
-                        <div class="ecru-card-meta">
-                            <span>OPTICAL SIZE 01</span>
-                            <span>42 PT AND ABOVE</span>
-                        </div>
-                        <div class="ecru-card-sample style-display">
-                            Display
-                        </div>
-                        <div class="ecru-card-caption">
-                            Extreme 1:12 contrast, gossamer hairlines, and theatrical drama for posters and covers.
-                        </div>
-                    </div>
+                            <!-- Right Page: Cyrillic (Russian) -->
+                            <article class="bilingual-page" lang="ru">
+                                <header class="bilingual-page__running-head">
+                                    <span>02 &mdash; КИРИЛЛИЦА</span>
+                                    <span>ЗАМЕТКИ ОБ АРХИТЕКТУРЕ И СВЕТЕ</span>
+                                </header>
 
-                    <!-- Card 2: Text Master -->
-                    <div class="optical-ecru-card">
-                        <div class="ecru-card-meta">
-                            <span>OPTICAL SIZE 02</span>
-                            <span>12 PT TO 24 PT</span>
-                        </div>
-                        <div class="ecru-card-sample style-text">
-                            Text
-                        </div>
-                        <div class="ecru-card-caption">
-                            Tempered contrast, reinforced brackets, and rhythmic counters for effortless long-form reading.
+                                <h3 class="bilingual-page__title">
+                                    О тихой тяжести полуденного света
+                                </h3>
+
+                                <p class="bilingual-page__deck">
+                                    Комната помнит время по тому, под каким углом луч касается стены, превращая шершавую известь в тёплый алебастр.
+                                </p>
+
+                                <div class="bilingual-page__body">
+                                    <p>
+                                        К четырём часам деревянные ставни во внутреннем дворе прикрывают от слепящего зноя. Внутри жара теряет свою резкость; длинные тени ложатся на каменный пол с неспешной точностью солнечных часов. Открывая в этом полумраке старую книгу, замечаешь, как сильно страница похожа на дом: широкие поля работают как окна, а просветы между буквами хранят воздух, дающий фразе дыхание.
+                                    </p>
+                                    <p class="bilingual-page__caption-para">
+                                        Хорошая книжная типографика никогда не повышает голоса. Она не требует к себе внимания ломкими штрихами и не утомляет взгляд сухой геометрией. Напротив, она складывается в ровный, спокойный ритм &mdash; позволяя читателю забыть о типографской краске и слышать лишь живую интонацию автора.
+                                    </p>
+                                </div>
+
+                                <footer class="bilingual-page__footnote">
+                                    <span>Илл. 14 &mdash; Средиземноморская тетрадь, стр. 42&ndash;48</span>
+                                    <span>Плотность набора: 18 / 28 пт</span>
+                                </footer>
+                            </article>
                         </div>
                     </div>
                 </div>
@@ -2103,197 +3603,288 @@ section[id] {
         </section>
 
         <!-- ====================================================================
-             06. FAMILIES TABLE & GLOBAL SIZE SLIDER
+             03. WHITE EDITORIAL COMPARISON STACK (Font, Ligatures, Small Caps)
              ==================================================================== -->
-        <section class="section-families" id="families">
+        <section class="section-comparison-stack" id="comparison" style="border-bottom: 1px solid var(--border-color);">
             <div class="site-container">
-                <div class="section-top-bar">
-                    <div class="section-top-bar__info">
-                        <span class="section-num">01</span>
-                        <h2 class="section-title">Families &amp; Optical Hierarchy</h2>
-                        <span class="section-desc">Five meticulously engineered styles spanning three dedicated optical masters.</span>
-                    </div>
+                <div class="notus-intro-block">
+                    <span class="notus-intro-pill">Font</span>
+                    <h2 class="notus-intro-title">Notus</h2>
+                    <p class="notus-intro-description">Notus – a “classic, elegant and light” serif family by Wiktor Buksza. It blends smooth, flowing serif endings (its signature motif) with high-contrast modern shapes. Notus comes in five styles (Display/Italic, Text/Italic, Caption) and supports full Latin and Cyrillic alphabets, including small caps and old-style figures. This refined type system is crafted for premium editorial use: bold enough for big headlines, yet crisp and legible in text and caption settings.</p>
+                </div>
 
-                    <div class="family-size-control">
-                        <span class="control-label">Scale All Styles:</span>
-                        <input type="range" class="displaay-slider" id="familySizeSlider" min="20" max="110" value="54">
-                        <span class="control-val" id="familySizeVal">54px</span>
+                <!-- Витрина начертаний шрифта Notus Type -->
+                <div class="type-lab__showcase" id="families">
+                    <div class="type-lab__showcase-header">
+                        <h3 class="type-lab__showcase-title">Notus Family</h3>
+                    </div>
+                    <div class="type-lab__showcase-item showcase-display">
+                        <span class="type-lab__showcase-meta">Display Regular</span>
+                        <div class="type-lab__showcase-text">Notus Display</div>
+                        <div class="type-lab__showcase-pangram">Jackdaws love my big sphinx of quartz. 0123456789</div>
+                    </div>
+                    <div class="type-lab__showcase-item showcase-display-italic">
+                        <span class="type-lab__showcase-meta">Display Italic</span>
+                        <div class="type-lab__showcase-text">Notus Display Italic</div>
+                        <div class="type-lab__showcase-pangram">Quiet nymphs gracefully build vexing puzzles. 0123456789</div>
+                    </div>
+                    <div class="type-lab__showcase-item showcase-text">
+                        <span class="type-lab__showcase-meta">Text Regular</span>
+                        <div class="type-lab__showcase-text">Notus Text</div>
+                        <div class="type-lab__showcase-pangram">The quick brown fox jumps over the lazy dog. 0123456789</div>
+                    </div>
+                    <div class="type-lab__showcase-item showcase-text-italic">
+                        <span class="type-lab__showcase-meta">Text Italic</span>
+                        <div class="type-lab__showcase-text">Notus Text Italic</div>
+                        <div class="type-lab__showcase-pangram">Pack my box with five dozen liquor jugs. 0123456789</div>
+                    </div>
+                    <div class="type-lab__showcase-item showcase-caption">
+                        <span class="type-lab__showcase-meta">Caption Regular</span>
+                        <div class="type-lab__showcase-text">Notus Caption</div>
+                        <div class="type-lab__showcase-pangram">Sphinx of black quartz, judge my vow. 0123456789</div>
+                    </div>
+                    <div class="type-lab__showcase-item showcase-symbols">
+                        <span class="type-lab__showcase-meta">Multilingual &amp; Symbols</span>
+                        <div class="type-lab__showcase-text">Latin &amp; Кириллица</div>
+                        <div class="type-lab__showcase-pangram">
+                            <span class="showcase-pangram-desc">Multilingual support with rich set of characters, specials, ligatures &amp; symbols:</span>
+                            <span class="showcase-pangram-glyphs">@ % &amp; * ? ! † ‡ § ¶ © ®</span>
+                        </div>
+                    </div>
+                    <div class="type-lab__showcase-item showcase-multilingual-wide">
+                        <span class="type-lab__showcase-meta">Extended Character Set</span>
+                        <div class="type-lab__showcase-text">Mülтiliñğúał</div>
                     </div>
                 </div>
 
-                <div class="family-rows">
-                    <!-- Style 1 -->
-                    <div class="family-row" data-style-name="'Notus Display', serif">
-                        <div class="family-row__meta">
-                            <div class="family-row__tags">
-                                <span class="displaay-tag">Display Regular</span>
-                                <span class="displaay-tag displaay-tag--subtle">42pt+</span>
+                <!-- 03B. OPENTYPE LIGATURES SPECIMEN (Standard liga & Discretionary dlig) -->
+                <div class="stack-block" id="opentype-ligatures">
+                    <span class="notus-intro-pill">OPENTYPE LIGATURES</span>
+                    <div class="stack-meta-line">
+                        <div class="stack-meta-switcher-group">
+                            <span class="stack-meta-label">OPENTYPE LIGATURES &mdash; NOTUS DISPLAY REGULAR</span>
+                            <div class="stack-style-switchers" role="group" aria-label="Switch optical size for ligatures">
+                                <button type="button" class="displaay-pill displaay-pill--sm is-active" data-style-class="style-display" data-label="OPENTYPE LIGATURES — NOTUS DISPLAY REGULAR">Display</button>
+                                <button type="button" class="displaay-pill displaay-pill--sm" data-style-class="style-display-it" data-label="OPENTYPE LIGATURES — NOTUS DISPLAY ITALIC">Italic</button>
+                                <button type="button" class="displaay-pill displaay-pill--sm" data-style-class="style-text" data-label="OPENTYPE LIGATURES — NOTUS TEXT REGULAR">Text</button>
+                                <button type="button" class="displaay-pill displaay-pill--sm" data-style-class="style-text-it" data-label="OPENTYPE LIGATURES — NOTUS TEXT ITALIC">Text Italic</button>
                             </div>
-                            <button class="displaay-pill displaay-pill--sm btn-test-family" data-target-style="'Notus Display', serif">Test in Studio &rarr;</button>
                         </div>
-                        <div class="family-row__sample style-display" contenteditable="true" spellcheck="false">
-                            The architecture of stillness softened by southern wind.
+                        <div class="ot-feature-toggles" role="group" aria-label="Toggle OpenType Ligature Features">
+                            <button type="button" class="ot-feature-toggle-btn is-active" data-ot-toggle="liga" aria-pressed="true">
+                                <span class="ot-feature-tag">liga</span>
+                                <span>Standard</span>
+                            </button>
+                            <button type="button" class="ot-feature-toggle-btn is-active" data-ot-toggle="dlig" aria-pressed="true">
+                                <span class="ot-feature-tag">dlig</span>
+                                <span>Discretionary</span>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Style 2 -->
-                    <div class="family-row" data-style-name="'Notus Display Italic', serif">
-                        <div class="family-row__meta">
-                            <div class="family-row__tags">
-                                <span class="displaay-tag">Display Italic</span>
-                                <span class="displaay-tag displaay-tag--subtle">42pt+</span>
-                            </div>
-                            <button class="displaay-pill displaay-pill--sm btn-test-family" data-target-style="'Notus Display Italic', serif">Test in Studio &rarr;</button>
+                    <div class="ot-ligatures-stage style-display">
+                        <div class="ot-specimen-intro">
+                            <p class="ot-specimen-note">
+                                <strong>Terminal Collision &amp; Calligraphic Continuity.</strong> In high-contrast neoclassical serifs, overhanging <em>f</em>-hooks and teardrop terminals naturally collide with ascending stems and <em>i</em>-dots. Rather than kerning letters apart or clipping terminals, Notus resolves the juncture through bespoke <strong>Standard (<code>liga</code>)</strong> and historical <strong>Discretionary (<code>dlig</code>)</strong> ligatures &mdash; fusing arch, crossbar, and loop into a single continuous stroke.
+                            </p>
                         </div>
-                        <div class="family-row__sample style-display-it" contenteditable="true" spellcheck="false">
-                            Rapid calligraphic cadence sweeping through classical space.
-                        </div>
-                    </div>
 
-                    <!-- Style 3 -->
-                    <div class="family-row" data-style-name="'Notus Text', serif">
-                        <div class="family-row__meta">
-                            <div class="family-row__tags">
-                                <span class="displaay-tag">Text Regular</span>
-                                <span class="displaay-tag displaay-tag--subtle">12–24pt</span>
+                        <div class="ot-ligature-grid">
+                            <div class="ot-ligature-card" data-ot="liga">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">f_i</span>
+                                    <span class="ot-ligature-card__badge">liga</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">fi</div>
+                                <div class="ot-ligature-card__word">in<mark>fi</mark>nite</div>
                             </div>
-                            <button class="displaay-pill displaay-pill--sm btn-test-family" data-target-style="'Notus Text', serif">Test in Studio &rarr;</button>
-                        </div>
-                        <div class="family-row__sample style-text" contenteditable="true" spellcheck="false">
-                            Crystalline ink balance and steady cadence for prolonged reading.
-                        </div>
-                    </div>
-
-                    <!-- Style 4 -->
-                    <div class="family-row" data-style-name="'Notus Text Italic', serif">
-                        <div class="family-row__meta">
-                            <div class="family-row__tags">
-                                <span class="displaay-tag">Text Italic</span>
-                                <span class="displaay-tag displaay-tag--subtle">12–24pt</span>
+                            <div class="ot-ligature-card" data-ot="liga">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">f_l</span>
+                                    <span class="ot-ligature-card__badge">liga</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">fl</div>
+                                <div class="ot-ligature-card__word">con<mark>fl</mark>uence</div>
                             </div>
-                            <button class="displaay-pill displaay-pill--sm btn-test-family" data-target-style="'Notus Text Italic', serif">Test in Studio &rarr;</button>
-                        </div>
-                        <div class="family-row__sample style-text-it" contenteditable="true" spellcheck="false">
-                            Warm, articulate slant accompanying running thoughts with grace.
-                        </div>
-                    </div>
-
-                    <!-- Style 5 -->
-                    <div class="family-row" data-style-name="'Notus Caption', serif">
-                        <div class="family-row__meta">
-                            <div class="family-row__tags">
-                                <span class="displaay-tag">Caption Regular</span>
-                                <span class="displaay-tag displaay-tag--subtle">6–10pt</span>
+                            <div class="ot-ligature-card" data-ot="liga">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">f_f</span>
+                                    <span class="ot-ligature-card__badge">liga</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">ff</div>
+                                <div class="ot-ligature-card__word">a<mark>ff</mark>inity</div>
                             </div>
-                            <button class="displaay-pill displaay-pill--sm btn-test-family" data-target-style="'Notus Caption', serif">Test in Studio &rarr;</button>
-                        </div>
-                        <div class="family-row__sample style-caption" contenteditable="true" spellcheck="false">
-                            Open apertures and fortified serifs remaining legible at 6pt.
+                            <div class="ot-ligature-card" data-ot="liga">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">f_f_i</span>
+                                    <span class="ot-ligature-card__badge">liga</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">ffi</div>
+                                <div class="ot-ligature-card__word">o<mark>ffi</mark>cial</div>
+                            </div>
+                            <div class="ot-ligature-card" data-ot="liga">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">f_f_l</span>
+                                    <span class="ot-ligature-card__badge">liga</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">ffl</div>
+                                <div class="ot-ligature-card__word">a<mark>ffl</mark>iction</div>
+                            </div>
+                            <div class="ot-ligature-card" data-ot="liga">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">T_h</span>
+                                    <span class="ot-ligature-card__badge">liga</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">Th</div>
+                                <div class="ot-ligature-card__word"><mark>Th</mark>eatre</div>
+                            </div>
+                            <div class="ot-ligature-card" data-ot="dlig">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">c_t.dlig</span>
+                                    <span class="ot-ligature-card__badge">dlig</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">ct</div>
+                                <div class="ot-ligature-card__word">archite<mark>ct</mark>ure</div>
+                            </div>
+                            <div class="ot-ligature-card" data-ot="dlig">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">s_t.dlig</span>
+                                    <span class="ot-ligature-card__badge">dlig</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">st</div>
+                                <div class="ot-ligature-card__word">ae<mark>st</mark>hetic</div>
+                            </div>
+                            <div class="ot-ligature-card" data-ot="dlig">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">f_b.dlig</span>
+                                    <span class="ot-ligature-card__badge">dlig</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">fb</div>
+                                <div class="ot-ligature-card__word">of<mark>fb</mark>eat</div>
+                            </div>
+                            <div class="ot-ligature-card" data-ot="dlig">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">f_h.dlig</span>
+                                    <span class="ot-ligature-card__badge">dlig</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">fh</div>
+                                <div class="ot-ligature-card__word">clif<mark>fh</mark>anger</div>
+                            </div>
+                            <div class="ot-ligature-card" data-ot="dlig">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">f_j.dlig</span>
+                                    <span class="ot-ligature-card__badge">dlig</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">fj</div>
+                                <div class="ot-ligature-card__word"><mark>fj</mark>ord</div>
+                            </div>
+                            <div class="ot-ligature-card" data-ot="dlig">
+                                <div class="ot-ligature-card__top">
+                                    <span class="ot-ligature-card__glyph-id">f_t.dlig</span>
+                                    <span class="ot-ligature-card__badge">dlig</span>
+                                </div>
+                                <div class="ot-ligature-card__pair">ft</div>
+                                <div class="ot-ligature-card__word">cra<mark>ft</mark>ed</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- ====================================================================
-             07. INTERACTIVE TYPE TESTER CONSOLE
-             ==================================================================== -->
-        <section class="section-tester" id="tester">
-            <div class="site-container">
-                <div class="section-top-bar">
-                    <div class="section-top-bar__info">
-                        <span class="section-num">02</span>
-                        <h2 class="section-title">Interactive Tester</h2>
-                        <span class="section-desc">Type your custom copy, calibrate size, leading, tracking, and optical styles in real time.</span>
-                    </div>
-                </div>
-
-                <div class="tester-module" id="testerModule">
-                    <div class="tester-controls-bar">
-                        <div class="control-block">
-                            <span class="block-title">Style</span>
-                            <div class="pill-segmented">
-                                <button class="displaay-pill tester-style-btn is-active" data-font="'Notus Display', serif">Display Reg</button>
-                                <button class="displaay-pill tester-style-btn" data-font="'Notus Display Italic', serif">Display Ita</button>
-                                <button class="displaay-pill tester-style-btn" data-font="'Notus Text', serif">Text Reg</button>
-                                <button class="displaay-pill tester-style-btn" data-font="'Notus Text Italic', serif">Text Ita</button>
-                                <button class="displaay-pill tester-style-btn" data-font="'Notus Caption', serif">Caption</button>
+                <!-- 03C. TRUE DRAWN SMALL CAPITALS (smcp) & OLD-STYLE FIGURES (onum) -->
+                <div class="stack-block" id="small-capitals">
+                    <span class="notus-intro-pill">SMALL CAPITALS &amp; OLD-STYLE FIGURES</span>
+                    <div class="stack-meta-line">
+                        <div class="stack-meta-switcher-group">
+                            <span class="stack-meta-label">SMALL CAPITALS &amp; OLD-STYLE FIGURES &mdash; NOTUS DISPLAY REGULAR</span>
+                            <div class="stack-style-switchers" role="group" aria-label="Switch optical size for small capitals">
+                                <button type="button" class="displaay-pill displaay-pill--sm is-active" data-style-class="style-display" data-label="SMALL CAPITALS & OLD-STYLE FIGURES — NOTUS DISPLAY REGULAR">Display</button>
+                                <button type="button" class="displaay-pill displaay-pill--sm" data-style-class="style-text" data-label="SMALL CAPITALS & OLD-STYLE FIGURES — NOTUS TEXT REGULAR">Text</button>
+                                <button type="button" class="displaay-pill displaay-pill--sm" data-style-class="style-caption" data-label="SMALL CAPITALS & OLD-STYLE FIGURES — NOTUS CAPTION REGULAR">Caption</button>
                             </div>
                         </div>
-
-                        <div class="control-block">
-                            <span class="block-title">Format</span>
-                            <div class="pill-segmented">
-                                <button class="displaay-pill tester-align-btn is-active" data-align="left">Left</button>
-                                <button class="displaay-pill tester-align-btn" data-align="center">Center</button>
-                                <button class="displaay-pill tester-align-btn" data-align="right">Right</button>
-                            </div>
-                            <div class="pill-segmented">
-                                <button class="displaay-pill tester-case-btn is-active" data-case="none">Aa</button>
-                                <button class="displaay-pill tester-case-btn" data-case="uppercase">AA</button>
-                                <button class="displaay-pill tester-case-btn" data-case="lowercase">aa</button>
-                            </div>
-                        </div>
-
-                        <div class="control-block">
-                            <span class="block-title">Canvas</span>
-                            <div class="pill-segmented">
-                                <button class="displaay-pill tester-bg-btn is-active" data-bg="sand">Sand</button>
-                                <button class="displaay-pill tester-bg-btn" data-bg="night">Night</button>
-                                <button class="displaay-pill tester-bg-btn" data-bg="paper">Paper</button>
-                            </div>
+                        <div class="ot-feature-toggles" role="group" aria-label="Toggle Small Caps and Old-Style Figures">
+                            <button type="button" class="ot-feature-toggle-btn is-active" data-ot-toggle="smcp" aria-pressed="true">
+                                <span class="ot-feature-tag">smcp</span>
+                                <span>True Small Caps</span>
+                            </button>
+                            <button type="button" class="ot-feature-toggle-btn is-active" data-ot-toggle="onum" aria-pressed="true">
+                                <span class="ot-feature-tag">onum</span>
+                                <span>Old-Style Figures</span>
+                            </button>
                         </div>
                     </div>
 
-                    <div class="tester-sliders-bar">
-                        <div class="slider-box">
-                            <div class="slider-box__header">
-                                <span class="slider-box__label">Size</span>
-                                <span class="slider-box__val" id="testerSizeVal">64px</span>
+                    <div class="ot-smcp-stage style-display">
+                        <div class="ot-smcp-layout">
+                            <div class="ot-smcp-editorial">
+                                <span class="ot-smcp-dateline">Editorial Running Head, Lead-In &amp; Chronology</span>
+                                <div class="ot-smcp-headline">
+                                    Architectural Poetics &amp; Southern Gale &middot; 1892&ndash;2026
+                                </div>
+                                <p class="ot-smcp-prose">
+                                    <span class="ot-smcp-lead">In the classical broadsheet tradition</span>, true small capitals bridge the optical gulf between monumental majuscules and rhythmic minuscules. Drawn from scratch at 74% cap-height with reinforced stems and widened internal counters, Notus Small Caps maintain an even typographic colour in acronyms (<span class="ot-smcp-lead">unesco, moma, bbc</span>), Roman numerals (<span class="ot-smcp-lead">Vol. xiv &middot; Ch. viii</span>), and prolonged prose alongside old-style figures 1492, 1789, and 2026.
+                                </p>
+                                <div class="ot-smcp-alphabet-box">
+                                    <span class="ot-smcp-alphabet-label">Complete Drawn Small Capitals (.smcp) &amp; Old-Style Figures (.onum) &mdash; Hover to Inspect</span>
+                                    <div class="ot-smcp-alphabet-line" id="smcpAlphabetLine">
+                                        abcdefghijklmnopqrstuvwxyz &middot; &agrave;&aacute;&acirc;&atilde;&auml;&aring;&ccedil;&egrave;&eacute;&ecirc;&euml;&igrave;&iacute;&icirc;&iuml;&ntilde;&ograve;&oacute;&ocirc;&otilde;&ouml;&oslash;&ugrave;&uacute;&ucirc;&uuml;&yacute;&zcaron; &middot; 0123456789
+                                    </div>
+                                </div>
                             </div>
-                            <input type="range" class="displaay-slider" id="testerSizeSlider" min="16" max="150" value="64">
-                        </div>
 
-                        <div class="slider-box">
-                            <div class="slider-box__header">
-                                <span class="slider-box__label">Leading</span>
-                                <span class="slider-box__val" id="testerLeadingVal">1.15</span>
+                            <div class="ot-smcp-magnifier">
+                                <div class="ot-smcp-magnifier__stage" id="smcpMagnifierStage">
+                                    <div class="ot-smcp-grid" id="smcpMetricGrid" aria-hidden="true">
+                                        <div class="ot-smcp-grid__hline ot-smcp-grid__hline--c" id="smcpLineC">
+                                            <span class="ot-smcp-grid__tag">
+                                                <svg viewBox="0 0 22 14" aria-hidden="true"><path d="M7,0.75 H14.5 L21,7 L14.5,13.25 H7 A6.25,6.25 0 0,1 7,0.75 Z"/></svg>
+                                                <span>c</span>
+                                            </span>
+                                        </div>
+                                        <div class="ot-smcp-grid__hline ot-smcp-grid__hline--a" id="smcpLineA">
+                                            <span class="ot-smcp-grid__tag">
+                                                <svg viewBox="0 0 22 14" aria-hidden="true"><path d="M7,0.75 H14.5 L21,7 L14.5,13.25 H7 A6.25,6.25 0 0,1 7,0.75 Z"/></svg>
+                                                <span>a</span>
+                                            </span>
+                                        </div>
+                                        <div class="ot-smcp-grid__overshoot" id="smcpLineOvershoot"></div>
+                                        <div class="ot-smcp-grid__hline ot-smcp-grid__hline--x" id="smcpLineX">
+                                            <span class="ot-smcp-grid__tag">
+                                                <svg viewBox="0 0 22 14" aria-hidden="true"><path d="M7,0.75 H14.5 L21,7 L14.5,13.25 H7 A6.25,6.25 0 0,1 7,0.75 Z"/></svg>
+                                                <span>x</span>
+                                            </span>
+                                        </div>
+                                        <div class="ot-smcp-grid__hline ot-smcp-grid__hline--base" id="smcpLineBase">
+                                            <span class="ot-smcp-grid__tag">
+                                                <svg viewBox="0 0 22 14" aria-hidden="true"><path d="M7,0.75 H14.5 L21,7 L14.5,13.25 H7 A6.25,6.25 0 0,1 7,0.75 Z"/></svg>
+                                                <span>&minus;</span>
+                                            </span>
+                                            <div class="ot-smcp-grid__base-zone"></div>
+                                        </div>
+
+                                        <div class="ot-smcp-grid__vline ot-smcp-grid__vline--left" id="smcpVLineLeft">
+                                            <div class="ot-smcp-grid__sb ot-smcp-grid__sb--left">
+                                                <svg class="ot-smcp-grid__sb-tri" viewBox="0 0 9 10" aria-hidden="true"><polygon points="8.2,1 1,5 8.2,9"/></svg>
+                                                <span class="ot-smcp-grid__sb-num">10</span>
+                                            </div>
+                                        </div>
+                                        <div class="ot-smcp-grid__vline ot-smcp-grid__vline--right" id="smcpVLineRight">
+                                            <div class="ot-smcp-grid__sb ot-smcp-grid__sb--right">
+                                                <span class="ot-smcp-grid__sb-num">10</span>
+                                                <svg class="ot-smcp-grid__sb-tri" viewBox="0 0 9 10" aria-hidden="true"><polygon points="0.8,1 8,5 0.8,9"/></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="ot-smcp-magnifier__char-wrap">
+                                        <span class="ot-smcp-magnifier__baseline-probe" id="smcpBaselineProbe" aria-hidden="true"></span><span class="ot-smcp-magnifier__char" id="smcpMagnifierChar">a</span>
+                                    </div>
+                                </div>
+                                <div class="ot-smcp-magnifier__meta">
+                                    <span id="smcpMagnifierName">a.smcp &middot; TRUE SMALL CAPITAL</span>
+                                    <span id="smcpMagnifierCode">U+0061</span>
+                                </div>
                             </div>
-                            <input type="range" class="displaay-slider" id="testerLeadingSlider" min="0.85" max="1.9" step="0.05" value="1.15">
-                        </div>
-
-                        <div class="slider-box">
-                            <div class="slider-box__header">
-                                <span class="slider-box__label">Tracking</span>
-                                <span class="slider-box__val" id="testerTrackingVal">0.00em</span>
-                            </div>
-                            <input type="range" class="displaay-slider" id="testerTrackingSlider" min="-0.04" max="0.25" step="0.01" value="0.00">
-                        </div>
-                    </div>
-
-                    <div class="tester-presets-strip">
-                        <span class="presets-label">Pangram Presets:</span>
-                        <div class="presets-pills">
-                            <button class="displaay-pill displaay-pill--subtle preset-btn is-active" data-preset="myth-en">Myth EN</button>
-                            <button class="displaay-pill displaay-pill--subtle preset-btn" data-preset="editorial-ru">Editorial RU</button>
-                            <button class="displaay-pill displaay-pill--subtle preset-btn" data-preset="pangram-en">Pangram EN</button>
-                            <button class="displaay-pill displaay-pill--subtle preset-btn" data-preset="pangram-ru">Панграмма RU</button>
-                            <button class="displaay-pill displaay-pill--subtle preset-btn" data-preset="financial">Financial &amp; Math</button>
-                        </div>
-                    </div>
-
-                    <div class="tester-viewport theme-sand" id="testerViewport">
-                        <div class="tester-input-stage" id="testerInput" contenteditable="true" spellcheck="false">Notus brings the warmth of southern gales into rigid typographic stone.</div>
-                    </div>
-
-                    <div class="tester-meta-strip">
-                        <div class="meta-item">
-                            <span>Selected Style:</span>
-                            <strong id="testerActiveStyleText">Notus Display Regular</strong>
-                        </div>
-                        <div class="meta-item">
-                            <span>Character Count:</span>
-                            <strong id="testerCharCount">68 chars</strong>
                         </div>
                     </div>
                 </div>
@@ -2305,39 +3896,31 @@ section[id] {
              ==================================================================== -->
         <section class="section-glyphs" id="glyphs">
             <div class="site-container">
+                <span class="notus-intro-pill">CHARACTER SET &amp; GLYPH MATRIX</span>
                 <div class="section-top-bar">
                     <div class="section-top-bar__info">
-                        <span class="section-num">03</span>
                         <h2 class="section-title">Character Set &amp; Glyph Matrix</h2>
                         <span class="section-desc">480+ characters. Hover over any glyph to magnify on the left; click to copy to clipboard.</span>
                     </div>
 
                     <div class="glyph-filter-pills">
                         <button class="displaay-pill glyph-tab-btn is-active" data-glyph-cat="all">All Glyphs</button>
-                        <button class="displaay-pill glyph-tab-btn" data-glyph-cat="latin">Basic Latin</button>
-                        <button class="displaay-pill glyph-tab-btn" data-glyph-cat="cyrillic">Кириллица</button>
-                        <button class="displaay-pill glyph-tab-btn" data-glyph-cat="figures">Figures &amp; Math</button>
-                        <button class="displaay-pill glyph-tab-btn" data-glyph-cat="symbols">Punctuation</button>
                     </div>
                 </div>
 
                 <div class="displaay-inspector-split">
-                    <!-- Left: Huge Magnified Glyph Card -->
+                    <!-- Left: Huge Magnified Glyph Preview (50%) -->
                     <div class="inspector-magnifier-pane">
-                        <div class="magnifier-header">
-                            <span class="displaay-tag">Glyph Inspector</span>
-                        </div>
                         <div class="magnifier-giant-char style-display" id="inspectorGiantChar">
-                            a
+                            A
                         </div>
                         <div class="magnifier-meta">
-                            <div class="magnifier-name" id="inspectorCharName">LATIN SMALL LETTER A</div>
-                            <div class="magnifier-unicode" id="inspectorCharUnicode">U+0061 &middot; Dec 97</div>
-                            <button class="displaay-pill displaay-pill--sm" id="inspectorCopyBtn">Copy Glyph</button>
+                            <span class="magnifier-name" id="inspectorCharName">LATIN CAPITAL LETTER A</span>
+                            <span class="magnifier-unicode" id="inspectorCharUnicode">U+0041</span>
                         </div>
                     </div>
 
-                    <!-- Right: Dense Tabular Grid with Vivid Yellow Highlight -->
+                    <!-- Right: Minimalist Character Matrix (50%) -->
                     <div class="inspector-grid-pane">
                         <div class="displaay-glyph-matrix" id="displaayGlyphMatrix">
                             <!-- Populated dynamically via notus.js -->
@@ -2348,67 +3931,86 @@ section[id] {
         </section>
 
         <!-- ====================================================================
-             09. OPENTYPE SPECIFICATIONS & ACTION PILLS
+             09. DOWNLOAD & REQUEST FONT SECTION
              ==================================================================== -->
-        <section class="section-tech" id="tech">
+        <section class="section-download" id="download">
             <div class="site-container">
-                <div class="section-top-bar">
-                    <div class="section-top-bar__info">
-                        <span class="section-num">04</span>
-                        <h2 class="section-title">OpenType Features &amp; Specifications</h2>
-                        <span class="section-desc">Test OpenType feature substitutions live.</span>
-                    </div>
+                <div class="download-cta__bar" id="downloadCtaBar" role="button" tabindex="0" aria-expanded="false" aria-controls="downloadFormWrapper">
+                    <span class="download-cta__text">Interested in using Notus? Request trial or license files.</span>
+                    <span class="download-cta__link" id="downloadCtaAction">&rarr; Request Font</span>
                 </div>
 
-                <div class="tech-grid">
-                    <div class="tech-feature-card">
-                        <div class="feature-switches">
-                            <button class="displaay-pill feature-toggle-btn is-active" data-feat="smcp">Small Caps [smcp]</button>
-                            <button class="displaay-pill feature-toggle-btn is-active" data-feat="onum">Oldstyle [onum]</button>
-                            <button class="displaay-pill feature-toggle-btn is-active" data-feat="liga">Ligatures [liga]</button>
-                            <button class="displaay-pill feature-toggle-btn" data-feat="frac">Fractions [frac]</button>
-                        </div>
-
-                        <div class="feature-sandbox style-text" id="featureSandbox" contenteditable="true" spellcheck="false">
-                            THE ARCHITECTURE OF BREATH 1892–2026. RATIO &frac12; TO &frac34;. (SECTION &sect; 48 &middot; LATIN &amp; CYRILLIC).
-                        </div>
-                    </div>
-
-                    <div class="tech-specs-table-card">
-                        <div class="tech-data-table">
-                            <div class="data-row">
-                                <span class="data-key">Typeface</span>
-                                <span class="data-val">Notus</span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-key">Designer</span>
-                                <span class="data-val">Wiktor Buksza</span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-key">Optical Masters</span>
-                                <span class="data-val">Display, Text, Caption</span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-key">Supported Scripts</span>
-                                <span class="data-val">Latin Extended, Cyrillic</span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-key">Formats</span>
-                                <span class="data-val">OTF, TTF, WOFF, WOFF2</span>
+                <div class="download-form-wrapper" id="downloadFormWrapper" aria-hidden="true">
+                    <div class="download-form__inner">
+                        <div class="download-form__header">
+                            <div class="download-form__title-group">
+                                <span class="notus-intro-pill">Request Trial &amp; License</span>
+                                <h3 class="download-form__title">Notus Typeface</h3>
+                                <p class="download-form__subtitle">
+                                    Available for editorial trials, commercial design systems, and custom licenses. Fill in your details below and we will send the font files package.
+                                </p>
                             </div>
                         </div>
 
-                        <!-- Displaay Iconic Three Action Pills (Black, Cyan, Mint) -->
-                        <div class="displaay-action-pills-row">
-                            <a href="mailto:wiktor.buksza@gmail.com?subject=Notus%20Commercial%20License" class="action-pill action-pill--black">
-                                Inquire Commercial License
-                            </a>
-                            <a href="#tester" class="action-pill action-pill--cyan">
-                                Launch Interactive Studio
-                            </a>
-                            <a href="mailto:wiktor.buksza@gmail.com?subject=Notus%20Trial%20Fonts" class="action-pill action-pill--mint">
-                                Request Trial Fonts (OTF)
-                            </a>
+                        <!-- Web3Forms Form -->
+                        <form class="download-form" id="notusDownloadForm" novalidate>
+                            <input type="hidden" name="access_key" value="5a52640a-9343-48df-a69f-ecb0d05280b2">
+                            <input type="hidden" name="subject" value="New Notus Font Request from buksha.design">
+                            <input type="hidden" name="from_name" value="Notus Specimen Request Form">
+                            <input type="checkbox" name="botcheck" style="display:none">
+
+                            <div class="download-form__fields">
+                                <div class="download-form__row">
+                                    <div class="download-form__field" id="df-field-name">
+                                        <label class="download-form__label" for="dfName">Name</label>
+                                        <input class="download-form__input" type="text" id="dfName" name="name" placeholder="Your name" autocomplete="name" required>
+                                        <span class="download-form__error" id="df-error-name" role="alert"></span>
+                                    </div>
+                                    <div class="download-form__field" id="df-field-email">
+                                        <label class="download-form__label" for="dfEmail">Email</label>
+                                        <input class="download-form__input" type="email" id="dfEmail" name="email" placeholder="your@email.com" autocomplete="email" required>
+                                        <span class="download-form__error" id="df-error-email" role="alert"></span>
+                                    </div>
+                                </div>
+
+                                <div class="download-form__field download-form__field--full" id="df-field-license">
+                                    <label class="download-form__label">License / Request Type</label>
+                                    <div class="download-form__tags" role="group" aria-label="Select request type">
+                                        <button type="button" class="download-form__tag is-active" data-value="Evaluation / Student Trial">Evaluation &amp; Trial</button>
+                                        <button type="button" class="download-form__tag" data-value="Desktop &amp; Print">Desktop &amp; Print</button>
+                                        <button type="button" class="download-form__tag" data-value="Web &amp; Digital">Web &amp; Digital</button>
+                                        <button type="button" class="download-form__tag" data-value="App &amp; Broadcast">App &amp; Broadcast</button>
+                                        <button type="button" class="download-form__tag" data-value="Custom / Full Family">Custom Family</button>
+                                    </div>
+                                    <input type="hidden" id="dfLicenseType" name="license_type" value="Evaluation / Student Trial">
+                                </div>
+
+                                <div class="download-form__field download-form__field--full" id="df-field-message">
+                                    <label class="download-form__label" for="dfMessage">Project or Company Note <span class="download-form__optional">(Optional)</span></label>
+                                    <textarea class="download-form__input download-form__textarea" id="dfMessage" name="message" placeholder="Tell us about the project, estimated scale or license requirements..." rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="download-form__footer">
+                                <button type="submit" class="download-form__submit" id="dfSubmitBtn">
+                                    <span class="download-form__submit-text">Send Request</span>
+                                    <svg class="download-form__submit-arrow" width="18" height="18" viewBox="0 0 20 20" fill="none">
+                                        <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <p class="download-form__privacy">Your contact information is strictly used to send the font package and trial license details.</p>
+                            </div>
+                        </form>
+
+                        <div class="download-form__success" id="notusDownloadSuccess" aria-hidden="true">
+                            <div class="download-form__success-icon">
+                                <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+                                    <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M11 20L17 26L29 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h4 class="download-form__success-title">Request received</h4>
+                            <p class="download-form__success-text">Thank you! We will email the Notus font package and licensing overview shortly.</p>
                         </div>
                     </div>
                 </div>
@@ -2420,42 +4022,37 @@ section[id] {
              ==================================================================== -->
         <section class="section-gallery" id="in-use">
             <div class="site-container">
-                <div class="section-top-bar">
-                    <div class="section-top-bar__info">
-                        <span class="section-num">05</span>
-                        <h2 class="section-title">In Context</h2>
-                        <span class="section-desc">Notus rendered across high-fashion publication, architectural monographs, and packaging design.</span>
-                    </div>
-                </div>
+                <span class="notus-intro-pill">IN CONTEXT</span>
 
-                <div class="displaay-gallery-grid">
-                    <div class="gallery-item gallery-item--large">
-                        <div class="gallery-image-wrap">
-                            <img src="optimized_assets/Notus/Notus_1.webp" alt="Notus Publication Specimen" loading="lazy" decoding="async">
-                        </div>
-                        <div class="gallery-meta">
-                            <span class="gallery-meta__num">01</span>
-                            <span class="gallery-meta__title">Editorial Monograph &mdash; The Dialogue of Stone &amp; Wind</span>
-                        </div>
+                <div class="type-lab__slider-container-wide">
+                    <div class="type-lab__slider-info">
+                        <h4 class="type-lab__slider-title">
+                            Visual specimens and editorial layouts
+                        </h4>
+                        <p class="type-lab__slider-text">
+                            Showcasing Notus in premium brand contexts and high-contrast typography compositions.
+                        </p>
                     </div>
-
-                    <div class="gallery-item">
-                        <div class="gallery-image-wrap">
-                            <img src="optimized_assets/Notus/Notus_2.webp" alt="Notus Poster Series" loading="lazy" decoding="async">
-                        </div>
-                        <div class="gallery-meta">
-                            <span class="gallery-meta__num">02</span>
-                            <span class="gallery-meta__title">Poster Triad &mdash; Kinetic Typographic Cadence</span>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <div class="gallery-image-wrap">
-                            <img src="optimized_assets/Notus/Notus_3.webp" alt="Notus Identity Packaging" loading="lazy" decoding="async">
-                        </div>
-                        <div class="gallery-meta">
-                            <span class="gallery-meta__num">03</span>
-                            <span class="gallery-meta__title">Identity &amp; Packaging &mdash; High-contrast Luxury System</span>
+                    <div class="dclex-slider">
+                        <div class="dclex-slider__track">
+                            <div class="dclex-slider__item">
+                                <img src="optimized_assets/Notus/Notus_1.webp" alt="Notus Display & Text Specimen 1" loading="lazy" decoding="async">
+                            </div>
+                            <div class="dclex-slider__item">
+                                <img src="optimized_assets/Notus/Notus_2.webp" alt="Notus Display & Text Specimen 2" loading="lazy" decoding="async">
+                            </div>
+                            <div class="dclex-slider__item">
+                                <img src="optimized_assets/Notus/Notus_3.webp" alt="Notus Display & Text Specimen 3" loading="lazy" decoding="async">
+                            </div>
+                            <div class="dclex-slider__item">
+                                <img src="optimized_assets/Notus/Notus_1.webp" alt="Notus Display & Text Specimen 1" loading="lazy" decoding="async">
+                            </div>
+                            <div class="dclex-slider__item">
+                                <img src="optimized_assets/Notus/Notus_2.webp" alt="Notus Display & Text Specimen 2" loading="lazy" decoding="async">
+                            </div>
+                            <div class="dclex-slider__item">
+                                <img src="optimized_assets/Notus/Notus_3.webp" alt="Notus Display & Text Specimen 3" loading="lazy" decoding="async">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2463,58 +4060,51 @@ section[id] {
         </section>
 
         <!-- ====================================================================
-             11. MONUMENTAL DISPLAAY-STYLE FOOTER
+             11. MINIMALIST FOOTER (Matches index.html)
              ==================================================================== -->
-        <footer class="section-displaay-footer" id="info">
-            <div class="site-container">
-                <!-- Monumental Grotesque Title -->
-                <div class="footer-foundry-block">
-                    <div class="footer-foundry-title">
-                        Wiktor Buksza<sup>&reg;</sup><br>
-                        Type &amp; Design
-                    </div>
-                    <div class="footer-split-year">
-                        <span>20</span>
-                        <span>26</span>
-                    </div>
+        <footer class="footer" id="info">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="index.html" class="footer__logo-container" aria-label="Wiktor Buksza — Home">
+                        <div id="lottie-logo-footer"></div>
+                        <p class="footer__author-name">Wiktor Buksza</p>
+                    </a>
+                    <p class="footer__brand-meta">Type &amp; Design &mdash; 2026</p>
                 </div>
 
-                <!-- Structured Directory Grid -->
-                <div class="footer-directory-grid">
-                    <div class="dir-col">
-                        <span class="dir-col-title">Collection</span>
-                        <a href="#cover">Notus Display Regular</a>
-                        <a href="#cover">Notus Display Italic</a>
-                        <a href="#cover">Notus Text Regular</a>
-                        <a href="#cover">Notus Text Italic</a>
-                        <a href="#cover">Notus Caption</a>
+                <div class="footer__content">
+                    <div class="footer__col">
+                        <h4>COLLECTION</h4>
+                        <nav>
+                            <a href="#cover">Notus Display Regular</a>
+                            <a href="#cover">Notus Display Italic</a>
+                            <a href="#cover">Notus Text Regular</a>
+                            <a href="#cover">Notus Text Italic</a>
+                            <a href="#cover">Notus Caption</a>
+                        </nav>
                     </div>
-                    <div class="dir-col">
-                        <span class="dir-col-title">Studio</span>
-                        <a href="index.html">Portfolio Home</a>
-                        <a href="index.html#works">Selected Projects</a>
-                        <a href="index.html#about">About Wiktor Buksza</a>
-                        <a href="mailto:wiktor.buksza@gmail.com">Get in Touch</a>
+                    <div class="footer__col">
+                        <h4>STUDIO</h4>
+                        <nav>
+                            <a href="index.html">Portfolio Home</a>
+                            <a href="index.html#works">Selected Projects</a>
+                            <a href="index.html#about">About Wiktor Buksza</a>
+                            <a href="mailto:wiktor.buksza@gmail.com">Get in Touch</a>
+                        </nav>
                     </div>
-                    <div class="dir-col">
-                        <span class="dir-col-title">Licensing</span>
-                        <a href="mailto:wiktor.buksza@gmail.com?subject=Desktop%20License">Desktop (Print &amp; Static)</a>
-                        <a href="mailto:wiktor.buksza@gmail.com?subject=Web%20License">Web &amp; Digital (Self-hosted)</a>
-                        <a href="mailto:wiktor.buksza@gmail.com?subject=App%20License">App &amp; Broadcast</a>
-                        <a href="mailto:wiktor.buksza@gmail.com?subject=Student%20Trial">Free Student &amp; Evaluation</a>
-                    </div>
-                    <div class="dir-col">
-                        <span class="dir-col-title">Inquiries</span>
-                        <a href="mailto:wiktor.buksza@gmail.com">wiktor.buksza@gmail.com</a>
-                        <span>Warsaw / Worldwide</span>
-                        <span>Available for Custom Type Design</span>
+                    <div class="footer__col">
+                        <h4>INQUIRIES</h4>
+                        <nav>
+                            <a href="mailto:wiktor.buksza@gmail.com">wiktor.buksza@gmail.com</a>
+                            <span>Warsaw / Worldwide</span>
+                            <span>Available for Custom Type Design</span>
+                        </nav>
                     </div>
                 </div>
+            </div>
 
-                <div class="footer-bottom-bar">
-                    <div>&copy; 2026 Wiktor Buksza. Specimen design homage to Displaay Type Foundry.</div>
-                    <a href="#top" class="displaay-pill displaay-pill--sm">Back to Top &uarr;</a>
-                </div>
+            <div class="footer__bottom">
+                <div>&copy; 2026 Wiktor Buksza. All rights reserved.</div>
             </div>
         </footer>
     </main>
@@ -2537,6 +4127,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initTesterStudio();
     initDisplaayGlyphs();
     initOpenTypeSandbox();
+    initComparisonStackSwitchers();
+    initDownloadForm();
 });
 
 /* --------------------------------------------------------------------------
@@ -2567,7 +4159,7 @@ function initScrollAndNav() {
                 e.preventDefault();
                 const headerH = header ? header.offsetHeight : 104;
                 const subnav = document.querySelector('.notus-giant-subnav-wrapper');
-                const subnavH = subnav ? subnav.offsetHeight : 56;
+                const subnavH = subnav ? subnav.offsetHeight : 0;
                 const totalOffset = headerH + subnavH + 16;
                 const targetTop = target.getBoundingClientRect().top + window.pageYOffset - totalOffset;
                 window.scrollTo({
@@ -2603,9 +4195,8 @@ function initScrollAndNav() {
 
         let currentSectionId = '';
         sections.forEach(sec => {
-            const top = sec.offsetTop - 180;
-            const height = sec.offsetHeight;
-            if (scrollTop >= top && scrollTop < top + height) {
+            const top = sec.getBoundingClientRect().top + scrollTop - 180;
+            if (scrollTop >= top) {
                 currentSectionId = `#${sec.id}`;
             }
         });
@@ -2616,32 +4207,50 @@ function initScrollAndNav() {
                 if (pill.getAttribute('href') === currentSectionId) {
                     pill.classList.add('is-active');
                 } else {
-                    pill.classList.remove('is-active');
+                    pill.classList.remove('is-active', 'giant-pill--active');
                 }
             });
         } else {
             // At the top of the page
             if (notusPill) notusPill.classList.add('is-active', 'giant-pill--active');
-            giantPills.forEach(pill => pill.classList.remove('is-active'));
+            giantPills.forEach((pill, idx) => {
+                if (idx === 0) {
+                    pill.classList.add('is-active');
+                } else {
+                    pill.classList.remove('is-active', 'giant-pill--active');
+                }
+            });
         }
     }, { passive: true });
 }
 
 /* --------------------------------------------------------------------------
-   02. HEADER LOTTIE LOGO (Matches index.html)
+   02. HEADER & FOOTER LOTTIE LOGO (Matches index.html)
    -------------------------------------------------------------------------- */
 function initHeaderLogo() {
     const logoContainer = document.getElementById('lottie-logo') || document.getElementById('siteLottieLogo');
-    if (logoContainer && typeof lottie !== 'undefined') {
+    const footerLogoContainer = document.getElementById('lottie-logo-footer');
+    if (typeof lottie !== 'undefined') {
         const logoData = {"v":"5.12.1","fr":25,"ip":0,"op":100,"w":500,"h":500,"nm":"WB Animation","ddd":0,"assets":[],"layers":[{"ddd":0,"ind":1,"ty":4,"nm":"W3","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[250,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":1,"k":[{"i":{"x":0.667,"y":1},"o":{"x":1,"y":0},"t":0,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,-1.095],[50,150],[-50,150],[-49.818,-1.095]],"c":true}]},{"i":{"x":0.63,"y":1},"o":{"x":0.953,"y":0},"t":27,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true}]},{"i":{"x":1,"y":1},"o":{"x":0.333,"y":0},"t":49,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50.182,-148.905],[-49.818,-148.905],[-50,-150]],"c":true}]},{"i":{"x":0,"y":1},"o":{"x":0.333,"y":0},"t":50,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,148.905],[50.365,150],[-49.635,150],[-49.818,148.905]],"c":true}]},{"t":74,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.183,-2.19],[50.365,150],[-49.635,150],[-49.817,-2.19]],"c":true}]}],"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":2,"ty":4,"nm":"W2","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[370,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":3,"ty":4,"nm":"W1","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[130,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0}],"markers":[],"props":{}};
 
-        lottie.loadAnimation({
-            container: logoContainer,
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            animationData: logoData
-        });
+        if (logoContainer) {
+            lottie.loadAnimation({
+                container: logoContainer,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                animationData: logoData
+            });
+        }
+        if (footerLogoContainer) {
+            lottie.loadAnimation({
+                container: footerLogoContainer,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                animationData: logoData
+            });
+        }
     }
 }
 
@@ -2807,10 +4416,10 @@ function initDisplaayGlyphs() {
     let selectedChar = 'a';
 
     const sets = {
-        'all': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя0123456789.,:;!?\'"—–-()[]{}/\\@#$%&*+=<>€$£¥₽§¶†‡©®™°¼½¾⅓⅔',
+        'all': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя0123456789.,:;!?\'"—–-()[]{}/\\@#$%&*+=<>€$£¥₽§¶†‡©®™°¼½¾',
         'latin': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ',
         'cyrillic': 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюяҐЄІЇґєії',
-        'figures': '0123456789¼½¾⅓⅔⅛⅜⅝⅞%‰+−±×÷=≠≈$€£¥₽¢№',
+        'figures': '0123456789¼½¾%‰+−±×÷=≠≈$€£¥₽¢№',
         'symbols': '.,:;!?\'"—–-()[]{}/\\@#&*§¶†‡©®™°•…„“”«»'
     };
 
@@ -2820,7 +4429,7 @@ function initDisplaayGlyphs() {
         
         const codePoint = char.codePointAt(0);
         const hex = 'U+' + codePoint.toString(16).toUpperCase().padStart(4, '0');
-        if (charUnicode) charUnicode.textContent = `${hex} · Dec ${codePoint}`;
+        if (charUnicode) charUnicode.textContent = hex;
         if (charName) charName.textContent = getCharacterDescription(char, codePoint);
     }
 
@@ -2844,7 +4453,7 @@ function initDisplaayGlyphs() {
         chars.forEach((ch, idx) => {
             const cell = document.createElement('div');
             cell.className = 'glyph-box';
-            if (ch === 'a' || (idx === 0 && !chars.includes('a'))) {
+            if (idx === 0) {
                 cell.classList.add('is-active');
             }
             cell.textContent = ch;
@@ -2893,12 +4502,14 @@ function initDisplaayGlyphs() {
             tabBtns.forEach(b => b.classList.remove('is-active'));
             btn.classList.add('is-active');
             const cat = btn.getAttribute('data-glyph-cat');
-            renderMatrix(sets[cat] || sets['all']);
+            const activeSet = sets[cat] || sets['all'];
+            renderMatrix(activeSet);
+            updateInspector(Array.from(activeSet)[0] || 'A');
         });
     });
 
     renderMatrix(sets['all']);
-    updateInspector('a');
+    updateInspector('A');
 }
 
 /* --------------------------------------------------------------------------
@@ -2947,7 +4558,10 @@ function initBroadsheetInteractive() {
 
     const slogans = [
         { line1: 'Silent rhythm,', line2: 'tactile grace.' },
-        { line1: 'Жыве Беларусь,', line2: 'жыве вечна!' }
+        { line1: 'Жыве Беларусь!', line2: 'Жыве вечна!' },
+        { line1: 'Souffle doré,', line2: 'beauté pure.' },
+        { line1: 'Stille Größe,', line2: 'klare Form.' },
+        { line1: 'Czułe światło,', line2: 'żywa forma.' }
     ];
 
     const MAX_LEN_1 = Math.max(...slogans.map(s => s.line1.length));
@@ -2998,10 +4612,10 @@ function initBroadsheetInteractive() {
     let isTransitioning = false;
 
     // Pre-measured character advance widths for each slogan: widthsCache[sloganIdx].line1[i], .line2[i]
-    const widthsCache = [
-        { line1: new Array(MAX_LEN_1).fill(0), line2: new Array(MAX_LEN_2).fill(0) },
-        { line1: new Array(MAX_LEN_1).fill(0), line2: new Array(MAX_LEN_2).fill(0) }
-    ];
+    const widthsCache = slogans.map(() => ({
+        line1: new Array(MAX_LEN_1).fill(0),
+        line2: new Array(MAX_LEN_2).fill(0)
+    }));
 
     function measureCharAdvance(measureNode, ch) {
         if (!ch) return 0;
@@ -3200,7 +4814,7 @@ function initBroadsheetInteractive() {
 }
 
 /* --------------------------------------------------------------------------
-   02-C. BROADSHEET SCULPTURAL MARBLE DUST (Delicate Micro-Canvas Particles on Wind)
+   02-C. BROADSHEET ATMOSPHERIC GOLDEN STARDUST & KINETIC PARTICLES
    -------------------------------------------------------------------------- */
 function initBroadsheetAmbientGlow() {
     const section = document.getElementById('editorial-now');
@@ -3217,68 +4831,68 @@ function initBroadsheetAmbientGlow() {
     let isVisible = true;
     let isHovered = false;
 
-    const mouse = { x: -9999, y: -9999 };
-    let mouseVelocity = { x: 0, y: 0 };
+    const mouse = { x: -9999, y: -9999, targetX: -9999, targetY: -9999 };
+    let mouseSpeed = 0;
     let lastMouseX = -9999;
     let lastMouseY = -9999;
-    let lastMoveTime = performance.now();
 
-    // 80 Sculptural Marble Dust particles across 3 optical depth layers
-    const PARTICLE_COUNT = 80;
+    const PARTICLE_COUNT = 90;
     const particles = [];
-    const trailSparks = [];
+    const interactiveBursts = [];
 
-    function createParticle(initialX) {
-        // Layer: 0 = background (fine/slow), 1 = midground, 2 = foreground (luminous/close)
-        const depthRoll = Math.random();
-        let depth = 0;
-        let radius = 0.9;
-        let baseOpacity = 0.35;
-        let baseVx = 0.45;
+    function createParticle(randomX) {
+        // Optical tiers: 0 = distant micro-spark, 1 = midground drift, 2 = foreground luminous ember
+        const tierRoll = Math.random();
+        let tier = 0;
+        let radius = 0.75;
+        let baseAlpha = 0.35;
+        let speed = 0.45;
 
-        if (depthRoll > 0.78) {
-            // Foreground: close luminous marble grains (reduced by 40%)
-            depth = 2;
-            radius = 1.32 + Math.random() * 0.66;
-            baseOpacity = 0.85 + Math.random() * 0.12;
-            baseVx = 1.1 + Math.random() * 0.55;
-        } else if (depthRoll > 0.42) {
-            // Midground: floating marble dust (reduced by 40%)
-            depth = 1;
-            radius = 0.78 + Math.random() * 0.42;
-            baseOpacity = 0.55 + Math.random() * 0.22;
-            baseVx = 0.65 + Math.random() * 0.40;
+        if (tierRoll > 0.8) {
+            tier = 2;
+            radius = 1.35 + Math.random() * 0.75;
+            baseAlpha = 0.75 + Math.random() * 0.2;
+            speed = 0.85 + Math.random() * 0.45;
+        } else if (tierRoll > 0.4) {
+            tier = 1;
+            radius = 0.85 + Math.random() * 0.4;
+            baseAlpha = 0.45 + Math.random() * 0.25;
+            speed = 0.55 + Math.random() * 0.3;
         } else {
-            // Background: distant micro-haze (reduced by 40%)
-            depth = 0;
-            radius = 0.45 + Math.random() * 0.30;
-            baseOpacity = 0.25 + Math.random() * 0.20;
-            baseVx = 0.35 + Math.random() * 0.25;
+            tier = 0;
+            radius = 0.5 + Math.random() * 0.3;
+            baseAlpha = 0.2 + Math.random() * 0.2;
+            speed = 0.3 + Math.random() * 0.2;
         }
 
+        // Color palette: 0 = pure crystalline white, 1 = warm champagne alabaster, 2 = golden bronze
+        const colorType = Math.random();
+        let rgb = '255, 255, 255';
+        if (colorType > 0.65) rgb = '245, 210, 155'; // warm gold
+        else if (colorType > 0.3) rgb = '255, 240, 220'; // champagne alabaster
+
         return {
-            x: initialX !== undefined ? initialX : Math.random() * (width || 1200),
+            x: randomX ? Math.random() * (width || 1200) : -15,
             y: Math.random() * (height || 600),
-            vx: baseVx,
-            vy: (Math.random() - 0.5) * 0.15,
-            baseVx: baseVx,
-            baseVy: 0,
-            radius: radius,
-            depth: depth,
-            baseOpacity: baseOpacity,
-            waveFreq: 0.35 + Math.random() * 0.45,
-            waveAmp: 0.25 + Math.random() * 0.45,
+            vx: speed,
+            vy: (Math.random() - 0.5) * 0.25,
+            baseVx: speed,
+            baseVy: (Math.random() - 0.5) * 0.15,
+            radius,
+            tier,
+            baseAlpha,
+            rgb,
+            waveFreq: 0.4 + Math.random() * 0.5,
+            waveAmp: 0.35 + Math.random() * 0.5,
             phase: Math.random() * Math.PI * 2,
-            twinkleSpeed: 0.8 + Math.random() * 1.4,
-            // Warm marble tones: alabaster cream, sunlit champagne, and warm amber gold
-            hueType: Math.random()
+            twinkleFreq: 0.8 + Math.random() * 1.5
         };
     }
 
     function initParticles() {
         particles.length = 0;
         for (let i = 0; i < PARTICLE_COUNT; i++) {
-            particles.push(createParticle(Math.random() * width));
+            particles.push(createParticle(true));
         }
     }
 
@@ -3311,32 +4925,35 @@ function initBroadsheetAmbientGlow() {
         const rect = section.getBoundingClientRect();
         const curX = clientX - rect.left;
         const curY = clientY - rect.top;
-        const now = performance.now();
-        const dt = Math.max((now - lastMoveTime) * 0.001, 0.016);
 
         if (lastMouseX !== -9999) {
-            mouseVelocity.x = (curX - lastMouseX) / dt * 0.05;
-            mouseVelocity.y = (curY - lastMouseY) / dt * 0.05;
+            const dx = curX - lastMouseX;
+            const dy = curY - lastMouseY;
+            mouseSpeed = Math.hypot(dx, dy);
+
+            // Emit subtle kinetic micro-sparks on cursor move
+            if (mouseSpeed > 9 && interactiveBursts.length < 24) {
+                interactiveBursts.push({
+                    x: curX + (Math.random() - 0.5) * 12,
+                    y: curY + (Math.random() - 0.5) * 12,
+                    vx: dx * 0.08 + (Math.random() * 0.6 + 0.3),
+                    vy: dy * 0.08 + (Math.random() - 0.5) * 0.7,
+                    radius: 0.8 + Math.random() * 0.8,
+                    alpha: 0.85,
+                    decay: 0.02 + Math.random() * 0.025,
+                    rgb: Math.random() > 0.4 ? '255, 235, 190' : '255, 255, 255'
+                });
+            }
         }
 
         lastMouseX = curX;
         lastMouseY = curY;
-        lastMoveTime = now;
-        mouse.x = curX;
-        mouse.y = curY;
+        mouse.targetX = curX;
+        mouse.targetY = curY;
 
-        // Occasionally spawn subtle momentary luminous sparks at cursor
-        if (Math.hypot(mouseVelocity.x, mouseVelocity.y) > 8 && trailSparks.length < 18) {
-            trailSparks.push({
-                x: curX + (Math.random() - 0.5) * 16,
-                y: curY + (Math.random() - 0.5) * 16,
-                vx: mouseVelocity.x * 0.08 + (Math.random() * 0.8 + 0.4),
-                vy: mouseVelocity.y * 0.08 + (Math.random() - 0.5) * 0.8,
-                radius: 0.9 + Math.random() * 0.9,
-                opacity: 0.85,
-                life: 1.0,
-                decay: 0.02 + Math.random() * 0.025
-            });
+        if (mouse.x === -9999) {
+            mouse.x = curX;
+            mouse.y = curY;
         }
     }
 
@@ -3356,6 +4973,8 @@ function initBroadsheetAmbientGlow() {
         isHovered = false;
         mouse.x = -9999;
         mouse.y = -9999;
+        lastMouseX = -9999;
+        lastMouseY = -9999;
     });
 
     section.addEventListener('touchstart', (e) => {
@@ -3376,22 +4995,7 @@ function initBroadsheetAmbientGlow() {
 
     section.addEventListener('touchend', () => {
         isHovered = false;
-        mouse.x = -9999;
-        mouse.y = -9999;
     });
-
-    function getParticleColor(hueType, opacity) {
-        if (hueType > 0.65) {
-            // Warm golden amber flecks
-            return `rgba(248, 208, 148, ${opacity})`;
-        } else if (hueType > 0.3) {
-            // Sunlit champagne marble
-            return `rgba(255, 238, 212, ${opacity})`;
-        } else {
-            // Alabaster white dust
-            return `rgba(255, 252, 245, ${opacity})`;
-        }
-    }
 
     function render(currentTime) {
         if (!isVisible) {
@@ -3401,129 +5005,135 @@ function initBroadsheetAmbientGlow() {
 
         const t = (currentTime || performance.now()) * 0.001;
 
-        // Clear with pure pitch black base
+        // Smooth mouse cursor interpolation
+        if (isHovered && mouse.targetX !== -9999) {
+            mouse.x += (mouse.targetX - mouse.x) * 0.08;
+            mouse.y += (mouse.targetY - mouse.y) * 0.08;
+        }
+
+        // 1. Deep Obsidian Studio Base
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, width, height);
 
-        // Soft ambient beam of light through the studio center (sculptor's light shaft)
-        const centerGrad = ctx.createRadialGradient(width * 0.5, height * 0.48, 0, width * 0.5, height * 0.48, Math.max(width * 0.45, 450));
-        centerGrad.addColorStop(0, 'rgba(235, 195, 140, 0.075)');
-        centerGrad.addColorStop(0.5, 'rgba(185, 135, 75, 0.025)');
+        // 2. Soft atmospheric center warmth
+        const centerGrad = ctx.createRadialGradient(width * 0.5, height * 0.5, 0, width * 0.5, height * 0.5, Math.max(width * 0.5, 450));
+        centerGrad.addColorStop(0, 'rgba(235, 195, 140, 0.06)');
+        centerGrad.addColorStop(0.5, 'rgba(185, 135, 75, 0.02)');
         centerGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
         ctx.fillStyle = centerGrad;
         ctx.fillRect(0, 0, width, height);
 
-        // Decay mouse velocity
-        mouseVelocity.x *= 0.92;
-        mouseVelocity.y *= 0.92;
+        // 3. Delicate Cursor Halo
+        if (isHovered && mouse.x !== -9999) {
+            const cursorGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 220);
+            cursorGrad.addColorStop(0, 'rgba(255, 235, 200, 0.07)');
+            cursorGrad.addColorStop(0.6, 'rgba(210, 160, 100, 0.02)');
+            cursorGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = cursorGrad;
+            ctx.fillRect(0, 0, width, height);
+        }
 
-        const MOUSE_RADIUS = 180;
-        const MOUSE_RADIUS_SQ = MOUSE_RADIUS * MOUSE_RADIUS;
+        // 4. Update & Render Golden Particles
+        const MOUSE_REPEL_RADIUS = 160;
+        const MOUSE_REPEL_SQ = MOUSE_REPEL_RADIUS * MOUSE_REPEL_RADIUS;
 
-        // Update and draw particles
         for (let i = 0; i < particles.length; i++) {
             const p = particles[i];
 
-            // 1. Natural wind drift & wave
-            const waveY = Math.sin(t * p.waveFreq + p.phase) * p.waveAmp;
+            // Harmonic vertical undulation
+            const wave = Math.sin(t * p.waveFreq + p.phase) * p.waveAmp;
             p.x += p.vx;
-            p.y += p.vy + waveY;
+            p.y += p.vy + wave;
 
-            // 2. Mouse deflection & fluid wind reaction
+            // Interactive cursor repulsion / draft
             if (isHovered && mouse.x !== -9999) {
                 const dx = p.x - mouse.x;
                 const dy = p.y - mouse.y;
                 const distSq = dx * dx + dy * dy;
 
-                if (distSq < MOUSE_RADIUS_SQ && distSq > 1) {
+                if (distSq < MOUSE_REPEL_SQ && distSq > 4) {
                     const dist = Math.sqrt(distSq);
-                    const normalX = dx / dist;
-                    const normalY = dy / dist;
-                    const force = Math.pow(1 - dist / MOUSE_RADIUS, 1.8) * 3.8;
-
-                    // Deflection away from cursor + gentle lift in mouse direction
-                    p.vx += normalX * force + mouseVelocity.x * 0.04;
-                    p.vy += normalY * force + mouseVelocity.y * 0.04;
+                    const force = Math.pow(1 - dist / MOUSE_REPEL_RADIUS, 1.6) * 3.2;
+                    p.vx += (dx / dist) * force;
+                    p.vy += (dy / dist) * force;
                 }
             }
 
-            // Smooth damping back to steady-state wind speed
-            p.vx += (p.baseVx - p.vx) * 0.045;
-            p.vy += (p.baseVy - p.vy) * 0.045;
+            // Restore equilibrium speed
+            p.vx += (p.baseVx - p.vx) * 0.04;
+            p.vy += (p.baseVy - p.vy) * 0.04;
 
-            // Wrap boundaries smoothly
-            if (p.x > width + 25) {
-                p.x = -25;
+            // Seamless boundary wrap
+            if (p.x > width + 20) {
+                p.x = -20;
                 p.y = Math.random() * height;
                 p.vx = p.baseVx;
-                p.vy = 0;
-            } else if (p.x < -25) {
-                p.x = width + 25;
+                p.vy = p.baseVy;
+            } else if (p.x < -20) {
+                p.x = width + 20;
             }
 
             if (p.y > height + 20) p.y = -20;
             else if (p.y < -20) p.y = height + 20;
 
-            // Twinkle pulsation
-            const twinkle = 0.8 + 0.2 * Math.sin(t * p.twinkleSpeed + p.phase);
-            const currentOpacity = Math.min(Math.max(p.baseOpacity * twinkle, 0.1), 0.98);
-            const particleColor = getParticleColor(p.hueType, currentOpacity);
+            // Twinkle oscillation
+            const twinkle = 0.75 + 0.25 * Math.sin(t * p.twinkleFreq + p.phase);
+            const currentAlpha = Math.min(Math.max(p.baseAlpha * twinkle, 0.1), 0.95);
 
             // Draw particle
-            if (p.depth === 2) {
-                // Foreground: draw with soft luminous bloom halo
-                const glowRad = p.radius * 2.8;
-                const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, glowRad);
-                halo.addColorStop(0, particleColor);
-                halo.addColorStop(0.35, getParticleColor(p.hueType, currentOpacity * 0.5));
-                halo.addColorStop(1, 'rgba(0,0,0,0)');
+            if (p.tier === 2) {
+                // Foreground: luminous halo + bright center
+                const haloR = p.radius * 2.6;
+                const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
+                halo.addColorStop(0, `rgba(${p.rgb}, ${currentAlpha * 0.85})`);
+                halo.addColorStop(0.4, `rgba(${p.rgb}, ${currentAlpha * 0.3})`);
+                halo.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
                 ctx.fillStyle = halo;
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, glowRad, 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, haloR, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Bright crystalline core
-                ctx.fillStyle = `rgba(255, 255, 255, ${currentOpacity})`;
+                ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha})`;
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius * 0.7, 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, p.radius * 0.65, 0, Math.PI * 2);
                 ctx.fill();
             } else {
-                // Midground & Background: crisp, delicate micro-dust dots
-                ctx.fillStyle = particleColor;
+                // Midground & Background: crisp delicate embers
+                ctx.fillStyle = `rgba(${p.rgb}, ${currentAlpha})`;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        // Draw and update fleeting trail sparks
-        for (let i = trailSparks.length - 1; i >= 0; i--) {
-            const sp = trailSparks[i];
-            sp.x += sp.vx;
-            sp.y += sp.vy;
-            sp.vx *= 0.96;
-            sp.vy *= 0.96;
-            sp.life -= sp.decay;
+        // 5. Update & Render Interactive Cursor Bursts
+        for (let i = interactiveBursts.length - 1; i >= 0; i--) {
+            const b = interactiveBursts[i];
+            b.x += b.vx;
+            b.y += b.vy;
+            b.vx *= 0.95;
+            b.vy *= 0.95;
+            b.alpha -= b.decay;
 
-            if (sp.life <= 0) {
-                trailSparks.splice(i, 1);
+            if (b.alpha <= 0) {
+                interactiveBursts.splice(i, 1);
                 continue;
             }
 
-            const spAlpha = sp.opacity * sp.life;
-            const spGrad = ctx.createRadialGradient(sp.x, sp.y, 0, sp.x, sp.y, sp.radius * 2.4);
-            spGrad.addColorStop(0, `rgba(255, 240, 205, ${spAlpha})`);
-            spGrad.addColorStop(1, 'rgba(0,0,0,0)');
-            ctx.fillStyle = spGrad;
+            const bGrad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.radius * 2.2);
+            bGrad.addColorStop(0, `rgba(${b.rgb}, ${b.alpha})`);
+            bGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = bGrad;
             ctx.beginPath();
-            ctx.arc(sp.x, sp.y, sp.radius * 2.4, 0, Math.PI * 2);
+            ctx.arc(b.x, b.y, b.radius * 2.2, 0, Math.PI * 2);
             ctx.fill();
         }
 
         animId = requestAnimationFrame(render);
     }
 
-    // Start immediately!
+    // Start rendering loop
     animId = requestAnimationFrame(render);
 
     const observer = new IntersectionObserver((entries) => {
@@ -3559,13 +5169,40 @@ function initMastheadDelicateAnimation() {
     const topText = topLine.textContent.trim();
     const bottomText = bottomLine.textContent.trim();
 
+    // Inject subtle SVG fractal-noise filter for the prismatic gradient
+    if (!document.getElementById('masthead-grain-filter')) {
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const svgEl = document.createElementNS(svgNS, 'svg');
+        svgEl.setAttribute('width', '0');
+        svgEl.setAttribute('height', '0');
+        svgEl.setAttribute('aria-hidden', 'true');
+        svgEl.style.cssText = 'position:absolute;width:0;height:0;pointer-events:none;overflow:hidden;';
+        svgEl.innerHTML = `
+            <defs>
+                <filter id="masthead-grain-filter" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="3" seed="11" stitchTiles="stitch" result="noise" />
+                    <feColorMatrix in="noise" type="matrix"
+                        values="1 0 0 0 0
+                                1 0 0 0 0
+                                1 0 0 0 0
+                                1 0 0 0 0" result="monoNoise" />
+                    <feComposite in="SourceGraphic" in2="monoNoise" operator="arithmetic" k1="0.82" k2="0.59" k3="0" k4="0" />
+                </filter>
+            </defs>
+        `;
+        coverSection.appendChild(svgEl);
+    }
+
     // Build un-split core layer (preserves native kerning, ligatures, and full 'h' ascender)
-    // and radial-masked background glow layer so only the local mouse region glows
+    // and radial-masked background glow layer so only the local mouse/wind region glows
     mastheadTitle.innerHTML = '';
 
     const glowMask = document.createElement('div');
     glowMask.className = 'masthead-glow-mask';
     glowMask.setAttribute('aria-hidden', 'true');
+
+    const glowGrain = document.createElement('div');
+    glowGrain.className = 'masthead-glow-grain';
 
     const glowLayer = document.createElement('div');
     glowLayer.className = 'masthead-glow-layer';
@@ -3580,7 +5217,8 @@ function initMastheadDelicateAnimation() {
 
     glowLayer.appendChild(glowTop);
     glowLayer.appendChild(glowBottom);
-    glowMask.appendChild(glowLayer);
+    glowGrain.appendChild(glowLayer);
+    glowMask.appendChild(glowGrain);
 
     const coreLayer = document.createElement('div');
     coreLayer.className = 'masthead-core-layer';
@@ -3600,6 +5238,7 @@ function initMastheadDelicateAnimation() {
     mastheadTitle.appendChild(coreLayer);
 
     let isHovered = false;
+    let isVisible = true;
     let targetX = 0;
     let targetY = 0;
     let smoothX = 0;
@@ -3608,7 +5247,7 @@ function initMastheadDelicateAnimation() {
     let vy = 0;
     let lastClientX = null;
     let lastClientY = null;
-    let intensity = 0;
+    let hoverMix = 0;
     let shiftX = 14;
     let shiftY = 7;
     let animId = null;
@@ -3616,7 +5255,7 @@ function initMastheadDelicateAnimation() {
     const SPOT_RADIUS = 260;
 
     function startLoop() {
-        if (!animId) {
+        if (!animId && isVisible) {
             animId = requestAnimationFrame(animate);
         }
     }
@@ -3660,58 +5299,536 @@ function initMastheadDelicateAnimation() {
         startLoop();
     }, { passive: true });
 
-    function animate() {
-        vx *= 0.88;
-        vy *= 0.88;
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                isVisible = entry.isIntersecting;
+                if (isVisible) {
+                    startLoop();
+                } else if (animId) {
+                    cancelAnimationFrame(animId);
+                    animId = null;
+                }
+            });
+        }, { threshold: 0.02 });
+        io.observe(coverSection);
+    }
 
-        smoothX += (targetX - smoothX) * 0.22;
-        smoothY += (targetY - smoothY) * 0.22;
+    glowMask.style.opacity = '1';
 
-        const targetIntensity = isHovered ? 1 : 0;
-        intensity += (targetIntensity - intensity) * 0.12;
+    function animate(now) {
+        if (!isVisible) {
+            animId = null;
+            return;
+        }
+
+        const t = (now || performance.now()) * 0.001;
+
+        vx *= 0.90;
+        vy *= 0.90;
+
+        smoothX += (targetX - smoothX) * 0.18;
+        smoothY += (targetY - smoothY) * 0.18;
+
+        const targetHover = isHovered ? 1 : 0;
+        hoverMix += (targetHover - hoverMix) * 0.08;
+
+        // Gentle southern breeze harmonics ("Notus" wind)
+        const gust1 = Math.sin(t * 0.85);
+        const gust2 = Math.sin(t * 1.45 + 1.2);
+        const gust3 = Math.cos(t * 0.62 + 2.5);
+        const windPulse = 0.88 + 0.18 * gust1 + 0.10 * gust2;
 
         const clampedVx = Math.max(-16, Math.min(16, vx));
         const clampedVy = Math.max(-12, Math.min(12, vy));
-        const targetShiftX = 14.0 + Math.abs(clampedVx) * 0.65;
-        const targetShiftY = 7.0 + clampedVy * 0.42;
 
-        shiftX += (targetShiftX - shiftX) * 0.12;
-        shiftY += (targetShiftY - shiftY) * 0.12;
+        const targetShiftX = (14.0 + gust1 * 3.2 + gust2 * 1.8) + Math.abs(clampedVx) * 0.65;
+        const targetShiftY = (6.8 + gust3 * 2.4) + clampedVy * 0.42;
 
-        if (intensity > 0.005) {
-            const a = Math.min(1, intensity);
-            const sx = shiftX * a;
-            const sy = shiftY * a;
+        shiftX += (targetShiftX - shiftX) * 0.10;
+        shiftY += (targetShiftY - shiftY) * 0.10;
 
-            // Radial mask spotlight centered on the mouse cursor so only the local region glows
-            const maskGrad = `radial-gradient(circle ${SPOT_RADIUS}px at ${smoothX.toFixed(1)}px ${smoothY.toFixed(1)}px, rgba(0,0,0,1) 0%, rgba(0,0,0,0.78) 34%, rgba(0,0,0,0.32) 66%, rgba(0,0,0,0) 100%)`;
-            glowMask.style.opacity = '1';
-            glowMask.style.webkitMaskImage = maskGrad;
-            glowMask.style.maskImage = maskGrad;
+        // 1) Continuous drifting wind-wave streams across the masthead
+        const cycle1 = (t * 0.095) % 1;
+        const env1 = Math.sin(cycle1 * Math.PI);
+        const w1x = (8 + cycle1 * 84).toFixed(1);
+        const w1y = (48 + Math.sin(t * 0.75) * 14).toFixed(1);
+        const w1a = (env1 * (0.72 - hoverMix * 0.25)).toFixed(3);
 
-            // Soft optical blur on the background glow layer (-20% additional intensity reduction)
-            const blurPx = (a * 4.15).toFixed(2);
-            glowLayer.style.filter = `blur(${blurPx}px)`;
+        const cycle2 = (t * 0.095 + 0.5) % 1;
+        const env2 = Math.sin(cycle2 * Math.PI);
+        const w2x = (8 + cycle2 * 84).toFixed(1);
+        const w2y = (54 + Math.cos(t * 0.68 + 1.1) * 15).toFixed(1);
+        const w2a = (env2 * (0.68 - hoverMix * 0.25)).toFixed(3);
 
-            // Multi-spectrum RGB/prismatic dispersion layers (-20% additional intensity reduction)
-            const sAmber   = `${(-sx * 1.50).toFixed(1)}px ${(sy * 1.20).toFixed(1)}px ${(15.4 * a + 2.5).toFixed(1)}px rgba(255, 178, 38, ${(a * 0.42).toFixed(3)})`;
-            const sMagenta = `${(-sx * 0.82).toFixed(1)}px ${(sy * 0.58).toFixed(1)}px ${(9.0 * a + 1.3).toFixed(1)}px rgba(255, 38, 108, ${(a * 0.43).toFixed(3)})`;
-            const sViolet  = `${(-sx * 0.18).toFixed(1)}px ${(-sy * 0.88).toFixed(1)}px ${(9.6 * a + 1.3).toFixed(1)}px rgba(112, 16, 255, ${(a * 0.42).toFixed(3)})`;
-            const sBlue    = `${(sx * 0.82).toFixed(1)}px ${(-sy * 0.32).toFixed(1)}px ${(9.0 * a + 1.3).toFixed(1)}px rgba(12, 88, 255, ${(a * 0.43).toFixed(3)})`;
-            const sCyan    = `${(sx * 1.60).toFixed(1)}px ${(sy * 0.22).toFixed(1)}px ${(16.6 * a + 2.5).toFixed(1)}px rgba(0, 228, 255, ${(a * 0.43).toFixed(3)})`;
+        const rx1 = Math.round(320 + gust1 * 38);
+        const ry1 = Math.round(215 + gust3 * 24);
+        const rx2 = Math.round(290 + gust2 * 34);
+        const ry2 = Math.round(205 - gust1 * 22);
 
-            glowLayer.style.textShadow = `${sAmber}, ${sMagenta}, ${sViolet}, ${sBlue}, ${sCyan}`;
+        const windGrad1 = `radial-gradient(ellipse ${rx1}px ${ry1}px at ${w1x}% ${w1y}%, rgba(0,0,0,${w1a}) 0%, rgba(0,0,0,${(w1a * 0.65).toFixed(3)}) 42%, rgba(0,0,0,0) 100%)`;
+        const windGrad2 = `radial-gradient(ellipse ${rx2}px ${ry2}px at ${w2x}% ${w2y}%, rgba(0,0,0,${w2a}) 0%, rgba(0,0,0,${(w2a * 0.65).toFixed(3)}) 42%, rgba(0,0,0,0) 100%)`;
 
-            animId = requestAnimationFrame(animate);
-        } else {
-            intensity = 0;
-            glowMask.style.opacity = '0';
-            glowMask.style.webkitMaskImage = 'none';
-            glowMask.style.maskImage = 'none';
-            glowLayer.style.filter = 'none';
-            glowLayer.style.textShadow = 'none';
-            animId = null;
+        // 2) Local mouse spotlight gently elongated and swaying with the breeze
+        let maskGrad = `${windGrad1}, ${windGrad2}`;
+        if (hoverMix > 0.005) {
+            const hm = hoverMix;
+            const spotRx = (SPOT_RADIUS * (1.06 + 0.08 * gust1)).toFixed(1);
+            const spotRy = (SPOT_RADIUS * (0.94 + 0.06 * gust3)).toFixed(1);
+            const driftX = smoothX + gust1 * 10 + gust2 * 5;
+            const driftY = smoothY + gust3 * 7;
+            const mouseGrad = `radial-gradient(ellipse ${spotRx}px ${spotRy}px at ${driftX.toFixed(1)}px ${driftY.toFixed(1)}px, rgba(0,0,0,${hm.toFixed(3)}) 0%, rgba(0,0,0,${(hm * 0.78).toFixed(3)}) 36%, rgba(0,0,0,${(hm * 0.32).toFixed(3)}) 68%, rgba(0,0,0,0) 100%)`;
+            maskGrad = `${mouseGrad}, ${windGrad1}, ${windGrad2}`;
         }
+
+        glowMask.style.webkitMaskImage = maskGrad;
+        glowMask.style.maskImage = maskGrad;
+
+        // 3) Traveling wind-wave phase across the 5 RGB dispersion layers
+        const a = windPulse;
+        const sx = shiftX;
+        const sy = shiftY;
+        const wavePhase = t * 1.55;
+
+        const wA = 1 + 0.22 * Math.sin(wavePhase);
+        const wM = 1 + 0.20 * Math.sin(wavePhase - 0.55);
+        const wV = 1 + 0.18 * Math.sin(wavePhase - 1.10);
+        const wB = 1 + 0.20 * Math.sin(wavePhase - 1.65);
+        const wC = 1 + 0.25 * Math.sin(wavePhase - 2.20);
+
+        const liftA = Math.cos(wavePhase * 0.85) * 2.2;
+        const liftM = Math.cos(wavePhase * 0.85 - 0.55) * 1.8;
+        const liftV = Math.cos(wavePhase * 0.85 - 1.10) * 2.0;
+        const liftB = Math.cos(wavePhase * 0.85 - 1.65) * 1.8;
+        const liftC = Math.cos(wavePhase * 0.85 - 2.20) * 2.4;
+
+        const blurPx = (3.85 + 0.65 * Math.sin(t * 1.1)).toFixed(2);
+        glowLayer.style.filter = `blur(${blurPx}px)`;
+
+        const sAmber   = `${(-sx * 1.45 * wA).toFixed(1)}px ${(sy * 1.15 + liftA).toFixed(1)}px ${(15.4 * a + 2.5).toFixed(1)}px rgba(255, 178, 38, ${(0.42 * a).toFixed(3)})`;
+        const sMagenta = `${(-sx * 0.80 * wM).toFixed(1)}px ${(sy * 0.56 + liftM).toFixed(1)}px ${(9.0 * a + 1.3).toFixed(1)}px rgba(255, 38, 108, ${(0.43 * a).toFixed(3)})`;
+        const sViolet  = `${(-sx * 0.16 * wV).toFixed(1)}px ${(-sy * 0.86 + liftV).toFixed(1)}px ${(9.6 * a + 1.3).toFixed(1)}px rgba(112, 16, 255, ${(0.42 * a).toFixed(3)})`;
+        const sBlue    = `${(sx * 0.82 * wB).toFixed(1)}px ${(-sy * 0.30 + liftB).toFixed(1)}px ${(9.0 * a + 1.3).toFixed(1)}px rgba(12, 88, 255, ${(0.43 * a).toFixed(3)})`;
+        const sCyan    = `${(sx * 1.62 * wC).toFixed(1)}px ${(sy * 0.22 + liftC).toFixed(1)}px ${(16.6 * a + 2.5).toFixed(1)}px rgba(0, 228, 255, ${(0.43 * a).toFixed(3)})`;
+
+        glowLayer.style.textShadow = `${sAmber}, ${sMagenta}, ${sViolet}, ${sBlue}, ${sCyan}`;
+
+        animId = requestAnimationFrame(animate);
+    }
+
+    startLoop();
+}
+
+/* --------------------------------------------------------------------------
+   08. COMPARISON STACK OPTICAL SIZE SWITCHERS (Display / Text / Caption)
+   -------------------------------------------------------------------------- */
+function initComparisonStackSwitchers() {
+    const switcherGroups = document.querySelectorAll('.stack-style-switchers');
+    if (!switcherGroups.length) return;
+
+    const styleMap = {
+        'style-display':    { family: '"Notus Display", serif',        style: 'normal' },
+        'style-display-it': { family: '"Notus Display Italic", serif', style: 'italic' },
+        'style-text':       { family: '"Notus Text", serif',           style: 'normal' },
+        'style-text-it':    { family: '"Notus Text Italic", serif',    style: 'italic' },
+        'style-caption':    { family: '"Notus Caption", serif',        style: 'normal' },
+        'style-caption-it': { family: '"Notus Caption", serif',        style: 'italic' }
+    };
+
+    const allStyleClasses = Object.keys(styleMap);
+
+    // Preload all 5 Notus font faces so switching is instant on first click
+    if (document.fonts && document.fonts.load) {
+        [
+            '1em "Notus Display"',
+            'italic 1em "Notus Display Italic"',
+            '1em "Notus Text"',
+            'italic 1em "Notus Text Italic"',
+            '1em "Notus Caption"'
+        ].forEach((fontSpec) => {
+            document.fonts.load(fontSpec).catch(() => {});
+        });
+    }
+
+    switcherGroups.forEach((group) => {
+        const stackBlock = group.closest('.stack-block');
+        if (!stackBlock) return;
+
+        const targetTextEl = stackBlock.querySelector('.stack-hero-word, .stack-question, .stack-cascade-list, .ot-ligatures-stage, .ot-smcp-stage, .bilingual-spread-stage');
+        const metaLabel = stackBlock.querySelector('.stack-meta-label') || stackBlock.querySelector('.stack-meta-switcher-group > span');
+        const buttons = group.querySelectorAll('button[data-style-class]');
+
+        if (!targetTextEl || !buttons.length) return;
+
+        const applySelection = (btn) => {
+            buttons.forEach((b) => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
+
+            const styleClass = btn.getAttribute('data-style-class');
+            const labelText = btn.getAttribute('data-label');
+
+            targetTextEl.classList.remove(...allStyleClasses);
+            if (styleClass) {
+                targetTextEl.classList.add(styleClass);
+                const fontConf = styleMap[styleClass];
+                if (fontConf) {
+                    targetTextEl.style.setProperty('font-family', fontConf.family, 'important');
+                    targetTextEl.style.setProperty('font-style', fontConf.style, 'important');
+                }
+            }
+
+            if (labelText && metaLabel) {
+                metaLabel.textContent = labelText;
+            }
+
+            // Force synchronous WebKit layout & paint invalidation while cursor is still hovering button
+            targetTextEl.style.transform = 'translateZ(0)';
+            targetTextEl.style.opacity = '0.999';
+            void targetTextEl.offsetHeight;
+            requestAnimationFrame(() => {
+                targetTextEl.style.transform = '';
+                targetTextEl.style.opacity = '';
+            });
+        };
+
+        buttons.forEach((btn) => {
+            btn.addEventListener('pointerdown', (e) => {
+                if (e.button && e.button !== 0) return;
+                applySelection(btn);
+            });
+            btn.addEventListener('click', () => {
+                applySelection(btn);
+            });
+        });
+    });
+
+    // OpenType Feature Toggle Pills (liga, dlig, smcp, onum)
+    const otToggleBtns = document.querySelectorAll('.ot-feature-toggle-btn[data-ot-toggle]');
+
+    // Store clean original text/HTML for deterministic ZWNJ splitting when ligatures are disabled
+    document.querySelectorAll('.ot-ligature-card__pair, .ot-ligature-card__word mark, .ot-specimen-stream').forEach((el) => {
+        if (!el.hasAttribute('data-orig-text')) {
+            el.setAttribute('data-orig-text', el.textContent);
+        }
+    });
+
+    function syncLigatureStage(stage) {
+        const ligaOff = stage.classList.contains('is-liga-off');
+        const dligOff = stage.classList.contains('is-dlig-off');
+
+        // 1. Update stream line
+        const stream = stage.querySelector('.ot-specimen-stream');
+        if (stream) {
+            const orig = stream.getAttribute('data-orig-text') || stream.textContent.replace(/\u200C/g, '');
+            let txt = orig;
+            if (ligaOff) {
+                txt = txt.replace(/ffl/g, 'f\u200Cf\u200Cl').replace(/ffi/g, 'f\u200Cf\u200Ci').replace(/fl/g, 'f\u200Cl').replace(/fi/g, 'f\u200Ci').replace(/ff/g, 'f\u200Cf').replace(/Th/g, 'T\u200Ch');
+            }
+            if (dligOff) {
+                txt = txt.replace(/ct/g, 'c\u200Ct').replace(/st/g, 's\u200Ct').replace(/fj/g, 'f\u200Cj').replace(/Fj/g, 'F\u200Cj');
+            }
+            stream.textContent = txt;
+            stream.style.setProperty('font-feature-settings', `"kern" 1, "liga" ${ligaOff ? 0 : 1}, "clig" ${ligaOff ? 0 : 1}, "dlig" ${dligOff ? 0 : 1}`, 'important');
+        }
+
+        // 2. Update each ligature card
+        stage.querySelectorAll('.ot-ligature-card').forEach((card) => {
+            const otType = card.getAttribute('data-ot');
+            const isOff = (otType === 'liga' && ligaOff) || (otType === 'dlig' && dligOff);
+            const pairEl = card.querySelector('.ot-ligature-card__pair');
+            const markEl = card.querySelector('.ot-ligature-card__word mark');
+            const wordEl = card.querySelector('.ot-ligature-card__word');
+
+            if (pairEl) {
+                const origPair = pairEl.getAttribute('data-orig-text') || pairEl.textContent.replace(/\u200C/g, '');
+                pairEl.textContent = isOff ? origPair.split('').join('\u200C') : origPair;
+                pairEl.style.setProperty('font-feature-settings', isOff ? '"kern" 1, "liga" 0, "clig" 0, "dlig" 0' : '"kern" 1, "liga" 1, "dlig" 1', 'important');
+            }
+            if (markEl) {
+                const origMark = markEl.getAttribute('data-orig-text') || markEl.textContent.replace(/\u200C/g, '');
+                markEl.textContent = isOff ? origMark.split('').join('\u200C') : origMark;
+            }
+            if (wordEl) {
+                wordEl.style.setProperty('font-feature-settings', isOff ? '"kern" 1, "liga" 0, "clig" 0, "dlig" 0' : '"kern" 1, "liga" 1, "dlig" 1', 'important');
+            }
+        });
+    }
+
+    otToggleBtns.forEach((btn) => {
+        const toggleFeature = () => {
+            const block = btn.closest('.stack-block');
+            if (!block) return;
+            const stage = block.querySelector('.ot-ligatures-stage, .ot-smcp-stage');
+            if (!stage) return;
+
+            const feat = btn.getAttribute('data-ot-toggle');
+            const isNowActive = !btn.classList.contains('is-active');
+            btn.classList.toggle('is-active', isNowActive);
+            btn.setAttribute('aria-pressed', isNowActive ? 'true' : 'false');
+
+            const offClass = `is-${feat}-off`;
+            stage.classList.toggle(offClass, !isNowActive);
+
+            if (stage.classList.contains('ot-ligatures-stage')) {
+                syncLigatureStage(stage);
+            }
+
+            // Synchronous WebKit repaint
+            stage.style.transform = 'translateZ(0)';
+            stage.style.opacity = '0.999';
+            void stage.offsetHeight;
+            requestAnimationFrame(() => {
+                stage.style.transform = '';
+                stage.style.opacity = '';
+            });
+        };
+
+        btn.addEventListener('pointerdown', (e) => {
+            if (e.button && e.button !== 0) return;
+            e.preventDefault();
+            toggleFeature();
+        });
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+        });
+    });
+
+    // Interactive Small Caps & Old-Style Figures Magnifier with Glyphs Metric Grid
+    const smcpLine = document.getElementById('smcpAlphabetLine');
+    const smcpCharEl = document.getElementById('smcpMagnifierChar');
+    const smcpNameEl = document.getElementById('smcpMagnifierName');
+    const smcpCodeEl = document.getElementById('smcpMagnifierCode');
+    const smcpStageEl = document.getElementById('smcpMagnifierStage');
+    const smcpProbeEl = document.getElementById('smcpBaselineProbe');
+    const smcpLineBase = document.getElementById('smcpLineBase');
+    const smcpLineX = document.getElementById('smcpLineX');
+    const smcpLineOvershoot = document.getElementById('smcpLineOvershoot');
+    const smcpLineA = document.getElementById('smcpLineA');
+    const smcpLineC = document.getElementById('smcpLineC');
+    const smcpVLineLeft = document.getElementById('smcpVLineLeft');
+    const smcpVLineRight = document.getElementById('smcpVLineRight');
+
+    function syncSmcpGrid() {
+        if (!smcpCharEl || !smcpStageEl || !smcpProbeEl) return;
+        const stageRect = smcpStageEl.getBoundingClientRect();
+        const probeRect = smcpProbeEl.getBoundingClientRect();
+        const charRect = smcpCharEl.getBoundingClientRect();
+        if (stageRect.height < 10 || charRect.width < 2) return;
+
+        const fontSize = parseFloat(window.getComputedStyle(smcpCharEl).fontSize) || 320;
+        const baselineFromBottom = Math.max(16, stageRect.bottom - probeRect.bottom);
+
+        // Exact 1000-UPM metric coordinates from Notus Glyphs master:
+        // baseline = 0, x (smcp height) = 0.518em, overshoot = 0.538em, a (diacritic/ascender) = 0.772em, c (cap/top) = 0.858em
+        if (smcpLineBase) smcpLineBase.style.bottom = `${baselineFromBottom.toFixed(1)}px`;
+        if (smcpLineX) smcpLineX.style.bottom = `${(baselineFromBottom + fontSize * 0.518).toFixed(1)}px`;
+        if (smcpLineOvershoot) smcpLineOvershoot.style.bottom = `${(baselineFromBottom + fontSize * 0.538).toFixed(1)}px`;
+        if (smcpLineA) smcpLineA.style.bottom = `${(baselineFromBottom + fontSize * 0.772).toFixed(1)}px`;
+        if (smcpLineC) smcpLineC.style.bottom = `${(baselineFromBottom + fontSize * 0.858).toFixed(1)}px`;
+
+        const leftX = charRect.left - stageRect.left;
+        const rightX = charRect.right - stageRect.left;
+        if (smcpVLineLeft) smcpVLineLeft.style.left = `${leftX.toFixed(1)}px`;
+        if (smcpVLineRight) smcpVLineRight.style.left = `${rightX.toFixed(1)}px`;
+    }
+
+    if (smcpLine && smcpCharEl) {
+        const rawText = smcpLine.textContent.trim();
+        smcpLine.innerHTML = '';
+
+        function updateSmcpMagnifier(ch) {
+            smcpCharEl.textContent = ch;
+            const code = ch.codePointAt(0);
+            const hex = 'U+' + code.toString(16).toUpperCase().padStart(4, '0');
+            if (smcpCodeEl) smcpCodeEl.textContent = hex;
+            if (smcpNameEl) {
+                const isDigit = /[0-9]/.test(ch);
+                smcpNameEl.textContent = isDigit
+                    ? `${ch}.onum · OLD-STYLE FIGURE`
+                    : `${ch}.smcp · TRUE SMALL CAPITAL`;
+            }
+            syncSmcpGrid();
+        }
+
+        let firstAssigned = false;
+        Array.from(rawText).forEach((ch) => {
+            if (ch === ' ' || ch === '·') {
+                const sep = document.createTextNode(ch);
+                smcpLine.appendChild(sep);
+                return;
+            }
+            const span = document.createElement('span');
+            span.className = 'ot-smcp-char';
+            if (!firstAssigned) {
+                span.classList.add('is-active');
+                firstAssigned = true;
+            }
+            span.textContent = ch;
+            span.addEventListener('mouseenter', () => {
+                smcpLine.querySelectorAll('.ot-smcp-char').forEach((s) => s.classList.remove('is-active'));
+                span.classList.add('is-active');
+                updateSmcpMagnifier(ch);
+            });
+            span.addEventListener('click', () => {
+                smcpLine.querySelectorAll('.ot-smcp-char').forEach((s) => s.classList.remove('is-active'));
+                span.classList.add('is-active');
+                updateSmcpMagnifier(ch);
+            });
+            smcpLine.appendChild(span);
+        });
+
+        syncSmcpGrid();
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(syncSmcpGrid);
+        }
+        window.addEventListener('resize', syncSmcpGrid, { passive: true });
+
+        // Re-sync grid when optical size or OpenType toggles are clicked in this block
+        const smcpBlock = smcpStageEl ? smcpStageEl.closest('.stack-block') : null;
+        if (smcpBlock) {
+            smcpBlock.addEventListener('click', () => requestAnimationFrame(syncSmcpGrid));
+            smcpBlock.addEventListener('pointerdown', () => requestAnimationFrame(syncSmcpGrid));
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------
+   09. DOWNLOAD & REQUEST FONT EXPANDABLE CONTROLLER
+   -------------------------------------------------------------------------- */
+function initDownloadForm() {
+    const ctaBar = document.getElementById('downloadCtaBar');
+    const formWrapper = document.getElementById('downloadFormWrapper');
+    const closeBtn = document.getElementById('downloadFormClose');
+    const actionLabel = document.getElementById('downloadCtaAction');
+    const form = document.getElementById('notusDownloadForm');
+    const successBox = document.getElementById('notusDownloadSuccess');
+    const submitBtn = document.getElementById('dfSubmitBtn');
+    const tags = document.querySelectorAll('.download-form__tag');
+    const hiddenLicenseInput = document.getElementById('dfLicenseType');
+
+    if (!ctaBar || !formWrapper) return;
+
+    function openForm() {
+        formWrapper.classList.add('is-open');
+        formWrapper.setAttribute('aria-hidden', 'false');
+        ctaBar.classList.add('is-open');
+        ctaBar.setAttribute('aria-expanded', 'true');
+        if (actionLabel) actionLabel.innerHTML = '&times; Close Form';
+
+        setTimeout(() => {
+            const section = document.getElementById('download');
+            if (section) {
+                const headerH = document.querySelector('.header')?.offsetHeight || 104;
+                const top = section.getBoundingClientRect().top + window.pageYOffset - (headerH + 20);
+                window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+            }
+        }, 300);
+    }
+
+    function closeForm() {
+        formWrapper.classList.remove('is-open');
+        formWrapper.setAttribute('aria-hidden', 'true');
+        ctaBar.classList.remove('is-open');
+        ctaBar.setAttribute('aria-expanded', 'false');
+        if (actionLabel) actionLabel.innerHTML = '&rarr; Request Font';
+    }
+
+    ctaBar.addEventListener('click', (e) => {
+        // Prevent toggle if clicked directly on close button
+        if (e.target.closest('#downloadFormClose')) return;
+        const isOpen = formWrapper.classList.contains('is-open');
+        isOpen ? closeForm() : openForm();
+    });
+
+    ctaBar.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const isOpen = formWrapper.classList.contains('is-open');
+            isOpen ? closeForm() : openForm();
+        }
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeForm();
+        });
+    }
+
+    // License Type Tags Selection
+    tags.forEach((tag) => {
+        tag.addEventListener('click', (e) => {
+            e.preventDefault();
+            tags.forEach((t) => t.classList.remove('is-active'));
+            tag.classList.add('is-active');
+            const val = tag.getAttribute('data-value') || tag.textContent.trim();
+            if (hiddenLicenseInput) hiddenLicenseInput.value = val;
+        });
+    });
+
+    // Form submission via Web3Forms
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nameInput = document.getElementById('dfName');
+            const emailInput = document.getElementById('dfEmail');
+            const errName = document.getElementById('df-error-name');
+            const errEmail = document.getElementById('df-error-email');
+
+            let isValid = true;
+            if (errName) errName.textContent = '';
+            if (errEmail) errEmail.textContent = '';
+
+            if (!nameInput || !nameInput.value.trim()) {
+                if (errName) errName.textContent = 'Please enter your name.';
+                isValid = false;
+            }
+
+            if (!emailInput || !emailInput.value.trim()) {
+                if (errEmail) errEmail.textContent = 'Please enter your email.';
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+                if (errEmail) errEmail.textContent = 'Please enter a valid email address.';
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                const txtSpan = submitBtn.querySelector('.download-form__submit-text');
+                if (txtSpan) txtSpan.textContent = 'Sending...';
+            }
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    form.style.display = 'none';
+                    if (successBox) successBox.classList.add('is-visible');
+                } else {
+                    alert(result.message || 'Something went wrong. Please try again.');
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        const txtSpan = submitBtn.querySelector('.download-form__submit-text');
+                        if (txtSpan) txtSpan.textContent = 'Send Request';
+                    }
+                }
+            } catch (err) {
+                alert('Connection error. Please try again later.');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    const txtSpan = submitBtn.querySelector('.download-form__submit-text');
+                    if (txtSpan) txtSpan.textContent = 'Send Request';
+                }
+            }
+        });
     }
 }
 

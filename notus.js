@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initTesterStudio();
     initDisplaayGlyphs();
     initOpenTypeSandbox();
+    initComparisonStackSwitchers();
+    initDownloadForm();
 });
 
 /* --------------------------------------------------------------------------
@@ -42,7 +44,7 @@ function initScrollAndNav() {
                 e.preventDefault();
                 const headerH = header ? header.offsetHeight : 104;
                 const subnav = document.querySelector('.notus-giant-subnav-wrapper');
-                const subnavH = subnav ? subnav.offsetHeight : 56;
+                const subnavH = subnav ? subnav.offsetHeight : 0;
                 const totalOffset = headerH + subnavH + 16;
                 const targetTop = target.getBoundingClientRect().top + window.pageYOffset - totalOffset;
                 window.scrollTo({
@@ -78,9 +80,8 @@ function initScrollAndNav() {
 
         let currentSectionId = '';
         sections.forEach(sec => {
-            const top = sec.offsetTop - 180;
-            const height = sec.offsetHeight;
-            if (scrollTop >= top && scrollTop < top + height) {
+            const top = sec.getBoundingClientRect().top + scrollTop - 180;
+            if (scrollTop >= top) {
                 currentSectionId = `#${sec.id}`;
             }
         });
@@ -91,32 +92,50 @@ function initScrollAndNav() {
                 if (pill.getAttribute('href') === currentSectionId) {
                     pill.classList.add('is-active');
                 } else {
-                    pill.classList.remove('is-active');
+                    pill.classList.remove('is-active', 'giant-pill--active');
                 }
             });
         } else {
             // At the top of the page
             if (notusPill) notusPill.classList.add('is-active', 'giant-pill--active');
-            giantPills.forEach(pill => pill.classList.remove('is-active'));
+            giantPills.forEach((pill, idx) => {
+                if (idx === 0) {
+                    pill.classList.add('is-active');
+                } else {
+                    pill.classList.remove('is-active', 'giant-pill--active');
+                }
+            });
         }
     }, { passive: true });
 }
 
 /* --------------------------------------------------------------------------
-   02. HEADER LOTTIE LOGO (Matches index.html)
+   02. HEADER & FOOTER LOTTIE LOGO (Matches index.html)
    -------------------------------------------------------------------------- */
 function initHeaderLogo() {
     const logoContainer = document.getElementById('lottie-logo') || document.getElementById('siteLottieLogo');
-    if (logoContainer && typeof lottie !== 'undefined') {
+    const footerLogoContainer = document.getElementById('lottie-logo-footer');
+    if (typeof lottie !== 'undefined') {
         const logoData = {"v":"5.12.1","fr":25,"ip":0,"op":100,"w":500,"h":500,"nm":"WB Animation","ddd":0,"assets":[],"layers":[{"ddd":0,"ind":1,"ty":4,"nm":"W3","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[250,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":1,"k":[{"i":{"x":0.667,"y":1},"o":{"x":1,"y":0},"t":0,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,-1.095],[50,150],[-50,150],[-49.818,-1.095]],"c":true}]},{"i":{"x":0.63,"y":1},"o":{"x":0.953,"y":0},"t":27,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true}]},{"i":{"x":1,"y":1},"o":{"x":0.333,"y":0},"t":49,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50.182,-148.905],[-49.818,-148.905],[-50,-150]],"c":true}]},{"i":{"x":0,"y":1},"o":{"x":0.333,"y":0},"t":50,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,148.905],[50.365,150],[-49.635,150],[-49.818,148.905]],"c":true}]},{"t":74,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.183,-2.19],[50.365,150],[-49.635,150],[-49.817,-2.19]],"c":true}]}],"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":2,"ty":4,"nm":"W2","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[370,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":3,"ty":4,"nm":"W1","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[130,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0}],"markers":[],"props":{}};
 
-        lottie.loadAnimation({
-            container: logoContainer,
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            animationData: logoData
-        });
+        if (logoContainer) {
+            lottie.loadAnimation({
+                container: logoContainer,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                animationData: logoData
+            });
+        }
+        if (footerLogoContainer) {
+            lottie.loadAnimation({
+                container: footerLogoContainer,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                animationData: logoData
+            });
+        }
     }
 }
 
@@ -282,10 +301,10 @@ function initDisplaayGlyphs() {
     let selectedChar = 'a';
 
     const sets = {
-        'all': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя0123456789.,:;!?\'"—–-()[]{}/\\@#$%&*+=<>€$£¥₽§¶†‡©®™°¼½¾⅓⅔',
+        'all': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя0123456789.,:;!?\'"—–-()[]{}/\\@#$%&*+=<>€$£¥₽§¶†‡©®™°¼½¾',
         'latin': 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ',
         'cyrillic': 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюяҐЄІЇґєії',
-        'figures': '0123456789¼½¾⅓⅔⅛⅜⅝⅞%‰+−±×÷=≠≈$€£¥₽¢№',
+        'figures': '0123456789¼½¾%‰+−±×÷=≠≈$€£¥₽¢№',
         'symbols': '.,:;!?\'"—–-()[]{}/\\@#&*§¶†‡©®™°•…„“”«»'
     };
 
@@ -295,7 +314,7 @@ function initDisplaayGlyphs() {
         
         const codePoint = char.codePointAt(0);
         const hex = 'U+' + codePoint.toString(16).toUpperCase().padStart(4, '0');
-        if (charUnicode) charUnicode.textContent = `${hex} · Dec ${codePoint}`;
+        if (charUnicode) charUnicode.textContent = hex;
         if (charName) charName.textContent = getCharacterDescription(char, codePoint);
     }
 
@@ -319,7 +338,7 @@ function initDisplaayGlyphs() {
         chars.forEach((ch, idx) => {
             const cell = document.createElement('div');
             cell.className = 'glyph-box';
-            if (ch === 'a' || (idx === 0 && !chars.includes('a'))) {
+            if (idx === 0) {
                 cell.classList.add('is-active');
             }
             cell.textContent = ch;
@@ -368,12 +387,14 @@ function initDisplaayGlyphs() {
             tabBtns.forEach(b => b.classList.remove('is-active'));
             btn.classList.add('is-active');
             const cat = btn.getAttribute('data-glyph-cat');
-            renderMatrix(sets[cat] || sets['all']);
+            const activeSet = sets[cat] || sets['all'];
+            renderMatrix(activeSet);
+            updateInspector(Array.from(activeSet)[0] || 'A');
         });
     });
 
     renderMatrix(sets['all']);
-    updateInspector('a');
+    updateInspector('A');
 }
 
 /* --------------------------------------------------------------------------
@@ -422,7 +443,10 @@ function initBroadsheetInteractive() {
 
     const slogans = [
         { line1: 'Silent rhythm,', line2: 'tactile grace.' },
-        { line1: 'Жыве Беларусь,', line2: 'жыве вечна!' }
+        { line1: 'Жыве Беларусь!', line2: 'Жыве вечна!' },
+        { line1: 'Souffle doré,', line2: 'beauté pure.' },
+        { line1: 'Stille Größe,', line2: 'klare Form.' },
+        { line1: 'Czułe światło,', line2: 'żywa forma.' }
     ];
 
     const MAX_LEN_1 = Math.max(...slogans.map(s => s.line1.length));
@@ -473,10 +497,10 @@ function initBroadsheetInteractive() {
     let isTransitioning = false;
 
     // Pre-measured character advance widths for each slogan: widthsCache[sloganIdx].line1[i], .line2[i]
-    const widthsCache = [
-        { line1: new Array(MAX_LEN_1).fill(0), line2: new Array(MAX_LEN_2).fill(0) },
-        { line1: new Array(MAX_LEN_1).fill(0), line2: new Array(MAX_LEN_2).fill(0) }
-    ];
+    const widthsCache = slogans.map(() => ({
+        line1: new Array(MAX_LEN_1).fill(0),
+        line2: new Array(MAX_LEN_2).fill(0)
+    }));
 
     function measureCharAdvance(measureNode, ch) {
         if (!ch) return 0;
@@ -675,7 +699,7 @@ function initBroadsheetInteractive() {
 }
 
 /* --------------------------------------------------------------------------
-   02-C. BROADSHEET SCULPTURAL MARBLE DUST (Delicate Micro-Canvas Particles on Wind)
+   02-C. BROADSHEET ATMOSPHERIC GOLDEN STARDUST & KINETIC PARTICLES
    -------------------------------------------------------------------------- */
 function initBroadsheetAmbientGlow() {
     const section = document.getElementById('editorial-now');
@@ -692,68 +716,68 @@ function initBroadsheetAmbientGlow() {
     let isVisible = true;
     let isHovered = false;
 
-    const mouse = { x: -9999, y: -9999 };
-    let mouseVelocity = { x: 0, y: 0 };
+    const mouse = { x: -9999, y: -9999, targetX: -9999, targetY: -9999 };
+    let mouseSpeed = 0;
     let lastMouseX = -9999;
     let lastMouseY = -9999;
-    let lastMoveTime = performance.now();
 
-    // 80 Sculptural Marble Dust particles across 3 optical depth layers
-    const PARTICLE_COUNT = 80;
+    const PARTICLE_COUNT = 90;
     const particles = [];
-    const trailSparks = [];
+    const interactiveBursts = [];
 
-    function createParticle(initialX) {
-        // Layer: 0 = background (fine/slow), 1 = midground, 2 = foreground (luminous/close)
-        const depthRoll = Math.random();
-        let depth = 0;
-        let radius = 0.9;
-        let baseOpacity = 0.35;
-        let baseVx = 0.45;
+    function createParticle(randomX) {
+        // Optical tiers: 0 = distant micro-spark, 1 = midground drift, 2 = foreground luminous ember
+        const tierRoll = Math.random();
+        let tier = 0;
+        let radius = 0.75;
+        let baseAlpha = 0.35;
+        let speed = 0.45;
 
-        if (depthRoll > 0.78) {
-            // Foreground: close luminous marble grains (reduced by 40%)
-            depth = 2;
-            radius = 1.32 + Math.random() * 0.66;
-            baseOpacity = 0.85 + Math.random() * 0.12;
-            baseVx = 1.1 + Math.random() * 0.55;
-        } else if (depthRoll > 0.42) {
-            // Midground: floating marble dust (reduced by 40%)
-            depth = 1;
-            radius = 0.78 + Math.random() * 0.42;
-            baseOpacity = 0.55 + Math.random() * 0.22;
-            baseVx = 0.65 + Math.random() * 0.40;
+        if (tierRoll > 0.8) {
+            tier = 2;
+            radius = 1.35 + Math.random() * 0.75;
+            baseAlpha = 0.75 + Math.random() * 0.2;
+            speed = 0.85 + Math.random() * 0.45;
+        } else if (tierRoll > 0.4) {
+            tier = 1;
+            radius = 0.85 + Math.random() * 0.4;
+            baseAlpha = 0.45 + Math.random() * 0.25;
+            speed = 0.55 + Math.random() * 0.3;
         } else {
-            // Background: distant micro-haze (reduced by 40%)
-            depth = 0;
-            radius = 0.45 + Math.random() * 0.30;
-            baseOpacity = 0.25 + Math.random() * 0.20;
-            baseVx = 0.35 + Math.random() * 0.25;
+            tier = 0;
+            radius = 0.5 + Math.random() * 0.3;
+            baseAlpha = 0.2 + Math.random() * 0.2;
+            speed = 0.3 + Math.random() * 0.2;
         }
 
+        // Color palette: 0 = pure crystalline white, 1 = warm champagne alabaster, 2 = golden bronze
+        const colorType = Math.random();
+        let rgb = '255, 255, 255';
+        if (colorType > 0.65) rgb = '245, 210, 155'; // warm gold
+        else if (colorType > 0.3) rgb = '255, 240, 220'; // champagne alabaster
+
         return {
-            x: initialX !== undefined ? initialX : Math.random() * (width || 1200),
+            x: randomX ? Math.random() * (width || 1200) : -15,
             y: Math.random() * (height || 600),
-            vx: baseVx,
-            vy: (Math.random() - 0.5) * 0.15,
-            baseVx: baseVx,
-            baseVy: 0,
-            radius: radius,
-            depth: depth,
-            baseOpacity: baseOpacity,
-            waveFreq: 0.35 + Math.random() * 0.45,
-            waveAmp: 0.25 + Math.random() * 0.45,
+            vx: speed,
+            vy: (Math.random() - 0.5) * 0.25,
+            baseVx: speed,
+            baseVy: (Math.random() - 0.5) * 0.15,
+            radius,
+            tier,
+            baseAlpha,
+            rgb,
+            waveFreq: 0.4 + Math.random() * 0.5,
+            waveAmp: 0.35 + Math.random() * 0.5,
             phase: Math.random() * Math.PI * 2,
-            twinkleSpeed: 0.8 + Math.random() * 1.4,
-            // Warm marble tones: alabaster cream, sunlit champagne, and warm amber gold
-            hueType: Math.random()
+            twinkleFreq: 0.8 + Math.random() * 1.5
         };
     }
 
     function initParticles() {
         particles.length = 0;
         for (let i = 0; i < PARTICLE_COUNT; i++) {
-            particles.push(createParticle(Math.random() * width));
+            particles.push(createParticle(true));
         }
     }
 
@@ -786,32 +810,35 @@ function initBroadsheetAmbientGlow() {
         const rect = section.getBoundingClientRect();
         const curX = clientX - rect.left;
         const curY = clientY - rect.top;
-        const now = performance.now();
-        const dt = Math.max((now - lastMoveTime) * 0.001, 0.016);
 
         if (lastMouseX !== -9999) {
-            mouseVelocity.x = (curX - lastMouseX) / dt * 0.05;
-            mouseVelocity.y = (curY - lastMouseY) / dt * 0.05;
+            const dx = curX - lastMouseX;
+            const dy = curY - lastMouseY;
+            mouseSpeed = Math.hypot(dx, dy);
+
+            // Emit subtle kinetic micro-sparks on cursor move
+            if (mouseSpeed > 9 && interactiveBursts.length < 24) {
+                interactiveBursts.push({
+                    x: curX + (Math.random() - 0.5) * 12,
+                    y: curY + (Math.random() - 0.5) * 12,
+                    vx: dx * 0.08 + (Math.random() * 0.6 + 0.3),
+                    vy: dy * 0.08 + (Math.random() - 0.5) * 0.7,
+                    radius: 0.8 + Math.random() * 0.8,
+                    alpha: 0.85,
+                    decay: 0.02 + Math.random() * 0.025,
+                    rgb: Math.random() > 0.4 ? '255, 235, 190' : '255, 255, 255'
+                });
+            }
         }
 
         lastMouseX = curX;
         lastMouseY = curY;
-        lastMoveTime = now;
-        mouse.x = curX;
-        mouse.y = curY;
+        mouse.targetX = curX;
+        mouse.targetY = curY;
 
-        // Occasionally spawn subtle momentary luminous sparks at cursor
-        if (Math.hypot(mouseVelocity.x, mouseVelocity.y) > 8 && trailSparks.length < 18) {
-            trailSparks.push({
-                x: curX + (Math.random() - 0.5) * 16,
-                y: curY + (Math.random() - 0.5) * 16,
-                vx: mouseVelocity.x * 0.08 + (Math.random() * 0.8 + 0.4),
-                vy: mouseVelocity.y * 0.08 + (Math.random() - 0.5) * 0.8,
-                radius: 0.9 + Math.random() * 0.9,
-                opacity: 0.85,
-                life: 1.0,
-                decay: 0.02 + Math.random() * 0.025
-            });
+        if (mouse.x === -9999) {
+            mouse.x = curX;
+            mouse.y = curY;
         }
     }
 
@@ -831,6 +858,8 @@ function initBroadsheetAmbientGlow() {
         isHovered = false;
         mouse.x = -9999;
         mouse.y = -9999;
+        lastMouseX = -9999;
+        lastMouseY = -9999;
     });
 
     section.addEventListener('touchstart', (e) => {
@@ -851,22 +880,7 @@ function initBroadsheetAmbientGlow() {
 
     section.addEventListener('touchend', () => {
         isHovered = false;
-        mouse.x = -9999;
-        mouse.y = -9999;
     });
-
-    function getParticleColor(hueType, opacity) {
-        if (hueType > 0.65) {
-            // Warm golden amber flecks
-            return `rgba(248, 208, 148, ${opacity})`;
-        } else if (hueType > 0.3) {
-            // Sunlit champagne marble
-            return `rgba(255, 238, 212, ${opacity})`;
-        } else {
-            // Alabaster white dust
-            return `rgba(255, 252, 245, ${opacity})`;
-        }
-    }
 
     function render(currentTime) {
         if (!isVisible) {
@@ -876,129 +890,135 @@ function initBroadsheetAmbientGlow() {
 
         const t = (currentTime || performance.now()) * 0.001;
 
-        // Clear with pure pitch black base
+        // Smooth mouse cursor interpolation
+        if (isHovered && mouse.targetX !== -9999) {
+            mouse.x += (mouse.targetX - mouse.x) * 0.08;
+            mouse.y += (mouse.targetY - mouse.y) * 0.08;
+        }
+
+        // 1. Deep Obsidian Studio Base
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, width, height);
 
-        // Soft ambient beam of light through the studio center (sculptor's light shaft)
-        const centerGrad = ctx.createRadialGradient(width * 0.5, height * 0.48, 0, width * 0.5, height * 0.48, Math.max(width * 0.45, 450));
-        centerGrad.addColorStop(0, 'rgba(235, 195, 140, 0.075)');
-        centerGrad.addColorStop(0.5, 'rgba(185, 135, 75, 0.025)');
+        // 2. Soft atmospheric center warmth
+        const centerGrad = ctx.createRadialGradient(width * 0.5, height * 0.5, 0, width * 0.5, height * 0.5, Math.max(width * 0.5, 450));
+        centerGrad.addColorStop(0, 'rgba(235, 195, 140, 0.06)');
+        centerGrad.addColorStop(0.5, 'rgba(185, 135, 75, 0.02)');
         centerGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
         ctx.fillStyle = centerGrad;
         ctx.fillRect(0, 0, width, height);
 
-        // Decay mouse velocity
-        mouseVelocity.x *= 0.92;
-        mouseVelocity.y *= 0.92;
+        // 3. Delicate Cursor Halo
+        if (isHovered && mouse.x !== -9999) {
+            const cursorGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 220);
+            cursorGrad.addColorStop(0, 'rgba(255, 235, 200, 0.07)');
+            cursorGrad.addColorStop(0.6, 'rgba(210, 160, 100, 0.02)');
+            cursorGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = cursorGrad;
+            ctx.fillRect(0, 0, width, height);
+        }
 
-        const MOUSE_RADIUS = 180;
-        const MOUSE_RADIUS_SQ = MOUSE_RADIUS * MOUSE_RADIUS;
+        // 4. Update & Render Golden Particles
+        const MOUSE_REPEL_RADIUS = 160;
+        const MOUSE_REPEL_SQ = MOUSE_REPEL_RADIUS * MOUSE_REPEL_RADIUS;
 
-        // Update and draw particles
         for (let i = 0; i < particles.length; i++) {
             const p = particles[i];
 
-            // 1. Natural wind drift & wave
-            const waveY = Math.sin(t * p.waveFreq + p.phase) * p.waveAmp;
+            // Harmonic vertical undulation
+            const wave = Math.sin(t * p.waveFreq + p.phase) * p.waveAmp;
             p.x += p.vx;
-            p.y += p.vy + waveY;
+            p.y += p.vy + wave;
 
-            // 2. Mouse deflection & fluid wind reaction
+            // Interactive cursor repulsion / draft
             if (isHovered && mouse.x !== -9999) {
                 const dx = p.x - mouse.x;
                 const dy = p.y - mouse.y;
                 const distSq = dx * dx + dy * dy;
 
-                if (distSq < MOUSE_RADIUS_SQ && distSq > 1) {
+                if (distSq < MOUSE_REPEL_SQ && distSq > 4) {
                     const dist = Math.sqrt(distSq);
-                    const normalX = dx / dist;
-                    const normalY = dy / dist;
-                    const force = Math.pow(1 - dist / MOUSE_RADIUS, 1.8) * 3.8;
-
-                    // Deflection away from cursor + gentle lift in mouse direction
-                    p.vx += normalX * force + mouseVelocity.x * 0.04;
-                    p.vy += normalY * force + mouseVelocity.y * 0.04;
+                    const force = Math.pow(1 - dist / MOUSE_REPEL_RADIUS, 1.6) * 3.2;
+                    p.vx += (dx / dist) * force;
+                    p.vy += (dy / dist) * force;
                 }
             }
 
-            // Smooth damping back to steady-state wind speed
-            p.vx += (p.baseVx - p.vx) * 0.045;
-            p.vy += (p.baseVy - p.vy) * 0.045;
+            // Restore equilibrium speed
+            p.vx += (p.baseVx - p.vx) * 0.04;
+            p.vy += (p.baseVy - p.vy) * 0.04;
 
-            // Wrap boundaries smoothly
-            if (p.x > width + 25) {
-                p.x = -25;
+            // Seamless boundary wrap
+            if (p.x > width + 20) {
+                p.x = -20;
                 p.y = Math.random() * height;
                 p.vx = p.baseVx;
-                p.vy = 0;
-            } else if (p.x < -25) {
-                p.x = width + 25;
+                p.vy = p.baseVy;
+            } else if (p.x < -20) {
+                p.x = width + 20;
             }
 
             if (p.y > height + 20) p.y = -20;
             else if (p.y < -20) p.y = height + 20;
 
-            // Twinkle pulsation
-            const twinkle = 0.8 + 0.2 * Math.sin(t * p.twinkleSpeed + p.phase);
-            const currentOpacity = Math.min(Math.max(p.baseOpacity * twinkle, 0.1), 0.98);
-            const particleColor = getParticleColor(p.hueType, currentOpacity);
+            // Twinkle oscillation
+            const twinkle = 0.75 + 0.25 * Math.sin(t * p.twinkleFreq + p.phase);
+            const currentAlpha = Math.min(Math.max(p.baseAlpha * twinkle, 0.1), 0.95);
 
             // Draw particle
-            if (p.depth === 2) {
-                // Foreground: draw with soft luminous bloom halo
-                const glowRad = p.radius * 2.8;
-                const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, glowRad);
-                halo.addColorStop(0, particleColor);
-                halo.addColorStop(0.35, getParticleColor(p.hueType, currentOpacity * 0.5));
-                halo.addColorStop(1, 'rgba(0,0,0,0)');
+            if (p.tier === 2) {
+                // Foreground: luminous halo + bright center
+                const haloR = p.radius * 2.6;
+                const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
+                halo.addColorStop(0, `rgba(${p.rgb}, ${currentAlpha * 0.85})`);
+                halo.addColorStop(0.4, `rgba(${p.rgb}, ${currentAlpha * 0.3})`);
+                halo.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
                 ctx.fillStyle = halo;
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, glowRad, 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, haloR, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Bright crystalline core
-                ctx.fillStyle = `rgba(255, 255, 255, ${currentOpacity})`;
+                ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha})`;
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius * 0.7, 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, p.radius * 0.65, 0, Math.PI * 2);
                 ctx.fill();
             } else {
-                // Midground & Background: crisp, delicate micro-dust dots
-                ctx.fillStyle = particleColor;
+                // Midground & Background: crisp delicate embers
+                ctx.fillStyle = `rgba(${p.rgb}, ${currentAlpha})`;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        // Draw and update fleeting trail sparks
-        for (let i = trailSparks.length - 1; i >= 0; i--) {
-            const sp = trailSparks[i];
-            sp.x += sp.vx;
-            sp.y += sp.vy;
-            sp.vx *= 0.96;
-            sp.vy *= 0.96;
-            sp.life -= sp.decay;
+        // 5. Update & Render Interactive Cursor Bursts
+        for (let i = interactiveBursts.length - 1; i >= 0; i--) {
+            const b = interactiveBursts[i];
+            b.x += b.vx;
+            b.y += b.vy;
+            b.vx *= 0.95;
+            b.vy *= 0.95;
+            b.alpha -= b.decay;
 
-            if (sp.life <= 0) {
-                trailSparks.splice(i, 1);
+            if (b.alpha <= 0) {
+                interactiveBursts.splice(i, 1);
                 continue;
             }
 
-            const spAlpha = sp.opacity * sp.life;
-            const spGrad = ctx.createRadialGradient(sp.x, sp.y, 0, sp.x, sp.y, sp.radius * 2.4);
-            spGrad.addColorStop(0, `rgba(255, 240, 205, ${spAlpha})`);
-            spGrad.addColorStop(1, 'rgba(0,0,0,0)');
-            ctx.fillStyle = spGrad;
+            const bGrad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.radius * 2.2);
+            bGrad.addColorStop(0, `rgba(${b.rgb}, ${b.alpha})`);
+            bGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = bGrad;
             ctx.beginPath();
-            ctx.arc(sp.x, sp.y, sp.radius * 2.4, 0, Math.PI * 2);
+            ctx.arc(b.x, b.y, b.radius * 2.2, 0, Math.PI * 2);
             ctx.fill();
         }
 
         animId = requestAnimationFrame(render);
     }
 
-    // Start immediately!
+    // Start rendering loop
     animId = requestAnimationFrame(render);
 
     const observer = new IntersectionObserver((entries) => {
@@ -1034,13 +1054,40 @@ function initMastheadDelicateAnimation() {
     const topText = topLine.textContent.trim();
     const bottomText = bottomLine.textContent.trim();
 
+    // Inject subtle SVG fractal-noise filter for the prismatic gradient
+    if (!document.getElementById('masthead-grain-filter')) {
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const svgEl = document.createElementNS(svgNS, 'svg');
+        svgEl.setAttribute('width', '0');
+        svgEl.setAttribute('height', '0');
+        svgEl.setAttribute('aria-hidden', 'true');
+        svgEl.style.cssText = 'position:absolute;width:0;height:0;pointer-events:none;overflow:hidden;';
+        svgEl.innerHTML = `
+            <defs>
+                <filter id="masthead-grain-filter" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="3" seed="11" stitchTiles="stitch" result="noise" />
+                    <feColorMatrix in="noise" type="matrix"
+                        values="1 0 0 0 0
+                                1 0 0 0 0
+                                1 0 0 0 0
+                                1 0 0 0 0" result="monoNoise" />
+                    <feComposite in="SourceGraphic" in2="monoNoise" operator="arithmetic" k1="0.82" k2="0.59" k3="0" k4="0" />
+                </filter>
+            </defs>
+        `;
+        coverSection.appendChild(svgEl);
+    }
+
     // Build un-split core layer (preserves native kerning, ligatures, and full 'h' ascender)
-    // and radial-masked background glow layer so only the local mouse region glows
+    // and radial-masked background glow layer so only the local mouse/wind region glows
     mastheadTitle.innerHTML = '';
 
     const glowMask = document.createElement('div');
     glowMask.className = 'masthead-glow-mask';
     glowMask.setAttribute('aria-hidden', 'true');
+
+    const glowGrain = document.createElement('div');
+    glowGrain.className = 'masthead-glow-grain';
 
     const glowLayer = document.createElement('div');
     glowLayer.className = 'masthead-glow-layer';
@@ -1055,7 +1102,8 @@ function initMastheadDelicateAnimation() {
 
     glowLayer.appendChild(glowTop);
     glowLayer.appendChild(glowBottom);
-    glowMask.appendChild(glowLayer);
+    glowGrain.appendChild(glowLayer);
+    glowMask.appendChild(glowGrain);
 
     const coreLayer = document.createElement('div');
     coreLayer.className = 'masthead-core-layer';
@@ -1075,6 +1123,7 @@ function initMastheadDelicateAnimation() {
     mastheadTitle.appendChild(coreLayer);
 
     let isHovered = false;
+    let isVisible = true;
     let targetX = 0;
     let targetY = 0;
     let smoothX = 0;
@@ -1083,7 +1132,7 @@ function initMastheadDelicateAnimation() {
     let vy = 0;
     let lastClientX = null;
     let lastClientY = null;
-    let intensity = 0;
+    let hoverMix = 0;
     let shiftX = 14;
     let shiftY = 7;
     let animId = null;
@@ -1091,7 +1140,7 @@ function initMastheadDelicateAnimation() {
     const SPOT_RADIUS = 260;
 
     function startLoop() {
-        if (!animId) {
+        if (!animId && isVisible) {
             animId = requestAnimationFrame(animate);
         }
     }
@@ -1135,60 +1184,550 @@ function initMastheadDelicateAnimation() {
         startLoop();
     }, { passive: true });
 
-    function animate() {
-        vx *= 0.88;
-        vy *= 0.88;
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                isVisible = entry.isIntersecting;
+                if (isVisible) {
+                    startLoop();
+                } else if (animId) {
+                    cancelAnimationFrame(animId);
+                    animId = null;
+                }
+            });
+        }, { threshold: 0.02 });
+        io.observe(coverSection);
+    }
 
-        smoothX += (targetX - smoothX) * 0.22;
-        smoothY += (targetY - smoothY) * 0.22;
+    glowMask.style.opacity = '1';
 
-        const targetIntensity = isHovered ? 1 : 0;
-        intensity += (targetIntensity - intensity) * 0.12;
+    function animate(now) {
+        if (!isVisible) {
+            animId = null;
+            return;
+        }
+
+        const t = (now || performance.now()) * 0.001;
+
+        vx *= 0.90;
+        vy *= 0.90;
+
+        smoothX += (targetX - smoothX) * 0.18;
+        smoothY += (targetY - smoothY) * 0.18;
+
+        const targetHover = isHovered ? 1 : 0;
+        hoverMix += (targetHover - hoverMix) * 0.08;
+
+        // Gentle southern breeze harmonics ("Notus" wind)
+        const gust1 = Math.sin(t * 0.85);
+        const gust2 = Math.sin(t * 1.45 + 1.2);
+        const gust3 = Math.cos(t * 0.62 + 2.5);
+        const windPulse = 0.88 + 0.18 * gust1 + 0.10 * gust2;
 
         const clampedVx = Math.max(-16, Math.min(16, vx));
         const clampedVy = Math.max(-12, Math.min(12, vy));
-        const targetShiftX = 14.0 + Math.abs(clampedVx) * 0.65;
-        const targetShiftY = 7.0 + clampedVy * 0.42;
 
-        shiftX += (targetShiftX - shiftX) * 0.12;
-        shiftY += (targetShiftY - shiftY) * 0.12;
+        const targetShiftX = (14.0 + gust1 * 3.2 + gust2 * 1.8) + Math.abs(clampedVx) * 0.65;
+        const targetShiftY = (6.8 + gust3 * 2.4) + clampedVy * 0.42;
 
-        if (intensity > 0.005) {
-            const a = Math.min(1, intensity);
-            const sx = shiftX * a;
-            const sy = shiftY * a;
+        shiftX += (targetShiftX - shiftX) * 0.10;
+        shiftY += (targetShiftY - shiftY) * 0.10;
 
-            // Radial mask spotlight centered on the mouse cursor so only the local region glows
-            const maskGrad = `radial-gradient(circle ${SPOT_RADIUS}px at ${smoothX.toFixed(1)}px ${smoothY.toFixed(1)}px, rgba(0,0,0,1) 0%, rgba(0,0,0,0.78) 34%, rgba(0,0,0,0.32) 66%, rgba(0,0,0,0) 100%)`;
-            glowMask.style.opacity = '1';
-            glowMask.style.webkitMaskImage = maskGrad;
-            glowMask.style.maskImage = maskGrad;
+        // 1) Continuous drifting wind-wave streams across the masthead
+        const cycle1 = (t * 0.095) % 1;
+        const env1 = Math.sin(cycle1 * Math.PI);
+        const w1x = (8 + cycle1 * 84).toFixed(1);
+        const w1y = (48 + Math.sin(t * 0.75) * 14).toFixed(1);
+        const w1a = (env1 * (0.72 - hoverMix * 0.25)).toFixed(3);
 
-            // Soft optical blur on the background glow layer (-20% additional intensity reduction)
-            const blurPx = (a * 4.15).toFixed(2);
-            glowLayer.style.filter = `blur(${blurPx}px)`;
+        const cycle2 = (t * 0.095 + 0.5) % 1;
+        const env2 = Math.sin(cycle2 * Math.PI);
+        const w2x = (8 + cycle2 * 84).toFixed(1);
+        const w2y = (54 + Math.cos(t * 0.68 + 1.1) * 15).toFixed(1);
+        const w2a = (env2 * (0.68 - hoverMix * 0.25)).toFixed(3);
 
-            // Multi-spectrum RGB/prismatic dispersion layers (-20% additional intensity reduction)
-            const sAmber   = `${(-sx * 1.50).toFixed(1)}px ${(sy * 1.20).toFixed(1)}px ${(15.4 * a + 2.5).toFixed(1)}px rgba(255, 178, 38, ${(a * 0.42).toFixed(3)})`;
-            const sMagenta = `${(-sx * 0.82).toFixed(1)}px ${(sy * 0.58).toFixed(1)}px ${(9.0 * a + 1.3).toFixed(1)}px rgba(255, 38, 108, ${(a * 0.43).toFixed(3)})`;
-            const sViolet  = `${(-sx * 0.18).toFixed(1)}px ${(-sy * 0.88).toFixed(1)}px ${(9.6 * a + 1.3).toFixed(1)}px rgba(112, 16, 255, ${(a * 0.42).toFixed(3)})`;
-            const sBlue    = `${(sx * 0.82).toFixed(1)}px ${(-sy * 0.32).toFixed(1)}px ${(9.0 * a + 1.3).toFixed(1)}px rgba(12, 88, 255, ${(a * 0.43).toFixed(3)})`;
-            const sCyan    = `${(sx * 1.60).toFixed(1)}px ${(sy * 0.22).toFixed(1)}px ${(16.6 * a + 2.5).toFixed(1)}px rgba(0, 228, 255, ${(a * 0.43).toFixed(3)})`;
+        const rx1 = Math.round(320 + gust1 * 38);
+        const ry1 = Math.round(215 + gust3 * 24);
+        const rx2 = Math.round(290 + gust2 * 34);
+        const ry2 = Math.round(205 - gust1 * 22);
 
-            glowLayer.style.textShadow = `${sAmber}, ${sMagenta}, ${sViolet}, ${sBlue}, ${sCyan}`;
+        const windGrad1 = `radial-gradient(ellipse ${rx1}px ${ry1}px at ${w1x}% ${w1y}%, rgba(0,0,0,${w1a}) 0%, rgba(0,0,0,${(w1a * 0.65).toFixed(3)}) 42%, rgba(0,0,0,0) 100%)`;
+        const windGrad2 = `radial-gradient(ellipse ${rx2}px ${ry2}px at ${w2x}% ${w2y}%, rgba(0,0,0,${w2a}) 0%, rgba(0,0,0,${(w2a * 0.65).toFixed(3)}) 42%, rgba(0,0,0,0) 100%)`;
 
-            animId = requestAnimationFrame(animate);
-        } else {
-            intensity = 0;
-            glowMask.style.opacity = '0';
-            glowMask.style.webkitMaskImage = 'none';
-            glowMask.style.maskImage = 'none';
-            glowLayer.style.filter = 'none';
-            glowLayer.style.textShadow = 'none';
-            animId = null;
+        // 2) Local mouse spotlight gently elongated and swaying with the breeze
+        let maskGrad = `${windGrad1}, ${windGrad2}`;
+        if (hoverMix > 0.005) {
+            const hm = hoverMix;
+            const spotRx = (SPOT_RADIUS * (1.06 + 0.08 * gust1)).toFixed(1);
+            const spotRy = (SPOT_RADIUS * (0.94 + 0.06 * gust3)).toFixed(1);
+            const driftX = smoothX + gust1 * 10 + gust2 * 5;
+            const driftY = smoothY + gust3 * 7;
+            const mouseGrad = `radial-gradient(ellipse ${spotRx}px ${spotRy}px at ${driftX.toFixed(1)}px ${driftY.toFixed(1)}px, rgba(0,0,0,${hm.toFixed(3)}) 0%, rgba(0,0,0,${(hm * 0.78).toFixed(3)}) 36%, rgba(0,0,0,${(hm * 0.32).toFixed(3)}) 68%, rgba(0,0,0,0) 100%)`;
+            maskGrad = `${mouseGrad}, ${windGrad1}, ${windGrad2}`;
+        }
+
+        glowMask.style.webkitMaskImage = maskGrad;
+        glowMask.style.maskImage = maskGrad;
+
+        // 3) Traveling wind-wave phase across the 5 RGB dispersion layers
+        const a = windPulse;
+        const sx = shiftX;
+        const sy = shiftY;
+        const wavePhase = t * 1.55;
+
+        const wA = 1 + 0.22 * Math.sin(wavePhase);
+        const wM = 1 + 0.20 * Math.sin(wavePhase - 0.55);
+        const wV = 1 + 0.18 * Math.sin(wavePhase - 1.10);
+        const wB = 1 + 0.20 * Math.sin(wavePhase - 1.65);
+        const wC = 1 + 0.25 * Math.sin(wavePhase - 2.20);
+
+        const liftA = Math.cos(wavePhase * 0.85) * 2.2;
+        const liftM = Math.cos(wavePhase * 0.85 - 0.55) * 1.8;
+        const liftV = Math.cos(wavePhase * 0.85 - 1.10) * 2.0;
+        const liftB = Math.cos(wavePhase * 0.85 - 1.65) * 1.8;
+        const liftC = Math.cos(wavePhase * 0.85 - 2.20) * 2.4;
+
+        const blurPx = (3.85 + 0.65 * Math.sin(t * 1.1)).toFixed(2);
+        glowLayer.style.filter = `blur(${blurPx}px)`;
+
+        const sAmber   = `${(-sx * 1.45 * wA).toFixed(1)}px ${(sy * 1.15 + liftA).toFixed(1)}px ${(15.4 * a + 2.5).toFixed(1)}px rgba(255, 178, 38, ${(0.42 * a).toFixed(3)})`;
+        const sMagenta = `${(-sx * 0.80 * wM).toFixed(1)}px ${(sy * 0.56 + liftM).toFixed(1)}px ${(9.0 * a + 1.3).toFixed(1)}px rgba(255, 38, 108, ${(0.43 * a).toFixed(3)})`;
+        const sViolet  = `${(-sx * 0.16 * wV).toFixed(1)}px ${(-sy * 0.86 + liftV).toFixed(1)}px ${(9.6 * a + 1.3).toFixed(1)}px rgba(112, 16, 255, ${(0.42 * a).toFixed(3)})`;
+        const sBlue    = `${(sx * 0.82 * wB).toFixed(1)}px ${(-sy * 0.30 + liftB).toFixed(1)}px ${(9.0 * a + 1.3).toFixed(1)}px rgba(12, 88, 255, ${(0.43 * a).toFixed(3)})`;
+        const sCyan    = `${(sx * 1.62 * wC).toFixed(1)}px ${(sy * 0.22 + liftC).toFixed(1)}px ${(16.6 * a + 2.5).toFixed(1)}px rgba(0, 228, 255, ${(0.43 * a).toFixed(3)})`;
+
+        glowLayer.style.textShadow = `${sAmber}, ${sMagenta}, ${sViolet}, ${sBlue}, ${sCyan}`;
+
+        animId = requestAnimationFrame(animate);
+    }
+
+    startLoop();
+}
+
+/* --------------------------------------------------------------------------
+   08. COMPARISON STACK OPTICAL SIZE SWITCHERS (Display / Text / Caption)
+   -------------------------------------------------------------------------- */
+function initComparisonStackSwitchers() {
+    const switcherGroups = document.querySelectorAll('.stack-style-switchers');
+    if (!switcherGroups.length) return;
+
+    // Preload all optical sizes so switching is instantaneous on first click
+    if (document.fonts && document.fonts.load) {
+        [
+            '1em "Notus Display"',
+            'italic 1em "Notus Display Italic"',
+            '1em "Notus Text"',
+            'italic 1em "Notus Text Italic"',
+            '1em "Notus Caption"'
+        ].forEach((f) => {
+            try { document.fonts.load(f); } catch (_) {}
+        });
+    }
+
+    const ALL_STYLE_CLASSES = [
+        'style-display',
+        'style-display-it',
+        'style-text',
+        'style-text-it',
+        'style-caption',
+        'style-caption-it'
+    ];
+
+    const FONT_MAP = {
+        'style-display':    { family: '"Notus Display", serif', style: 'normal' },
+        'style-display-it': { family: '"Notus Display Italic", serif', style: 'italic' },
+        'style-text':       { family: '"Notus Text", serif', style: 'normal' },
+        'style-text-it':    { family: '"Notus Text Italic", serif', style: 'italic' },
+        'style-caption':    { family: '"Notus Caption", serif', style: 'normal' },
+        'style-caption-it': { family: '"Notus Caption", serif', style: 'italic' }
+    };
+
+    switcherGroups.forEach((group) => {
+        const block = group.closest('.stack-block');
+        if (!block) return;
+
+        const buttons = group.querySelectorAll('button[data-style-class]');
+        const targetTextEl = block.querySelector('.stack-hero-word, .stack-question, .stack-cascade-list, .ot-ligatures-stage, .ot-smcp-stage, .bilingual-spread-stage');
+        const metaLabelEl = block.querySelector('.stack-meta-label');
+        if (!buttons.length || !targetTextEl) return;
+
+        function activateButton(btn) {
+            buttons.forEach((b) => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
+
+            const styleClass = btn.getAttribute('data-style-class');
+            const labelText = btn.getAttribute('data-label');
+
+            targetTextEl.classList.remove(...ALL_STYLE_CLASSES);
+            if (styleClass) {
+                targetTextEl.classList.add(styleClass);
+                const mapped = FONT_MAP[styleClass];
+                if (mapped) {
+                    targetTextEl.style.setProperty('font-family', mapped.family, 'important');
+                    targetTextEl.style.setProperty('font-style', mapped.style, 'important');
+                }
+            }
+
+            if (metaLabelEl && labelText) {
+                metaLabelEl.textContent = labelText;
+            }
+
+            // Force synchronous WebKit/Blink glyph cache & layer repaint while cursor stays on button
+            targetTextEl.style.webkitTransform = 'translateZ(0)';
+            targetTextEl.style.transform = 'translateZ(0)';
+            targetTextEl.style.opacity = '0.999';
+            void targetTextEl.offsetHeight;
+            requestAnimationFrame(() => {
+                targetTextEl.style.webkitTransform = '';
+                targetTextEl.style.transform = '';
+                targetTextEl.style.opacity = '';
+            });
+        }
+
+        buttons.forEach((btn) => {
+            btn.addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                activateButton(btn);
+            });
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                activateButton(btn);
+                btn.blur();
+            });
+        });
+    });
+
+    // OpenType Feature Toggle Pills (liga, dlig, smcp, onum)
+    const otToggleBtns = document.querySelectorAll('.ot-feature-toggle-btn[data-ot-toggle]');
+
+    // Store clean original text/HTML for deterministic ZWNJ splitting when ligatures are disabled
+    document.querySelectorAll('.ot-ligature-card__pair, .ot-ligature-card__word mark, .ot-specimen-stream').forEach((el) => {
+        if (!el.hasAttribute('data-orig-text')) {
+            el.setAttribute('data-orig-text', el.textContent);
+        }
+    });
+
+    function syncLigatureStage(stage) {
+        const ligaOff = stage.classList.contains('is-liga-off');
+        const dligOff = stage.classList.contains('is-dlig-off');
+
+        // 1. Update stream line
+        const stream = stage.querySelector('.ot-specimen-stream');
+        if (stream) {
+            const orig = stream.getAttribute('data-orig-text') || stream.textContent.replace(/\u200C/g, '');
+            let txt = orig;
+            if (ligaOff) {
+                txt = txt.replace(/ffl/g, 'f\u200Cf\u200Cl').replace(/ffi/g, 'f\u200Cf\u200Ci').replace(/fl/g, 'f\u200Cl').replace(/fi/g, 'f\u200Ci').replace(/ff/g, 'f\u200Cf').replace(/Th/g, 'T\u200Ch');
+            }
+            if (dligOff) {
+                txt = txt.replace(/ct/g, 'c\u200Ct').replace(/st/g, 's\u200Ct').replace(/fj/g, 'f\u200Cj').replace(/Fj/g, 'F\u200Cj');
+            }
+            stream.textContent = txt;
+            stream.style.setProperty('font-feature-settings', `"kern" 1, "liga" ${ligaOff ? 0 : 1}, "clig" ${ligaOff ? 0 : 1}, "dlig" ${dligOff ? 0 : 1}`, 'important');
+        }
+
+        // 2. Update each ligature card
+        stage.querySelectorAll('.ot-ligature-card').forEach((card) => {
+            const otType = card.getAttribute('data-ot');
+            const isOff = (otType === 'liga' && ligaOff) || (otType === 'dlig' && dligOff);
+            const pairEl = card.querySelector('.ot-ligature-card__pair');
+            const markEl = card.querySelector('.ot-ligature-card__word mark');
+            const wordEl = card.querySelector('.ot-ligature-card__word');
+
+            if (pairEl) {
+                const origPair = pairEl.getAttribute('data-orig-text') || pairEl.textContent.replace(/\u200C/g, '');
+                pairEl.textContent = isOff ? origPair.split('').join('\u200C') : origPair;
+                pairEl.style.setProperty('font-feature-settings', isOff ? '"kern" 1, "liga" 0, "clig" 0, "dlig" 0' : '"kern" 1, "liga" 1, "dlig" 1', 'important');
+            }
+            if (markEl) {
+                const origMark = markEl.getAttribute('data-orig-text') || markEl.textContent.replace(/\u200C/g, '');
+                markEl.textContent = isOff ? origMark.split('').join('\u200C') : origMark;
+            }
+            if (wordEl) {
+                wordEl.style.setProperty('font-feature-settings', isOff ? '"kern" 1, "liga" 0, "clig" 0, "dlig" 0' : '"kern" 1, "liga" 1, "dlig" 1', 'important');
+            }
+        });
+    }
+
+    otToggleBtns.forEach((btn) => {
+        const toggleFeature = () => {
+            const block = btn.closest('.stack-block');
+            if (!block) return;
+            const stage = block.querySelector('.ot-ligatures-stage, .ot-smcp-stage');
+            if (!stage) return;
+
+            const feat = btn.getAttribute('data-ot-toggle');
+            const isNowActive = !btn.classList.contains('is-active');
+            btn.classList.toggle('is-active', isNowActive);
+            btn.setAttribute('aria-pressed', isNowActive ? 'true' : 'false');
+
+            const offClass = `is-${feat}-off`;
+            stage.classList.toggle(offClass, !isNowActive);
+
+            if (stage.classList.contains('ot-ligatures-stage')) {
+                syncLigatureStage(stage);
+            }
+
+            // Synchronous WebKit repaint
+            stage.style.transform = 'translateZ(0)';
+            stage.style.opacity = '0.999';
+            void stage.offsetHeight;
+            requestAnimationFrame(() => {
+                stage.style.transform = '';
+                stage.style.opacity = '';
+            });
+        };
+
+        btn.addEventListener('pointerdown', (e) => {
+            if (e.button && e.button !== 0) return;
+            e.preventDefault();
+            toggleFeature();
+        });
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+        });
+    });
+
+    // Interactive Small Caps & Old-Style Figures Magnifier with Glyphs Metric Grid
+    const smcpLine = document.getElementById('smcpAlphabetLine');
+    const smcpCharEl = document.getElementById('smcpMagnifierChar');
+    const smcpNameEl = document.getElementById('smcpMagnifierName');
+    const smcpCodeEl = document.getElementById('smcpMagnifierCode');
+    const smcpStageEl = document.getElementById('smcpMagnifierStage');
+    const smcpProbeEl = document.getElementById('smcpBaselineProbe');
+    const smcpLineBase = document.getElementById('smcpLineBase');
+    const smcpLineX = document.getElementById('smcpLineX');
+    const smcpLineOvershoot = document.getElementById('smcpLineOvershoot');
+    const smcpLineA = document.getElementById('smcpLineA');
+    const smcpLineC = document.getElementById('smcpLineC');
+    const smcpVLineLeft = document.getElementById('smcpVLineLeft');
+    const smcpVLineRight = document.getElementById('smcpVLineRight');
+
+    function syncSmcpGrid() {
+        if (!smcpCharEl || !smcpStageEl || !smcpProbeEl) return;
+        const stageRect = smcpStageEl.getBoundingClientRect();
+        const probeRect = smcpProbeEl.getBoundingClientRect();
+        const charRect = smcpCharEl.getBoundingClientRect();
+        if (stageRect.height < 10 || charRect.width < 2) return;
+
+        const fontSize = parseFloat(window.getComputedStyle(smcpCharEl).fontSize) || 320;
+        const baselineFromBottom = Math.max(16, stageRect.bottom - probeRect.bottom);
+
+        // Exact 1000-UPM metric coordinates from Notus Glyphs master:
+        // baseline = 0, x (smcp height) = 0.518em, overshoot = 0.538em, a (diacritic/ascender) = 0.772em, c (cap/top) = 0.858em
+        if (smcpLineBase) smcpLineBase.style.bottom = `${baselineFromBottom.toFixed(1)}px`;
+        if (smcpLineX) smcpLineX.style.bottom = `${(baselineFromBottom + fontSize * 0.518).toFixed(1)}px`;
+        if (smcpLineOvershoot) smcpLineOvershoot.style.bottom = `${(baselineFromBottom + fontSize * 0.538).toFixed(1)}px`;
+        if (smcpLineA) smcpLineA.style.bottom = `${(baselineFromBottom + fontSize * 0.772).toFixed(1)}px`;
+        if (smcpLineC) smcpLineC.style.bottom = `${(baselineFromBottom + fontSize * 0.858).toFixed(1)}px`;
+
+        const leftX = charRect.left - stageRect.left;
+        const rightX = charRect.right - stageRect.left;
+        if (smcpVLineLeft) smcpVLineLeft.style.left = `${leftX.toFixed(1)}px`;
+        if (smcpVLineRight) smcpVLineRight.style.left = `${rightX.toFixed(1)}px`;
+    }
+
+    if (smcpLine && smcpCharEl) {
+        const rawText = smcpLine.textContent.trim();
+        smcpLine.innerHTML = '';
+
+        function updateSmcpMagnifier(ch) {
+            smcpCharEl.textContent = ch;
+            const code = ch.codePointAt(0);
+            const hex = 'U+' + code.toString(16).toUpperCase().padStart(4, '0');
+            if (smcpCodeEl) smcpCodeEl.textContent = hex;
+            if (smcpNameEl) {
+                const isDigit = /[0-9]/.test(ch);
+                smcpNameEl.textContent = isDigit
+                    ? `${ch}.onum · OLD-STYLE FIGURE`
+                    : `${ch}.smcp · TRUE SMALL CAPITAL`;
+            }
+            syncSmcpGrid();
+        }
+
+        let firstAssigned = false;
+        Array.from(rawText).forEach((ch) => {
+            if (ch === ' ' || ch === '·') {
+                const sep = document.createTextNode(ch);
+                smcpLine.appendChild(sep);
+                return;
+            }
+            const span = document.createElement('span');
+            span.className = 'ot-smcp-char';
+            if (!firstAssigned) {
+                span.classList.add('is-active');
+                firstAssigned = true;
+            }
+            span.textContent = ch;
+            span.addEventListener('mouseenter', () => {
+                smcpLine.querySelectorAll('.ot-smcp-char').forEach((s) => s.classList.remove('is-active'));
+                span.classList.add('is-active');
+                updateSmcpMagnifier(ch);
+            });
+            span.addEventListener('click', () => {
+                smcpLine.querySelectorAll('.ot-smcp-char').forEach((s) => s.classList.remove('is-active'));
+                span.classList.add('is-active');
+                updateSmcpMagnifier(ch);
+            });
+            smcpLine.appendChild(span);
+        });
+
+        syncSmcpGrid();
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(syncSmcpGrid);
+        }
+        window.addEventListener('resize', syncSmcpGrid, { passive: true });
+
+        // Re-sync grid when optical size or OpenType toggles are clicked in this block
+        const smcpBlock = smcpStageEl ? smcpStageEl.closest('.stack-block') : null;
+        if (smcpBlock) {
+            smcpBlock.addEventListener('click', () => requestAnimationFrame(syncSmcpGrid));
+            smcpBlock.addEventListener('pointerdown', () => requestAnimationFrame(syncSmcpGrid));
         }
     }
 }
+
+/* --------------------------------------------------------------------------
+   09. DOWNLOAD & REQUEST FONT EXPANDABLE CONTROLLER
+   -------------------------------------------------------------------------- */
+function initDownloadForm() {
+    const ctaBar = document.getElementById('downloadCtaBar');
+    const formWrapper = document.getElementById('downloadFormWrapper');
+    const closeBtn = document.getElementById('downloadFormClose');
+    const actionLabel = document.getElementById('downloadCtaAction');
+    const form = document.getElementById('notusDownloadForm');
+    const successBox = document.getElementById('notusDownloadSuccess');
+    const submitBtn = document.getElementById('dfSubmitBtn');
+    const tags = document.querySelectorAll('.download-form__tag');
+    const hiddenLicenseInput = document.getElementById('dfLicenseType');
+
+    if (!ctaBar || !formWrapper) return;
+
+    function openForm() {
+        formWrapper.classList.add('is-open');
+        formWrapper.setAttribute('aria-hidden', 'false');
+        ctaBar.classList.add('is-open');
+        ctaBar.setAttribute('aria-expanded', 'true');
+        if (actionLabel) actionLabel.innerHTML = '&times; Close Form';
+
+        setTimeout(() => {
+            const section = document.getElementById('download');
+            if (section) {
+                const headerH = document.querySelector('.header')?.offsetHeight || 104;
+                const top = section.getBoundingClientRect().top + window.pageYOffset - (headerH + 20);
+                window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+            }
+        }, 300);
+    }
+
+    function closeForm() {
+        formWrapper.classList.remove('is-open');
+        formWrapper.setAttribute('aria-hidden', 'true');
+        ctaBar.classList.remove('is-open');
+        ctaBar.setAttribute('aria-expanded', 'false');
+        if (actionLabel) actionLabel.innerHTML = '&rarr; Request Font';
+    }
+
+    ctaBar.addEventListener('click', (e) => {
+        // Prevent toggle if clicked directly on close button
+        if (e.target.closest('#downloadFormClose')) return;
+        const isOpen = formWrapper.classList.contains('is-open');
+        isOpen ? closeForm() : openForm();
+    });
+
+    ctaBar.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const isOpen = formWrapper.classList.contains('is-open');
+            isOpen ? closeForm() : openForm();
+        }
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeForm();
+        });
+    }
+
+    // License Type Tags Selection
+    tags.forEach((tag) => {
+        tag.addEventListener('click', (e) => {
+            e.preventDefault();
+            tags.forEach((t) => t.classList.remove('is-active'));
+            tag.classList.add('is-active');
+            const val = tag.getAttribute('data-value') || tag.textContent.trim();
+            if (hiddenLicenseInput) hiddenLicenseInput.value = val;
+        });
+    });
+
+    // Form submission via Web3Forms
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nameInput = document.getElementById('dfName');
+            const emailInput = document.getElementById('dfEmail');
+            const errName = document.getElementById('df-error-name');
+            const errEmail = document.getElementById('df-error-email');
+
+            let isValid = true;
+            if (errName) errName.textContent = '';
+            if (errEmail) errEmail.textContent = '';
+
+            if (!nameInput || !nameInput.value.trim()) {
+                if (errName) errName.textContent = 'Please enter your name.';
+                isValid = false;
+            }
+
+            if (!emailInput || !emailInput.value.trim()) {
+                if (errEmail) errEmail.textContent = 'Please enter your email.';
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+                if (errEmail) errEmail.textContent = 'Please enter a valid email address.';
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                const txtSpan = submitBtn.querySelector('.download-form__submit-text');
+                if (txtSpan) txtSpan.textContent = 'Sending...';
+            }
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    form.style.display = 'none';
+                    if (successBox) successBox.classList.add('is-visible');
+                } else {
+                    alert(result.message || 'Something went wrong. Please try again.');
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        const txtSpan = submitBtn.querySelector('.download-form__submit-text');
+                        if (txtSpan) txtSpan.textContent = 'Send Request';
+                    }
+                }
+            } catch (err) {
+                alert('Connection error. Please try again later.');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    const txtSpan = submitBtn.querySelector('.download-form__submit-text');
+                    if (txtSpan) txtSpan.textContent = 'Send Request';
+                }
+            }
+        });
+    }
+}
+
+
 
 
 

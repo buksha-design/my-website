@@ -904,48 +904,48 @@ function initBroadsheetAmbientGlow() {
         // Orbiting ethereal focal centers
         const blueX = width * (0.32 + 0.22 * Math.sin(t * 0.38));
         const blueY = height * (0.42 + 0.28 * Math.cos(t * 0.44));
-        const blueRadius = Math.max(width * 0.55, 520);
+        const blueRadius = Math.max(width * 0.358, 338);
 
         const orangeX = width * (0.68 + 0.22 * Math.sin(t * 0.42 + 2.8));
         const orangeY = height * (0.58 + 0.26 * Math.cos(t * 0.36 + 1.2));
-        const orangeRadius = Math.max(width * 0.52, 480);
+        const orangeRadius = Math.max(width * 0.338, 312);
 
         const thirdX = width * (0.5 + 0.18 * Math.cos(t * 0.25 + 0.8));
         const thirdY = height * (0.35 + 0.2 * Math.sin(t * 0.31 + 2.1));
-        const thirdRadius = Math.max(width * 0.4, 380);
+        const thirdRadius = Math.max(width * 0.26, 247);
 
         // A. Flowing Midnight Sapphire & Electric Cobalt Blue Orb
         const blueGrad = ctx.createRadialGradient(blueX, blueY, 0, blueX, blueY, blueRadius);
-        blueGrad.addColorStop(0, 'rgba(30, 85, 235, 0.24)');
-        blueGrad.addColorStop(0.35, 'rgba(18, 52, 175, 0.14)');
-        blueGrad.addColorStop(0.7, 'rgba(10, 26, 95, 0.05)');
+        blueGrad.addColorStop(0, 'rgba(30, 85, 235, 0.156)');
+        blueGrad.addColorStop(0.35, 'rgba(18, 52, 175, 0.091)');
+        blueGrad.addColorStop(0.7, 'rgba(10, 26, 95, 0.033)');
         blueGrad.addColorStop(1, 'rgba(5, 7, 12, 0)');
         ctx.fillStyle = blueGrad;
         ctx.fillRect(0, 0, width, height);
 
         // B. Radiant Molten Amber & Sunset Orange Glow Orb
         const orangeGrad = ctx.createRadialGradient(orangeX, orangeY, 0, orangeX, orangeY, orangeRadius);
-        orangeGrad.addColorStop(0, 'rgba(255, 125, 30, 0.26)');
-        orangeGrad.addColorStop(0.3, 'rgba(235, 95, 20, 0.16)');
-        orangeGrad.addColorStop(0.65, 'rgba(175, 60, 10, 0.05)');
+        orangeGrad.addColorStop(0, 'rgba(255, 125, 30, 0.169)');
+        orangeGrad.addColorStop(0.3, 'rgba(235, 95, 20, 0.104)');
+        orangeGrad.addColorStop(0.65, 'rgba(175, 60, 10, 0.033)');
         orangeGrad.addColorStop(1, 'rgba(5, 7, 12, 0)');
         ctx.fillStyle = orangeGrad;
         ctx.fillRect(0, 0, width, height);
 
         // C. Central Atmospheric Diffusion
         const mixGrad = ctx.createRadialGradient(thirdX, thirdY, 0, thirdX, thirdY, thirdRadius);
-        mixGrad.addColorStop(0, 'rgba(215, 140, 75, 0.10)');
-        mixGrad.addColorStop(0.5, 'rgba(55, 80, 170, 0.06)');
+        mixGrad.addColorStop(0, 'rgba(215, 140, 75, 0.065)');
+        mixGrad.addColorStop(0.5, 'rgba(55, 80, 170, 0.039)');
         mixGrad.addColorStop(1, 'rgba(5, 7, 12, 0)');
         ctx.fillStyle = mixGrad;
         ctx.fillRect(0, 0, width, height);
 
         // 3. Delicate Cursor Halo with dual chromatic warmth
         if (isHovered && mouse.x !== -9999) {
-            const cursorGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 260);
-            cursorGrad.addColorStop(0, 'rgba(255, 175, 85, 0.18)');
-            cursorGrad.addColorStop(0.35, 'rgba(120, 145, 245, 0.09)');
-            cursorGrad.addColorStop(0.7, 'rgba(35, 70, 190, 0.03)');
+            const cursorGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 169);
+            cursorGrad.addColorStop(0, 'rgba(255, 175, 85, 0.117)');
+            cursorGrad.addColorStop(0.35, 'rgba(120, 145, 245, 0.058)');
+            cursorGrad.addColorStop(0.7, 'rgba(35, 70, 190, 0.019)');
             cursorGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
             ctx.fillStyle = cursorGrad;
             ctx.fillRect(0, 0, width, height);

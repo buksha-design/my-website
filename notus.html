@@ -3179,11 +3179,11 @@ button {
    16. SECTION 11: MINIMALIST FOOTER (Matches index.html)
    -------------------------------------------------------------------------- */
 .footer {
-    padding: 3.5rem var(--pad-x) 2.5rem;
+    padding: 3rem var(--pad-x);
     background: #ffffff;
     color: #000000;
     border-top: 1px solid #000000;
-    font-family: var(--font-sans);
+    font-family: var(--font-main);
 }
 
 [data-theme="dark"] .footer {
@@ -3194,25 +3194,22 @@ button {
 
 .footer__grid {
     display: grid;
-    grid-template-columns: 0.65fr 1.35fr;
+    grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: flex-start;
 }
 
-.footer__brand {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1.5rem;
+.footer__content {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 0.8fr;
+    gap: 2.5rem;
+    align-items: flex-start;
 }
 
 .footer__logo-container {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 1.2rem;
-    text-decoration: none;
-    color: inherit;
-    width: fit-content;
 }
 
 #lottie-logo-footer {
@@ -3228,26 +3225,14 @@ button {
     color: inherit;
     letter-spacing: -0.01em;
     white-space: nowrap;
-    line-height: 1;
+    line-height: 1.0;
     margin: 0;
 }
 
-.footer__brand-meta {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: rgba(0, 0, 0, 0.55);
-    margin: 0;
-}
-
-[data-theme="dark"] .footer__brand-meta {
-    color: rgba(255, 255, 255, 0.55);
-}
-
-.footer__content {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-    align-items: flex-start;
+.footer__col--text p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: inherit;
 }
 
 .footer__col h4 {
@@ -3259,42 +3244,33 @@ button {
     margin: 0 0 1rem 0;
 }
 
-.footer__col p,
-.footer__col span {
-    display: block;
+.footer__col p {
     font-size: 0.9rem;
-    line-height: 1.8;
-    color: rgba(0, 0, 0, 0.65);
-    margin: 0;
-}
-
-[data-theme="dark"] .footer__col p,
-[data-theme="dark"] .footer__col span {
-    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.6;
+    color: inherit;
+    margin: 0 0 0.5rem 0;
 }
 
 .footer__col nav {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.3rem;
 }
 
 .footer__col nav a,
-.footer__col a,
-.footer__back-top {
+.footer__col a {
     display: inline-block;
     width: fit-content;
     text-decoration: none;
     color: inherit;
     font-size: 0.9rem;
     line-height: 1.8;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s;
     position: relative;
 }
 
 .footer__col nav a::after,
-.footer__col a::after,
-.footer__back-top::after {
+.footer__col a::after {
     content: '';
     position: absolute;
     bottom: 2px;
@@ -3306,40 +3282,13 @@ button {
 }
 
 .footer__col nav a:hover::after,
-.footer__col a:hover::after,
-.footer__back-top:hover::after {
+.footer__col a:hover::after {
     width: 100%;
 }
 
 .footer__col nav a:hover,
-.footer__col a:hover,
-.footer__back-top:hover {
+.footer__col a:hover {
     opacity: 0.6;
-}
-
-.footer__bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 3.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    font-size: 0.82rem;
-    color: rgba(0, 0, 0, 0.55);
-}
-
-[data-theme="dark"] .footer__bottom {
-    border-top-color: rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.55);
-}
-
-.footer__back-top {
-    font-size: 0.82rem;
-    color: #000000;
-}
-
-[data-theme="dark"] .footer__back-top {
-    color: #ffffff;
 }
 
 /* --------------------------------------------------------------------------
@@ -3358,8 +3307,7 @@ button {
     .displaay-inspector-split { grid-template-columns: 1fr; }
     .inspector-magnifier-pane { border-right: none; border-bottom: 1px solid var(--border-color); }
     .tech-grid { grid-template-columns: 1fr; }
-    .footer__grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .footer__content { grid-template-columns: repeat(2, 1fr); }
+    .footer__grid { grid-template-columns: 1fr; gap: 3rem; }
 }
 
 @media (max-width: 768px) {
@@ -3377,9 +3325,8 @@ button {
         white-space: nowrap !important;
         letter-spacing: -0.04em !important;
     }
-    .footer { padding: 2.5rem var(--pad-x) 2rem; }
-    .footer__content { grid-template-columns: 1fr; gap: 2rem; }
-    .footer__bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; margin-top: 2.5rem; }
+    .footer__grid { grid-template-columns: 1fr; gap: 3rem; }
+    .footer__content { grid-template-columns: 1fr; gap: 3rem; }
 }
 
 /* Prevent sticky header from overlapping section titles */
@@ -4064,47 +4011,29 @@ section[id] {
              ==================================================================== -->
         <footer class="footer" id="info">
             <div class="footer__grid">
-                <div class="footer__brand">
-                    <a href="index.html" class="footer__logo-container" aria-label="Wiktor Buksza — Home">
-                        <div id="lottie-logo-footer"></div>
-                        <p class="footer__author-name">Wiktor Buksza</p>
-                    </a>
-                    <p class="footer__brand-meta">Type &amp; Design &mdash; 2026</p>
+                <div class="footer__logo-container">
+                    <div id="lottie-logo-footer"></div>
+                    <p class="footer__author-name">Wiktor Buksza</p>
                 </div>
-
                 <div class="footer__content">
-                    <div class="footer__col">
-                        <h4>COLLECTION</h4>
-                        <nav>
-                            <a href="#cover">Notus Display Regular</a>
-                            <a href="#cover">Notus Display Italic</a>
-                            <a href="#cover">Notus Text Regular</a>
-                            <a href="#cover">Notus Text Italic</a>
-                            <a href="#cover">Notus Caption</a>
-                        </nav>
+                    <div class="footer__col footer__col--text">
+                        <p>Open for collaborations<br>in motion design, 3D,<br>and high-end visual<br>production.</p>
                     </div>
-                    <div class="footer__col">
-                        <h4>STUDIO</h4>
-                        <nav>
-                            <a href="index.html">Portfolio Home</a>
-                            <a href="index.html#works">Selected Projects</a>
-                            <a href="index.html#about">About Wiktor Buksza</a>
-                            <a href="mailto:wiktor.buksza@gmail.com">Get in Touch</a>
-                        </nav>
+                    <div class="footer__col footer__col--contact">
+                        <h4>OFFICE</h4>
+                        <p>Wrocław, Mieszczańska 31</p>
+                        <h4 style="margin-top: 3rem;">CONTACT</h4>
+                        <a href="index.html#contactSection" class="footer__contact-link">Contact form</a>
                     </div>
-                    <div class="footer__col">
-                        <h4>INQUIRIES</h4>
+                    <div class="footer__col footer__col--social">
+                        <h4>SOCIAL</h4>
                         <nav>
-                            <a href="mailto:wiktor.buksza@gmail.com">wiktor.buksza@gmail.com</a>
-                            <span>Warsaw / Worldwide</span>
-                            <span>Available for Custom Type Design</span>
+                            <a href="https://www.instagram.com/buksha.design/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                            <a href="https://www.behance.net/bukshaeu?locale=pl_PL" target="_blank" rel="noopener noreferrer">Behance</a>
+                            <a href="https://pl.linkedin.com/in/buksha-design" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                         </nav>
                     </div>
                 </div>
-            </div>
-
-            <div class="footer__bottom">
-                <div>&copy; 2026 Wiktor Buksza. All rights reserved.</div>
             </div>
         </footer>
     </main>
@@ -5459,18 +5388,7 @@ function initComparisonStackSwitchers() {
     const switcherGroups = document.querySelectorAll('.stack-style-switchers');
     if (!switcherGroups.length) return;
 
-    const styleMap = {
-        'style-display':    { family: '"Notus Display", serif',        style: 'normal' },
-        'style-display-it': { family: '"Notus Display Italic", serif', style: 'italic' },
-        'style-text':       { family: '"Notus Text", serif',           style: 'normal' },
-        'style-text-it':    { family: '"Notus Text Italic", serif',    style: 'italic' },
-        'style-caption':    { family: '"Notus Caption", serif',        style: 'normal' },
-        'style-caption-it': { family: '"Notus Caption", serif',        style: 'italic' }
-    };
-
-    const allStyleClasses = Object.keys(styleMap);
-
-    // Preload all 5 Notus font faces so switching is instant on first click
+    // Preload all optical sizes so switching is instantaneous on first click
     if (document.fonts && document.fonts.load) {
         [
             '1em "Notus Display"',
@@ -5478,59 +5396,80 @@ function initComparisonStackSwitchers() {
             '1em "Notus Text"',
             'italic 1em "Notus Text Italic"',
             '1em "Notus Caption"'
-        ].forEach((fontSpec) => {
-            document.fonts.load(fontSpec).catch(() => {});
+        ].forEach((f) => {
+            try { document.fonts.load(f); } catch (_) {}
         });
     }
 
+    const ALL_STYLE_CLASSES = [
+        'style-display',
+        'style-display-it',
+        'style-text',
+        'style-text-it',
+        'style-caption',
+        'style-caption-it'
+    ];
+
+    const FONT_MAP = {
+        'style-display':    { family: '"Notus Display", serif', style: 'normal' },
+        'style-display-it': { family: '"Notus Display Italic", serif', style: 'italic' },
+        'style-text':       { family: '"Notus Text", serif', style: 'normal' },
+        'style-text-it':    { family: '"Notus Text Italic", serif', style: 'italic' },
+        'style-caption':    { family: '"Notus Caption", serif', style: 'normal' },
+        'style-caption-it': { family: '"Notus Caption", serif', style: 'italic' }
+    };
+
     switcherGroups.forEach((group) => {
-        const stackBlock = group.closest('.stack-block');
-        if (!stackBlock) return;
+        const block = group.closest('.stack-block');
+        if (!block) return;
 
-        const targetTextEl = stackBlock.querySelector('.stack-hero-word, .stack-question, .stack-cascade-list, .ot-ligatures-stage, .ot-smcp-stage, .bilingual-spread-stage');
-        const metaLabel = stackBlock.querySelector('.stack-meta-label') || stackBlock.querySelector('.stack-meta-switcher-group > span');
         const buttons = group.querySelectorAll('button[data-style-class]');
+        const targetTextEl = block.querySelector('.stack-hero-word, .stack-question, .stack-cascade-list, .ot-ligatures-stage, .ot-smcp-stage, .bilingual-spread-stage');
+        const metaLabelEl = block.querySelector('.stack-meta-label');
+        if (!buttons.length || !targetTextEl) return;
 
-        if (!targetTextEl || !buttons.length) return;
-
-        const applySelection = (btn) => {
+        function activateButton(btn) {
             buttons.forEach((b) => b.classList.remove('is-active'));
             btn.classList.add('is-active');
 
             const styleClass = btn.getAttribute('data-style-class');
             const labelText = btn.getAttribute('data-label');
 
-            targetTextEl.classList.remove(...allStyleClasses);
+            targetTextEl.classList.remove(...ALL_STYLE_CLASSES);
             if (styleClass) {
                 targetTextEl.classList.add(styleClass);
-                const fontConf = styleMap[styleClass];
-                if (fontConf) {
-                    targetTextEl.style.setProperty('font-family', fontConf.family, 'important');
-                    targetTextEl.style.setProperty('font-style', fontConf.style, 'important');
+                const mapped = FONT_MAP[styleClass];
+                if (mapped) {
+                    targetTextEl.style.setProperty('font-family', mapped.family, 'important');
+                    targetTextEl.style.setProperty('font-style', mapped.style, 'important');
                 }
             }
 
-            if (labelText && metaLabel) {
-                metaLabel.textContent = labelText;
+            if (metaLabelEl && labelText) {
+                metaLabelEl.textContent = labelText;
             }
 
-            // Force synchronous WebKit layout & paint invalidation while cursor is still hovering button
+            // Force synchronous WebKit/Blink glyph cache & layer repaint while cursor stays on button
+            targetTextEl.style.webkitTransform = 'translateZ(0)';
             targetTextEl.style.transform = 'translateZ(0)';
             targetTextEl.style.opacity = '0.999';
             void targetTextEl.offsetHeight;
             requestAnimationFrame(() => {
+                targetTextEl.style.webkitTransform = '';
                 targetTextEl.style.transform = '';
                 targetTextEl.style.opacity = '';
             });
-        };
+        }
 
         buttons.forEach((btn) => {
             btn.addEventListener('pointerdown', (e) => {
-                if (e.button && e.button !== 0) return;
-                applySelection(btn);
+                e.preventDefault();
+                activateButton(btn);
             });
-            btn.addEventListener('click', () => {
-                applySelection(btn);
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                activateButton(btn);
+                btn.blur();
             });
         });
     });
@@ -5864,6 +5803,12 @@ function initDownloadForm() {
         });
     }
 }
+
+
+
+
+
+
 
 </script>
 </body>

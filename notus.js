@@ -447,7 +447,10 @@ function initBroadsheetInteractive() {
         { line1: 'Жыве Беларусь!', line2: 'Жыве вечна!' },
         { line1: 'Souffle doré,', line2: 'beauté pure.' },
         { line1: 'Stille Größe,', line2: 'klare Form.' },
-        { line1: 'Czułe światło,', line2: 'żywa forma.' }
+        { line1: 'Czułe światło,', line2: 'żywa forma.' },
+        { line1: 'Tyst rytm,', line2: 'taktil nåd.' },
+        { line1: 'Stille rytme,', line2: 'taktil nåde.' },
+        { line1: 'Tichý rytmus,', line2: 'živá forma.' }
     ];
 
     const MAX_LEN_1 = Math.max(...slogans.map(s => s.line1.length));

@@ -2130,7 +2130,7 @@ button {
 .bilingual-page__body p.bilingual-page__caption-para {
     font-family: 'Notus Caption', serif !important;
     font-style: normal !important;
-    font-size: clamp(0.62rem, 0.74vw, 0.69rem);
+    font-size: clamp(0.744rem, 0.888vw, 0.828rem);
     line-height: 1.56;
     letter-spacing: 0.015em;
     color: var(--text-main);

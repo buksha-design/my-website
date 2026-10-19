@@ -3,6 +3,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initMastheadFontLoader();
     initScrollAndNav();
     initMastheadDelicateAnimation();
     initBroadsheetInteractive();
@@ -1072,6 +1073,33 @@ function initBroadsheetAmbientGlow() {
     }, { threshold: 0.0, rootMargin: '250px 0px' });
 
     observer.observe(section);
+}
+
+/* --------------------------------------------------------------------------
+   01-A. MASTHEAD PAC-MAN FONT LOADER
+   Keeps the Pac-Man visible for at least MIN_MS, waits for Notus Display
+   (capped at MAX_MS), then reveals "The Notus TIMES".
+   -------------------------------------------------------------------------- */
+function initMastheadFontLoader() {
+    const cover = document.getElementById('cover');
+    if (!cover || !cover.classList.contains('is-font-loading')) return;
+
+    const MIN_MS = 1500;
+    const MAX_MS = 4000;
+    const start = performance.now();
+
+    const fontReady = (document.fonts && document.fonts.load)
+        ? document.fonts.load('1em "Notus Display"', 'The Notus TIMES').catch(() => {})
+        : Promise.resolve();
+    const timeout = new Promise(resolve => setTimeout(resolve, MAX_MS));
+
+    Promise.race([fontReady, timeout]).then(() => {
+        const remaining = Math.max(0, MIN_MS - (performance.now() - start));
+        setTimeout(() => {
+            cover.classList.remove('is-font-loading');
+            cover.classList.add('is-font-ready');
+        }, remaining);
+    });
 }
 
 /* --------------------------------------------------------------------------

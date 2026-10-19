@@ -899,6 +899,138 @@ button {
 }
 
 /* --------------------------------------------------------------------------
+   06-B. MASTHEAD PAC-MAN FONT LOADER ("The Notus TIMES")
+   Shown for ~1.5s while Notus Display loads, then the masthead fades in.
+   -------------------------------------------------------------------------- */
+.masthead-stage {
+    position: relative;
+}
+
+.masthead-stage .masthead-title {
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#cover.is-font-loading .masthead-title {
+    opacity: 0;
+    transform: translateY(14px);
+}
+
+.masthead-loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+    color: inherit;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+    z-index: 3;
+}
+
+#cover.is-font-loading .masthead-loader {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.35s ease, visibility 0s;
+}
+
+.pacman-loader {
+    --pm-size: 56px;
+    --pm-dot: 10px;
+    --pm-gap: 36px;
+    --pm-speed: 0.42s;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.pacman {
+    position: relative;
+    width: var(--pm-size);
+    height: var(--pm-size);
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+.pacman__half {
+    position: absolute;
+    left: 0;
+    width: var(--pm-size);
+    height: calc(var(--pm-size) / 2);
+    background: currentColor;
+}
+
+.pacman__half--top {
+    top: 0;
+    border-radius: var(--pm-size) var(--pm-size) 0 0;
+    transform-origin: 50% 100%;
+    animation: pacman-chomp-top var(--pm-speed) ease-in-out infinite alternate;
+}
+
+.pacman__half--bottom {
+    bottom: 0;
+    border-radius: 0 0 var(--pm-size) var(--pm-size);
+    transform-origin: 50% 0%;
+    animation: pacman-chomp-bottom var(--pm-speed) ease-in-out infinite alternate;
+}
+
+.pacman-dots {
+    width: calc(var(--pm-gap) * 5);
+    margin-left: calc(var(--pm-size) / -2);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
+    mask-image: linear-gradient(to right, #000 85%, transparent);
+}
+
+.pacman-dots__track {
+    display: flex;
+    gap: calc(var(--pm-gap) - var(--pm-dot));
+    padding-left: calc(var(--pm-size) / 2);
+    animation: pacman-dots-move calc(var(--pm-speed) * 2) linear infinite;
+}
+
+.pacman-dots__track span {
+    width: var(--pm-dot);
+    height: var(--pm-dot);
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.55;
+    flex-shrink: 0;
+}
+
+.masthead-loader__label {
+    font-family: var(--font-main);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.55;
+}
+
+@keyframes pacman-chomp-top {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-38deg); }
+}
+
+@keyframes pacman-chomp-bottom {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(38deg); }
+}
+
+@keyframes pacman-dots-move {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(var(--pm-gap) * -1)); }
+}
+
+@media (max-width: 768px) {
+    .pacman-loader { --pm-size: 42px; --pm-dot: 8px; --pm-gap: 28px; }
+}
+
+/* --------------------------------------------------------------------------
    07. SECTION 02: BLACK BROADSHEET ("Statues carved in marble...")
    -------------------------------------------------------------------------- */
 .section-black-broadsheet {
@@ -3383,7 +3515,7 @@ section[id] {
         <!-- ====================================================================
              01. THE COVER: "The Notus TIMES" (+15% INCREASED HEADLINE)
              ==================================================================== -->
-        <section class="section-displaay-masthead" id="cover">
+        <section class="section-displaay-masthead is-font-loading" id="cover">
             <div class="masthead-container">
                 <!-- Monumental Broadsheet Masthead Stage (+15% Larger) -->
                 <div class="masthead-stage">
@@ -3391,6 +3523,21 @@ section[id] {
                         <span class="masthead-title-top">The Notus</span>
                         <span class="masthead-title-bottom">TIMES</span>
                     </h1>
+                    <!-- Pac-Man font loader (removed via .is-font-loading after ~1.5s) -->
+                    <div class="masthead-loader" aria-hidden="true">
+                        <div class="pacman-loader">
+                            <div class="pacman">
+                                <span class="pacman__half pacman__half--top"></span>
+                                <span class="pacman__half pacman__half--bottom"></span>
+                            </div>
+                            <div class="pacman-dots">
+                                <div class="pacman-dots__track">
+                                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="masthead-loader__label">Loading Notus Display</div>
+                    </div>
                 </div>
 
                 <!-- Bottom Micro-Ticker matching the Displaay reference screenshot -->
@@ -4047,6 +4194,7 @@ section[id] {
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initMastheadFontLoader();
     initScrollAndNav();
     initMastheadDelicateAnimation();
     initBroadsheetInteractive();
@@ -5116,6 +5264,33 @@ function initBroadsheetAmbientGlow() {
     }, { threshold: 0.0, rootMargin: '250px 0px' });
 
     observer.observe(section);
+}
+
+/* --------------------------------------------------------------------------
+   01-A. MASTHEAD PAC-MAN FONT LOADER
+   Keeps the Pac-Man visible for at least MIN_MS, waits for Notus Display
+   (capped at MAX_MS), then reveals "The Notus TIMES".
+   -------------------------------------------------------------------------- */
+function initMastheadFontLoader() {
+    const cover = document.getElementById('cover');
+    if (!cover || !cover.classList.contains('is-font-loading')) return;
+
+    const MIN_MS = 1500;
+    const MAX_MS = 4000;
+    const start = performance.now();
+
+    const fontReady = (document.fonts && document.fonts.load)
+        ? document.fonts.load('1em "Notus Display"', 'The Notus TIMES').catch(() => {})
+        : Promise.resolve();
+    const timeout = new Promise(resolve => setTimeout(resolve, MAX_MS));
+
+    Promise.race([fontReady, timeout]).then(() => {
+        const remaining = Math.max(0, MIN_MS - (performance.now() - start));
+        setTimeout(() => {
+            cover.classList.remove('is-font-loading');
+            cover.classList.add('is-font-ready');
+        }, remaining);
+    });
 }
 
 /* --------------------------------------------------------------------------

@@ -939,7 +939,7 @@ button {
 }
 
 .pacman-loader {
-    --pm-size: 56px;
+    --pm-size: 84px;
     --pm-dot: 10px;
     --pm-gap: 36px;
     --pm-speed: 0.42s;
@@ -979,11 +979,9 @@ button {
 }
 
 .pacman-dots {
-    width: calc(var(--pm-gap) * 5);
+    width: calc(var(--pm-size) / 2 + var(--pm-gap) * 2 + var(--pm-dot));
     margin-left: calc(var(--pm-size) / -2);
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
-    mask-image: linear-gradient(to right, #000 85%, transparent);
 }
 
 .pacman-dots__track {
@@ -997,18 +995,12 @@ button {
     width: var(--pm-dot);
     height: var(--pm-dot);
     border-radius: 50%;
-    background: currentColor;
-    opacity: 0.55;
+    background: #000000;
     flex-shrink: 0;
 }
 
-.masthead-loader__label {
-    font-family: var(--font-main);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    opacity: 0.55;
+[data-theme="dark"] .pacman-dots__track span {
+    background: #ffffff;
 }
 
 @keyframes pacman-chomp-top {
@@ -1027,7 +1019,7 @@ button {
 }
 
 @media (max-width: 768px) {
-    .pacman-loader { --pm-size: 42px; --pm-dot: 8px; --pm-gap: 28px; }
+    .pacman-loader { --pm-size: 63px; --pm-dot: 8px; --pm-gap: 28px; }
 }
 
 /* --------------------------------------------------------------------------
@@ -3532,11 +3524,10 @@ section[id] {
                             </div>
                             <div class="pacman-dots">
                                 <div class="pacman-dots__track">
-                                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                    <span></span><span></span><span></span><span></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="masthead-loader__label">Loading Notus Display</div>
                     </div>
                 </div>
 

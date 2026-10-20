@@ -11,7 +11,7 @@
 
 @font-face {
     font-family: 'Notus Display';
-    src: url('notus/Notus-Display.otf?v=4') format('opentype');
+    src: url('notus/Notus-Display.otf?v=1792525200') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -19,7 +19,7 @@
 
 @font-face {
     font-family: 'Notus Display Italic';
-    src: url('notus/Notus-Display Italic.otf') format('opentype');
+    src: url('notus/Notus-Display Italic.otf?v=1792525200') format('opentype');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -68,6 +68,9 @@
 
 html {
     background-color: #ffffff;
+    text-rendering: optimizeLegibility;
+    font-kerning: normal;
+    font-feature-settings: "kern" 1;
 }
 
 body {

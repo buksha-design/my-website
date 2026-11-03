@@ -831,6 +831,306 @@ document.addEventListener('DOMContentLoaded', () => {
         updateActiveService('motion');
     }
 
+    // =============================================
+    // ЛОГИКА 3D-МЕТАВСЕЛЕННОЙ ПРОЕКТОВ (КАМЕРА ПО ОСИ Z БЕЗ ПЕРСПЕКТИВНОГО ИСКАЖЕНИЯ)
+    // =============================================
+    const showcaseSection = document.getElementById('services-showcase');
+    if (showcaseSection) {
+        const showcaseCamera = document.getElementById('showcase-camera');
+        const showcaseBgTitle = document.getElementById('showcase-bg-title');
+        const showcaseHudIndex = document.getElementById('showcase-hud-index');
+        const showcaseWorkTitle = document.getElementById('showcase-work-title');
+        const showcaseWorkSubtitle = document.getElementById('showcase-work-subtitle');
+        const showcaseWorkDetails = document.getElementById('showcase-work-details');
+        const showcaseCards = Array.from(showcaseSection.querySelectorAll('.showcase-card'));
+
+        // Считываем Z-координаты карточек для глубины резкости (DOF blur) и масштаба без искажений
+        const cardData = showcaseCards.map(el => {
+            const zVal = parseFloat(el.style.getPropertyValue('--z')) || 0;
+            const nodeIdx = el.hasAttribute('data-node') ? Number(el.getAttribute('data-node')) : -1;
+            const isHero = el.classList.contains('showcase-card--hero');
+            return { el, z: zVal, nodeIdx, isHero };
+        });
+
+        // 9 работ из разных проектов разбросаны по 3D-пространству с индивидуальными пропорциями ratio
+        const targets = [
+            {
+                nodeIdx: 0,
+                category: 'antigravity',
+                camX: 0,
+                camY: 0,
+                camZ: 0,
+                title: 'Showcase Coll. W—01',
+                index: '01',
+                workTitle: 'Antigravity',
+                workSubtitle: 'Motion Exploration — 16:9',
+                workDetails: 'Selected Works / 01 — 09'
+            },
+            {
+                nodeIdx: 1,
+                category: 'dclex',
+                camX: 530,
+                camY: 80,
+                camZ: 140,
+                title: 'Showcase Coll. W—02',
+                index: '02',
+                workTitle: 'DCLEX — Analytics',
+                workSubtitle: 'Decentralized Financial Platform — 4:3',
+                workDetails: 'Selected Works / 02 — 09'
+            },
+            {
+                nodeIdx: 2,
+                category: 'verity',
+                camX: -515,
+                camY: -110,
+                camZ: 170,
+                title: 'Showcase Coll. W—03',
+                index: '03',
+                workTitle: 'Verity AI',
+                workSubtitle: 'Zero-Touch Warehouse Intelligence — 9:16',
+                workDetails: 'Selected Works / 03 — 09'
+            },
+            {
+                nodeIdx: 3,
+                category: 'notus',
+                camX: 560,
+                camY: -360,
+                camZ: -160,
+                title: 'Showcase Coll. W—04',
+                index: '04',
+                workTitle: 'Notus Type',
+                workSubtitle: 'Editorial Serif Type System — 4:5',
+                workDetails: 'Selected Works / 04 — 09'
+            },
+            {
+                nodeIdx: 4,
+                category: 'antigravity',
+                camX: 20,
+                camY: -420,
+                camZ: 110,
+                title: 'Showcase Coll. W—05',
+                index: '05',
+                workTitle: 'Antigravity — Study I',
+                workSubtitle: 'Physics & Spatial Detachment — 16:9',
+                workDetails: 'Selected Works / 05 — 09'
+            },
+            {
+                nodeIdx: 5,
+                category: 'dclex',
+                camX: -810,
+                camY: 380,
+                camZ: -200,
+                title: 'Showcase Coll. W—06',
+                index: '06',
+                workTitle: 'DCLEX',
+                workSubtitle: 'Tokenized Stock Market Interface — 4:3',
+                workDetails: 'Selected Works / 06 — 09'
+            },
+            {
+                nodeIdx: 6,
+                category: 'antigravity',
+                camX: -210,
+                camY: 430,
+                camZ: -70,
+                title: 'Showcase Coll. W—07',
+                index: '07',
+                workTitle: 'Antigravity — Study II',
+                workSubtitle: 'Still Life & Floating Objects — 3:4',
+                workDetails: 'Selected Works / 07 — 09'
+            },
+            {
+                nodeIdx: 7,
+                category: 'verity',
+                camX: 810,
+                camY: 490,
+                camZ: 230,
+                title: 'Showcase Coll. W—08',
+                index: '08',
+                workTitle: 'Verity — Autonomy',
+                workSubtitle: 'AI-Powered Mobile Intelligence — 4:5',
+                workDetails: 'Selected Works / 08 — 09'
+            },
+            {
+                nodeIdx: 8,
+                category: 'dclex',
+                camX: -910,
+                camY: -510,
+                camZ: 260,
+                title: 'Showcase Coll. W—09',
+                index: '09',
+                workTitle: 'DCLEX — DeFi Core',
+                workSubtitle: 'Real-Time Trading & Liquidity — 16:10',
+                workDetails: 'Selected Works / 09 — 09'
+            }
+        ];
+
+        const HOLD_DURATION = 2500; // Пауза 2.5 секунды на каждом ассете для детального просмотра
+        const MOVE_DURATION = 2200; // 2.2 секунды плавный и деликатный перелет к следующей рандомной работе
+        const SEGMENT_DURATION = HOLD_DURATION + MOVE_DURATION; // 4.7 сек на шаг
+
+        // Сверхплавная кривая с очень длинным, деликатным торможением (long gentle settle) без рывков
+        const easeDelicateGlide = (t) => {
+            const smoothStep = t * t * (3 - 2 * t);
+            const gentleOut = 1 - Math.pow(1 - t, 3.2);
+            return smoothStep * 0.55 + gentleOut * 0.45;
+        };
+
+        // Рандомный выбор следующей работы из ДРУГОЙ категории (чтобы приближение шло вразброс, а не по проектам)
+        let activeTransitionStep = -1;
+        let currentFromTarget = targets[0];
+        let currentToTarget = targets[3]; // Первая цель — другая категория (Notus)
+        let recentNodeHistory = [0, 3];
+
+        let currentFlightProfile = {
+            curveOffsetX: 35,
+            curveOffsetY: -28,
+            zArc: -45,
+            staggerX: 0.94,
+            staggerY: 1.06
+        };
+
+        const pickNextRandomTarget = (fromTarget) => {
+            // Исключаем текущую категорию и последние посещенные карточки для максимального разнообразия
+            let candidates = targets.filter(t =>
+                t.nodeIdx !== fromTarget.nodeIdx &&
+                t.category !== fromTarget.category &&
+                !recentNodeHistory.includes(t.nodeIdx)
+            );
+            if (candidates.length === 0) {
+                candidates = targets.filter(t =>
+                    t.nodeIdx !== fromTarget.nodeIdx &&
+                    t.category !== fromTarget.category
+                );
+            }
+            const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+            recentNodeHistory.push(chosen.nodeIdx);
+            if (recentNodeHistory.length > 4) {
+                recentNodeHistory.shift();
+            }
+            return chosen;
+        };
+
+        const randomizeFlightProfile = () => {
+            const signX = Math.random() > 0.5 ? 1 : -1;
+            const signY = Math.random() > 0.5 ? 1 : -1;
+            currentFlightProfile = {
+                curveOffsetX: signX * (25 + Math.random() * 30),
+                curveOffsetY: signY * (20 + Math.random() * 25),
+                zArc: -(35 + Math.random() * 30),
+                staggerX: 0.92 + Math.random() * 0.16,
+                staggerY: 0.92 + Math.random() * 0.16
+            };
+        };
+
+        let isShowcaseVisible = false;
+        let isShowcaseAnimating = false;
+        let activeNodeIndex = 0;
+
+        const showcaseObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                isShowcaseVisible = entry.isIntersecting;
+                if (isShowcaseVisible && !isShowcaseAnimating) {
+                    isShowcaseAnimating = true;
+                    requestAnimationFrame(animateShowcaseMetaverse);
+                }
+            });
+        }, { threshold: 0.05 });
+
+        showcaseObserver.observe(showcaseSection);
+
+        function animateShowcaseMetaverse(now) {
+            if (!isShowcaseVisible) {
+                isShowcaseAnimating = false;
+                return;
+            }
+
+            const totalStep = Math.floor(now / SEGMENT_DURATION);
+            if (totalStep !== activeTransitionStep) {
+                if (activeTransitionStep !== -1) {
+                    currentFromTarget = currentToTarget;
+                    currentToTarget = pickNextRandomTarget(currentFromTarget);
+                }
+                activeTransitionStep = totalStep;
+                randomizeFlightProfile();
+            }
+
+            const segmentTime = now - totalStep * SEGMENT_DURATION;
+            const fromState = currentFromTarget;
+            const toState = currentToTarget;
+
+            // Пауза 2.5 секунды над проектом, затем плавный и деликатный доезд
+            let rawT = 0;
+            if (segmentTime > HOLD_DURATION) {
+                rawT = Math.min(1, Math.max(0, (segmentTime - HOLD_DURATION) / MOVE_DURATION));
+            }
+
+            const tX = rawT > 0 ? easeDelicateGlide(Math.min(1, Math.pow(rawT, currentFlightProfile.staggerX))) : 0;
+            const tY = rawT > 0 ? easeDelicateGlide(Math.min(1, Math.pow(rawT, currentFlightProfile.staggerY))) : 0;
+            const tZ = rawT > 0 ? easeDelicateGlide(rawT) : 0;
+
+            // Очень мягкая колоколообразная огибающая (sin^2), чтобы вход и выход из дуги были абсолютно бесшовными
+            const smoothBell = Math.pow(Math.sin(rawT * Math.PI), 2);
+
+            // Едва уловимое плавное дыхание камеры
+            const driftX = Math.sin(now * 0.001) * 2.5;
+            const driftY = Math.cos(now * 0.0009) * 2.0;
+            const driftZ = Math.sin(now * 0.0012) * 4.5;
+
+            const camX = fromState.camX + (toState.camX - fromState.camX) * tX + currentFlightProfile.curveOffsetX * smoothBell + driftX;
+            const camY = fromState.camY + (toState.camY - fromState.camY) * tY + currentFlightProfile.curveOffsetY * smoothBell + driftY;
+            const camZ = fromState.camZ + (toState.camZ - fromState.camZ) * tZ + currentFlightProfile.zArc * smoothBell + driftZ;
+
+            const moveProgress = tZ;
+
+            // В каждом кадре обновляем только transform камеры (без перебора карточек в цикле — 0 лагов!)
+            if (showcaseCamera) {
+                showcaseCamera.style.transform = `translate3d(${camX.toFixed(2)}px, ${camY.toFixed(2)}px, ${camZ.toFixed(2)}px)`;
+            }
+
+            // Мягкое движение центрального заголовка
+            if (showcaseBgTitle) {
+                const flightPulse = Math.sin(moveProgress * Math.PI);
+                const titleX = camX * 0.06;
+                const titleY = camY * 0.06;
+                const titleScale = 1 + flightPulse * 0.035;
+                showcaseBgTitle.style.transform = `translate3d(${titleX.toFixed(2)}px, ${titleY.toFixed(2)}px, 0) scale(${titleScale.toFixed(3)})`;
+            }
+
+            // При подъезде к работе (moveProgress > 0.38) она деликатно увеличивается через GPU-transition (.is-focused)
+            const focusedNode = moveProgress > 0.38 ? toState.nodeIdx : fromState.nodeIdx;
+            if (focusedNode !== activeNodeIndex) {
+                activeNodeIndex = focusedNode;
+                const activeTarget = targets[activeNodeIndex];
+
+                if (showcaseBgTitle) {
+                    showcaseBgTitle.textContent = activeTarget.title;
+                }
+                if (showcaseHudIndex) {
+                    showcaseHudIndex.textContent = activeTarget.index;
+                }
+                if (showcaseWorkTitle) {
+                    showcaseWorkTitle.textContent = activeTarget.workTitle;
+                }
+                if (showcaseWorkSubtitle) {
+                    showcaseWorkSubtitle.textContent = activeTarget.workSubtitle;
+                }
+                if (showcaseWorkDetails) {
+                    showcaseWorkDetails.textContent = activeTarget.workDetails;
+                }
+
+                for (let i = 0; i < cardData.length; i++) {
+                    if (cardData[i].nodeIdx === activeNodeIndex) {
+                        cardData[i].el.classList.add('is-focused');
+                    } else {
+                        cardData[i].el.classList.remove('is-focused');
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateShowcaseMetaverse);
+        }
+    }
+
     const canvas = document.getElementById('stats-canvas');
     if (statsSection && canvas) {
         const ctx = canvas.getContext('2d');
@@ -1334,36 +1634,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
             requestAnimationFrame(animate);
         }
-
-        // =============================================
-        // ЛЕНИВАЯ ЗАГРУЗКА И УПРАВЛЕНИЕ ВИДЕО (PLAY/PAUSE)
-        // =============================================
-        const videoObserverOptions = {
-            threshold: 0.05, // Запускаем, если видно хотя бы 5% видео
-            rootMargin: '150px 0px 150px 0px' // Подгружаем и запускаем чуть заранее
-        };
-
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const video = entry.target;
-                if (entry.isIntersecting) {
-                    if (video.paused) {
-                        video.play().catch(err => {
-                            console.log('Autoplay prevented:', err);
-                        });
-                    }
-                } else {
-                    if (!video.paused) {
-                        video.pause();
-                    }
-                }
-            });
-        }, videoObserverOptions);
-
-        const allVideos = document.querySelectorAll('video');
-        allVideos.forEach(video => {
-            video.setAttribute('preload', 'auto');
-            videoObserver.observe(video);
-        });
     }
+
+    // =============================================
+    // ЛЕНИВАЯ ЗАГРУЗКА И УПРАВЛЕНИЕ ВИДЕО (PLAY/PAUSE)
+    // =============================================
+    const videoObserverOptions = {
+        threshold: 0.05, // Запускаем, если видно хотя бы 5% видео
+        rootMargin: '150px 0px 150px 0px' // Подгружаем и запускаем чуть заранее
+    };
+
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+                if (video.paused) {
+                    video.play().catch(err => {
+                        console.log('Autoplay prevented:', err);
+                    });
+                }
+            } else {
+                if (!video.paused) {
+                    video.pause();
+                }
+            }
+        });
+    }, videoObserverOptions);
+
+    const allVideos = document.querySelectorAll('video');
+    allVideos.forEach(video => {
+        video.setAttribute('preload', 'auto');
+        videoObserver.observe(video);
+    });
 });

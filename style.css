@@ -605,6 +605,182 @@ body {
     color: rgba(255, 255, 255, 0.25);
 }
 
+/* =========================================================
+   СЕКЦИЯ ВИТРИНЫ РАБОТ С ДИНАМИЧЕСКОЙ КАМЕРОЙ (Record_3.mp4)
+   ========================================================= */
+.stats--showcase {
+    display: block;
+    padding: 0;
+    height: 713px; /* Увеличено ровно на +15% от 620px */
+    background-color: #e6e7e9;
+    border-top: none;
+    border-radius: 32px; /* Закругление углов секции */
+    overflow: hidden;
+    margin-top: 2rem;
+    pointer-events: none; /* Без интеракций с мышкой */
+}
+
+.showcase-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #e6e7e9;
+    color: #0d0d0d;
+    border-radius: 32px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+}
+
+/* Тонкая пространственная сетка и радиальная глубина метавселенной */
+.showcase-stage__grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.55) 0%, rgba(230, 231, 233, 0.95) 75%),
+        linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+    background-size: 100% 100%, 80px 80px, 80px 80px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Верхняя и нижняя HUD-строки в стиле Jitter Showcase Template */
+.showcase-stage__hud-top {
+    position: absolute;
+    top: 1.8rem;
+    left: var(--container-padding);
+    right: var(--container-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    color: #1a1a1a;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.showcase-stage__hud-bottom {
+    position: absolute;
+    bottom: 1.8rem;
+    left: var(--container-padding);
+    right: var(--container-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    line-height: 1.38;
+    color: #1a1a1a;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.showcase-stage__formats strong {
+    font-weight: 700;
+}
+
+.showcase-stage__kaomoji {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+/* Центральный крупный заголовок в пространстве сцены */
+.showcase-stage__bg-title {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-main);
+    font-size: clamp(2.8rem, 5.5vw, 5.4rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    color: #0a0a0a;
+    white-space: nowrap;
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* Ортогональная 3D-перспектива по оси Z (без наклона плоскостей и перспективных искажений карточек) */
+.showcase-viewport-3d {
+    position: absolute;
+    inset: 0;
+    perspective: 1400px;
+    perspective-origin: 50% 50%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Пространственная 3D-камера */
+.showcase-camera {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* Карточки проектов, расставленные строго параллельно экрану (без перспективной трапеции, с GPU-оптимизацией) */
+.showcase-card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--w, 280px);
+    height: var(--h, 210px);
+    transform: translate3d(
+        calc(var(--x, 0px) - 50%),
+        calc(var(--y, 0px) - 50%),
+        var(--z, 0px)
+    ) scale(1);
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #111111;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+    contain: layout paint style;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.showcase-card video,
+.showcase-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+}
+
+.showcase-card__tag {
+    position: absolute;
+    bottom: 0.85rem;
+    left: 0.95rem;
+    padding: 0.28rem 0.65rem;
+    border-radius: 100px;
+    background: rgba(12, 12, 14, 0.88);
+    color: #ffffff;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.03em;
+}
+
+/* Деликатное увеличение активной работы в фокусе для визуального акцента */
+.showcase-card.is-focused {
+    transform: translate3d(
+        calc(var(--x, 0px) - 50%),
+        calc(var(--y, 0px) - 50%),
+        var(--z, 0px)
+    ) scale(1.15);
+    box-shadow: 0 28px 64px rgba(0, 0, 0, 0.28);
+}
+
 /* Stats White Section (Alternative horizontal layout) */
 .stats-white {
     position: relative;
@@ -2472,6 +2648,18 @@ body {
         padding-left: 0;
         border-left: none;
         border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .stats--showcase {
+        height: 598px; /* +15% от 520px на мобильных */
+        padding: 0;
+        border-radius: 24px;
+    }
+
+    .stats--showcase .showcase-stage {
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
     }
 
     /* Stats White Section */

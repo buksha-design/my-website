@@ -31,7 +31,7 @@
         <nav class="header__nav">
             <a href="#works">Works</a>
             <a href="notus.html">Notus</a>
-            <a href="#services">Services</a>
+            <a href="#services-showcase">Services</a>
             <button class="nav-contact-trigger" id="contactTrigger" aria-expanded="false" aria-controls="contactSection">Contact</button>
         </nav>
     </header>
@@ -448,27 +448,102 @@ emotion and visual precision.
             </div>
         </section>
 
-        <section class="stats" id="services">
-            <div class="stats__video-container">
-                <div class="video-loader"></div>
-                <video autoplay muted loop playsinline class="stats__video" id="stats-video">
-                    <source src="optimized_assets/All/All_Animations_720.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="stats__list">
-                <div class="display-button">Services</div>
-                
-                <div class="stats__item" id="service-motion">
-                    <h3 class="stats__service-title">Motion Design</h3>
-                    <p class="stats__service-description">Creating high-fidelity motion graphics and designed to bring digital experiences to life.</p>
+        <!-- 3D-Метавселенная проектов с глубокой осью Z как в After Effects (без перспективного искажения карточек) -->
+        <section class="stats stats--showcase" id="services-showcase">
+            <div class="showcase-stage" id="showcase-stage">
+                <!-- Пространственная сетка и глубина -->
+                <div class="showcase-stage__grid-bg" aria-hidden="true"></div>
+
+                <!-- Верхняя мета-строка референса -->
+                <div class="showcase-stage__hud-top">
+                    <span>Showcase</span>
+                    <span id="showcase-hud-index">01</span>
+                    <span>Selected Works</span>
                 </div>
-                <div class="stats__item" id="service-3d">
-                    <h3 class="stats__service-title">3D Visualisation</h3>
-                    <p class="stats__service-description">Crafting high-end, tactile 3D visuals and detailed product renders.</p>
+
+                <!-- Крупная типографика в 3D-пространстве -->
+                <div class="showcase-stage__bg-title" id="showcase-bg-title">
+                    Showcase Coll. W—01
                 </div>
-                <div class="stats__item" id="service-brand">
-                    <h3 class="stats__service-title">Brand Identity</h3>
-                    <p class="stats__service-description">Building cohesive brand systems and motion-first guidelines.</p>
+
+                <!-- Ортогональная 3D-Камера (работы хаотично разбросаны в 3D-пространстве с индивидуальными пропорциями ratio) -->
+                <div class="showcase-viewport-3d">
+                    <div class="showcase-camera" id="showcase-camera">
+                        <!-- 01: Antigravity Main — 16:9 Widescreen (384x216, Z = 0px) -->
+                        <div class="showcase-card is-focused" data-node="0" data-ratio="16:9" style="--x: 0px; --y: 0px; --z: 0px; --w: 384px; --h: 216px;">
+                            <video autoplay muted loop playsinline preload="metadata">
+                                <source src="showcase_assets/work_01_main.mp4" type="video/mp4">
+                            </video>
+                            <div class="showcase-card__tag">Antigravity — 16:9</div>
+                        </div>
+
+                        <!-- 02: DCLEX Detail — 4:3 Landscape (280x210, Z = -140px) -->
+                        <div class="showcase-card" data-node="1" data-ratio="4:3" style="--x: -530px; --y: -80px; --z: -140px; --w: 280px; --h: 210px;">
+                            <img src="showcase_assets/work_02_sub1.webp" alt="DCLEX Interface" loading="lazy" decoding="async">
+                            <div class="showcase-card__tag">DCLEX — 4:3</div>
+                        </div>
+
+                        <!-- 03: Verity AI Interface — 9:16 Vertical Mobile (198x352, Z = -170px) -->
+                        <div class="showcase-card" data-node="2" data-ratio="9:16" style="--x: 515px; --y: 110px; --z: -170px; --w: 198px; --h: 352px;">
+                            <video autoplay muted loop playsinline preload="metadata">
+                                <source src="showcase_assets/work_03_sub1.mp4" type="video/mp4">
+                            </video>
+                            <div class="showcase-card__tag">Verity AI — 9:16</div>
+                        </div>
+
+                        <!-- 04: Notus Type Specimen — 4:5 Editorial Portrait (264x330, Z = +160px) -->
+                        <div class="showcase-card" data-node="3" data-ratio="4:5" style="--x: -560px; --y: 360px; --z: 160px; --w: 264px; --h: 330px;">
+                            <img src="showcase_assets/work_03_sub2.webp" alt="Notus Specimen" loading="lazy" decoding="async">
+                            <div class="showcase-card__tag">Notus — 4:5</div>
+                        </div>
+
+                        <!-- 05: Antigravity Detail 1 — 16:9 Widescreen (304x171, Z = -110px) -->
+                        <div class="showcase-card" data-node="4" data-ratio="16:9" style="--x: -20px; --y: 420px; --z: -110px; --w: 304px; --h: 171px;">
+                            <img src="showcase_assets/work_01_sub1.webp" alt="Antigravity Detail 1" loading="lazy" decoding="async">
+                            <div class="showcase-card__tag">Antigravity — 16:9</div>
+                        </div>
+
+                        <!-- 06: DCLEX Main — 4:3 Landscape (360x270, Z = +200px) -->
+                        <div class="showcase-card" data-node="5" data-ratio="4:3" style="--x: 810px; --y: -380px; --z: 200px; --w: 360px; --h: 270px;">
+                            <video autoplay muted loop playsinline preload="metadata">
+                                <source src="showcase_assets/work_02_main.mp4" type="video/mp4">
+                            </video>
+                            <div class="showcase-card__tag">DCLEX — 4:3</div>
+                        </div>
+
+                        <!-- 07: Antigravity Detail 2 — 3:4 Vertical Portrait (216x288, Z = +70px) -->
+                        <div class="showcase-card" data-node="6" data-ratio="3:4" style="--x: 210px; --y: -430px; --z: 70px; --w: 216px; --h: 288px;">
+                            <img src="showcase_assets/work_01_sub2.webp" alt="Antigravity Detail 2" loading="lazy" decoding="async">
+                            <div class="showcase-card__tag">Antigravity — 3:4</div>
+                        </div>
+
+                        <!-- 08: Verity AI Main — 4:5 Portrait (272x340, Z = -230px) -->
+                        <div class="showcase-card" data-node="7" data-ratio="4:5" style="--x: -810px; --y: -490px; --z: -230px; --w: 272px; --h: 340px;">
+                            <video autoplay muted loop playsinline preload="metadata">
+                                <source src="showcase_assets/work_03_main.mp4" type="video/mp4">
+                            </video>
+                            <div class="showcase-card__tag">Verity AI — 4:5</div>
+                        </div>
+
+                        <!-- 09: DCLEX Exchange — 16:10 Widescreen (340x212, Z = -260px) -->
+                        <div class="showcase-card" data-node="8" data-ratio="16:10" style="--x: 910px; --y: 510px; --z: -260px; --w: 340px; --h: 212px;">
+                            <video autoplay muted loop playsinline preload="metadata">
+                                <source src="showcase_assets/work_02_sub2.mp4" type="video/mp4">
+                            </video>
+                            <div class="showcase-card__tag">DCLEX — 16:10</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Нижняя мета-строка: название текущей работы слева -->
+                <div class="showcase-stage__hud-bottom">
+                    <div class="showcase-stage__formats" id="showcase-work-meta">
+                        <strong id="showcase-work-title">Antigravity</strong><br>
+                        <span id="showcase-work-subtitle">Motion Exploration — 3D Visuals</span><br>
+                        <span id="showcase-work-details">Selected Works / 01 — 09</span>
+                    </div>
+                    <div class="showcase-stage__kaomoji">ツ</div>
+                    <div class="showcase-stage__year">YR26</div>
                 </div>
             </div>
         </section>

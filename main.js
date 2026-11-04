@@ -863,7 +863,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Animation - Coll - 01',
                 index: '01',
                 workTitle: 'Altalogy Showreel',
-                workSubtitle: 'Animation — 16:9',
+                workSubtitle: 'Animation',
                 workDetails: 'Selected Works / 01 — 18'
             },
             {
@@ -872,7 +872,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Branding - Coll - 02',
                 index: '02',
                 workTitle: 'Crescent',
-                workSubtitle: 'Branding — 4:5',
+                workSubtitle: 'Branding',
                 workDetails: 'Selected Works / 02 — 18'
             },
             {
@@ -881,7 +881,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Illustration - Coll - 03',
                 index: '03',
                 workTitle: 'Metaverse',
-                workSubtitle: 'Illustration — 16:10',
+                workSubtitle: 'Illustration',
                 workDetails: 'Selected Works / 03 — 18'
             },
             {
@@ -890,7 +890,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Animation - Coll - 04',
                 index: '04',
                 workTitle: 'Monn Mortgage',
-                workSubtitle: 'Animation — 4:3',
+                workSubtitle: 'Animation',
                 workDetails: 'Selected Works / 04 — 18'
             },
             {
@@ -899,7 +899,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Animation - Coll - 05',
                 index: '05',
                 workTitle: 'Verity AI',
-                workSubtitle: 'Animation — 9:16',
+                workSubtitle: 'Animation',
                 workDetails: 'Selected Works / 05 — 18'
             },
             {
@@ -908,7 +908,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Branding - Coll - 06',
                 index: '06',
                 workTitle: 'SIDE Branding',
-                workSubtitle: 'Branding — 16:9',
+                workSubtitle: 'Branding',
                 workDetails: 'Selected Works / 06 — 18'
             },
             {
@@ -917,7 +917,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Illustration - Coll - 07',
                 index: '07',
                 workTitle: 'Antigravity — Study I',
-                workSubtitle: 'Illustration — 16:9',
+                workSubtitle: 'Illustration',
                 workDetails: 'Selected Works / 07 — 18'
             },
             {
@@ -926,7 +926,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Animation - Coll - 08',
                 index: '08',
                 workTitle: 'Engine',
-                workSubtitle: 'Animation — 4:3',
+                workSubtitle: 'Animation',
                 workDetails: 'Selected Works / 08 — 18'
             },
             {
@@ -935,7 +935,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Branding - Coll - 09',
                 index: '09',
                 workTitle: 'DCLEX — Brand',
-                workSubtitle: 'Branding — 4:3',
+                workSubtitle: 'Branding',
                 workDetails: 'Selected Works / 09 — 18'
             },
             {
@@ -944,7 +944,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Animation - Coll - 10',
                 index: '10',
                 workTitle: 'DCLEX — Motion',
-                workSubtitle: 'Animation — 4:3',
+                workSubtitle: 'Animation',
                 workDetails: 'Selected Works / 10 — 18'
             },
             {
@@ -953,7 +953,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Typography - Coll - 11',
                 index: '11',
                 workTitle: 'Notus Type',
-                workSubtitle: 'Typography — 4:5',
+                workSubtitle: 'Typography',
                 workDetails: 'Selected Works / 11 — 18'
             },
             {
@@ -962,7 +962,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Animation - Coll - 12',
                 index: '12',
                 workTitle: 'SpaceX',
-                workSubtitle: 'Animation — 4:3',
+                workSubtitle: 'Animation',
                 workDetails: 'Selected Works / 12 — 18'
             },
             {
@@ -971,7 +971,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Illustration - Coll - 13',
                 index: '13',
                 workTitle: 'Antigravity — Study II',
-                workSubtitle: 'Illustration — 3:4',
+                workSubtitle: 'Illustration',
                 workDetails: 'Selected Works / 13 — 18'
             },
             {
@@ -980,7 +980,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Animation - Coll - 14',
                 index: '14',
                 workTitle: 'DCLEX — Exchange',
-                workSubtitle: 'Animation — 16:10',
+                workSubtitle: 'Animation',
                 workDetails: 'Selected Works / 14 — 18'
             },
             {
@@ -989,7 +989,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Branding - Coll - 15',
                 index: '15',
                 workTitle: 'Crescent — Visuals',
-                workSubtitle: 'Branding — 4:3',
+                workSubtitle: 'Branding',
                 workDetails: 'Selected Works / 15 — 18'
             },
             {
@@ -998,7 +998,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Animation - Coll - 16',
                 index: '16',
                 workTitle: 'SpaceX — Orbital',
-                workSubtitle: 'Animation — 4:3',
+                workSubtitle: 'Animation',
                 workDetails: 'Selected Works / 16 — 18'
             },
             {
@@ -1007,7 +1007,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Branding - Coll - 17',
                 index: '17',
                 workTitle: 'DCLEX — Interface',
-                workSubtitle: 'Branding — 4:3',
+                workSubtitle: 'Branding',
                 workDetails: 'Selected Works / 17 — 18'
             },
             {
@@ -1016,7 +1016,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Showcase/Animation - Coll - 18',
                 index: '18',
                 workTitle: 'Verity — Autonomy',
-                workSubtitle: 'Animation — 4:5',
+                workSubtitle: 'Animation',
                 workDetails: 'Selected Works / 18 — 18'
             }
         ];

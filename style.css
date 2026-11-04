@@ -688,6 +688,9 @@ body {
 }
 
 .showcase-stage__kaomoji {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 0.95rem;
     line-height: 1;
 }

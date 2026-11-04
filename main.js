@@ -1067,20 +1067,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Пауза 2.8 секунды над проектом в центре, затем плавный и деликатный перелет
             let rawT = 0;
-            let centerZoomProgress = 0;
-            if (segmentTime <= HOLD_DURATION) {
-                // Когда проект находится в центре: очень мягкий, плавный zoom-in по синусоиде (0 -> 1 без рывка)
-                const holdProgress = Math.min(1, Math.max(0, segmentTime / HOLD_DURATION));
-                centerZoomProgress = 0.5 * (1 - Math.cos(holdProgress * Math.PI));
-            } else {
+            if (segmentTime > HOLD_DURATION) {
                 rawT = Math.min(1, Math.max(0, (segmentTime - HOLD_DURATION) / MOVE_DURATION));
-                // Плавный возврат масштаба (1 -> 0) по мере отъезда камеры к следующему проекту
-                centerZoomProgress = 0.5 * (1 + Math.cos(rawT * Math.PI));
             }
 
             const tX = rawT > 0 ? easeDelicateGlide(Math.min(1, Math.pow(rawT, currentFlightProfile.staggerX))) : 0;
             const tY = rawT > 0 ? easeDelicateGlide(Math.min(1, Math.pow(rawT, currentFlightProfile.staggerY))) : 0;
             const tZ = rawT > 0 ? easeDelicateGlide(rawT) : 0;
+
+            // Плавный безударный zoom-in в процессе доезда до центральной позиции (0 -> 1 синхронно с подлётом камеры)
+            const approachZoomT = rawT > 0 ? 0.5 * (1 - Math.cos(rawT * Math.PI)) : 0;
+            const MAX_ZOOM_BOOST = 0.12; // Деликатное увеличение на +12% по мере приближения к центру
 
             // Очень мягкая колоколообразная огибающая (sin^2), чтобы вход и выход из дуги были абсолютно бесшовными
             const smoothBell = Math.pow(Math.sin(rawT * Math.PI), 2);
@@ -1096,15 +1093,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const moveProgress = tZ;
 
-            // В каждом кадре обновляем transform камеры и деликатный zoom-in только одной активной карточки в центре
+            // В каждом кадре обновляем transform камеры
             if (showcaseCamera) {
                 showcaseCamera.style.transform = `translate3d(${camX.toFixed(2)}px, ${camY.toFixed(2)}px, ${camZ.toFixed(2)}px)`;
             }
 
-            const centeredCard = cardData[fromState.nodeIdx];
-            if (centeredCard) {
-                const activeScale = 1 + centerZoomProgress * 0.085; // Деликатный плавный zoom-in до +8.5% в центре
-                centeredCard.el.style.transform = `${centeredCard.baseTransform} scale(${activeScale.toFixed(4)})`;
+            // Текущая карточка в центре держит масштаб 1.12 во время паузы и плавно уменьшается до 1.0 при отъезде
+            const fromCard = cardData[fromState.nodeIdx];
+            if (fromCard) {
+                const fromScale = 1 + MAX_ZOOM_BOOST * (1 - approachZoomT);
+                fromCard.el.style.transform = `${fromCard.baseTransform} scale(${fromScale.toFixed(4)})`;
+            }
+
+            // Следующая карточка плавно увеличивается с 1.0 до 1.12 в процессе доезда до центральной позиции
+            const toCard = cardData[toState.nodeIdx];
+            if (toCard && toState.nodeIdx !== fromState.nodeIdx) {
+                const toScale = 1 + MAX_ZOOM_BOOST * approachZoomT;
+                toCard.el.style.transform = `${toCard.baseTransform} scale(${toScale.toFixed(4)})`;
             }
 
             // Мягкое движение центрального заголовка

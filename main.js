@@ -850,125 +850,246 @@ document.addEventListener('DOMContentLoaded', () => {
             const yVal = parseFloat(el.style.getPropertyValue('--y')) || 0;
             const zVal = parseFloat(el.style.getPropertyValue('--z')) || 0;
             const nodeIdx = el.hasAttribute('data-node') ? Number(el.getAttribute('data-node')) : -1;
+            const videoEl = el.querySelector('video');
             const baseTransform = `translate3d(calc(${xVal}px - 50%), calc(${yVal}px - 50%), ${zVal}px)`;
-            return { el, x: xVal, y: yVal, z: zVal, nodeIdx, baseTransform };
+            return { el, x: xVal, y: yVal, z: zVal, nodeIdx, videoEl, baseTransform };
         });
 
-        // 9 работ из разных проектов разбросаны по 3D-пространству с индивидуальными пропорциями ratio
+        // 19 работ из папок Animation, Branding, Illustration, Typography с форматом Showcase/<Папка> - Coll - <Номер>
         const targets = [
             {
                 nodeIdx: 0,
-                category: 'antigravity',
+                category: 'Animation',
                 camX: 0,
                 camY: 0,
                 camZ: 0,
-                title: 'Showcase Coll. W—01',
+                title: 'Showcase/Animation - Coll - 01',
                 index: '01',
-                workTitle: 'Antigravity',
-                workSubtitle: 'Motion Exploration — 16:9',
-                workDetails: 'Selected Works / 01 — 09'
+                workTitle: 'Altalogy Showreel',
+                workSubtitle: 'Animation — 16:9',
+                workDetails: 'Selected Works / 01 — 19'
             },
             {
                 nodeIdx: 1,
-                category: 'dclex',
-                camX: 530,
-                camY: 80,
-                camZ: 140,
-                title: 'Showcase Coll. W—02',
+                category: 'Branding',
+                camX: 620,
+                camY: 40,
+                camZ: 90,
+                title: 'Showcase/Branding - Coll - 02',
                 index: '02',
-                workTitle: 'DCLEX — Analytics',
-                workSubtitle: 'Decentralized Financial Platform — 4:3',
-                workDetails: 'Selected Works / 02 — 09'
+                workTitle: 'Crescent',
+                workSubtitle: 'Branding — 4:5',
+                workDetails: 'Selected Works / 02 — 19'
             },
             {
                 nodeIdx: 2,
-                category: 'verity',
-                camX: -515,
-                camY: -110,
-                camZ: 170,
-                title: 'Showcase Coll. W—03',
+                category: 'Illustration',
+                camX: -640,
+                camY: -50,
+                camZ: 110,
+                title: 'Showcase/Illustration - Coll - 03',
                 index: '03',
-                workTitle: 'Verity AI',
-                workSubtitle: 'Zero-Touch Warehouse Intelligence — 9:16',
-                workDetails: 'Selected Works / 03 — 09'
+                workTitle: 'Metaverse',
+                workSubtitle: 'Illustration — 16:10',
+                workDetails: 'Selected Works / 03 — 19'
             },
             {
                 nodeIdx: 3,
-                category: 'notus',
-                camX: 560,
-                camY: -360,
-                camZ: -160,
-                title: 'Showcase Coll. W—04',
+                category: 'Animation',
+                camX: 1260,
+                camY: -30,
+                camZ: -80,
+                title: 'Showcase/Animation - Coll - 04',
                 index: '04',
-                workTitle: 'Notus Type',
-                workSubtitle: 'Editorial Serif Type System — 4:5',
-                workDetails: 'Selected Works / 04 — 09'
+                workTitle: 'Monn Mortgage',
+                workSubtitle: 'Animation — 4:3',
+                workDetails: 'Selected Works / 04 — 19'
             },
             {
                 nodeIdx: 4,
-                category: 'antigravity',
-                camX: 20,
-                camY: -420,
-                camZ: 110,
-                title: 'Showcase Coll. W—05',
+                category: 'Animation',
+                camX: -1260,
+                camY: 30,
+                camZ: 70,
+                title: 'Showcase/Animation - Coll - 05',
                 index: '05',
-                workTitle: 'Antigravity — Study I',
-                workSubtitle: 'Physics & Spatial Detachment — 16:9',
-                workDetails: 'Selected Works / 05 — 09'
+                workTitle: 'Verity AI',
+                workSubtitle: 'Animation — 9:16',
+                workDetails: 'Selected Works / 05 — 19'
             },
             {
                 nodeIdx: 5,
-                category: 'dclex',
-                camX: -810,
-                camY: 380,
-                camZ: -200,
-                title: 'Showcase Coll. W—06',
+                category: 'Branding',
+                camX: -260,
+                camY: 460,
+                camZ: -70,
+                title: 'Showcase/Branding - Coll - 06',
                 index: '06',
-                workTitle: 'DCLEX',
-                workSubtitle: 'Tokenized Stock Market Interface — 4:3',
-                workDetails: 'Selected Works / 06 — 09'
+                workTitle: 'SIDE Branding',
+                workSubtitle: 'Branding — 16:9',
+                workDetails: 'Selected Works / 06 — 19'
             },
             {
                 nodeIdx: 6,
-                category: 'antigravity',
-                camX: -210,
-                camY: 430,
-                camZ: -70,
-                title: 'Showcase Coll. W—07',
+                category: 'Illustration',
+                camX: 340,
+                camY: 490,
+                camZ: -90,
+                title: 'Showcase/Illustration - Coll - 07',
                 index: '07',
-                workTitle: 'Antigravity — Study II',
-                workSubtitle: 'Still Life & Floating Objects — 3:4',
-                workDetails: 'Selected Works / 07 — 09'
+                workTitle: 'Antigravity — Study I',
+                workSubtitle: 'Illustration — 16:9',
+                workDetails: 'Selected Works / 07 — 19'
             },
             {
                 nodeIdx: 7,
-                category: 'verity',
-                camX: 810,
+                category: 'Animation',
+                camX: -920,
                 camY: 490,
-                camZ: 230,
-                title: 'Showcase Coll. W—08',
+                camZ: -110,
+                title: 'Showcase/Animation - Coll - 08',
                 index: '08',
-                workTitle: 'Verity — Autonomy',
-                workSubtitle: 'AI-Powered Mobile Intelligence — 4:5',
-                workDetails: 'Selected Works / 08 — 09'
+                workTitle: 'Engine',
+                workSubtitle: 'Animation — 4:3',
+                workDetails: 'Selected Works / 08 — 19'
             },
             {
                 nodeIdx: 8,
-                category: 'dclex',
-                camX: -910,
-                camY: -510,
-                camZ: 260,
-                title: 'Showcase Coll. W—09',
+                category: 'Branding',
+                camX: 960,
+                camY: 510,
+                camZ: 120,
+                title: 'Showcase/Branding - Coll - 09',
                 index: '09',
-                workTitle: 'DCLEX — DeFi Core',
-                workSubtitle: 'Real-Time Trading & Liquidity — 16:10',
-                workDetails: 'Selected Works / 09 — 09'
+                workTitle: 'DCLEX — Brand',
+                workSubtitle: 'Branding — 4:3',
+                workDetails: 'Selected Works / 09 — 19'
+            },
+            {
+                nodeIdx: 9,
+                category: 'Animation',
+                camX: -1560,
+                camY: 500,
+                camZ: 100,
+                title: 'Showcase/Animation - Coll - 10',
+                index: '10',
+                workTitle: 'DCLEX — Motion',
+                workSubtitle: 'Animation — 4:3',
+                workDetails: 'Selected Works / 10 — 19'
+            },
+            {
+                nodeIdx: 10,
+                category: 'Typography',
+                camX: 520,
+                camY: -490,
+                camZ: -110,
+                title: 'Showcase/Typography - Coll - 11',
+                index: '11',
+                workTitle: 'Notus Type',
+                workSubtitle: 'Typography — 4:5',
+                workDetails: 'Selected Works / 11 — 19'
+            },
+            {
+                nodeIdx: 11,
+                category: 'Animation',
+                camX: -90,
+                camY: -490,
+                camZ: 80,
+                title: 'Showcase/Animation - Coll - 12',
+                index: '12',
+                workTitle: 'SpaceX',
+                workSubtitle: 'Animation — 4:3',
+                workDetails: 'Selected Works / 12 — 19'
+            },
+            {
+                nodeIdx: 12,
+                category: 'Typography',
+                camX: -720,
+                camY: -510,
+                camZ: 120,
+                title: 'Showcase/Typography - Coll - 13',
+                index: '13',
+                workTitle: 'Notus — Specimen',
+                workSubtitle: 'Typography — 3:4',
+                workDetails: 'Selected Works / 13 — 19'
+            },
+            {
+                nodeIdx: 13,
+                category: 'Illustration',
+                camX: 1140,
+                camY: -520,
+                camZ: 110,
+                title: 'Showcase/Illustration - Coll - 14',
+                index: '14',
+                workTitle: 'Antigravity — Study II',
+                workSubtitle: 'Illustration — 3:4',
+                workDetails: 'Selected Works / 14 — 19'
+            },
+            {
+                nodeIdx: 14,
+                category: 'Animation',
+                camX: -1360,
+                camY: -510,
+                camZ: -100,
+                title: 'Showcase/Animation - Coll - 15',
+                index: '15',
+                workTitle: 'DCLEX — Exchange',
+                workSubtitle: 'Animation — 16:10',
+                workDetails: 'Selected Works / 15 — 19'
+            },
+            {
+                nodeIdx: 15,
+                category: 'Branding',
+                camX: -420,
+                camY: -960,
+                camZ: -90,
+                title: 'Showcase/Branding - Coll - 16',
+                index: '16',
+                workTitle: 'Crescent — Visuals',
+                workSubtitle: 'Branding — 4:3',
+                workDetails: 'Selected Works / 16 — 19'
+            },
+            {
+                nodeIdx: 16,
+                category: 'Animation',
+                camX: 240,
+                camY: -970,
+                camZ: 90,
+                title: 'Showcase/Animation - Coll - 17',
+                index: '17',
+                workTitle: 'SpaceX — Orbital',
+                workSubtitle: 'Animation — 4:3',
+                workDetails: 'Selected Works / 17 — 19'
+            },
+            {
+                nodeIdx: 17,
+                category: 'Branding',
+                camX: 40,
+                camY: 940,
+                camZ: 110,
+                title: 'Showcase/Branding - Coll - 18',
+                index: '18',
+                workTitle: 'DCLEX — Interface',
+                workSubtitle: 'Branding — 4:3',
+                workDetails: 'Selected Works / 18 — 19'
+            },
+            {
+                nodeIdx: 18,
+                category: 'Animation',
+                camX: 1580,
+                camY: 490,
+                camZ: -80,
+                title: 'Showcase/Animation - Coll - 19',
+                index: '19',
+                workTitle: 'Verity — Autonomy',
+                workSubtitle: 'Animation — 4:5',
+                workDetails: 'Selected Works / 19 — 19'
             }
         ];
 
-        const HOLD_DURATION = 2800; // Пауза 2.8 секунды в центре с плавным деликатным zoom-in
-        const MOVE_DURATION = 2200; // 2.2 секунды плавный и деликатный перелет к следующей рандомной работе
-        const SEGMENT_DURATION = HOLD_DURATION + MOVE_DURATION; // 5.0 сек на шаг
+        const HOLD_DURATION = 2600; // Пауза 2.6 секунды в центре для детального просмотра
+        const MOVE_DURATION = 2400; // 2.4 секунды плавный и деликатный перелет к следующей рандомной работе
+        const SEGMENT_DURATION = HOLD_DURATION + MOVE_DURATION; // 5.0 сек на шаг (полный обход всех 19 работ ~ 95 секунд)
 
         // Сверхплавная кривая с очень длинным, деликатным торможением (long gentle settle) без рывков
         const easeDelicateGlide = (t) => {
@@ -977,11 +1098,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return smoothStep * 0.55 + gentleOut * 0.45;
         };
 
-        // Рандомный выбор следующей работы из ДРУГОЙ категории (чтобы приближение шло вразброс, а не по проектам)
+        // Рандомный выбор следующей работы из ДРУГОЙ папки в комфортном радиусе (чтобы перелеты были плавными и разнообразными)
         let activeTransitionStep = -1;
         let currentFromTarget = targets[0];
-        let currentToTarget = targets[3]; // Первая цель — другая категория (Notus)
-        let recentNodeHistory = [0, 3];
+        let currentToTarget = targets[1]; // Первая цель — Branding / Crescent
+        let recentNodeHistory = [0, 1];
 
         let currentFlightProfile = {
             curveOffsetX: 35,
@@ -992,12 +1113,24 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const pickNextRandomTarget = (fromTarget) => {
-            // Исключаем текущую категорию и последние посещенные карточки для максимального разнообразия
+            const distTo = (t) => Math.hypot(t.camX - fromTarget.camX, t.camY - fromTarget.camY);
+
+            // Приоритет 1: другая папка, комфортная дистанция (<= 1450px), не в истории последних 8 остановок
             let candidates = targets.filter(t =>
                 t.nodeIdx !== fromTarget.nodeIdx &&
                 t.category !== fromTarget.category &&
+                distTo(t) <= 1450 &&
                 !recentNodeHistory.includes(t.nodeIdx)
             );
+            // Приоритет 2: любая карточка на комфортной дистанции, не в истории последних 8 остановок
+            if (candidates.length === 0) {
+                candidates = targets.filter(t =>
+                    t.nodeIdx !== fromTarget.nodeIdx &&
+                    distTo(t) <= 1450 &&
+                    !recentNodeHistory.includes(t.nodeIdx)
+                );
+            }
+            // Приоритет 3: любая карточка другой папки
             if (candidates.length === 0) {
                 candidates = targets.filter(t =>
                     t.nodeIdx !== fromTarget.nodeIdx &&
@@ -1006,10 +1139,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const chosen = candidates[Math.floor(Math.random() * candidates.length)];
             recentNodeHistory.push(chosen.nodeIdx);
-            if (recentNodeHistory.length > 4) {
+            if (recentNodeHistory.length > 8) {
                 recentNodeHistory.shift();
             }
             return chosen;
+        };
+
+        // Оптимизация декодирования видео: воспроизводим только видео рядом с текущей траекторией камеры
+        const updateNearbyVideos = (fromT, toT) => {
+            for (let i = 0; i < cardData.length; i++) {
+                const item = cardData[i];
+                if (!item.videoEl) continue;
+                const dFrom = Math.hypot(item.x + fromT.camX, item.y + fromT.camY);
+                const dTo = Math.hypot(item.x + toT.camX, item.y + toT.camY);
+                if (dFrom < 1150 || dTo < 1150) {
+                    if (item.videoEl.paused) {
+                        item.videoEl.play().catch(() => {});
+                    }
+                } else {
+                    if (!item.videoEl.paused) {
+                        item.videoEl.pause();
+                    }
+                }
+            }
         };
 
         const randomizeFlightProfile = () => {
@@ -1033,6 +1185,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 isShowcaseVisible = entry.isIntersecting;
                 if (isShowcaseVisible && !isShowcaseAnimating) {
                     isShowcaseAnimating = true;
+                    updateNearbyVideos(currentFromTarget, currentToTarget);
                     requestAnimationFrame(animateShowcaseMetaverse);
                 }
             });
@@ -1059,6 +1212,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 activeTransitionStep = totalStep;
                 randomizeFlightProfile();
+                updateNearbyVideos(currentFromTarget, currentToTarget);
             }
 
             const segmentTime = now - totalStep * SEGMENT_DURATION;

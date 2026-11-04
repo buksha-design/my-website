@@ -837,8 +837,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const showcaseSection = document.getElementById('services-showcase');
     if (showcaseSection) {
         const showcaseCamera = document.getElementById('showcase-camera');
-        const showcaseBgTitleFrom = document.getElementById('showcase-bg-title-from');
-        const showcaseBgTitleTo = document.getElementById('showcase-bg-title-to');
+        const showcaseBgTitleText = document.getElementById('showcase-bg-title-text');
         const showcaseHudIndex = document.getElementById('showcase-hud-index');
         const showcaseWorkTitle = document.getElementById('showcase-work-title');
         const showcaseWorkSubtitle = document.getElementById('showcase-work-subtitle');
@@ -1214,14 +1213,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 activeTransitionStep = totalStep;
                 randomizeFlightProfile();
                 updateNearbyVideos(currentFromTarget, currentToTarget);
-
-                // Обновляем два слоя текста для бесшовного перехода без скачка ширины
-                if (showcaseBgTitleFrom) {
-                    showcaseBgTitleFrom.textContent = currentFromTarget.title;
-                }
-                if (showcaseBgTitleTo) {
-                    showcaseBgTitleTo.textContent = currentToTarget.title;
-                }
             }
 
             const segmentTime = now - totalStep * SEGMENT_DURATION;
@@ -1275,28 +1266,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 toCard.el.style.transform = `${toCard.baseTransform} scale(${toScale.toFixed(4)})`;
             }
 
-            // Бесшовный двухслойный loop центрального заголовка (без скачков при смене длины текста)
-            if (showcaseBgTitleFrom && showcaseBgTitleTo) {
+            // Плавный непрерывный loop положения центрального заголовка без прозрачности
+            if (showcaseBgTitleText) {
                 const titleBreathX = Math.sin(now * 0.0007) * 5.0;
                 const titleBreathY = Math.cos(now * 0.0006) * 3.5;
-                const slideOffset = 16;
-
-                const fromY = titleBreathY - approachZoomT * slideOffset;
-                const toY = titleBreathY + (1 - approachZoomT) * slideOffset;
-
-                showcaseBgTitleFrom.style.opacity = (1 - approachZoomT).toFixed(4);
-                showcaseBgTitleFrom.style.transform = `translate3d(calc(-50% + ${titleBreathX.toFixed(2)}px), calc(-50% + ${fromY.toFixed(2)}px), 0)`;
-
-                showcaseBgTitleTo.style.opacity = approachZoomT.toFixed(4);
-                showcaseBgTitleTo.style.transform = `translate3d(calc(-50% + ${titleBreathX.toFixed(2)}px), calc(-50% + ${toY.toFixed(2)}px), 0)`;
+                showcaseBgTitleText.style.transform = `translate3d(calc(-50% + ${titleBreathX.toFixed(2)}px), calc(-50% + ${titleBreathY.toFixed(2)}px), 0)`;
             }
 
-            // Обновляем мета-информацию работы, когда камера подъезжает к центру
+            // Четкая смена текста Showcase/... и мета-информации работы без прозрачности
             const focusedNode = moveProgress > 0.55 ? toState.nodeIdx : fromState.nodeIdx;
             if (focusedNode !== activeNodeIndex) {
                 activeNodeIndex = focusedNode;
                 const activeTarget = targets[activeNodeIndex];
 
+                if (showcaseBgTitleText) {
+                    showcaseBgTitleText.textContent = activeTarget.title;
+                }
                 if (showcaseHudIndex) {
                     showcaseHudIndex.textContent = activeTarget.index;
                 }

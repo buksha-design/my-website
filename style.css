@@ -611,12 +611,13 @@ body {
 .stats--showcase {
     display: block;
     padding: 0;
+    width: calc(100% - 2 * var(--container-padding));
+    margin: 2rem var(--container-padding) 0;
     height: 713px; /* Увеличено ровно на +15% от 620px */
     background-color: #e6e7e9;
     border-top: none;
     border-radius: 32px; /* Закругление углов секции */
     overflow: hidden;
-    margin-top: 2rem;
     pointer-events: none; /* Без интеракций с мышкой */
 }
 
@@ -653,8 +654,8 @@ body {
 .showcase-stage__hud-top {
     position: absolute;
     top: 1.8rem;
-    left: var(--container-padding);
-    right: var(--container-padding);
+    left: clamp(1.4rem, 2.8vw, 2.6rem);
+    right: clamp(1.4rem, 2.8vw, 2.6rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -669,8 +670,8 @@ body {
 .showcase-stage__hud-bottom {
     position: absolute;
     bottom: 1.8rem;
-    left: var(--container-padding);
-    right: var(--container-padding);
+    left: clamp(1.4rem, 2.8vw, 2.6rem);
+    right: clamp(1.4rem, 2.8vw, 2.6rem);
     display: flex;
     justify-content: space-between;
     align-items: flex-end;

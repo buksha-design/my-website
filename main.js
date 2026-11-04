@@ -844,25 +844,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const showcaseWorkDetails = document.getElementById('showcase-work-details');
         const showcaseCards = Array.from(showcaseSection.querySelectorAll('.showcase-card'));
 
-        // Считываем X/Y/Z-координаты карточек для бесшовного локального масштабирования активной карточки в центре
-        const cardData = showcaseCards.map(el => {
+        // Считываем X/Y/Z-координаты карточек напрямую из DOM, чтобы камера всегда центрировала ассет строго в (0, 0, 0)
+        const cardData = showcaseCards.map((el, idx) => {
             const xVal = parseFloat(el.style.getPropertyValue('--x')) || 0;
             const yVal = parseFloat(el.style.getPropertyValue('--y')) || 0;
             const zVal = parseFloat(el.style.getPropertyValue('--z')) || 0;
-            const nodeIdx = el.hasAttribute('data-node') ? Number(el.getAttribute('data-node')) : -1;
+            const nodeIdx = el.hasAttribute('data-node') ? Number(el.getAttribute('data-node')) : idx;
             const videoEl = el.querySelector('video');
             const baseTransform = `translate3d(calc(${xVal}px - 50%), calc(${yVal}px - 50%), ${zVal}px)`;
             return { el, x: xVal, y: yVal, z: zVal, nodeIdx, videoEl, baseTransform };
         });
 
-        // 18 актуальных работ из папок Animation, Branding, Illustration, Typography (сближены на 15%, без линейной сетки)
-        const targets = [
+        // 18 актуальных работ из папок Animation, Branding, Illustration, Typography
+        const targetMeta = [
             {
                 nodeIdx: 0,
                 category: 'Animation',
-                camX: 0,
-                camY: 0,
-                camZ: 0,
                 title: 'Showcase/Animation - Coll - 01',
                 index: '01',
                 workTitle: 'Altalogy Showreel',
@@ -872,9 +869,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 1,
                 category: 'Branding',
-                camX: 440,
-                camY: -210,
-                camZ: 80,
                 title: 'Showcase/Branding - Coll - 02',
                 index: '02',
                 workTitle: 'Crescent',
@@ -884,9 +878,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 2,
                 category: 'Illustration',
-                camX: -110,
-                camY: 365,
-                camZ: -95,
                 title: 'Showcase/Illustration - Coll - 03',
                 index: '03',
                 workTitle: 'Metaverse',
@@ -896,9 +887,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 3,
                 category: 'Animation',
-                camX: -410,
-                camY: -355,
-                camZ: 110,
                 title: 'Showcase/Animation - Coll - 04',
                 index: '04',
                 workTitle: 'Monn Mortgage',
@@ -908,9 +896,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 4,
                 category: 'Animation',
-                camX: 755,
-                camY: 225,
-                camZ: -75,
                 title: 'Showcase/Animation - Coll - 05',
                 index: '05',
                 workTitle: 'Verity AI',
@@ -920,9 +905,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 5,
                 category: 'Branding',
-                camX: -630,
-                camY: 185,
-                camZ: 65,
                 title: 'Showcase/Branding - Coll - 06',
                 index: '06',
                 workTitle: 'SIDE Branding',
@@ -932,9 +914,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 6,
                 category: 'Illustration',
-                camX: 185,
-                camY: -585,
-                camZ: -110,
                 title: 'Showcase/Illustration - Coll - 07',
                 index: '07',
                 workTitle: 'Antigravity — Study I',
@@ -944,9 +923,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 7,
                 category: 'Animation',
-                camX: 435,
-                camY: 690,
-                camZ: 95,
                 title: 'Showcase/Animation - Coll - 08',
                 index: '08',
                 workTitle: 'Engine',
@@ -956,9 +932,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 8,
                 category: 'Branding',
-                camX: -900,
-                camY: -265,
-                camZ: -80,
                 title: 'Showcase/Branding - Coll - 09',
                 index: '09',
                 workTitle: 'DCLEX — Brand',
@@ -968,9 +941,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 9,
                 category: 'Animation',
-                camX: 920,
-                camY: -395,
-                camZ: 75,
                 title: 'Showcase/Animation - Coll - 10',
                 index: '10',
                 workTitle: 'DCLEX — Motion',
@@ -980,9 +950,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 10,
                 category: 'Typography',
-                camX: -540,
-                camY: 665,
-                camZ: -105,
                 title: 'Showcase/Typography - Coll - 11',
                 index: '11',
                 workTitle: 'Notus Type',
@@ -992,9 +959,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 11,
                 category: 'Animation',
-                camX: -290,
-                camY: -925,
-                camZ: 90,
                 title: 'Showcase/Animation - Coll - 12',
                 index: '12',
                 workTitle: 'SpaceX',
@@ -1004,9 +968,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 12,
                 category: 'Illustration',
-                camX: -1310,
-                camY: 160,
-                camZ: 105,
                 title: 'Showcase/Illustration - Coll - 13',
                 index: '13',
                 workTitle: 'Antigravity — Study II',
@@ -1016,9 +977,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 13,
                 category: 'Animation',
-                camX: 670,
-                camY: -885,
-                camZ: -90,
                 title: 'Showcase/Animation - Coll - 14',
                 index: '14',
                 workTitle: 'DCLEX — Exchange',
@@ -1028,9 +986,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 14,
                 category: 'Branding',
-                camX: -40,
-                camY: 915,
-                camZ: 55,
                 title: 'Showcase/Branding - Coll - 15',
                 index: '15',
                 workTitle: 'Crescent — Visuals',
@@ -1040,9 +995,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 15,
                 category: 'Animation',
-                camX: -925,
-                camY: -780,
-                camZ: -95,
                 title: 'Showcase/Animation - Coll - 16',
                 index: '16',
                 workTitle: 'SpaceX — Orbital',
@@ -1052,9 +1004,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 16,
                 category: 'Branding',
-                camX: 1290,
-                camY: -20,
-                camZ: 100,
                 title: 'Showcase/Branding - Coll - 17',
                 index: '17',
                 workTitle: 'DCLEX — Interface',
@@ -1064,9 +1013,6 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 nodeIdx: 17,
                 category: 'Animation',
-                camX: -1045,
-                camY: 670,
-                camZ: -75,
                 title: 'Showcase/Animation - Coll - 18',
                 index: '18',
                 workTitle: 'Verity — Autonomy',
@@ -1075,30 +1021,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ];
 
-        const HOLD_DURATION = 2600; // Пауза 2.6 секунды в центре для детального просмотра
-        const MOVE_DURATION = 2400; // 2.4 секунды плавный и деликатный перелет к следующей рандомной работе
-        const SEGMENT_DURATION = HOLD_DURATION + MOVE_DURATION; // 5.0 сек на шаг (полный обход всех 19 работ ~ 95 секунд)
+        // Координаты камеры вычисляются строго как (-x, -y, -z) самой карточки, чтобы каждый целевой ассет вставал ровно по центру (50% / 50%) секции
+        const targets = targetMeta.map((meta, idx) => {
+            const card = cardData.find(c => c.nodeIdx === meta.nodeIdx) || cardData[idx];
+            return {
+                ...meta,
+                nodeIdx: idx,
+                camX: card ? -card.x : 0,
+                camY: card ? -card.y : 0,
+                camZ: card ? -card.z : 0
+            };
+        });
 
-        // Сверхплавная кривая с очень длинным, деликатным торможением (long gentle settle) без рывков
+        const HOLD_DURATION = 2600; // Пауза 2.6 секунды строго по центру секции
+        const MOVE_DURATION = 2400; // 2.4 секунды плавный перелет к следующей работе
+        const SEGMENT_DURATION = HOLD_DURATION + MOVE_DURATION;
+
+        // Сверхплавная кривая с очень длинным, деликатным торможением в центральной точке
         const easeDelicateGlide = (t) => {
             const smoothStep = t * t * (3 - 2 * t);
             const gentleOut = 1 - Math.pow(1 - t, 3.2);
             return smoothStep * 0.55 + gentleOut * 0.45;
         };
 
-        // Рандомный выбор следующей работы из ДРУГОЙ папки в комфортном радиусе (чтобы перелеты были плавными и разнообразными)
-        let activeTransitionStep = -1;
+        let activeTransitionStep = 0;
         let currentFromTarget = targets[0];
-        let currentToTarget = targets[1]; // Первая цель — Branding / Crescent
+        let currentToTarget = targets[1];
         let recentNodeHistory = [0, 1];
+        let animationStartTime = null;
+        let pausedElapsed = 0;
 
-        let currentFlightProfile = {
-            curveOffsetX: 35,
-            curveOffsetY: -28,
-            zArc: -45,
-            staggerX: 0.94,
-            staggerY: 1.06
-        };
+        // Применяем начальный фокус в центре на первой карточке сразу при инициализации
+        if (showcaseCamera && currentFromTarget) {
+            showcaseCamera.style.transform = `translate3d(${currentFromTarget.camX}px, ${currentFromTarget.camY}px, ${currentFromTarget.camZ}px)`;
+        }
+        if (cardData[0]) {
+            cardData[0].el.style.transform = `${cardData[0].baseTransform} scale(1.12)`;
+        }
 
         const pickNextRandomTarget = (fromTarget) => {
             const distTo = (t) => Math.hypot(t.camX - fromTarget.camX, t.camY - fromTarget.camY);
@@ -1152,18 +1111,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const randomizeFlightProfile = () => {
-            const signX = Math.random() > 0.5 ? 1 : -1;
-            const signY = Math.random() > 0.5 ? 1 : -1;
-            currentFlightProfile = {
-                curveOffsetX: signX * (25 + Math.random() * 30),
-                curveOffsetY: signY * (20 + Math.random() * 25),
-                zArc: -(35 + Math.random() * 30),
-                staggerX: 0.92 + Math.random() * 0.16,
-                staggerY: 0.92 + Math.random() * 0.16
-            };
-        };
-
         let isShowcaseVisible = false;
         let isShowcaseAnimating = false;
         let activeNodeIndex = 0;
@@ -1173,6 +1120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 isShowcaseVisible = entry.isIntersecting;
                 if (isShowcaseVisible && !isShowcaseAnimating) {
                     isShowcaseAnimating = true;
+                    animationStartTime = performance.now() - pausedElapsed;
                     updateNearbyVideos(currentFromTarget, currentToTarget);
                     requestAnimationFrame(animateShowcaseMetaverse);
                 }
@@ -1187,70 +1135,69 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const totalStep = Math.floor(now / SEGMENT_DURATION);
+            if (animationStartTime === null) {
+                animationStartTime = now - pausedElapsed;
+            }
+            const elapsed = now - animationStartTime;
+            pausedElapsed = elapsed;
+
+            const totalStep = Math.floor(elapsed / SEGMENT_DURATION);
             if (totalStep !== activeTransitionStep) {
-                if (activeTransitionStep !== -1) {
-                    // Сбрасываем масштаб предыдущей карточки ровно в 1 перед сменой цели
-                    const prevCard = cardData[currentFromTarget.nodeIdx];
-                    if (prevCard) {
-                        prevCard.el.style.transform = `${prevCard.baseTransform} scale(1)`;
-                    }
-                    currentFromTarget = currentToTarget;
-                    currentToTarget = pickNextRandomTarget(currentFromTarget);
+                // Сбрасываем масштаб предыдущей карточки ровно в 1 перед сменой цели
+                const prevCard = cardData[currentFromTarget.nodeIdx];
+                if (prevCard) {
+                    prevCard.el.style.transform = `${prevCard.baseTransform} scale(1)`;
+                }
+                currentFromTarget = currentToTarget;
+                currentToTarget = pickNextRandomTarget(currentFromTarget);
+                // Гарантируем, что прибывшая в центр карточка стоит в масштабе 1.12
+                const centeredCard = cardData[currentFromTarget.nodeIdx];
+                if (centeredCard) {
+                    centeredCard.el.style.transform = `${centeredCard.baseTransform} scale(1.12)`;
                 }
                 activeTransitionStep = totalStep;
-                randomizeFlightProfile();
                 updateNearbyVideos(currentFromTarget, currentToTarget);
             }
 
-            const segmentTime = now - totalStep * SEGMENT_DURATION;
+            const segmentTime = elapsed - totalStep * SEGMENT_DURATION;
             const fromState = currentFromTarget;
             const toState = currentToTarget;
 
-            // Пауза 2.8 секунды над проектом в центре, затем плавный и деликатный перелет
+            // Пауза 2.6 секунды над проектом строго в центре (rawT = 0), затем плавный прямой перелет в центр следующего проекта
             let rawT = 0;
             if (segmentTime > HOLD_DURATION) {
                 rawT = Math.min(1, Math.max(0, (segmentTime - HOLD_DURATION) / MOVE_DURATION));
             }
 
-            const tX = rawT > 0 ? easeDelicateGlide(Math.min(1, Math.pow(rawT, currentFlightProfile.staggerX))) : 0;
-            const tY = rawT > 0 ? easeDelicateGlide(Math.min(1, Math.pow(rawT, currentFlightProfile.staggerY))) : 0;
-            const tZ = rawT > 0 ? easeDelicateGlide(rawT) : 0;
+            const moveProgress = rawT > 0 ? easeDelicateGlide(rawT) : 0;
 
-            // Плавный безударный zoom-in в процессе доезда до центральной позиции (0 -> 1 синхронно с подлётом камеры)
-            const approachZoomT = rawT > 0 ? 0.5 * (1 - Math.cos(rawT * Math.PI)) : 0;
-            const MAX_ZOOM_BOOST = 0.12; // Деликатное увеличение на +12% по мере приближения к центру
+            // Zoom-in выполняется по мере вхождения целевого ассета в центральную зону композиции и до полной фиксации в центре
+            const MAX_ZOOM_BOOST = 0.12;
+            const outZoomProgress = rawT > 0 ? Math.min(1, rawT / 0.65) : 0;
+            const outZoomEase = 0.5 * (1 - Math.cos(outZoomProgress * Math.PI));
+            const inZoomProgress = rawT > 0.25 ? Math.min(1, (rawT - 0.25) / 0.75) : 0;
+            const inZoomEase = 0.5 * (1 - Math.cos(inZoomProgress * Math.PI));
 
-            // Очень мягкая колоколообразная огибающая (sin^2), чтобы вход и выход из дуги были абсолютно бесшовными
-            const smoothBell = Math.pow(Math.sin(rawT * Math.PI), 2);
+            // Камера движется строго по прямой траектории в центральную точку (-x, -y, -z) целевого ассета без боковых отклонений
+            const camX = fromState.camX + (toState.camX - fromState.camX) * moveProgress;
+            const camY = fromState.camY + (toState.camY - fromState.camY) * moveProgress;
+            const camZ = fromState.camZ + (toState.camZ - fromState.camZ) * moveProgress;
 
-            // Едва уловимое плавное дыхание камеры
-            const driftX = Math.sin(now * 0.001) * 2.5;
-            const driftY = Math.cos(now * 0.0009) * 2.0;
-            const driftZ = Math.sin(now * 0.0012) * 4.5;
-
-            const camX = fromState.camX + (toState.camX - fromState.camX) * tX + currentFlightProfile.curveOffsetX * smoothBell + driftX;
-            const camY = fromState.camY + (toState.camY - fromState.camY) * tY + currentFlightProfile.curveOffsetY * smoothBell + driftY;
-            const camZ = fromState.camZ + (toState.camZ - fromState.camZ) * tZ + currentFlightProfile.zArc * smoothBell + driftZ;
-
-            const moveProgress = tZ;
-
-            // В каждом кадре обновляем transform камеры
             if (showcaseCamera) {
                 showcaseCamera.style.transform = `translate3d(${camX.toFixed(2)}px, ${camY.toFixed(2)}px, ${camZ.toFixed(2)}px)`;
             }
 
-            // Текущая карточка в центре держит масштаб 1.12 во время паузы и плавно уменьшается до 1.0 при отъезде
+            // Текущая карточка в центре держит масштаб 1.12 во время паузы и плавно уменьшается до 1.0 при отъезде из центра
             const fromCard = cardData[fromState.nodeIdx];
             if (fromCard) {
-                const fromScale = 1 + MAX_ZOOM_BOOST * (1 - approachZoomT);
+                const fromScale = 1 + MAX_ZOOM_BOOST * (1 - outZoomEase);
                 fromCard.el.style.transform = `${fromCard.baseTransform} scale(${fromScale.toFixed(4)})`;
             }
 
-            // Следующая карточка плавно увеличивается с 1.0 до 1.12 в процессе доезда до центральной позиции
+            // Следующая карточка плавно увеличивается с 1.0 до 1.12 при доезде в центральную позицию секции
             const toCard = cardData[toState.nodeIdx];
             if (toCard && toState.nodeIdx !== fromState.nodeIdx) {
-                const toScale = 1 + MAX_ZOOM_BOOST * approachZoomT;
+                const toScale = 1 + MAX_ZOOM_BOOST * inZoomEase;
                 toCard.el.style.transform = `${toCard.baseTransform} scale(${toScale.toFixed(4)})`;
             }
 

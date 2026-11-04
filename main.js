@@ -855,7 +855,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return { el, x: xVal, y: yVal, z: zVal, nodeIdx, videoEl, baseTransform };
         });
 
-        // 19 работ из папок Animation, Branding, Illustration, Typography (органичное облако без линейной сетки)
+        // 18 актуальных работ из папок Animation, Branding, Illustration, Typography (сближены на 15%, без линейной сетки)
         const targets = [
             {
                 nodeIdx: 0,
@@ -867,223 +867,211 @@ document.addEventListener('DOMContentLoaded', () => {
                 index: '01',
                 workTitle: 'Altalogy Showreel',
                 workSubtitle: 'Animation — 16:9',
-                workDetails: 'Selected Works / 01 — 19'
+                workDetails: 'Selected Works / 01 — 18'
             },
             {
                 nodeIdx: 1,
                 category: 'Branding',
-                camX: 490,
-                camY: -195,
-                camZ: 95,
+                camX: 440,
+                camY: -210,
+                camZ: 80,
                 title: 'Showcase/Branding - Coll - 02',
                 index: '02',
                 workTitle: 'Crescent',
                 workSubtitle: 'Branding — 4:5',
-                workDetails: 'Selected Works / 02 — 19'
+                workDetails: 'Selected Works / 02 — 18'
             },
             {
                 nodeIdx: 2,
                 category: 'Illustration',
-                camX: -115,
-                camY: 420,
-                camZ: -115,
+                camX: -110,
+                camY: 365,
+                camZ: -95,
                 title: 'Showcase/Illustration - Coll - 03',
                 index: '03',
                 workTitle: 'Metaverse',
                 workSubtitle: 'Illustration — 16:10',
-                workDetails: 'Selected Works / 03 — 19'
+                workDetails: 'Selected Works / 03 — 18'
             },
             {
                 nodeIdx: 3,
                 category: 'Animation',
-                camX: -465,
-                camY: -390,
-                camZ: 130,
+                camX: -410,
+                camY: -355,
+                camZ: 110,
                 title: 'Showcase/Animation - Coll - 04',
                 index: '04',
                 workTitle: 'Monn Mortgage',
                 workSubtitle: 'Animation — 4:3',
-                workDetails: 'Selected Works / 04 — 19'
+                workDetails: 'Selected Works / 04 — 18'
             },
             {
                 nodeIdx: 4,
                 category: 'Animation',
-                camX: 850,
-                camY: 265,
-                camZ: -85,
+                camX: 755,
+                camY: 225,
+                camZ: -75,
                 title: 'Showcase/Animation - Coll - 05',
                 index: '05',
                 workTitle: 'Verity AI',
                 workSubtitle: 'Animation — 9:16',
-                workDetails: 'Selected Works / 05 — 19'
+                workDetails: 'Selected Works / 05 — 18'
             },
             {
                 nodeIdx: 5,
                 category: 'Branding',
-                camX: -740,
-                camY: 215,
-                camZ: 75,
+                camX: -630,
+                camY: 185,
+                camZ: 65,
                 title: 'Showcase/Branding - Coll - 06',
                 index: '06',
                 workTitle: 'SIDE Branding',
                 workSubtitle: 'Branding — 16:9',
-                workDetails: 'Selected Works / 06 — 19'
+                workDetails: 'Selected Works / 06 — 18'
             },
             {
                 nodeIdx: 6,
                 category: 'Illustration',
-                camX: 220,
-                camY: -680,
-                camZ: -130,
+                camX: 185,
+                camY: -585,
+                camZ: -110,
                 title: 'Showcase/Illustration - Coll - 07',
                 index: '07',
                 workTitle: 'Antigravity — Study I',
                 workSubtitle: 'Illustration — 16:9',
-                workDetails: 'Selected Works / 07 — 19'
+                workDetails: 'Selected Works / 07 — 18'
             },
             {
                 nodeIdx: 7,
                 category: 'Animation',
-                camX: 490,
-                camY: 740,
-                camZ: 115,
+                camX: 435,
+                camY: 690,
+                camZ: 95,
                 title: 'Showcase/Animation - Coll - 08',
                 index: '08',
                 workTitle: 'Engine',
                 workSubtitle: 'Animation — 4:3',
-                workDetails: 'Selected Works / 08 — 19'
+                workDetails: 'Selected Works / 08 — 18'
             },
             {
                 nodeIdx: 8,
                 category: 'Branding',
-                camX: -1060,
-                camY: -310,
-                camZ: -95,
+                camX: -900,
+                camY: -265,
+                camZ: -80,
                 title: 'Showcase/Branding - Coll - 09',
                 index: '09',
                 workTitle: 'DCLEX — Brand',
                 workSubtitle: 'Branding — 4:3',
-                workDetails: 'Selected Works / 09 — 19'
+                workDetails: 'Selected Works / 09 — 18'
             },
             {
                 nodeIdx: 9,
                 category: 'Animation',
-                camX: 1080,
-                camY: -445,
-                camZ: 85,
+                camX: 920,
+                camY: -395,
+                camZ: 75,
                 title: 'Showcase/Animation - Coll - 10',
                 index: '10',
                 workTitle: 'DCLEX — Motion',
                 workSubtitle: 'Animation — 4:3',
-                workDetails: 'Selected Works / 10 — 19'
+                workDetails: 'Selected Works / 10 — 18'
             },
             {
                 nodeIdx: 10,
                 category: 'Typography',
-                camX: -635,
-                camY: 780,
-                camZ: -125,
+                camX: -540,
+                camY: 665,
+                camZ: -105,
                 title: 'Showcase/Typography - Coll - 11',
                 index: '11',
                 workTitle: 'Notus Type',
                 workSubtitle: 'Typography — 4:5',
-                workDetails: 'Selected Works / 11 — 19'
+                workDetails: 'Selected Works / 11 — 18'
             },
             {
                 nodeIdx: 11,
                 category: 'Animation',
-                camX: -340,
-                camY: -1090,
-                camZ: 105,
+                camX: -290,
+                camY: -925,
+                camZ: 90,
                 title: 'Showcase/Animation - Coll - 12',
                 index: '12',
                 workTitle: 'SpaceX',
                 workSubtitle: 'Animation — 4:3',
-                workDetails: 'Selected Works / 12 — 19'
+                workDetails: 'Selected Works / 12 — 18'
             },
             {
                 nodeIdx: 12,
-                category: 'Typography',
-                camX: 1290,
-                camY: 640,
-                camZ: -75,
-                title: 'Showcase/Typography - Coll - 13',
+                category: 'Illustration',
+                camX: -1310,
+                camY: 160,
+                camZ: 105,
+                title: 'Showcase/Illustration - Coll - 13',
                 index: '13',
-                workTitle: 'Notus — Specimen',
-                workSubtitle: 'Typography — 3:4',
-                workDetails: 'Selected Works / 13 — 19'
+                workTitle: 'Antigravity — Study II',
+                workSubtitle: 'Illustration — 3:4',
+                workDetails: 'Selected Works / 13 — 18'
             },
             {
                 nodeIdx: 13,
-                category: 'Illustration',
-                camX: -1540,
-                camY: 190,
-                camZ: 125,
-                title: 'Showcase/Illustration - Coll - 14',
+                category: 'Animation',
+                camX: 670,
+                camY: -885,
+                camZ: -90,
+                title: 'Showcase/Animation - Coll - 14',
                 index: '14',
-                workTitle: 'Antigravity — Study II',
-                workSubtitle: 'Illustration — 3:4',
-                workDetails: 'Selected Works / 14 — 19'
+                workTitle: 'DCLEX — Exchange',
+                workSubtitle: 'Animation — 16:10',
+                workDetails: 'Selected Works / 14 — 18'
             },
             {
                 nodeIdx: 14,
-                category: 'Animation',
-                camX: 790,
-                camY: -1040,
-                camZ: -105,
-                title: 'Showcase/Animation - Coll - 15',
+                category: 'Branding',
+                camX: -40,
+                camY: 915,
+                camZ: 55,
+                title: 'Showcase/Branding - Coll - 15',
                 index: '15',
-                workTitle: 'DCLEX — Exchange',
-                workSubtitle: 'Animation — 16:10',
-                workDetails: 'Selected Works / 15 — 19'
+                workTitle: 'Crescent — Visuals',
+                workSubtitle: 'Branding — 4:3',
+                workDetails: 'Selected Works / 15 — 18'
             },
             {
                 nodeIdx: 15,
-                category: 'Branding',
-                camX: -45,
-                camY: 1060,
-                camZ: 65,
-                title: 'Showcase/Branding - Coll - 16',
+                category: 'Animation',
+                camX: -925,
+                camY: -780,
+                camZ: -95,
+                title: 'Showcase/Animation - Coll - 16',
                 index: '16',
-                workTitle: 'Crescent — Visuals',
-                workSubtitle: 'Branding — 4:3',
-                workDetails: 'Selected Works / 16 — 19'
+                workTitle: 'SpaceX — Orbital',
+                workSubtitle: 'Animation — 4:3',
+                workDetails: 'Selected Works / 16 — 18'
             },
             {
                 nodeIdx: 16,
-                category: 'Animation',
-                camX: -1090,
-                camY: -920,
-                camZ: -110,
-                title: 'Showcase/Animation - Coll - 17',
+                category: 'Branding',
+                camX: 1290,
+                camY: -20,
+                camZ: 100,
+                title: 'Showcase/Branding - Coll - 17',
                 index: '17',
-                workTitle: 'SpaceX — Orbital',
-                workSubtitle: 'Animation — 4:3',
-                workDetails: 'Selected Works / 17 — 19'
+                workTitle: 'DCLEX — Interface',
+                workSubtitle: 'Branding — 4:3',
+                workDetails: 'Selected Works / 17 — 18'
             },
             {
                 nodeIdx: 17,
-                category: 'Branding',
-                camX: 1520,
-                camY: -25,
-                camZ: 120,
-                title: 'Showcase/Branding - Coll - 18',
-                index: '18',
-                workTitle: 'DCLEX — Interface',
-                workSubtitle: 'Branding — 4:3',
-                workDetails: 'Selected Works / 18 — 19'
-            },
-            {
-                nodeIdx: 18,
                 category: 'Animation',
-                camX: -1230,
-                camY: 790,
-                camZ: -90,
-                title: 'Showcase/Animation - Coll - 19',
-                index: '19',
+                camX: -1045,
+                camY: 670,
+                camZ: -75,
+                title: 'Showcase/Animation - Coll - 18',
+                index: '18',
                 workTitle: 'Verity — Autonomy',
                 workSubtitle: 'Animation — 4:5',
-                workDetails: 'Selected Works / 19 — 19'
+                workDetails: 'Selected Works / 18 — 18'
             }
         ];
 

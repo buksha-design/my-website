@@ -692,10 +692,19 @@ body {
     line-height: 1;
 }
 
-/* Центральный крупный заголовок в пространстве сцены */
+/* Центральный крупный заголовок в пространстве сцены (бесшовный двухслойный loop) */
 .showcase-stage__bg-title {
-    position: relative;
+    position: absolute;
+    inset: 0;
     z-index: 2;
+    pointer-events: none;
+}
+
+.showcase-stage__bg-title-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
     font-family: var(--font-main);
     font-size: clamp(1.5rem, 3.8vw, 4.0rem);
     font-weight: 400;
@@ -703,7 +712,7 @@ body {
     color: #0a0a0a;
     white-space: nowrap;
     pointer-events: none;
-    will-change: transform;
+    will-change: transform, opacity;
 }
 
 /* Ортогональная 3D-перспектива по оси Z (без наклона плоскостей и перспективных искажений карточек) */

@@ -844,12 +844,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const showcaseWorkDetails = document.getElementById('showcase-work-details');
         const showcaseCards = Array.from(showcaseSection.querySelectorAll('.showcase-card'));
 
-        // Считываем Z-координаты карточек для глубины резкости (DOF blur) и масштаба без искажений
+        // Считываем X/Y/Z-координаты карточек для бесшовного локального масштабирования активной карточки в центре
         const cardData = showcaseCards.map(el => {
+            const xVal = parseFloat(el.style.getPropertyValue('--x')) || 0;
+            const yVal = parseFloat(el.style.getPropertyValue('--y')) || 0;
             const zVal = parseFloat(el.style.getPropertyValue('--z')) || 0;
             const nodeIdx = el.hasAttribute('data-node') ? Number(el.getAttribute('data-node')) : -1;
-            const isHero = el.classList.contains('showcase-card--hero');
-            return { el, z: zVal, nodeIdx, isHero };
+            const baseTransform = `translate3d(calc(${xVal}px - 50%), calc(${yVal}px - 50%), ${zVal}px)`;
+            return { el, x: xVal, y: yVal, z: zVal, nodeIdx, baseTransform };
         });
 
         // 9 работ из разных проектов разбросаны по 3D-пространству с индивидуальными пропорциями ratio
@@ -964,9 +966,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ];
 
-        const HOLD_DURATION = 2500; // Пауза 2.5 секунды на каждом ассете для детального просмотра
+        const HOLD_DURATION = 2800; // Пауза 2.8 секунды в центре с плавным деликатным zoom-in
         const MOVE_DURATION = 2200; // 2.2 секунды плавный и деликатный перелет к следующей рандомной работе
-        const SEGMENT_DURATION = HOLD_DURATION + MOVE_DURATION; // 4.7 сек на шаг
+        const SEGMENT_DURATION = HOLD_DURATION + MOVE_DURATION; // 5.0 сек на шаг
 
         // Сверхплавная кривая с очень длинным, деликатным торможением (long gentle settle) без рывков
         const easeDelicateGlide = (t) => {
@@ -1047,6 +1049,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalStep = Math.floor(now / SEGMENT_DURATION);
             if (totalStep !== activeTransitionStep) {
                 if (activeTransitionStep !== -1) {
+                    // Сбрасываем масштаб предыдущей карточки ровно в 1 перед сменой цели
+                    const prevCard = cardData[currentFromTarget.nodeIdx];
+                    if (prevCard) {
+                        prevCard.el.style.transform = `${prevCard.baseTransform} scale(1)`;
+                    }
                     currentFromTarget = currentToTarget;
                     currentToTarget = pickNextRandomTarget(currentFromTarget);
                 }
@@ -1058,10 +1065,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const fromState = currentFromTarget;
             const toState = currentToTarget;
 
-            // Пауза 2.5 секунды над проектом, затем плавный и деликатный доезд
+            // Пауза 2.8 секунды над проектом в центре, затем плавный и деликатный перелет
             let rawT = 0;
-            if (segmentTime > HOLD_DURATION) {
+            let centerZoomProgress = 0;
+            if (segmentTime <= HOLD_DURATION) {
+                // Когда проект находится в центре: очень мягкий, плавный zoom-in по синусоиде (0 -> 1 без рывка)
+                const holdProgress = Math.min(1, Math.max(0, segmentTime / HOLD_DURATION));
+                centerZoomProgress = 0.5 * (1 - Math.cos(holdProgress * Math.PI));
+            } else {
                 rawT = Math.min(1, Math.max(0, (segmentTime - HOLD_DURATION) / MOVE_DURATION));
+                // Плавный возврат масштаба (1 -> 0) по мере отъезда камеры к следующему проекту
+                centerZoomProgress = 0.5 * (1 + Math.cos(rawT * Math.PI));
             }
 
             const tX = rawT > 0 ? easeDelicateGlide(Math.min(1, Math.pow(rawT, currentFlightProfile.staggerX))) : 0;
@@ -1082,9 +1096,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const moveProgress = tZ;
 
-            // В каждом кадре обновляем только transform камеры (без перебора карточек в цикле — 0 лагов!)
+            // В каждом кадре обновляем transform камеры и деликатный zoom-in только одной активной карточки в центре
             if (showcaseCamera) {
                 showcaseCamera.style.transform = `translate3d(${camX.toFixed(2)}px, ${camY.toFixed(2)}px, ${camZ.toFixed(2)}px)`;
+            }
+
+            const centeredCard = cardData[fromState.nodeIdx];
+            if (centeredCard) {
+                const activeScale = 1 + centerZoomProgress * 0.085; // Деликатный плавный zoom-in до +8.5% в центре
+                centeredCard.el.style.transform = `${centeredCard.baseTransform} scale(${activeScale.toFixed(4)})`;
             }
 
             // Мягкое движение центрального заголовка
@@ -1096,8 +1116,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 showcaseBgTitle.style.transform = `translate3d(${titleX.toFixed(2)}px, ${titleY.toFixed(2)}px, 0) scale(${titleScale.toFixed(3)})`;
             }
 
-            // При подъезде к работе (moveProgress > 0.38) она деликатно увеличивается через GPU-transition (.is-focused)
-            const focusedNode = moveProgress > 0.38 ? toState.nodeIdx : fromState.nodeIdx;
+            // Обновляем мета-информацию работы, когда камера подъезжает к центру
+            const focusedNode = moveProgress > 0.65 ? toState.nodeIdx : fromState.nodeIdx;
             if (focusedNode !== activeNodeIndex) {
                 activeNodeIndex = focusedNode;
                 const activeTarget = targets[activeNodeIndex];

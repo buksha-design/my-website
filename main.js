@@ -14,15 +14,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Клик на логотип — плавная прокрутка наверх (к шапке)
+    // Клик на логотип — переход на главную страницу (или плавный скролл наверх, если уже на главной)
     const logoLink = document.getElementById('logoLink');
     if (logoLink) {
         logoLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            const path = window.location.pathname;
+            const isHomePage = path === '/' || path.endsWith('/index.html') || path === '';
+            if (isHomePage) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                window.location.href = 'index.html';
+            }
         });
     }
 

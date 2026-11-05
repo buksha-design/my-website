@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <!-- Google Tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVR219B845"></script>
+    <!-- Google Consent Mode v2 (RODO & Polish PKE Compliant: Denied by default until explicit user consent) -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LVR219B845');
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500
+      });
+      window.GA_MEASUREMENT_ID = 'G-LVR219B845';
+      window.loadBuckshaGA = function() {
+        if (window._gaLoaded) return;
+        window._gaLoaded = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GA_MEASUREMENT_ID;
+        document.head.appendChild(s);
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        gtag('js', new Date());
+        gtag('config', window.GA_MEASUREMENT_ID, { 'anonymize_ip': true });
+      };
+      try {
+        if (localStorage.getItem('buksha_cookie_consent') === 'accepted') {
+          window.loadBuckshaGA();
+        }
+      } catch (e) {}
     </script>
 
     <meta charset="UTF-8">
@@ -3322,15 +3343,15 @@ button {
 
 .footer__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 0.72fr 1.28fr;
+    gap: 3rem;
     align-items: flex-start;
 }
 
 .footer__content {
     display: grid;
-    grid-template-columns: 1.3fr 1fr 0.8fr;
-    gap: 2.5rem;
+    grid-template-columns: 1.25fr 1fr 0.72fr 0.95fr;
+    gap: 2.2rem;
     align-items: flex-start;
 }
 
@@ -3417,6 +3438,140 @@ button {
 .footer__col nav a:hover,
 .footer__col a:hover {
     opacity: 0.6;
+}
+
+.download-form__privacy a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.cookie-banner {
+    position: fixed;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    bottom: 1.5rem;
+    max-width: 920px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.96);
+    color: #000;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid #000;
+    border-radius: 22px;
+    padding: 1.2rem 1.5rem;
+    z-index: 9999;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+    font-family: var(--font-main);
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, 20px, 0);
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0s linear 0.35s;
+}
+
+.cookie-banner.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0s;
+}
+
+.cookie-banner__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.8rem;
+}
+
+.cookie-banner__text {
+    font-size: 0.82rem;
+    line-height: 1.48;
+    color: #111;
+}
+
+.cookie-banner__text strong {
+    display: block;
+    font-size: 0.86rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.cookie-banner__text p {
+    margin: 0;
+    color: #333;
+}
+
+.cookie-banner__text a {
+    color: #000;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 500;
+}
+
+.cookie-banner__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+}
+
+.cookie-banner__btn {
+    font-family: var(--font-main);
+    font-size: 0.74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding: 0.62rem 1.15rem;
+    border-radius: 100px;
+    border: 1px solid #000;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cookie-banner__btn--reject {
+    background: #fff;
+    color: #000;
+}
+
+.cookie-banner__btn--reject:hover {
+    background: #000;
+    color: #fff;
+}
+
+.cookie-banner__btn--accept {
+    background: #000;
+    color: #fff;
+}
+
+.cookie-banner__btn--accept:hover {
+    background: #fff;
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .cookie-banner {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        padding: 1.1rem 1.2rem;
+    }
+    .cookie-banner__inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    .cookie-banner__actions {
+        width: 100%;
+    }
+    .cookie-banner__btn {
+        flex: 1;
+        text-align: center;
+    }
 }
 
 /* --------------------------------------------------------------------------
@@ -4087,7 +4242,7 @@ section[id] {
                                         <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
-                                <p class="download-form__privacy">Your contact information is strictly used to send the font package and trial license details.</p>
+                                <p class="download-form__privacy">Data Controller: Wiktor Buksza (Wrocław, Poland). Data is processed to send the font package &amp; licensing terms (Art. 6(1)(b) &amp; (f) GDPR / RODO). See <a href="legal.html#privacy">Privacy Policy</a> &amp; <a href="legal.html#terms">Terms</a>.</p>
                             </div>
                         </form>
 
@@ -4175,9 +4330,34 @@ section[id] {
                             <a href="https://pl.linkedin.com/in/buksha-design" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                         </nav>
                     </div>
+                    <div class="footer__col footer__col--legal">
+                        <h4>LEGAL</h4>
+                        <nav>
+                            <a href="legal.html#privacy">Privacy Policy</a>
+                            <a href="legal.html#cookies">Cookie Policy</a>
+                            <a href="legal.html#terms">Terms (Regulamin)</a>
+                            <a href="#cookie-settings" data-open-cookie-settings>Cookie Settings</a>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </footer>
+
+        <!-- RODO & Polish PKE Cookie Consent Banner -->
+        <aside class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie consent preferences" aria-hidden="true">
+            <div class="cookie-banner__inner">
+                <div class="cookie-banner__text">
+                    <strong>Cookies &amp; Privacy (RODO / PKE)</strong>
+                    <p>
+                        This website uses strictly necessary local storage and, only with your explicit consent, anonymous Google Analytics cookies to understand portfolio traffic. Self-hosted showcase videos use no third-party trackers. Read our <a href="legal.html#privacy">Privacy Policy</a>, <a href="legal.html#cookies">Cookie Policy</a> &amp; <a href="legal.html#terms">Terms</a>.
+                    </p>
+                </div>
+                <div class="cookie-banner__actions">
+                    <button type="button" class="cookie-banner__btn cookie-banner__btn--reject" id="cookieRejectBtn">Essential Only</button>
+                    <button type="button" class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAcceptBtn">Accept All</button>
+                </div>
+            </div>
+        </aside>
     </main>
 
     <!-- Dependencies -->
@@ -4201,7 +4381,67 @@ document.addEventListener('DOMContentLoaded', () => {
     initOpenTypeSandbox();
     initComparisonStackSwitchers();
     initDownloadForm();
+    initCookieConsent();
 });
+
+function initCookieConsent() {
+    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieAcceptBtn = document.getElementById('cookieAcceptBtn');
+    const cookieRejectBtn = document.getElementById('cookieRejectBtn');
+    const cookieSettingsTriggers = document.querySelectorAll('[data-open-cookie-settings]');
+    if (!cookieBanner) return;
+
+    function clearGoogleAnalyticsCookies() {
+        const host = window.location.hostname;
+        const domainParts = host.split('.');
+        const baseDomain = domainParts.length >= 2 ? '.' + domainParts.slice(-2).join('.') : host;
+        ['_ga', '_ga_LVR219B845', '_gid', '_gat'].forEach(name => {
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${host};`;
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${baseDomain};`;
+        });
+    }
+
+    function showCookieBanner() {
+        cookieBanner.classList.add('is-visible');
+        cookieBanner.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideCookieBanner() {
+        cookieBanner.classList.remove('is-visible');
+        cookieBanner.setAttribute('aria-hidden', 'true');
+    }
+
+    let savedChoice = null;
+    try { savedChoice = localStorage.getItem('buksha_cookie_consent'); } catch (e) {}
+    if (!savedChoice) {
+        setTimeout(showCookieBanner, 450);
+    }
+
+    if (cookieAcceptBtn) {
+        cookieAcceptBtn.addEventListener('click', () => {
+            try { localStorage.setItem('buksha_cookie_consent', 'accepted'); } catch (e) {}
+            if (typeof window.loadBuckshaGA === 'function') window.loadBuckshaGA();
+            hideCookieBanner();
+        });
+    }
+
+    if (cookieRejectBtn) {
+        cookieRejectBtn.addEventListener('click', () => {
+            try { localStorage.setItem('buksha_cookie_consent', 'rejected'); } catch (e) {}
+            if (typeof window.gtag === 'function') window.gtag('consent', 'update', { 'analytics_storage': 'denied' });
+            clearGoogleAnalyticsCookies();
+            hideCookieBanner();
+        });
+    }
+
+    cookieSettingsTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            showCookieBanner();
+        });
+    });
+}
 
 /* --------------------------------------------------------------------------
    01. SCROLL PROGRESS & ACTIVE GIANT SUB-NAV TRACKING

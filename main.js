@@ -1778,4 +1778,81 @@ document.addEventListener('DOMContentLoaded', () => {
         video.setAttribute('preload', 'auto');
         videoObserver.observe(video);
     });
+
+    // =============================================
+    // RODO / POLISH PKE COOKIE CONSENT CONTROLLER
+    // =============================================
+    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieAcceptBtn = document.getElementById('cookieAcceptBtn');
+    const cookieRejectBtn = document.getElementById('cookieRejectBtn');
+    const cookieSettingsTriggers = document.querySelectorAll('[data-open-cookie-settings]');
+
+    function clearGoogleAnalyticsCookies() {
+        const host = window.location.hostname;
+        const domainParts = host.split('.');
+        const baseDomain = domainParts.length >= 2 ? '.' + domainParts.slice(-2).join('.') : host;
+        const cookieNames = ['_ga', '_ga_LVR219B845', '_gid', '_gat'];
+        cookieNames.forEach(name => {
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${host};`;
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${baseDomain};`;
+        });
+    }
+
+    function showCookieBanner() {
+        if (!cookieBanner) return;
+        cookieBanner.classList.add('is-visible');
+        cookieBanner.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideCookieBanner() {
+        if (!cookieBanner) return;
+        cookieBanner.classList.remove('is-visible');
+        cookieBanner.setAttribute('aria-hidden', 'true');
+    }
+
+    if (cookieBanner) {
+        let savedChoice = null;
+        try {
+            savedChoice = localStorage.getItem('buksha_cookie_consent');
+        } catch (e) {}
+
+        if (!savedChoice) {
+            setTimeout(showCookieBanner, 450);
+        }
+
+        if (cookieAcceptBtn) {
+            cookieAcceptBtn.addEventListener('click', () => {
+                try {
+                    localStorage.setItem('buksha_cookie_consent', 'accepted');
+                } catch (e) {}
+                if (typeof window.loadBuckshaGA === 'function') {
+                    window.loadBuckshaGA();
+                } else if (typeof window.gtag === 'function') {
+                    window.gtag('consent', 'update', { 'analytics_storage': 'granted' });
+                }
+                hideCookieBanner();
+            });
+        }
+
+        if (cookieRejectBtn) {
+            cookieRejectBtn.addEventListener('click', () => {
+                try {
+                    localStorage.setItem('buksha_cookie_consent', 'rejected');
+                } catch (e) {}
+                if (typeof window.gtag === 'function') {
+                    window.gtag('consent', 'update', { 'analytics_storage': 'denied' });
+                }
+                clearGoogleAnalyticsCookies();
+                hideCookieBanner();
+            });
+        }
+
+        cookieSettingsTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                showCookieBanner();
+            });
+        });
+    }
 });

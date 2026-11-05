@@ -7,4 +7,31 @@ backup_large_files/
 # Исходники After Effects
 *.aep
 *.AEP
-.DS_Store
+
+# Исходники шрифтов (FontLab, Glyphs, UFO и их бэкапы)
+*.vfc
+*.VFC
+*.vfj
+*.VFJ
+*.glyphs
+*.ufo
+*.backup/
+*.backup
+notus/*.vfc
+notus/*.backup/
+
+# Локальные служебные скрипты, инструкции и документация (хранятся только в Dropbox, не на GitHub)
+BACKUP_SETTINGS.md
+restore_setup.sh
+deploy.sh
+scripts/
+GEMINI.md
+docs/
+
+# Секреты и ключи (на случай случайного создания)
+.env
+.env.*
+*.pem
+*.key
+id_ed25519*
+id_rsa*

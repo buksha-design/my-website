@@ -1249,6 +1249,68 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // =============================================
+    // FULL-WIDTH DARK RECAP TIMELINE STREAM (Screen Recording 2026-11-05 at 21.46.24.mp4)
+    // =============================================
+    const recapShowcase = document.getElementById('notus-editorial-showcase');
+    if (recapShowcase) {
+        const gridTrack = document.getElementById('recapGridTrack');
+        const backTrack = recapShowcase.querySelector('[data-recap-track="back"]');
+        const frontTrack = recapShowcase.querySelector('[data-recap-track="front"]');
+
+        const TILE_WIDTH = 2640; // 12 колонок по 220px
+        const GRID_SPEED = 0.052; // px/ms — плавный непрерывный ход сетки справа налево (как на видео)
+        const BACK_SPEED = 0.068; // px/ms — ход заднего слоя карточек (за текстом THE NOTUS 01)
+        const FRONT_SPEED = 0.082; // px/ms — чуть более быстрый параллакс переднего слоя (поверх текста THE NOTUS 01)
+
+        let isRecapVisible = false;
+        let isRecapRunning = false;
+        let recapStart = null;
+        let recapElapsed = 0;
+
+        const recapObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                isRecapVisible = entry.isIntersecting;
+                if (isRecapVisible && !isRecapRunning) {
+                    isRecapRunning = true;
+                    recapStart = performance.now() - recapElapsed;
+                    requestAnimationFrame(animateRecapStream);
+                }
+            });
+        }, { threshold: 0.02 });
+
+        recapObserver.observe(recapShowcase);
+
+        function animateRecapStream(now) {
+            if (!isRecapVisible) {
+                isRecapRunning = false;
+                return;
+            }
+
+            if (recapStart === null) {
+                recapStart = now - recapElapsed;
+            }
+            const t = now - recapStart;
+            recapElapsed = t;
+
+            const gridOffset = -((t * GRID_SPEED) % TILE_WIDTH);
+            const backOffset = -((t * BACK_SPEED) % TILE_WIDTH);
+            const frontOffset = -((t * FRONT_SPEED) % TILE_WIDTH);
+
+            if (gridTrack) {
+                gridTrack.style.transform = `translate3d(${gridOffset.toFixed(2)}px, 0, 0)`;
+            }
+            if (backTrack) {
+                backTrack.style.transform = `translate3d(${backOffset.toFixed(2)}px, 0, 0)`;
+            }
+            if (frontTrack) {
+                frontTrack.style.transform = `translate3d(${frontOffset.toFixed(2)}px, 0, 0)`;
+            }
+
+            requestAnimationFrame(animateRecapStream);
+        }
+    }
+
     const canvas = document.getElementById('stats-canvas');
     if (statsSection && canvas) {
         const ctx = canvas.getContext('2d');

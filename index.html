@@ -37,7 +37,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261105_2">
+    <link rel="stylesheet" href="style.css?v=20261106_5">
 </head>
 <body>
     <div class="scroll-progress" aria-hidden="true"></div>
@@ -317,6 +317,587 @@ emotion and visual precision.
                         </div>
                         <div class="dclex-slider__item">
                             <img src="optimized_assets/Notus/Notus_3.webp" alt="Notus Showcase 3" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Полноширинная темная секция в стиле Screen Recording 2026-11-05 at 21.46.24.mp4 -->
+            <div class="recap-showcase" id="notus-editorial-showcase">
+                <!-- Верхняя тонкая линия как на видео -->
+                <div class="recap-showcase__top-line"></div>
+
+                <!-- Движущаяся сетка вертикальных линий с месяцами внизу -->
+                <div class="recap-showcase__grid-viewport">
+                    <div class="recap-showcase__grid-track" id="recapGridTrack">
+                        <!-- Набор 1 (12 колонок = 2640px) -->
+                        <div class="recap-grid-col"><span>JANUARY</span></div>
+                        <div class="recap-grid-col"><span>DECEMBER</span></div>
+                        <div class="recap-grid-col"><span>NOVEMBER</span></div>
+                        <div class="recap-grid-col"><span>OCTOBER</span></div>
+                        <div class="recap-grid-col"><span>SEPTEMBER</span></div>
+                        <div class="recap-grid-col"><span>AUGUST</span></div>
+                        <div class="recap-grid-col"><span>JULY</span></div>
+                        <div class="recap-grid-col"><span>JUNE</span></div>
+                        <div class="recap-grid-col"><span>MAY</span></div>
+                        <div class="recap-grid-col"><span>APRIL</span></div>
+                        <div class="recap-grid-col"><span>MARCH</span></div>
+                        <div class="recap-grid-col"><span>FEBRUARY</span></div>
+                        <!-- Набор 2 (дубль для бесшовного цикла) -->
+                        <div class="recap-grid-col"><span>JANUARY</span></div>
+                        <div class="recap-grid-col"><span>DECEMBER</span></div>
+                        <div class="recap-grid-col"><span>NOVEMBER</span></div>
+                        <div class="recap-grid-col"><span>OCTOBER</span></div>
+                        <div class="recap-grid-col"><span>SEPTEMBER</span></div>
+                        <div class="recap-grid-col"><span>AUGUST</span></div>
+                        <div class="recap-grid-col"><span>JULY</span></div>
+                        <div class="recap-grid-col"><span>JUNE</span></div>
+                        <div class="recap-grid-col"><span>MAY</span></div>
+                        <div class="recap-grid-col"><span>APRIL</span></div>
+                        <div class="recap-grid-col"><span>MARCH</span></div>
+                        <div class="recap-grid-col"><span>FEBRUARY</span></div>
+                    </div>
+                </div>
+
+                <!-- Центральный крупный белый заголовок на базе Notus Display -->
+                <div class="recap-showcase__center-title" aria-hidden="true">
+                    THE NOTUS <em>01</em>
+                </div>
+
+                <!-- Слой карточек ЗА центральным текстом (z-index: 2) -->
+                <div class="recap-showcase__cards-layer recap-showcase__cards-layer--back">
+                    <div class="recap-showcase__cards-track" data-recap-track="back">
+                        <!-- Полотно 1 (2640px) -->
+                        <div class="recap-canvas">
+                            <!-- 01: OpenType Standard Ligatures (f_i & f_l из #opentype-ligatures в notus.html) -->
+                            <article class="recap-card" style="--x: 85px; --y: 34px; --w: 205px; --h: 162px;">
+                                <div class="recap-card__media notus-feat notus-feat--liga-duo">
+                                    <div class="nf-liga-col">
+                                        <div class="nf-liga-top"><span>f_i</span><b>liga</b></div>
+                                        <div class="nf-liga-pair">fi</div>
+                                        <div class="nf-liga-word">in<mark>fi</mark>nite</div>
+                                    </div>
+                                    <div class="nf-liga-col">
+                                        <div class="nf-liga-top"><span>f_l</span><b>liga</b></div>
+                                        <div class="nf-liga-pair">fl</div>
+                                        <div class="nf-liga-word">con<mark>fl</mark>uence</div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>01</span><span>Standard Ligatures (liga)</span></div>
+                            </article>
+
+                            <!-- 02: Old-Style Figures & Fractions (Желтый #FAEA48 из notus.html + onum / frac) -->
+                            <article class="recap-card" style="--x: 360px; --y: 132px; --w: 228px; --h: 228px;">
+                                <div class="recap-card__media notus-feat notus-feat--yellow-figures">
+                                    <div class="nf-bar">
+                                        <span>OLD-STYLE FIGURES</span>
+                                        <b>onum</b>
+                                    </div>
+                                    <div class="nf-figures-hero">1892</div>
+                                    <div class="nf-figures-sub">&frac14; &frac12; &frac34; &middot; &permil; &plusmn; &times; &divide; &ne; &approx; &numero;</div>
+                                    <div class="nf-bar nf-bar--foot">
+                                        <span>0123456789</span>
+                                        <span>frac &middot; tnum</span>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>02</span><span>Figures &amp; Fractions (onum)</span></div>
+                            </article>
+
+                            <!-- 03: Mint Badge (#C4F1C0 из notus.html — Fractions ¼ ½ ¾) -->
+                            <article class="recap-card recap-card--no-meta" style="--x: 240px; --y: 702px; --w: 136px; --h: 92px;">
+                                <div class="recap-card__media notus-feat notus-feat--mint-frac">
+                                    <div class="nf-bar"><span>numr / dnom</span><b>frac</b></div>
+                                    <div class="nf-mint-glyphs">&frac14;&thinsp;&frac12;&thinsp;&frac34;</div>
+                                </div>
+                            </article>
+
+                            <!-- 04: Bilingual Editorial Spread (EN / RU Parallel Set из #broadsheet в notus.html) -->
+                            <article class="recap-card" style="--x: 545px; --y: 478px; --w: 290px; --h: 238px;">
+                                <div class="recap-card__media notus-feat notus-feat--bilingual-spread">
+                                    <div class="nf-page nf-page--en">
+                                        <div class="nf-page__head"><span>01 &mdash; LATIN</span><span>EN</span></div>
+                                        <div class="nf-page__title">On the quiet weight of afternoon light</div>
+                                        <p class="nf-page__deck">A room remembers the hour by the angle at which sunlight touches its walls.</p>
+                                        <div class="nf-page__foot"><span>Fig. 14</span><span>18/28 pt</span></div>
+                                    </div>
+                                    <div class="nf-page nf-page--ru">
+                                        <div class="nf-page__head"><span>02 &mdash; КИРИЛЛИЦА</span><span>RU</span></div>
+                                        <div class="nf-page__title">О тихой тяжести полуденного света</div>
+                                        <p class="nf-page__deck">Комната помнит время по тому, под каким углом луч касается стены.</p>
+                                        <div class="nf-page__foot"><span>Илл. 14</span><span>18/28 пт</span></div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>04</span><span>Bilingual Spread (EN / RU)</span></div>
+                            </article>
+
+                            <!-- 05: Special Symbols & Editorial Marks (из .showcase-symbols в notus.html) -->
+                            <article class="recap-card" style="--x: 680px; --y: 90px; --w: 205px; --h: 142px;">
+                                <div class="recap-card__media notus-feat notus-feat--symbols-dark">
+                                    <div class="nf-bar nf-bar--dark">
+                                        <span>SPECIALS &amp; SYMBOLS</span>
+                                        <span>U+00A7</span>
+                                    </div>
+                                    <div class="nf-symbols-hero">
+                                        <span>&sect;</span>
+                                        <em>&amp;</em>
+                                        <span>&Dagger;</span>
+                                        <span>&para;</span>
+                                    </div>
+                                    <div class="nf-symbols-strip">@ % * ? ! &dagger; &Dagger; &sect; &para; &copy; &reg; &trade; &deg;</div>
+                                </div>
+                                <div class="recap-card__meta"><span>05</span><span>Editorial Symbols</span></div>
+                            </article>
+
+                            <!-- 06: Script Stack ("Metamorphosis" 120 PT из #script в notus.html) -->
+                            <article class="recap-card" style="--x: 1105px; --y: 26px; --w: 185px; --h: 84px;">
+                                <div class="recap-card__media notus-feat notus-feat--script-stack">
+                                    <div class="nf-bar"><span>NOTUS DISPLAY</span><span>120 PT</span></div>
+                                    <div class="nf-script-word">Metamorphosis</div>
+                                    <div class="nf-script-sub"><em>Can discipline learn to flow?</em></div>
+                                </div>
+                                <div class="recap-card__meta"><span>06</span><span>Script Specimen</span></div>
+                            </article>
+
+                            <!-- 07: True Small Capitals Metric Grid (.ot-smcp-magnifier из #small-capitals в notus.html) -->
+                            <article class="recap-card" style="--x: 1065px; --y: 638px; --w: 198px; --h: 142px;">
+                                <div class="recap-card__media notus-feat notus-feat--smcp-grid">
+                                    <div class="nf-smcp-hline nf-smcp-hline--c"><span>c</span></div>
+                                    <div class="nf-smcp-hline nf-smcp-hline--a"><span>a</span></div>
+                                    <div class="nf-smcp-hline nf-smcp-hline--x"><span>x</span></div>
+                                    <div class="nf-smcp-hline nf-smcp-hline--base"><span>&minus;</span></div>
+                                    <div class="nf-smcp-vline nf-smcp-vline--l"><em>10</em></div>
+                                    <div class="nf-smcp-vline nf-smcp-vline--r"><em>10</em></div>
+                                    <div class="nf-smcp-char">a</div>
+                                    <div class="nf-smcp-meta">
+                                        <span>a.smcp &middot; SMALL CAP</span>
+                                        <span>U+0061</span>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>07</span><span>True Small Caps (smcp)</span></div>
+                            </article>
+
+                            <!-- 08: Discretionary Ligatures (c_t.dlig & s_t.dlig из #opentype-ligatures в notus.html) -->
+                            <article class="recap-card" style="--x: 1265px; --y: 432px; --w: 195px; --h: 168px;">
+                                <div class="recap-card__media notus-feat notus-feat--dlig-dark">
+                                    <div class="nf-bar nf-bar--dark">
+                                        <span>DISCRETIONARY</span>
+                                        <b>dlig</b>
+                                    </div>
+                                    <div class="nf-dlig-row">
+                                        <div class="nf-dlig-box">
+                                            <small>c_t.dlig</small>
+                                            <span>ct</span>
+                                            <em>archite<mark>ct</mark>ure</em>
+                                        </div>
+                                        <div class="nf-dlig-box">
+                                            <small>s_t.dlig</small>
+                                            <span>st</span>
+                                            <em>ae<mark>st</mark>hetic</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>08</span><span>Discretionary (dlig)</span></div>
+                            </article>
+
+                            <!-- 09: Dual-Pane Glyph Inspector (480+ Glyphs из #glyphs в notus.html) -->
+                            <article class="recap-card" style="--x: 1510px; --y: 185px; --w: 248px; --h: 192px;">
+                                <div class="recap-card__media notus-feat notus-feat--glyph-inspector">
+                                    <div class="nf-inspector-left">
+                                        <span class="nf-inspector-tag">GLYPH MATRIX</span>
+                                        <div class="nf-inspector-big">A</div>
+                                        <div class="nf-inspector-code"><span>LATIN CAP A</span><span>U+0041</span></div>
+                                    </div>
+                                    <div class="nf-inspector-right">
+                                        <span class="is-active">A</span><span>B</span><span>C</span><span>D</span>
+                                        <span>А</span><span>Б</span><span>В</span><span>Г</span>
+                                        <span>&aelig;</span><span>&szlig;</span><span>&oslash;</span><span>&Omega;</span>
+                                        <span>&euro;</span><span>&#8381;</span><span>&sect;</span><span>&Dagger;</span>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>09</span><span>480+ Glyph Inspector</span></div>
+                            </article>
+
+                            <!-- 10: Currency & Financial Set (Ecru #E5E2D8 из notus.html) -->
+                            <article class="recap-card" style="--x: 1785px; --y: 565px; --w: 172px; --h: 136px;">
+                                <div class="recap-card__media notus-feat notus-feat--ecru-currency">
+                                    <div class="nf-bar"><span>CURRENCIES</span><span>&sect; 48/B</span></div>
+                                    <div class="nf-currency-main">&euro;&thinsp;&#8381;&thinsp;&pound;&thinsp;$</div>
+                                    <div class="nf-bar nf-bar--foot"><span>&yen; &cent; &numero; &permil;</span><span>TABULAR</span></div>
+                                </div>
+                                <div class="recap-card__meta"><span>10</span><span>Currency Symbols</span></div>
+                            </article>
+
+                            <!-- 11: Extended Multilingual ("Mülтiliñğúał" из .showcase-multilingual-wide в notus.html) -->
+                            <article class="recap-card" style="--x: 2100px; --y: 535px; --w: 235px; --h: 176px;">
+                                <div class="recap-card__media notus-feat notus-feat--multilingual">
+                                    <div class="nf-bar">
+                                        <span>EXTENDED CHARACTER SET</span>
+                                        <span>LAT &middot; CYR</span>
+                                    </div>
+                                    <div class="nf-multi-hero">M&uuml;lтili&ntilde;&#287;&uacute;a&#322;</div>
+                                    <div class="nf-multi-chars">&Agrave;&Aacute;&Acirc;&Atilde;&Auml;&Aring;&AElig;&Ccedil; &middot; Ґ Є І Ї &middot; &szlig;&eth;&thorn;</div>
+                                    <div class="nf-bar nf-bar--foot">
+                                        <span>Жыве Беларусь!</span>
+                                        <span>Czu&#322;e &#347;wiat&#322;o</span>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>11</span><span>M&uuml;lтili&ntilde;&#287;&uacute;a&#322; Set</span></div>
+                            </article>
+
+                            <!-- 12: Triple Ligatures (ffi, ffl, Th из #opentype-ligatures в notus.html) -->
+                            <article class="recap-card" style="--x: 2350px; --y: 88px; --w: 225px; --h: 192px;">
+                                <div class="recap-card__media notus-feat notus-feat--liga-trio">
+                                    <div class="nf-liga-col">
+                                        <div class="nf-liga-top"><span>f_f_i</span><b>liga</b></div>
+                                        <div class="nf-liga-pair">ffi</div>
+                                        <div class="nf-liga-word">o<mark>ffi</mark>cial</div>
+                                    </div>
+                                    <div class="nf-liga-col">
+                                        <div class="nf-liga-top"><span>f_f_l</span><b>liga</b></div>
+                                        <div class="nf-liga-pair">ffl</div>
+                                        <div class="nf-liga-word">a<mark>ffl</mark>iction</div>
+                                    </div>
+                                    <div class="nf-liga-col">
+                                        <div class="nf-liga-top"><span>T_h</span><b>liga</b></div>
+                                        <div class="nf-liga-pair">Th</div>
+                                        <div class="nf-liga-word"><mark>Th</mark>eatre</div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>12</span><span>Triple Ligatures (ffi / ffl)</span></div>
+                            </article>
+                        </div>
+
+                        <!-- Полотно 2 (дубль для бесшовного цикла) -->
+                        <div class="recap-canvas" aria-hidden="true">
+                            <article class="recap-card" style="--x: 85px; --y: 34px; --w: 205px; --h: 162px;">
+                                <div class="recap-card__media notus-feat notus-feat--liga-duo">
+                                    <div class="nf-liga-col">
+                                        <div class="nf-liga-top"><span>f_i</span><b>liga</b></div>
+                                        <div class="nf-liga-pair">fi</div>
+                                        <div class="nf-liga-word">in<mark>fi</mark>nite</div>
+                                    </div>
+                                    <div class="nf-liga-col">
+                                        <div class="nf-liga-top"><span>f_l</span><b>liga</b></div>
+                                        <div class="nf-liga-pair">fl</div>
+                                        <div class="nf-liga-word">con<mark>fl</mark>uence</div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>01</span><span>Standard Ligatures (liga)</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 360px; --y: 132px; --w: 228px; --h: 228px;">
+                                <div class="recap-card__media notus-feat notus-feat--yellow-figures">
+                                    <div class="nf-bar">
+                                        <span>OLD-STYLE FIGURES</span>
+                                        <b>onum</b>
+                                    </div>
+                                    <div class="nf-figures-hero">1892</div>
+                                    <div class="nf-figures-sub">&frac14; &frac12; &frac34; &middot; &permil; &plusmn; &times; &divide; &ne; &approx; &numero;</div>
+                                    <div class="nf-bar nf-bar--foot">
+                                        <span>0123456789</span>
+                                        <span>frac &middot; tnum</span>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>02</span><span>Figures &amp; Fractions (onum)</span></div>
+                            </article>
+
+                            <article class="recap-card recap-card--no-meta" style="--x: 240px; --y: 702px; --w: 136px; --h: 92px;">
+                                <div class="recap-card__media notus-feat notus-feat--mint-frac">
+                                    <div class="nf-bar"><span>numr / dnom</span><b>frac</b></div>
+                                    <div class="nf-mint-glyphs">&frac14;&thinsp;&frac12;&thinsp;&frac34;</div>
+                                </div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 545px; --y: 478px; --w: 290px; --h: 238px;">
+                                <div class="recap-card__media notus-feat notus-feat--bilingual-spread">
+                                    <div class="nf-page nf-page--en">
+                                        <div class="nf-page__head"><span>01 &mdash; LATIN</span><span>EN</span></div>
+                                        <div class="nf-page__title">On the quiet weight of afternoon light</div>
+                                        <p class="nf-page__deck">A room remembers the hour by the angle at which sunlight touches its walls.</p>
+                                        <div class="nf-page__foot"><span>Fig. 14</span><span>18/28 pt</span></div>
+                                    </div>
+                                    <div class="nf-page nf-page--ru">
+                                        <div class="nf-page__head"><span>02 &mdash; КИРИЛЛИЦА</span><span>RU</span></div>
+                                        <div class="nf-page__title">О тихой тяжести полуденного света</div>
+                                        <p class="nf-page__deck">Комната помнит время по тому, под каким углом луч касается стены.</p>
+                                        <div class="nf-page__foot"><span>Илл. 14</span><span>18/28 пт</span></div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>04</span><span>Bilingual Spread (EN / RU)</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 680px; --y: 90px; --w: 205px; --h: 142px;">
+                                <div class="recap-card__media notus-feat notus-feat--symbols-dark">
+                                    <div class="nf-bar nf-bar--dark">
+                                        <span>SPECIALS &amp; SYMBOLS</span>
+                                        <span>U+00A7</span>
+                                    </div>
+                                    <div class="nf-symbols-hero">
+                                        <span>&sect;</span>
+                                        <em>&amp;</em>
+                                        <span>&Dagger;</span>
+                                        <span>&para;</span>
+                                    </div>
+                                    <div class="nf-symbols-strip">@ % * ? ! &dagger; &Dagger; &sect; &para; &copy; &reg; &trade; &deg;</div>
+                                </div>
+                                <div class="recap-card__meta"><span>05</span><span>Editorial Symbols</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 1105px; --y: 26px; --w: 185px; --h: 84px;">
+                                <div class="recap-card__media notus-feat notus-feat--script-stack">
+                                    <div class="nf-bar"><span>NOTUS DISPLAY</span><span>120 PT</span></div>
+                                    <div class="nf-script-word">Metamorphosis</div>
+                                    <div class="nf-script-sub"><em>Can discipline learn to flow?</em></div>
+                                </div>
+                                <div class="recap-card__meta"><span>06</span><span>Script Specimen</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 1065px; --y: 638px; --w: 198px; --h: 142px;">
+                                <div class="recap-card__media notus-feat notus-feat--smcp-grid">
+                                    <div class="nf-smcp-hline nf-smcp-hline--c"><span>c</span></div>
+                                    <div class="nf-smcp-hline nf-smcp-hline--a"><span>a</span></div>
+                                    <div class="nf-smcp-hline nf-smcp-hline--x"><span>x</span></div>
+                                    <div class="nf-smcp-hline nf-smcp-hline--base"><span>&minus;</span></div>
+                                    <div class="nf-smcp-vline nf-smcp-vline--l"><em>10</em></div>
+                                    <div class="nf-smcp-vline nf-smcp-vline--r"><em>10</em></div>
+                                    <div class="nf-smcp-char">a</div>
+                                    <div class="nf-smcp-meta">
+                                        <span>a.smcp &middot; SMALL CAP</span>
+                                        <span>U+0061</span>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>07</span><span>True Small Caps (smcp)</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 1265px; --y: 432px; --w: 195px; --h: 168px;">
+                                <div class="recap-card__media notus-feat notus-feat--dlig-dark">
+                                    <div class="nf-bar nf-bar--dark">
+                                        <span>DISCRETIONARY</span>
+                                        <b>dlig</b>
+                                    </div>
+                                    <div class="nf-dlig-row">
+                                        <div class="nf-dlig-box">
+                                            <small>c_t.dlig</small>
+                                            <span>ct</span>
+                                            <em>archite<mark>ct</mark>ure</em>
+                                        </div>
+                                        <div class="nf-dlig-box">
+                                            <small>s_t.dlig</small>
+                                            <span>st</span>
+                                            <em>ae<mark>st</mark>hetic</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>08</span><span>Discretionary (dlig)</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 1510px; --y: 185px; --w: 248px; --h: 192px;">
+                                <div class="recap-card__media notus-feat notus-feat--glyph-inspector">
+                                    <div class="nf-inspector-left">
+                                        <span class="nf-inspector-tag">GLYPH MATRIX</span>
+                                        <div class="nf-inspector-big">A</div>
+                                        <div class="nf-inspector-code"><span>LATIN CAP A</span><span>U+0041</span></div>
+                                    </div>
+                                    <div class="nf-inspector-right">
+                                        <span class="is-active">A</span><span>B</span><span>C</span><span>D</span>
+                                        <span>А</span><span>Б</span><span>В</span><span>Г</span>
+                                        <span>&aelig;</span><span>&szlig;</span><span>&oslash;</span><span>&Omega;</span>
+                                        <span>&euro;</span><span>&#8381;</span><span>&sect;</span><span>&Dagger;</span>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>09</span><span>480+ Glyph Inspector</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 1785px; --y: 565px; --w: 172px; --h: 136px;">
+                                <div class="recap-card__media notus-feat notus-feat--ecru-currency">
+                                    <div class="nf-bar"><span>CURRENCIES</span><span>&sect; 48/B</span></div>
+                                    <div class="nf-currency-main">&euro;&thinsp;&#8381;&thinsp;&pound;&thinsp;$</div>
+                                    <div class="nf-bar nf-bar--foot"><span>&yen; &cent; &numero; &permil;</span><span>TABULAR</span></div>
+                                </div>
+                                <div class="recap-card__meta"><span>10</span><span>Currency Symbols</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 2100px; --y: 535px; --w: 235px; --h: 176px;">
+                                <div class="recap-card__media notus-feat notus-feat--multilingual">
+                                    <div class="nf-bar">
+                                        <span>EXTENDED CHARACTER SET</span>
+                                        <span>LAT &middot; CYR</span>
+                                    </div>
+                                    <div class="nf-multi-hero">M&uuml;lтili&ntilde;&#287;&uacute;a&#322;</div>
+                                    <div class="nf-multi-chars">&Agrave;&Aacute;&Acirc;&Atilde;&Auml;&Aring;&AElig;&Ccedil; &middot; Ґ Є І Ї &middot; &szlig;&eth;&thorn;</div>
+                                    <div class="nf-bar nf-bar--foot">
+                                        <span>Жыве Беларусь!</span>
+                                        <span>Czu&#322;e &#347;wiat&#322;o</span>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>11</span><span>M&uuml;lтili&ntilde;&#287;&uacute;a&#322; Set</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 2350px; --y: 88px; --w: 225px; --h: 192px;">
+                                <div class="recap-card__media notus-feat notus-feat--liga-trio">
+                                    <div class="nf-liga-col">
+                                        <div class="nf-liga-top"><span>f_f_i</span><b>liga</b></div>
+                                        <div class="nf-liga-pair">ffi</div>
+                                        <div class="nf-liga-word">o<mark>ffi</mark>cial</div>
+                                    </div>
+                                    <div class="nf-liga-col">
+                                        <div class="nf-liga-top"><span>f_f_l</span><b>liga</b></div>
+                                        <div class="nf-liga-pair">ffl</div>
+                                        <div class="nf-liga-word">a<mark>ffl</mark>iction</div>
+                                    </div>
+                                    <div class="nf-liga-col">
+                                        <div class="nf-liga-top"><span>T_h</span><b>liga</b></div>
+                                        <div class="nf-liga-pair">Th</div>
+                                        <div class="nf-liga-word"><mark>Th</mark>eatre</div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>12</span><span>Triple Ligatures (ffi / ffl)</span></div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Слой карточек ПОВЕРХ центрального текста (z-index: 6) -->
+                <div class="recap-showcase__cards-layer recap-showcase__cards-layer--front">
+                    <div class="recap-showcase__cards-track" data-recap-track="front">
+                        <!-- Полотно 1 (2640px) -->
+                        <div class="recap-canvas">
+                            <!-- 13: Pitch-Black Statement ("Silent rhythm, tactile grace." из #editorial-now в notus.html) -->
+                            <article class="recap-card" style="--x: 205px; --y: 292px; --w: 185px; --h: 152px;">
+                                <div class="recap-card__media notus-feat notus-feat--statement-black">
+                                    <div class="nf-pills-row">
+                                        <span class="is-on">Display</span>
+                                        <span>Italic</span>
+                                        <span>Text</span>
+                                        <span>Caption</span>
+                                    </div>
+                                    <div class="nf-statement-title">
+                                        Silent rhythm,<br><em>tactile grace.</em>
+                                    </div>
+                                    <div class="nf-statement-sub">Active: Notus Display</div>
+                                </div>
+                                <div class="recap-card__meta"><span>13</span><span>Editorial Now</span></div>
+                            </article>
+
+                            <!-- 14: The Notus TIMES Masthead Specimen (из #cover в notus.html, проходит ПОВЕРХ заголовка) -->
+                            <article class="recap-card" style="--x: 870px; --y: 308px; --w: 235px; --h: 164px;">
+                                <div class="recap-card__media notus-feat notus-feat--masthead-crimson">
+                                    <div class="nf-bar nf-bar--light">
+                                        <span>3 OPTICAL SIZES &middot; 5 STYLES</span>
+                                        <span>COVER</span>
+                                    </div>
+                                    <div class="nf-masthead-center">
+                                        <span class="nf-masthead-top">The Notus</span>
+                                        <strong class="nf-masthead-bot">TIMES</strong>
+                                    </div>
+                                    <div class="nf-bar nf-bar--light nf-bar--foot">
+                                        <span>LATIN &amp; CYRILLIC</span>
+                                        <span>480+ GLYPHS</span>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>14</span><span>The Notus Times</span></div>
+                            </article>
+
+                            <!-- 15: Swiss Red Discretionary Ligatures fj & ft (из #opentype-ligatures в notus.html) -->
+                            <article class="recap-card" style="--x: 1615px; --y: 372px; --w: 175px; --h: 136px;">
+                                <div class="recap-card__media notus-feat notus-feat--red-dlig">
+                                    <div class="nf-bar nf-bar--light">
+                                        <span>f_j.dlig &middot; f_t.dlig</span>
+                                        <b>dlig</b>
+                                    </div>
+                                    <div class="nf-red-pair">
+                                        <div><span>fj</span><small><mark>fj</mark>ord</small></div>
+                                        <div><em>ft</em><small>cra<mark>ft</mark>ed</small></div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>15</span><span>Terminal Continuity</span></div>
+                            </article>
+
+                            <!-- 16: Notus Family 5 Styles Showcase (из #families в notus.html) -->
+                            <article class="recap-card" style="--x: 2000px; --y: 274px; --w: 235px; --h: 172px;">
+                                <div class="recap-card__media notus-feat notus-feat--family-table">
+                                    <div class="nf-bar">
+                                        <span>NOTUS FAMILY &mdash; 5 STYLES</span>
+                                        <span>OPTICAL</span>
+                                    </div>
+                                    <div class="nf-family-list">
+                                        <div class="nf-fam-row nf-fam-row--disp"><span>Display</span><strong>Notus Display</strong></div>
+                                        <div class="nf-fam-row nf-fam-row--disp-it"><span>Display It</span><em>Notus Display Italic</em></div>
+                                        <div class="nf-fam-row nf-fam-row--text"><span>Text</span><strong>Notus Text</strong></div>
+                                        <div class="nf-fam-row nf-fam-row--text-it"><span>Text It</span><em>Notus Text Italic</em></div>
+                                        <div class="nf-fam-row nf-fam-row--capt"><span>Caption</span><strong>Notus Caption</strong></div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>16</span><span>Notus 5 Styles</span></div>
+                            </article>
+                        </div>
+
+                        <!-- Полотно 2 (дубль для бесшовного цикла) -->
+                        <div class="recap-canvas" aria-hidden="true">
+                            <article class="recap-card" style="--x: 205px; --y: 292px; --w: 185px; --h: 152px;">
+                                <div class="recap-card__media notus-feat notus-feat--statement-black">
+                                    <div class="nf-pills-row">
+                                        <span class="is-on">Display</span>
+                                        <span>Italic</span>
+                                        <span>Text</span>
+                                        <span>Caption</span>
+                                    </div>
+                                    <div class="nf-statement-title">
+                                        Silent rhythm,<br><em>tactile grace.</em>
+                                    </div>
+                                    <div class="nf-statement-sub">Active: Notus Display</div>
+                                </div>
+                                <div class="recap-card__meta"><span>13</span><span>Editorial Now</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 870px; --y: 308px; --w: 235px; --h: 164px;">
+                                <div class="recap-card__media notus-feat notus-feat--masthead-crimson">
+                                    <div class="nf-bar nf-bar--light">
+                                        <span>3 OPTICAL SIZES &middot; 5 STYLES</span>
+                                        <span>COVER</span>
+                                    </div>
+                                    <div class="nf-masthead-center">
+                                        <span class="nf-masthead-top">The Notus</span>
+                                        <strong class="nf-masthead-bot">TIMES</strong>
+                                    </div>
+                                    <div class="nf-bar nf-bar--light nf-bar--foot">
+                                        <span>LATIN &amp; CYRILLIC</span>
+                                        <span>480+ GLYPHS</span>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>14</span><span>The Notus Times</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 1615px; --y: 372px; --w: 175px; --h: 136px;">
+                                <div class="recap-card__media notus-feat notus-feat--red-dlig">
+                                    <div class="nf-bar nf-bar--light">
+                                        <span>f_j.dlig &middot; f_t.dlig</span>
+                                        <b>dlig</b>
+                                    </div>
+                                    <div class="nf-red-pair">
+                                        <div><span>fj</span><small><mark>fj</mark>ord</small></div>
+                                        <div><em>ft</em><small>cra<mark>ft</mark>ed</small></div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>15</span><span>Terminal Continuity</span></div>
+                            </article>
+
+                            <article class="recap-card" style="--x: 2000px; --y: 274px; --w: 235px; --h: 172px;">
+                                <div class="recap-card__media notus-feat notus-feat--family-table">
+                                    <div class="nf-bar">
+                                        <span>NOTUS FAMILY &mdash; 5 STYLES</span>
+                                        <span>OPTICAL</span>
+                                    </div>
+                                    <div class="nf-family-list">
+                                        <div class="nf-fam-row nf-fam-row--disp"><span>Display</span><strong>Notus Display</strong></div>
+                                        <div class="nf-fam-row nf-fam-row--disp-it"><span>Display It</span><em>Notus Display Italic</em></div>
+                                        <div class="nf-fam-row nf-fam-row--text"><span>Text</span><strong>Notus Text</strong></div>
+                                        <div class="nf-fam-row nf-fam-row--text-it"><span>Text It</span><em>Notus Text Italic</em></div>
+                                        <div class="nf-fam-row nf-fam-row--capt"><span>Caption</span><strong>Notus Caption</strong></div>
+                                    </div>
+                                </div>
+                                <div class="recap-card__meta"><span>16</span><span>Notus 5 Styles</span></div>
+                            </article>
                         </div>
                     </div>
                 </div>
@@ -795,20 +1376,19 @@ emotion and visual precision.
     <aside class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie consent preferences" aria-hidden="true">
         <div class="cookie-banner__inner">
             <div class="cookie-banner__text">
-                <strong>Cookies &amp; Privacy (RODO / PKE)</strong>
                 <p>
-                    This website uses strictly necessary local storage and, only with your explicit consent, anonymous Google Analytics cookies to understand portfolio traffic. Self-hosted showcase videos use no third-party trackers. Read our <a href="legal.html#privacy">Privacy Policy</a>, <a href="legal.html#cookies">Cookie Policy</a> &amp; <a href="legal.html#terms">Terms</a>.
+                    This website uses cookies to anonymously track usage. No personally identifiable information is stored or shared. Read our <a href="legal.html#privacy">Privacy Policy</a> &amp; <a href="legal.html#cookies">Cookie Policy</a>.
                 </p>
             </div>
             <div class="cookie-banner__actions">
-                <button type="button" class="cookie-banner__btn cookie-banner__btn--reject" id="cookieRejectBtn">Essential Only</button>
-                <button type="button" class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAcceptBtn">Accept All</button>
+                <button type="button" class="cookie-banner__btn cookie-banner__btn--reject" id="cookieRejectBtn">Decline</button>
+                <button type="button" class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAcceptBtn">Got it!</button>
             </div>
         </div>
     </aside>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <script src="json/Notus/data.js"></script>
-    <script src="main.js?v=20261105_2"></script>
+    <script src="main.js?v=20261105_4"></script>
 </body>
 </html>

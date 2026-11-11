@@ -11,7 +11,7 @@
 
 @font-face {
     font-family: 'Notus Display';
-    src: url('notus/Notus-Display.otf?v=1792525200') format('opentype');
+    src: url('notus/Notus-Display.otf?v=1794413369') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -19,7 +19,7 @@
 
 @font-face {
     font-family: 'Notus Display Italic';
-    src: url('notus/Notus-Display Italic.otf?v=1792665144') format('opentype');
+    src: url('notus/Notus-Display Italic.otf?v=1794413369') format('opentype');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -27,7 +27,7 @@
 
 @font-face {
     font-family: 'Notus Text';
-    src: url('notus/Notus-Text.otf') format('opentype');
+    src: url('notus/Notus-Text.otf?v=1794413369') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -35,7 +35,7 @@
 
 @font-face {
     font-family: 'Notus Text Italic';
-    src: url('notus/Notus-Text-Italic.otf') format('opentype');
+    src: url('notus/Notus-Text-Italic.otf?v=1794413369') format('opentype');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -43,7 +43,7 @@
 
 @font-face {
     font-family: 'Notus Caption';
-    src: url('notus/Notus-Caption.otf') format('opentype');
+    src: url('notus/Notus-Caption.otf?v=1794413369') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -3027,36 +3027,36 @@ body {
     cursor: pointer;
 }
 
-/* Minimalist RODO / PKE Cookie Consent Banner */
+/* Minimalist Bottom Bar Cookie Consent (Monochrome, large typography) */
 .cookie-banner {
     position: fixed;
-    left: var(--container-padding);
-    right: var(--container-padding);
-    bottom: 1.5rem;
-    max-width: 920px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.96);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    border: 1px solid #000;
-    border-radius: 22px;
-    padding: 1.2rem 1.5rem;
-    z-index: 9999;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    background: #000000;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 0;
+    padding: 1.25rem 2rem;
+    z-index: 99999;
+    box-shadow: none;
     opacity: 0;
     visibility: hidden;
-    transform: translate3d(0, 20px, 0);
-    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                visibility 0s linear 0.35s;
+    transform: translate3d(0, 100%, 0);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0s linear 0.3s;
+    box-sizing: border-box;
 }
 
 .cookie-banner.is-visible {
     opacity: 1;
     visibility: visible;
     transform: translate3d(0, 0, 0);
-    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
                 visibility 0s;
 }
 
@@ -3064,32 +3064,34 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.8rem;
+    gap: 1.5rem;
+    max-width: 1720px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .cookie-banner__text {
-    font-size: 0.82rem;
-    line-height: 1.48;
-    color: #111;
-}
-
-.cookie-banner__text strong {
-    display: block;
-    font-size: 0.86rem;
-    font-weight: 600;
-    margin-bottom: 0.2rem;
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    line-height: 1.3;
     letter-spacing: -0.01em;
+    color: #ffffff;
+    flex: 1;
 }
 
 .cookie-banner__text p {
     margin: 0;
-    color: #333;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .cookie-banner__text a {
-    color: #000;
+    color: #ffffff;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
     font-weight: 500;
 }
 
@@ -3100,39 +3102,39 @@ body {
     flex-shrink: 0;
 }
 
-/* Equal visual prominence for Reject and Accept as required by Polish PKE & UODO */
 .cookie-banner__btn {
     font-family: var(--font-main);
-    font-size: 0.74rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    padding: 0.62rem 1.15rem;
-    border-radius: 100px;
-    border: 1px solid #000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.45rem 1.2rem;
+    border-radius: 3px;
+    border: none;
     cursor: pointer;
     white-space: nowrap;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
-.cookie-banner__btn--reject {
-    background: #fff;
-    color: #000;
-}
-
-.cookie-banner__btn--reject:hover {
-    background: #000;
-    color: #fff;
-}
-
+/* Pure Black & White style */
 .cookie-banner__btn--accept {
-    background: #000;
-    color: #fff;
+    background: #ffffff;
+    color: #000000;
 }
 
 .cookie-banner__btn--accept:hover {
-    background: #fff;
-    color: #000;
+    background: #e2e2e2;
+    color: #000000;
+}
+
+.cookie-banner__btn--reject {
+    background: transparent;
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+
+.cookie-banner__btn--reject:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border-color: #ffffff;
 }
 
 @media (max-width: 1024px) {
@@ -3159,23 +3161,927 @@ body {
         grid-template-columns: 1fr;
     }
     .cookie-banner {
-        left: 1rem;
-        right: 1rem;
-        bottom: 1rem;
         padding: 1.1rem 1.2rem;
     }
     .cookie-banner__inner {
         flex-direction: column;
         align-items: stretch;
-        gap: 1rem;
+        gap: 1.1rem;
+    }
+    .cookie-banner__text {
+        font-size: 1.25rem;
     }
     .cookie-banner__actions {
         width: 100%;
+        justify-content: flex-end;
     }
     .cookie-banner__btn {
         flex: 1;
         text-align: center;
+        padding: 0.65rem 1rem;
+        font-size: 1.2rem;
     }
 }
+
+/* =========================================================
+   NOTUS FULL-WIDTH RECAP SHOWCASE (Screen Recording 21.46.24 Light Gray Edition)
+   ========================================================= */
+.recap-showcase {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    height: 820px;
+    background-color: #eeeeef;
+    color: #000000;
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+}
+
+.recap-showcase__top-line {
+    position: absolute;
+    top: 26px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+    z-index: 1;
+}
+
+.recap-showcase__grid-viewport {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.recap-showcase__grid-track {
+    display: flex;
+    width: max-content;
+    height: 100%;
+    will-change: transform;
+}
+
+.recap-grid-col {
+    flex: 0 0 220px;
+    width: 220px;
+    height: 100%;
+    border-left: 1px solid rgba(0, 0, 0, 0.07);
+    position: relative;
+}
+
+.recap-grid-col span {
+    position: absolute;
+    bottom: 24px;
+    left: 8px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: rgba(0, 0, 0, 0.55);
+    white-space: nowrap;
+}
+
+/* Центральный крупный черный заголовок (зажат между задним слоем карточек z-index:2 и передним z-index:6) */
+.recap-showcase__center-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    font-family: 'Notus Display', serif;
+    font-size: clamp(3.4rem, 9.2vw, 8.6rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #000000;
+    white-space: nowrap;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.recap-showcase__center-title em {
+    font-family: 'Notus Display Italic', serif;
+    font-style: italic;
+    font-weight: normal;
+}
+
+.recap-showcase__cards-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.recap-showcase__cards-layer--back {
+    z-index: 2;
+}
+
+.recap-showcase__cards-layer--front {
+    z-index: 6;
+}
+
+.recap-showcase__cards-track {
+    display: flex;
+    width: max-content;
+    height: 100%;
+    will-change: transform;
+}
+
+.recap-canvas {
+    position: relative;
+    flex: 0 0 2640px;
+    width: 2640px;
+    height: 100%;
+}
+
+.recap-card {
+    position: absolute;
+    left: var(--x, 0px);
+    top: var(--y, 0px);
+    width: var(--w, 200px);
+    display: flex;
+    flex-direction: column;
+}
+
+.recap-card__media {
+    width: 100%;
+    height: var(--h, 180px);
+    overflow: hidden;
+    position: relative;
+    background: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.05);
+}
+
+.recap-card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    font-family: 'Notus Caption', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+/* =========================================================
+   NOTUS.HTML OPENTYPE FEATURES & SYMBOLS SWISS COMPOSITIONS
+   ========================================================= */
+.notus-feat {
+    font-family: 'Notus Display', serif;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+}
+
+.nf-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 9px;
+    height: 22px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    font-family: var(--font-main);
+    font-size: 0.48rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555555;
+    flex-shrink: 0;
+}
+
+.nf-bar b {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.46rem;
+    padding: 1px 4px;
+    border: 1px solid currentColor;
+    border-radius: 3px;
+    font-weight: 500;
+    text-transform: lowercase;
+}
+
+.nf-bar--foot {
+    border-bottom: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.nf-bar--dark {
+    border-color: rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.68);
+}
+
+.nf-bar--light {
+    border-color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* 01 & 12: OpenType Standard Ligatures (.ot-ligature-card reproduction from notus.html) */
+.notus-feat--liga-duo {
+    background: #ffffff;
+    color: #121212;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.notus-feat--liga-trio {
+    background: #ffffff;
+    color: #121212;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.nf-liga-col {
+    border-right: 1px solid rgba(0, 0, 0, 0.14);
+    padding: 9px 8px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nf-liga-col:last-child {
+    border-right: none;
+}
+
+.nf-liga-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.48rem;
+    color: #666666;
+}
+
+.nf-liga-top b {
+    padding: 1px 4px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: 3px;
+    font-size: 0.44rem;
+    font-weight: 500;
+}
+
+.nf-liga-pair {
+    font-family: 'Notus Display', serif;
+    font-size: 3.1rem;
+    line-height: 1;
+    text-align: center;
+    color: #121212;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+    font-variant-ligatures: common-ligatures discretionary-ligatures;
+}
+
+.notus-feat--liga-trio .nf-liga-pair {
+    font-size: 2.35rem;
+}
+
+.nf-liga-word {
+    font-family: 'Notus Caption', serif;
+    font-size: 0.68rem;
+    color: #666666;
+    text-align: center;
+    font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.nf-liga-word mark {
+    background: none;
+    color: #121212;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+/* 02: Old-Style Figures & Fractions (--c-yellow: #FAEA48 from notus.html) */
+.notus-feat--yellow-figures {
+    background: #faea48;
+    color: #121212;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.notus-feat--yellow-figures .nf-bar {
+    color: #121212;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.nf-figures-hero {
+    font-family: 'Notus Display Italic', serif;
+    font-style: italic;
+    font-size: 4.8rem;
+    line-height: 0.85;
+    text-align: center;
+    letter-spacing: -0.03em;
+    font-feature-settings: "kern" 1, "onum" 1;
+    font-variant-numeric: oldstyle-nums;
+}
+
+.nf-figures-sub {
+    font-family: 'Notus Text', serif;
+    font-size: 0.82rem;
+    text-align: center;
+    padding: 4px 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
+    letter-spacing: 0.04em;
+}
+
+/* 03: Mint Fractions Badge (--c-mint: #C4F1C0 from notus.html) */
+.notus-feat--mint-frac {
+    background: #c4f1c0;
+    color: #121212;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.notus-feat--mint-frac .nf-bar {
+    color: #121212;
+    border-color: rgba(0, 0, 0, 0.18);
+}
+
+.nf-mint-glyphs {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Notus Display Italic', serif;
+    font-style: italic;
+    font-size: 2.3rem;
+    line-height: 1;
+}
+
+/* 04: Bilingual Editorial Spread (EN / RU Parallel Set from #broadsheet in notus.html) */
+.notus-feat--bilingual-spread {
+    background: #ffffff;
+    color: #121212;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.nf-page {
+    padding: 9px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nf-page--en {
+    border-right: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.nf-page--ru {
+    background: #ece9df;
+}
+
+.nf-page__head {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+    padding-bottom: 4px;
+    font-family: var(--font-main);
+    font-size: 0.44rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #666666;
+}
+
+.nf-page__title {
+    font-family: 'Notus Display', serif;
+    font-size: 0.96rem;
+    line-height: 1.06;
+    color: #121212;
+    margin-top: 4px;
+}
+
+.nf-page__deck {
+    margin: 0;
+    font-family: 'Notus Text Italic', serif;
+    font-style: italic;
+    font-size: 0.58rem;
+    line-height: 1.32;
+    color: #333333;
+}
+
+.nf-page__foot {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(0, 0, 0, 0.14);
+    padding-top: 4px;
+    font-family: 'Notus Caption', serif;
+    font-size: 0.46rem;
+    color: #666666;
+}
+
+/* 05: Editorial Symbols Dark (.showcase-symbols from notus.html) */
+.notus-feat--symbols-dark {
+    background: #18191c;
+    color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nf-symbols-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 10px;
+    font-family: 'Notus Display', serif;
+    font-size: 2.6rem;
+    line-height: 1;
+}
+
+.nf-symbols-hero em {
+    font-family: 'Notus Display Italic', serif;
+    font-style: italic;
+    color: #faea48;
+}
+
+.nf-symbols-strip {
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 4px 8px;
+    font-family: 'Notus Text', serif;
+    font-size: 0.56rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.72);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* 06: Script Stack ("Metamorphosis" from #script in notus.html) */
+.notus-feat--script-stack {
+    background: #ffffff;
+    color: #121212;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+.nf-script-word {
+    font-family: 'Notus Display', serif;
+    font-size: 1.55rem;
+    line-height: 0.95;
+    text-align: center;
+    letter-spacing: -0.02em;
+}
+
+.nf-script-sub {
+    font-family: 'Notus Display Italic', serif;
+    font-style: italic;
+    font-size: 0.68rem;
+    text-align: center;
+    color: #555555;
+}
+
+/* 07: True Small Capitals Metric Grid (.ot-smcp-magnifier from #small-capitals in notus.html) */
+.notus-feat--smcp-grid {
+    background: #ffffff;
+    color: #121212;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.nf-smcp-hline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
+.nf-smcp-hline span {
+    position: absolute;
+    left: 4px;
+    top: -6px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    padding: 0 3px;
+    font-family: var(--font-main);
+    font-size: 0.42rem;
+    line-height: 1.2;
+    color: #555555;
+}
+
+.nf-smcp-hline--c { top: 14px; }
+.nf-smcp-hline--a { top: 26px; }
+.nf-smcp-hline--x { top: 52px; }
+.nf-smcp-hline--base {
+    top: 96px;
+    background: rgba(162, 196, 190, 0.22);
+    height: 5px;
+}
+
+.nf-smcp-vline {
+    position: absolute;
+    top: 0;
+    bottom: 22px;
+    border-left: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.nf-smcp-vline--l { left: 56px; }
+.nf-smcp-vline--r { right: 56px; }
+
+.nf-smcp-vline em {
+    position: absolute;
+    bottom: 2px;
+    left: 3px;
+    font-style: normal;
+    font-family: var(--font-main);
+    font-size: 0.42rem;
+    color: #666666;
+}
+
+.nf-smcp-char {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Notus Display', serif;
+    font-size: 5.2rem;
+    line-height: 1;
+    font-feature-settings: "kern" 1, "smcp" 1;
+    font-variant-caps: small-caps;
+    z-index: 2;
+}
+
+.nf-smcp-meta {
+    height: 22px;
+    border-top: 1px solid rgba(0, 0, 0, 0.14);
+    padding: 0 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-main);
+    font-size: 0.45rem;
+    letter-spacing: 0.06em;
+    color: #666666;
+    background: #ffffff;
+    z-index: 3;
+}
+
+/* 08: Discretionary Ligatures Dark (c_t.dlig & s_t.dlig from notus.html) */
+.notus-feat--dlig-dark {
+    background: #18191c;
+    color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+}
+
+.nf-dlig-row {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.nf-dlig-box {
+    padding: 7px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.nf-dlig-box:last-child {
+    border-right: none;
+}
+
+.nf-dlig-box small {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.44rem;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.nf-dlig-box span {
+    font-family: 'Notus Display', serif;
+    font-size: 2.95rem;
+    line-height: 1;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+    font-variant-ligatures: common-ligatures discretionary-ligatures;
+}
+
+.nf-dlig-box em {
+    font-family: 'Notus Caption', serif;
+    font-style: normal;
+    font-size: 0.58rem;
+    color: rgba(255, 255, 255, 0.68);
+}
+
+.nf-dlig-box mark {
+    background: none;
+    color: #faea48;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* 09: Dual-Pane Glyph Inspector (from #glyphs in notus.html) */
+.notus-feat--glyph-inspector {
+    background: #ffffff;
+    color: #121212;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+}
+
+.nf-inspector-left {
+    border-right: 1px solid rgba(0, 0, 0, 0.16);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nf-inspector-tag {
+    font-family: var(--font-main);
+    font-size: 0.44rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #666666;
+}
+
+.nf-inspector-big {
+    font-family: 'Notus Display', serif;
+    font-size: 4.5rem;
+    line-height: 0.9;
+    text-align: center;
+}
+
+.nf-inspector-code {
+    display: flex;
+    justify-content: space-between;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.42rem;
+    color: #666666;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    padding-top: 4px;
+}
+
+.nf-inspector-right {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.nf-inspector-right span {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Notus Display', serif;
+    font-size: 1.05rem;
+}
+
+.nf-inspector-right span.is-active {
+    background: #121212;
+    color: #ffffff;
+}
+
+/* 10: Ecru Currency Card (--c-ecru-card: #E5E2D8 from notus.html) */
+.notus-feat--ecru-currency {
+    background: #e5e2d8;
+    color: #121212;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nf-currency-main {
+    font-family: 'Notus Display', serif;
+    font-size: 2.3rem;
+    line-height: 1;
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+
+/* 11: Extended Multilingual ("Mülтiliñğúał" from notus.html) */
+.notus-feat--multilingual {
+    background: #ece9df;
+    color: #121212;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nf-multi-hero {
+    font-family: 'Notus Display', serif;
+    font-size: 2.1rem;
+    line-height: 1;
+    text-align: center;
+    letter-spacing: -0.02em;
+}
+
+.nf-multi-chars {
+    font-family: 'Notus Text Italic', serif;
+    font-style: italic;
+    font-size: 0.68rem;
+    text-align: center;
+    color: #333333;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    padding-top: 5px;
+}
+
+/* 13 (FRONT): Pitch-Black Editorial Statement ("Silent rhythm, tactile grace." from #editorial-now) */
+.notus-feat--statement-black {
+    background: #111214;
+    color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    padding: 9px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nf-pills-row {
+    display: flex;
+    gap: 4px;
+}
+
+.nf-pills-row span {
+    font-family: var(--font-main);
+    font-size: 0.42rem;
+    padding: 2px 5px;
+    border-radius: 99px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.nf-pills-row span.is-on {
+    background: #ffffff;
+    color: #0c0c0c;
+    border-color: #ffffff;
+}
+
+.nf-statement-title {
+    font-family: 'Notus Display', serif;
+    font-size: 1.45rem;
+    line-height: 1.02;
+    text-align: center;
+}
+
+.nf-statement-title em {
+    font-family: 'Notus Display Italic', serif;
+    font-style: italic;
+}
+
+.nf-statement-sub {
+    font-family: var(--font-main);
+    font-size: 0.44rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.58);
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    padding-top: 4px;
+}
+
+/* 14 (FRONT): The Notus TIMES Masthead Specimen (from #cover in notus.html) */
+.notus-feat--masthead-crimson {
+    background: radial-gradient(circle at 50% 45%, #6e140e 0%, #1d0504 85%);
+    color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nf-masthead-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 0.86;
+}
+
+.nf-masthead-top {
+    font-family: 'Notus Display', serif;
+    font-size: 1.85rem;
+}
+
+.nf-masthead-bot {
+    font-family: 'Notus Display', serif;
+    font-weight: normal;
+    font-size: 2.85rem;
+    letter-spacing: -0.02em;
+}
+
+/* 15 (FRONT): Swiss Red Discretionary Ligatures fj & ft */
+.notus-feat--red-dlig {
+    background: #e24a32;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.nf-red-pair {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.nf-red-pair > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border-right: 1px solid rgba(255, 255, 255, 0.26);
+}
+
+.nf-red-pair > div:last-child {
+    border-right: none;
+}
+
+.nf-red-pair span {
+    font-family: 'Notus Display', serif;
+    font-size: 3.1rem;
+    line-height: 0.9;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+}
+
+.nf-red-pair em {
+    font-family: 'Notus Display Italic', serif;
+    font-style: italic;
+    font-size: 3.1rem;
+    line-height: 0.9;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+}
+
+.nf-red-pair small {
+    font-family: 'Notus Caption', serif;
+    font-size: 0.58rem;
+    opacity: 0.9;
+}
+
+.nf-red-pair mark {
+    background: none;
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* 16 (FRONT): Notus Family 5 Styles Table (from #families in notus.html) */
+.notus-feat--family-table {
+    background: #ffffff;
+    color: #121212;
+    display: flex;
+    flex-direction: column;
+}
+
+.nf-family-list {
+    flex: 1;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.nf-fam-row {
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    align-items: center;
+    padding: 0 9px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.nf-fam-row:last-child {
+    border-bottom: none;
+}
+
+.nf-fam-row span {
+    font-family: var(--font-main);
+    font-size: 0.44rem;
+    font-weight: 500;
+    color: #666666;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nf-fam-row strong,
+.nf-fam-row em {
+    padding-left: 8px;
+    font-weight: normal;
+    font-size: 0.82rem;
+    line-height: 1;
+}
+
+.nf-fam-row--disp strong { font-family: 'Notus Display', serif; }
+.nf-fam-row--disp-it em { font-family: 'Notus Display Italic', serif; font-style: italic; }
+.nf-fam-row--text strong { font-family: 'Notus Text', serif; }
+.nf-fam-row--text-it em { font-family: 'Notus Text Italic', serif; font-style: italic; }
+.nf-fam-row--capt strong { font-family: 'Notus Caption', serif; font-size: 0.72rem; }
+
+@media (max-width: 768px) {
+    .recap-showcase {
+        height: 640px;
+    }
+}
+
 
 

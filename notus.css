@@ -8,7 +8,7 @@
    -------------------------------------------------------------------------- */
 @font-face {
     font-family: 'Notus Display';
-    src: url('notus/Notus-Display.otf?v=1794416465') format('opentype');
+    src: url('notus/Notus-Display.otf?v=1794417812') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
     font-family: 'Notus Display Italic';
-    src: url('notus/Notus-Display Italic.otf?v=1794416465') format('opentype');
+    src: url('notus/Notus-Display Italic.otf?v=1794417812') format('opentype');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
     font-family: 'Notus Text';
-    src: url('notus/Notus-Text.otf?v=1794416465') format('opentype');
+    src: url('notus/Notus-Text.otf?v=1794417812') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
     font-family: 'Notus Text Italic';
-    src: url('notus/Notus-Text-Italic.otf?v=1794416465') format('opentype');
+    src: url('notus/Notus-Text-Italic.otf?v=1794417812') format('opentype');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -40,7 +40,7 @@
 
 @font-face {
     font-family: 'Notus Caption';
-    src: url('notus/Notus-Caption.otf?v=1794416465') format('opentype');
+    src: url('notus/Notus-Caption.otf?v=1794417812') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -1096,7 +1096,7 @@ button {
 
 .broadsheet-char {
     display: inline-block;
-    text-align: center;
+    text-align: left;
     vertical-align: baseline;
     line-height: 1.35;
     padding: 0;

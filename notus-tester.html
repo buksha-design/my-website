@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notus Font Tester & OpenType Features Inspector</title>
+<style>
+  @font-face {
+    font-family: 'Notus Display';
+    src: url('notus/Notus-Display.otf?v=test_1') format('opentype');
+    font-weight: 100 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Notus Display Italic';
+    src: url('notus/Notus-Display Italic.otf?v=test_1') format('opentype');
+    font-weight: 100 400;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Notus Text';
+    src: url('notus/Notus-Text.otf?v=test_1') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Notus Text Italic';
+    src: url('notus/Notus-Text-Italic.otf?v=test_1') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Notus Caption';
+    src: url('notus/Notus-Caption.otf?v=test_1') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  :root {
+    --bg: #0f1015;
+    --panel-bg: #181920;
+    --panel-border: #282a36;
+    --accent: #5e81f4;
+    --text: #e6e6e6;
+    --text-muted: #8a8d9b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: var(--panel-bg);
+    border-bottom: 1px solid var(--panel-border);
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .title-group h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .title-group p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .badge {
+    background: rgba(94, 129, 244, 0.15);
+    color: #8da4f7;
+    font-size: 0.72rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+
+  .controls-panel {
+    background: #14151b;
+    border-bottom: 1px solid var(--panel-border);
+    padding: 16px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 32px;
+    align-items: center;
+  }
+
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .control-group label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+
+  select, input[type="range"], input[type="text"] {
+    background: var(--panel-bg);
+    color: var(--text);
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  select:focus, input[type="text"]:focus {
+    border-color: var(--accent);
+  }
+
+  .range-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .range-val {
+    font-size: 0.82rem;
+    font-family: monospace;
+    color: var(--text-muted);
+    min-width: 44px;
+  }
+
+  .features-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .feature-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+  }
+  .feature-pill input {
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  .feature-pill.active {
+    background: rgba(94, 129, 244, 0.18);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .feature-pill code {
+    font-size: 0.74rem;
+    opacity: 0.7;
+    font-family: monospace;
+  }
+
+  .presets-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .preset-btn {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .preset-btn:hover {
+    background: #232530;
+    border-color: #3b3e52;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 36px 32px;
+    gap: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .canvas-card {
+    background: #111217;
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  .canvas-header {
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid var(--panel-border);
+    padding: 10px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .canvas-body {
+    padding: 48px 36px;
+    min-height: 240px;
+    position: relative;
+    overflow-x: auto;
+  }
+
+  .editable-text {
+    outline: none;
+    line-height: 1.25;
+    white-space: pre-wrap;
+    word-break: break-word;
+    transition: color 0.15s;
+  }
+  .editable-text:focus {
+    background: rgba(255, 255, 255, 0.015);
+  }
+
+  /* Overlay Comparison */
+  .comparison-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .comparison-split { grid-template-columns: 1fr; }
+  }
+
+  .split-pane {
+    background: #121318;
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 24px;
+    position: relative;
+  }
+  .split-label {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .split-label.on {
+    background: rgba(78, 201, 176, 0.15);
+    color: #4ec9b0;
+  }
+  .split-label.off {
+    background: rgba(244, 87, 87, 0.15);
+    color: #f45757;
+  }
+
+  /* Quick Test Pairs section */
+  .quick-tests {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .pair-card {
+    background: #14151c;
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pair-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .pair-sample {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--panel-border);
+  }
+
+  .status-bar {
+    background: var(--panel-bg);
+    border-top: 1px solid var(--panel-border);
+    padding: 10px 28px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: monospace;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title-group">
+    <h1>Notus Font Tester <span class="badge">OpenType & Kerning Inspector</span></h1>
+    <p>Проверка подменённого файла <code>01 - Notus - Display - Thin.otf</code> и анализ OpenType фич</p>
+  </div>
+  <div class="presets-row">
+    <span style="font-size: 0.75rem; color: var(--text-muted);">Быстрый текст:</span>
+    <button class="preset-btn" onclick="setText('Skärpa i mörker,\nmjuk i rörelse.')">Скриншот (Skärpa...)</button>
+    <button class="preset-btn" onclick="setText('ct st fb fh fj fk ft ffb ffh ffj ffk')">Лигатуры dlig</button>
+    <button class="preset-btn" onclick="setText('Th fi fl ff ffi ffl')">Лигатуры liga</button>
+    <button class="preset-btn" onclick="setText('1234567890 1/2 3/4 x² H₂O')">Цифры / Frac</button>
+    <button class="preset-btn" onclick="setText('SMALL CAPS & LOREM IPSUM DOLOR')">Капитель (smcp)</button>
+    <button class="preset-btn" onclick="setText('AV Aw Ta To Tr Tu Ty Va Vo Wa Wo Ya Yo V. W, Y.')">Кернинг-пары</button>
+  </div>
+</header>
+
+<div class="controls-panel">
+  <!-- Начертание -->
+  <div class="control-group">
+    <label>Шрифт / Начертание</label>
+    <select id="fontSelect" onchange="updateStyles()">
+      <option value="'Notus Display', serif" selected>Notus Display (Thin Replaced)</option>
+      <option value="'Notus Display Italic', serif">Notus Display Italic</option>
+      <option value="'Notus Text', serif">Notus Text</option>
+      <option value="'Notus Text Italic', serif">Notus Text Italic</option>
+      <option value="'Notus Caption', serif">Notus Caption</option>
+    </select>
+  </div>
+
+  <!-- Размер кегля -->
+  <div class="control-group">
+    <label>Размер кегля: <span id="sizeVal" class="range-val">64px</span></label>
+    <div class="range-wrap">
+      <input type="range" id="sizeRange" min="16" max="140" value="64" oninput="updateStyles()">
+    </div>
+  </div>
+
+  <!-- Tracking -->
+  <div class="control-group">
+    <label>Letter-spacing: <span id="spacingVal" class="range-val">0.00em</span></label>
+    <div class="range-wrap">
+      <input type="range" id="spacingRange" min="-0.1" max="0.3" step="0.005" value="0" oninput="updateStyles()">
+    </div>
+  </div>
+
+  <!-- Цвет фона / темы -->
+  <div class="control-group">
+    <label>Тема</label>
+    <select id="themeSelect" onchange="toggleTheme()">
+      <option value="dark" selected>Тёмная (Космос)</option>
+      <option value="light">Светлая</option>
+    </select>
+  </div>
+</div>
+
+<div class="controls-panel" style="padding-top: 10px; padding-bottom: 14px; background: #101116;">
+  <div class="control-group" style="width: 100%;">
+    <label>OpenType Features (включить / выключить):</label>
+    <div class="features-grid">
+      <label class="feature-pill active" id="lbl-kern">
+        <input type="checkbox" id="feat-kern" checked onchange="handlePill('kern')">
+        <strong>Кернинг</strong> <code>kern</code>
+      </label>
+
+      <label class="feature-pill active" id="lbl-liga">
+        <input type="checkbox" id="feat-liga" checked onchange="handlePill('liga')">
+        <strong>Стандартные лигатуры</strong> <code>liga</code>
+      </label>
+
+      <label class="feature-pill" id="lbl-dlig">
+        <input type="checkbox" id="feat-dlig" onchange="handlePill('dlig')">
+        <strong>Дискреционные лигатуры</strong> <code>dlig</code>
+      </label>
+
+      <label class="feature-pill" id="lbl-smcp">
+        <input type="checkbox" id="feat-smcp" onchange="handlePill('smcp')">
+        <strong>Капитель</strong> <code>smcp</code>
+      </label>
+
+      <label class="feature-pill" id="lbl-onum">
+        <input type="checkbox" id="feat-onum" onchange="handlePill('onum')">
+        <strong>Минускульные цифры</strong> <code>onum</code>
+      </label>
+
+      <label class="feature-pill" id="lbl-frac">
+        <input type="checkbox" id="feat-frac" onchange="handlePill('frac')">
+        <strong>Дроби</strong> <code>frac</code>
+      </label>
+
+      <label class="feature-pill" id="lbl-sups">
+        <input type="checkbox" id="feat-sups" onchange="handlePill('sups')">
+        <strong>Верхний индекс</strong> <code>sups</code>
+      </label>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- Главное интерактивное поле -->
+  <div class="canvas-card">
+    <div class="canvas-header">
+      <span>Интерактивный холст (кликните, чтобы редактировать текст)</span>
+      <span id="appliedFeaturesCss" style="font-family: monospace; color: #8da4f7;">font-feature-settings: ...</span>
+    </div>
+    <div class="canvas-body" id="canvasBg">
+      <div id="targetText" class="editable-text" contenteditable="true" spellcheck="false">Skärpa i mörker,
+mjuk i rörelse.</div>
+    </div>
+  </div>
+
+  <!-- A/B Сравнение: Кернинг ВКЛ против Кернинг ВЫКЛ -->
+  <h2 style="font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">A/B Тест: С Кернингом vs Без Кернинга</h2>
+  <div class="comparison-split">
+    <div class="split-pane">
+      <span class="split-label on">Кернинг ВКЛ (kern: 1)</span>
+      <div id="previewKernOn" class="editable-text" style="font-feature-settings: 'kern' 1; font-kerning: normal;"></div>
+    </div>
+    <div class="split-pane">
+      <span class="split-label off">Кернинг ВЫКЛ (kern: 0)</span>
+      <div id="previewKernOff" class="editable-text" style="font-feature-settings: 'kern' 0; font-kerning: none;"></div>
+    </div>
+  </div>
+
+  <!-- Специальные тесты лигатур и умлаутов -->
+  <h2 style="font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Характерные пары Notus Display</h2>
+  <div class="quick-tests">
+    <div class="pair-card">
+      <div class="pair-meta"><span>Диакритика & Овалы</span><code>Skärpa / mörker</code></div>
+      <div class="pair-sample sample-font">Skärpa mörker rörelse</div>
+    </div>
+    <div class="pair-card">
+      <div class="pair-meta"><span>Стандартные лигатуры</span><code>fi fl ffi ffl Th</code></div>
+      <div class="pair-sample sample-font">Th fi fl ffi ffl</div>
+    </div>
+    <div class="pair-card">
+      <div class="pair-meta"><span>Дискреционные (dlig)</span><code>ct st fb fh fj fk</code></div>
+      <div class="pair-sample sample-font" style="font-feature-settings: 'dlig' 1;">ct st fb fh fj fk ft</div>
+    </div>
+    <div class="pair-card">
+      <div class="pair-meta"><span>Критичные пары</span><code>Ta Te To Tr Tu Ty</code></div>
+      <div class="pair-sample sample-font">Ta Te To Tr Tu Ty Va Vo</div>
+    </div>
+  </div>
+</main>
+
+<div class="status-bar">
+  <div>Файл: <code>01 - Notus - Display - Thin.otf</code> &rarr; <code>notus/Notus-Display.otf</code> (Заменён успешно)</div>
+  <div id="featureSummary">Active: kern, liga</div>
+</div>
+
+<script>
+  const targetText = document.getElementById('targetText');
+  const previewKernOn = document.getElementById('previewKernOn');
+  const previewKernOff = document.getElementById('previewKernOff');
+  const fontSelect = document.getElementById('fontSelect');
+  const sizeRange = document.getElementById('sizeRange');
+  const sizeVal = document.getElementById('sizeVal');
+  const spacingRange = document.getElementById('spacingRange');
+  const spacingVal = document.getElementById('spacingVal');
+  const appliedFeaturesCss = document.getElementById('appliedFeaturesCss');
+  const featureSummary = document.getElementById('featureSummary');
+  const canvasBg = document.getElementById('canvasBg');
+
+  const features = ['kern', 'liga', 'dlig', 'smcp', 'onum', 'frac', 'sups'];
+
+  function handlePill(feat) {
+    const cb = document.getElementById('feat-' + feat);
+    const pill = document.getElementById('lbl-' + feat);
+    if (cb.checked) {
+      pill.classList.add('active');
+    } else {
+      pill.classList.remove('active');
+    }
+    updateStyles();
+  }
+
+  function getFeatureString() {
+    const list = [];
+    features.forEach(f => {
+      const cb = document.getElementById('feat-' + f);
+      if (cb) {
+        list.push(`"${f}" ${cb.checked ? 1 : 0}`);
+      }
+    });
+    return list.join(', ');
+  }
+
+  function updateStyles() {
+    const font = fontSelect.value;
+    const size = sizeRange.value + 'px';
+    const spacing = spacingRange.value + 'em';
+    const featStr = getFeatureString();
+
+    sizeVal.textContent = size;
+    spacingVal.textContent = (spacingRange.value >= 0 ? '+' : '') + spacing;
+
+    // Main Canvas
+    targetText.style.fontFamily = font;
+    targetText.style.fontSize = size;
+    targetText.style.letterSpacing = spacing;
+    targetText.style.fontFeatureSettings = featStr;
+    const kernChecked = document.getElementById('feat-kern').checked;
+    targetText.style.fontKerning = kernChecked ? 'normal' : 'none';
+
+    appliedFeaturesCss.textContent = `font-feature-settings: ${featStr}`;
+
+    // A/B previews
+    previewKernOn.style.fontFamily = font;
+    previewKernOn.style.fontSize = Math.min(parseInt(sizeRange.value), 48) + 'px';
+    previewKernOn.style.letterSpacing = spacing;
+    previewKernOn.innerText = targetText.innerText;
+
+    previewKernOff.style.fontFamily = font;
+    previewKernOff.style.fontSize = Math.min(parseInt(sizeRange.value), 48) + 'px';
+    previewKernOff.style.letterSpacing = spacing;
+    previewKernOff.innerText = targetText.innerText;
+
+    // Quick samples
+    document.querySelectorAll('.sample-font').forEach(el => {
+      el.style.fontFamily = font;
+    });
+
+    // Active summary
+    const active = features.filter(f => document.getElementById('feat-' + f).checked);
+    featureSummary.textContent = 'Активные фичи: ' + (active.join(', ') || 'нет');
+  }
+
+  function setText(val) {
+    targetText.innerText = val;
+    updateStyles();
+  }
+
+  function toggleTheme() {
+    const val = document.getElementById('themeSelect').value;
+    if (val === 'light') {
+      canvasBg.style.background = '#ffffff';
+      targetText.style.color = '#111111';
+    } else {
+      canvasBg.style.background = '#111217';
+      targetText.style.color = '#ffffff';
+    }
+  }
+
+  targetText.addEventListener('input', () => {
+    previewKernOn.innerText = targetText.innerText;
+    previewKernOff.innerText = targetText.innerText;
+  });
+
+  // Init
+  updateStyles();
+</script>
+</body>
+</html>

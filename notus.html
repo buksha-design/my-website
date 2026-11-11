@@ -53,7 +53,7 @@
    -------------------------------------------------------------------------- */
 @font-face {
     font-family: 'Notus Display';
-    src: url('notus/Notus-Display.otf?v=1794416465') format('opentype');
+    src: url('notus/Notus-Display.otf?v=1794419000') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -61,7 +61,7 @@
 
 @font-face {
     font-family: 'Notus Display Italic';
-    src: url('notus/Notus-Display Italic.otf?v=1794416465') format('opentype');
+    src: url('notus/Notus-Display Italic.otf?v=1794419000') format('opentype');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -69,7 +69,7 @@
 
 @font-face {
     font-family: 'Notus Text';
-    src: url('notus/Notus-Text.otf?v=1794416465') format('opentype');
+    src: url('notus/Notus-Text.otf?v=1794419000') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -77,7 +77,7 @@
 
 @font-face {
     font-family: 'Notus Text Italic';
-    src: url('notus/Notus-Text-Italic.otf?v=1794416465') format('opentype');
+    src: url('notus/Notus-Text-Italic.otf?v=1794419000') format('opentype');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -85,7 +85,7 @@
 
 @font-face {
     font-family: 'Notus Caption';
-    src: url('notus/Notus-Caption.otf?v=1794416465') format('opentype');
+    src: url('notus/Notus-Caption.otf?v=1794419000') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -1142,7 +1142,7 @@ button {
 
 .broadsheet-char {
     display: inline-block;
-    text-align: center;
+    text-align: left;
     vertical-align: baseline;
     line-height: 1.35;
     padding: 0;
@@ -3447,37 +3447,36 @@ button {
     text-underline-offset: 2px;
 }
 
+/* Minimalist Bottom Bar Cookie Consent (Monochrome, large typography — synced with index.html) */
 .cookie-banner {
     position: fixed;
-    left: var(--pad-x);
-    right: var(--pad-x);
-    bottom: 1.5rem;
-    max-width: 920px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.96);
-    color: #000;
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    border: 1px solid #000;
-    border-radius: 22px;
-    padding: 1.2rem 1.5rem;
-    z-index: 9999;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
-    font-family: var(--font-main);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    background: #000000;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 0;
+    padding: 1.25rem 2rem;
+    z-index: 99999;
+    box-shadow: none;
     opacity: 0;
     visibility: hidden;
-    transform: translate3d(0, 20px, 0);
-    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                visibility 0s linear 0.35s;
+    transform: translate3d(0, 100%, 0);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0s linear 0.3s;
+    box-sizing: border-box;
 }
 
 .cookie-banner.is-visible {
     opacity: 1;
     visibility: visible;
     transform: translate3d(0, 0, 0);
-    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
                 visibility 0s;
 }
 
@@ -3485,31 +3484,34 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.8rem;
+    gap: 1.5rem;
+    max-width: 1720px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .cookie-banner__text {
-    font-size: 0.82rem;
-    line-height: 1.48;
-    color: #111;
-}
-
-.cookie-banner__text strong {
-    display: block;
-    font-size: 0.86rem;
-    font-weight: 600;
-    margin-bottom: 0.2rem;
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    flex: 1;
 }
 
 .cookie-banner__text p {
     margin: 0;
-    color: #333;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .cookie-banner__text a {
-    color: #000;
+    color: #ffffff;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
     font-weight: 500;
 }
 
@@ -3522,56 +3524,60 @@ button {
 
 .cookie-banner__btn {
     font-family: var(--font-main);
-    font-size: 0.74rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    padding: 0.62rem 1.15rem;
-    border-radius: 100px;
-    border: 1px solid #000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.45rem 1.2rem;
+    border-radius: 3px;
+    border: none;
     cursor: pointer;
     white-space: nowrap;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
-.cookie-banner__btn--reject {
-    background: #fff;
-    color: #000;
-}
-
-.cookie-banner__btn--reject:hover {
-    background: #000;
-    color: #fff;
-}
-
+/* Pure Black & White style */
 .cookie-banner__btn--accept {
-    background: #000;
-    color: #fff;
+    background: #ffffff;
+    color: #000000;
 }
 
 .cookie-banner__btn--accept:hover {
-    background: #fff;
-    color: #000;
+    background: #e2e2e2;
+    color: #000000;
+}
+
+.cookie-banner__btn--reject {
+    background: transparent;
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+
+.cookie-banner__btn--reject:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border-color: #ffffff;
 }
 
 @media (max-width: 768px) {
     .cookie-banner {
-        left: 1rem;
-        right: 1rem;
-        bottom: 1rem;
         padding: 1.1rem 1.2rem;
     }
     .cookie-banner__inner {
         flex-direction: column;
         align-items: stretch;
-        gap: 1rem;
+        gap: 1.1rem;
+    }
+    .cookie-banner__text {
+        font-size: 1.25rem;
     }
     .cookie-banner__actions {
         width: 100%;
+        justify-content: flex-end;
     }
     .cookie-banner__btn {
         flex: 1;
         text-align: center;
+        padding: 0.65rem 1rem;
+        font-size: 1.2rem;
     }
 }
 
@@ -4914,11 +4920,11 @@ function initBroadsheetInteractive() {
 
     // Hidden measurement nodes inside each line so they inherit exact font/size/style
     const measure1 = document.createElement('span');
-    measure1.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;white-space:pre;left:-9999px;top:0;';
+    measure1.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;white-space:pre;left:-9999px;top:0;font-kerning:normal;font-feature-settings:"kern" 1,"liga" 0,"clig" 0,"dlig" 0;font-variant-ligatures:none;';
     line1El.appendChild(measure1);
 
     const measure2 = document.createElement('span');
-    measure2.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;white-space:pre;left:-9999px;top:0;';
+    measure2.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;white-space:pre;left:-9999px;top:0;font-kerning:normal;font-feature-settings:"kern" 1,"liga" 0,"clig" 0,"dlig" 0;font-variant-ligatures:none;';
     line2El.appendChild(measure2);
 
     let currentFont = 'Notus Display';
@@ -4932,24 +4938,27 @@ function initBroadsheetInteractive() {
         line2: new Array(MAX_LEN_2).fill(0)
     }));
 
-    function measureCharAdvance(measureNode, ch) {
-        if (!ch) return 0;
-        measureNode.textContent = 'о' + 'о';
-        const baseW = measureNode.getBoundingClientRect().width;
-        measureNode.textContent = 'о' + ch + 'о';
-        const fullW = measureNode.getBoundingClientRect().width;
-        return Math.max(0, fullW - baseW);
+    function measureLineAdvances(measureNode, text, maxLen) {
+        const result = new Array(maxLen).fill(0);
+        if (!text) return result;
+        measureNode.textContent = text;
+        const textNode = measureNode.firstChild;
+        if (!textNode) return result;
+        const range = document.createRange();
+        for (let i = 0; i < text.length; i++) {
+            range.setStart(textNode, i);
+            range.setEnd(textNode, i + 1);
+            const rect = range.getBoundingClientRect();
+            result[i] = Math.max(0, rect.width);
+        }
+        return result;
     }
 
     function recalcAllWidths() {
         for (let sIdx = 0; sIdx < slogans.length; sIdx++) {
             const s = slogans[sIdx];
-            for (let i = 0; i < MAX_LEN_1; i++) {
-                widthsCache[sIdx].line1[i] = measureCharAdvance(measure1, s.line1[i] || '');
-            }
-            for (let i = 0; i < MAX_LEN_2; i++) {
-                widthsCache[sIdx].line2[i] = measureCharAdvance(measure2, s.line2[i] || '');
-            }
+            widthsCache[sIdx].line1 = measureLineAdvances(measure1, s.line1, MAX_LEN_1);
+            widthsCache[sIdx].line2 = measureLineAdvances(measure2, s.line2, MAX_LEN_2);
         }
         if (!isTransitioning) {
             applyStaticSlogan(currentSloganIdx);
@@ -4981,7 +4990,9 @@ function initBroadsheetInteractive() {
 
         if (isItalic) {
             line2El.style.fontStyle = 'normal';
-            line2El.style.fontFamily = `"${font}", serif`;
+            if (font.includes('Display')) line2El.style.fontFamily = '"Notus Display", serif';
+            else if (font.includes('Text')) line2El.style.fontFamily = '"Notus Text", serif';
+            else line2El.style.fontFamily = '"Notus Caption", serif';
         } else {
             line2El.style.fontStyle = 'italic';
             if (font.includes('Display')) line2El.style.fontFamily = '"Notus Display Italic", serif';
@@ -5000,6 +5011,14 @@ function initBroadsheetInteractive() {
         });
 
         recalcAllWidths();
+        if (document.fonts && document.fonts.load) {
+            Promise.all([
+                document.fonts.load(`${isItalic ? 'italic' : 'normal'} 1em "${font}"`),
+                document.fonts.load(`${line2El.style.fontStyle} 1em ${line2El.style.fontFamily.split(',')[0]}`)
+            ]).then(() => {
+                recalcAllWidths();
+            }).catch(() => {});
+        }
     }
 
     pills.forEach(pill => {
@@ -5118,8 +5137,17 @@ function initBroadsheetInteractive() {
 
     // Initial calculation & re-measure after custom fonts finish loading / on resize
     recalcAllWidths();
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => {
+    if (document.fonts) {
+        Promise.all([
+            document.fonts.load('normal 1em "Notus Display"'),
+            document.fonts.load('italic 1em "Notus Display Italic"'),
+            document.fonts.load('normal 1em "Notus Text"'),
+            document.fonts.load('italic 1em "Notus Text Italic"'),
+            document.fonts.load('normal 1em "Notus Caption"'),
+            document.fonts.ready
+        ]).then(() => {
+            recalcAllWidths();
+        }).catch(() => {
             recalcAllWidths();
         });
     }

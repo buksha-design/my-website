@@ -7,7 +7,7 @@
 <style>
   @font-face {
     font-family: 'Notus Caption';
-    src: url('notus/Notus-Caption.otf?v=20261113_6') format('opentype');
+    src: url('notus/Notus-Caption.otf?v=20261113_7') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
@@ -457,13 +457,13 @@
       <div class="hero-role">Micro-Typography, Footnotes & Folios (6–12pt) &bull; Файл: 05 - Notus - Display - Caption.otf</div>
       <div class="hero-verdict">
         <strong>Дизайнерское резюме по оптическому кернингу:</strong><br>
-        В это начертание ещё не перенесены правки из 03 Text: 1) остались столкновения Хм, Км, Жм (-60), Wš, Vš (-120), įj (-50), ąj (-70), łv, łw (-30), Xf, Xb (-60), Af (-40), Tî, Fî (-40); 2) остались плюсовые дыры CZ (+50), QZ (+50), ZZ (+40), gj (+60), ҐЖ (+70) и f + строчные (+40 в fm, fn, fp, fr); 3) в liga отсутствует лигатура T_h.
+        Экспорт 17:49: полностью устранены ВСЕ 74 наезда от минусового кернинга (0 пересечений!) и все пережатия ядра (0)! Единственная новая проблема — избыточный плюсовой кернинг: +80 после f (fm, fn, fb, fh, fl, fp, fr, ft), +100 на gj, +30 на C/С + круглые строчные (Co, Ce, Cc, Cd, Cq, Со, Се, Сс, Сэ, Сф), +50…+60 на C/С + прописные (CM, CN, CB, CD, CE, СУ, СМ, СБ, СВ, СГ, СЕ, СИ, СН, СП, СР) и +50 на tu, ťu, Pv, Pw, KZ. Также в liga пропущена лигатура T_h.
       </div>
     </div>
     <div class="ref-metrics">
       <div style="color:var(--accent); font-weight:700; margin-bottom:6px;">Эталон оптического ритма:</div>
-      <div><span>Пара o+o:</span> <strong>96 u</strong></div>
-      <div><span>Пара n+o:</span> <strong>129 u</strong></div>
+      <div><span>Пара o+o:</span> <strong>116 u</strong></div>
+      <div><span>Пара n+o:</span> <strong>149 u</strong></div>
       <div><span>Пара n+n:</span> <strong>210 u</strong></div>
       <div><span>Пара O+O:</span> <strong>117 u</strong></div>
       <div><span>Пара H+H:</span> <strong>254 u</strong></div>
@@ -481,44 +481,44 @@
         <tr>
           <th>
             <span style="color:var(--danger);">A. Нахлёст из-за минусового кернинга</span><br>
-            <small>Контуры врезаются друг в друга (74 пар)</small>
+            <small>Контуры врезаются друг в друга (0 пар)</small>
           </th>
           <td>
-            <div class="comma-list-box" id="list-A">Tî, Ťî, Wš, Vš, įj, Xf, Yť, єъ, Fî, Yì, Хм, Pî, ąj, Км, Жм, łv, łw, УХ, УЪ, Af, Äf, Åf, Wť, Xb, Vť, Wì, gv, gw, Vì, Fï, Tï, Yř, Ťï, Wž, Cî, Vž, Çî, Хв, Хг, Хи, Хй, Хк, Хн, Хп, Хш, Хь, Хґ, єл, є,, Кв, Кг, Ки, Кй, Кк, Кн, Кп, Кш, Кь, Кґ, єд, Xk, Жв, Жг, Жи, Жй, Жк, Жн, Жп, Жш, Жь, Жґ, Ab, Äb, Åb</div>
+            <div class="comma-list-box" id="list-A">—</div>
             <button class="copy-mini-btn" onclick="copyText('list-A', this)">Скопировать пары через запятую</button>
-            <span style="font-size:0.75rem; color:var(--muted); margin-left:10px;">С текущим кернингом: Tî (-40), Ťî (-40), Wš (-120), Vš (-120), įj (-50), Xf (-60), Yť (-70), єъ (-40), Fî (-40), Yì (-70), Хм (-60), Pî (-20), ąj (-70), Км (-60), Жм (-60), łv (-30), łw (-30), УХ (-50), УЪ (-30), Af (-40), Äf (-40), Åf (-40), Wť (-60), Xb (-60), Vť (-60), Wì (-60), gv (-20), gw (-20), Vì (-60), Fï (-40)</span>
+            <span style="font-size:0.75rem; color:var(--muted); margin-left:10px;">С текущим кернингом: —</span>
           </td>
         </tr>
         <tr>
           <th>
             <span style="color:var(--warn);">B. Природный нахлёст (kern = 0)</span><br>
-            <small>Нужен плюсовой кернинг (13 пар)</small>
+            <small>Нужен плюсовой кернинг (4 пар)</small>
           </th>
           <td>
-            <div class="comma-list-box" id="list-B">ҐЪ, ҐТ, ґ?, ґч, ҐЇ, f?, f!, ҐК, ґт, ґу, ґъ, ґў, ґх</div>
+            <div class="comma-list-box" id="list-B">ҐЪ, ґ?, ҐЇ, ҐК</div>
             <button class="copy-mini-btn" onclick="copyText('list-B', this)">Скопировать пары через запятую</button>
           </td>
         </tr>
         <tr>
           <th>
             <span style="color:var(--accent);">C. Дыры из-за лишнего +кернинга</span><br>
-            <small>Плюсовой кернинг разрывает слово (68 пар)</small>
+            <small>Плюсовой кернинг разрывает слово (739 пар)</small>
           </th>
           <td>
-            <div class="comma-list-box" id="list-C">ҐЖ, gj, CZ, CŹ, CŻ, CŽ, ÇZ, ÇŹ, ÇŻ, ÇŽ, fm, fn, fń, fb, fh, fl, fp, fr, ft, QZ, QŹ, QŻ, QŽ, fî, ZZ, ZŹ, ZŻ, ZŽ, ŹZ, ŹŹ, ŹŽ, ŻZ, ŻŹ, ŻŽ, ŽZ, ŽŹ, ŽŽ, ŹŻ, ŻŻ, ŽŻ, fi, fį, OZ, OŹ, OŻ, OŽ, ØZ, ØŹ, ØŻ, ØŽ, AZ, AŹ, AŻ, AŽ, ÄZ, ÄŹ, ÄŻ, ÄŽ, ÅZ, ÅŹ, ÅŻ, ÅŽ, GZ, GŹ, GŻ, GŽ, PT, PŤ</div>
+            <div class="comma-list-box" id="list-C">ҐЖ, Сэ, gj, КЭ, ґж, Со, Сс, Сє, Се, Сё, Сф, Co, Có, Ço, Çó, Cc, Ce, Cę, Çe, ЖЭ, Cd, Cq, Çc, Çd, Çq, Çę, СУ, СМ, ťu, ťų, ХЭ, CM, CN, ÇM, ÇN, fm, fn, fń, Єэ, АХ, Pv, Pw, fb, fh, fl, fp, fr, ft, PJ, tu, tų, СЪ, CJ, ÇJ, АЛ, СБ, СВ, СГ, СЕ, СИ, СЙ, СН, СП, СР, СЦ, СШ, СЩ, СЫ, СЬ, СЮ, СҐ, ХФ, KZ, KŹ, KŻ, KŽ, ťy, ťý, ФУ, уж, CB, CD, CE, CF, CH, CI, CK, CL, CP, CR, fî, ÇB, ÇD, ÇE, ÇF, ÇH, ÇI, ÇK, ÇL, ÇP</div>
             <button class="copy-mini-btn" onclick="copyText('list-C', this)">Скопировать пары через запятую</button>
-            <span style="font-size:0.75rem; color:var(--muted); margin-left:10px;">С текущим кернингом: ҐЖ (+70), gj (+60), CZ (+50), CŹ (+50), CŻ (+50), CŽ (+50), ÇZ (+50), ÇŹ (+50), ÇŻ (+50), ÇŽ (+50), fm (+40), fn (+40), fń (+40), fb (+40), fh (+40), fl (+40), fp (+40), fr (+40), ft (+40), QZ (+50), QŹ (+50), QŻ (+50), QŽ (+50), fî (+40), ZZ (+40), ZŹ (+40), ZŻ (+40), ZŽ (+40), ŹZ (+40), ŹŹ (+40)</span>
+            <span style="font-size:0.75rem; color:var(--muted); margin-left:10px;">С текущим кернингом: ҐЖ (+60), Сэ (+30), gj (+100), КЭ (+30), ґж (+60), Со (+30), Сс (+30), Сє (+30), Се (+30), Сё (+30), Сф (+30), Co (+30), Có (+30), Ço (+30), Çó (+30), Cc (+30), Ce (+30), Cę (+30), Çe (+30), ЖЭ (+30), Cd (+30), Cq (+30), Çc (+30), Çd (+30), Çq (+30), Çę (+30), СУ (+60), СМ (+50), ťu (+50), ťų (+50)</span>
           </td>
         </tr>
         <tr>
           <th>
             <span style="color:var(--danger);">D. Оптическое слипание (пережаты)</span><br>
-            <small>Слишком узкий просвет внутри пары (3 пар)</small>
+            <small>Слишком узкий просвет внутри пары (0 пар)</small>
           </th>
           <td>
-            <div class="comma-list-box" id="list-D">Рэ, ЄА, ЄЧ</div>
+            <div class="comma-list-box" id="list-D">—</div>
             <button class="copy-mini-btn" onclick="copyText('list-D', this)">Скопировать пары через запятую</button>
-            <span style="font-size:0.75rem; color:var(--muted); margin-left:10px;">С текущим кернингом: Рэ (-60), ЄА (-80), ЄЧ (-90)</span>
+            <span style="font-size:0.75rem; color:var(--muted); margin-left:10px;">С текущим кернингом: —</span>
           </td>
         </tr>
         <tr>
@@ -527,7 +527,7 @@
             <small>Открытые формы без кернинга (топ-60)</small>
           </th>
           <td>
-            <div class="comma-list-box" id="list-E">Гл, Fj, Гў, ГЛ, Сч, ҐЛ, Гі, ГЖ, Yj, ГД, Tj, Ťj, ҐД, ГЗ, ГЯ, ГМ, УА, ҐЗ, ЎА, KY, ҐЯ, Су, Ґл, ГІ, ГЇ, ЎЖ, Ґд, КЧ, LY, ГБ, ГВ, ГГ, ГЕ, ГИ, ГЙ, ГН, ГП, ГР, ГЦ, ГШ, ГЩ, ГЫ, ГЬ, ГЮ, ГҐ, Ґр, Vj, ҐЭ, Сў, Ґх, Ґя, ГЧ, Ґм, Cj, Çj, Гъ, Ґу, Ґў, Fu, Fß</div>
+            <div class="comma-list-box" id="list-E">Fj, Гў, ГЛ, Сч, ҐЛ, Гі, ГЖ, Yj, ГД, Tj, Ťj, ГМ, ҐД, Cj, Çj, ГЗ, ГЯ, УА, ҐЗ, KY, ҐЯ, Су, Сў, Fm, Fn, Fń, ГБ, ГВ, ГГ, ГЕ, ГИ, ГЙ, ГН, ГП, ГР, ГЦ, ГШ, ГЩ, ГЫ, ГЬ, ГЮ, ГІ, ГЇ, ГҐ, ЎЖ, Ґд, Fp, Fr, Fř, КЧ, LY, Cv, Fx, Çv, Fb, Fh, Fl, Ft, Cw, Çw</div>
             <button class="copy-mini-btn" onclick="copyText('list-E', this)">Скопировать пары через запятую</button>
           </td>
         </tr>
@@ -560,606 +560,7 @@
       <span>Показаны сама пара и контекст внутри слова (клик загружает в A/B инспектор)</span>
     </div>
     <div class="pair-grid">
-      
-            <div class="pair-chip" onclick="loadPairIntoInspector('Tî', 'Tîno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Tî</span>
-                <span class="pair-chip__kern badge-danger">kern: -40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Tî</div>
-              <div class="pair-chip__ctx test-font">Tîno</div>
-              <div class="pair-chip__metrics">зазор: -6 &rarr; <b>-46</b> | опт: 315</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Ťî', 'Ťîno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Ťî</span>
-                <span class="pair-chip__kern badge-danger">kern: -40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Ťî</div>
-              <div class="pair-chip__ctx test-font">Ťîno</div>
-              <div class="pair-chip__metrics">зазор: -6 &rarr; <b>-46</b> | опт: 315</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Wš', 'Wšno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Wš</span>
-                <span class="pair-chip__kern badge-danger">kern: -120</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Wš</div>
-              <div class="pair-chip__ctx test-font">Wšno</div>
-              <div class="pair-chip__metrics">зазор: 78 &rarr; <b>-42</b> | опт: 150</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Vš', 'Všno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Vš</span>
-                <span class="pair-chip__kern badge-danger">kern: -120</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Vš</div>
-              <div class="pair-chip__ctx test-font">Všno</div>
-              <div class="pair-chip__metrics">зазор: 79 &rarr; <b>-41</b> | опт: 161</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('įj', 'nįjo')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">įj</span>
-                <span class="pair-chip__kern badge-danger">kern: -50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">įj</div>
-              <div class="pair-chip__ctx test-font">nįjo</div>
-              <div class="pair-chip__metrics">зазор: 9 &rarr; <b>-41</b> | опт: 248</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Xf', 'Xfno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Xf</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Xf</div>
-              <div class="pair-chip__ctx test-font">Xfno</div>
-              <div class="pair-chip__metrics">зазор: 31 &rarr; <b>-29</b> | опт: 148</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Yť', 'Yťno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Yť</span>
-                <span class="pair-chip__kern badge-danger">kern: -70</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Yť</div>
-              <div class="pair-chip__ctx test-font">Yťno</div>
-              <div class="pair-chip__metrics">зазор: 44 &rarr; <b>-26</b> | опт: 302</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('єъ', 'нєъо')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">єъ</span>
-                <span class="pair-chip__kern badge-danger">kern: -40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">єъ</div>
-              <div class="pair-chip__ctx test-font">нєъо</div>
-              <div class="pair-chip__metrics">зазор: 14 &rarr; <b>-26</b> | опт: 48</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Fî', 'Fîno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Fî</span>
-                <span class="pair-chip__kern badge-danger">kern: -40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Fî</div>
-              <div class="pair-chip__ctx test-font">Fîno</div>
-              <div class="pair-chip__metrics">зазор: 15 &rarr; <b>-25</b> | опт: 359</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Yì', 'Yìno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Yì</span>
-                <span class="pair-chip__kern badge-danger">kern: -70</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Yì</div>
-              <div class="pair-chip__ctx test-font">Yìno</div>
-              <div class="pair-chip__metrics">зазор: 45 &rarr; <b>-25</b> | опт: 296</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Хм', 'Хмно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Хм</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Хм</div>
-              <div class="pair-chip__ctx test-font">Хмно</div>
-              <div class="pair-chip__metrics">зазор: 35 &rarr; <b>-25</b> | опт: 179</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Pî', 'Pîno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Pî</span>
-                <span class="pair-chip__kern badge-danger">kern: -20</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Pî</div>
-              <div class="pair-chip__ctx test-font">Pîno</div>
-              <div class="pair-chip__metrics">зазор: -4 &rarr; <b>-24</b> | опт: 257</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ąj', 'nąjo')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ąj</span>
-                <span class="pair-chip__kern badge-danger">kern: -70</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ąj</div>
-              <div class="pair-chip__ctx test-font">nąjo</div>
-              <div class="pair-chip__metrics">зазор: 46 &rarr; <b>-24</b> | опт: 230</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Км', 'Кмно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Км</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Км</div>
-              <div class="pair-chip__ctx test-font">Кмно</div>
-              <div class="pair-chip__metrics">зазор: 36 &rarr; <b>-24</b> | опт: 203</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Жм', 'Жмно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Жм</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Жм</div>
-              <div class="pair-chip__ctx test-font">Жмно</div>
-              <div class="pair-chip__metrics">зазор: 37 &rarr; <b>-23</b> | опт: 183</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('łv', 'nłvo')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">łv</span>
-                <span class="pair-chip__kern badge-danger">kern: -30</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">łv</div>
-              <div class="pair-chip__ctx test-font">nłvo</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>-20</b> | опт: 170</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('łw', 'nłwo')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">łw</span>
-                <span class="pair-chip__kern badge-danger">kern: -30</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">łw</div>
-              <div class="pair-chip__ctx test-font">nłwo</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>-20</b> | опт: 170</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('УХ', 'НУХН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">УХ</span>
-                <span class="pair-chip__kern badge-danger">kern: -50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">УХ</div>
-              <div class="pair-chip__ctx test-font">НУХН</div>
-              <div class="pair-chip__metrics">зазор: 30 &rarr; <b>-20</b> | опт: 296</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('УЪ', 'НУЪН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">УЪ</span>
-                <span class="pair-chip__kern badge-danger">kern: -30</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">УЪ</div>
-              <div class="pair-chip__ctx test-font">НУЪН</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>-20</b> | опт: 259</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Af', 'Afno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Af</span>
-                <span class="pair-chip__kern badge-danger">kern: -40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Af</div>
-              <div class="pair-chip__ctx test-font">Afno</div>
-              <div class="pair-chip__metrics">зазор: 21 &rarr; <b>-19</b> | опт: 139</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Äf', 'Äfno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Äf</span>
-                <span class="pair-chip__kern badge-danger">kern: -40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Äf</div>
-              <div class="pair-chip__ctx test-font">Äfno</div>
-              <div class="pair-chip__metrics">зазор: 21 &rarr; <b>-19</b> | опт: 139</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Åf', 'Åfno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Åf</span>
-                <span class="pair-chip__kern badge-danger">kern: -40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Åf</div>
-              <div class="pair-chip__ctx test-font">Åfno</div>
-              <div class="pair-chip__metrics">зазор: 21 &rarr; <b>-19</b> | опт: 139</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Wť', 'Wťno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Wť</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Wť</div>
-              <div class="pair-chip__ctx test-font">Wťno</div>
-              <div class="pair-chip__metrics">зазор: 43 &rarr; <b>-17</b> | опт: 257</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Xb', 'Xbno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Xb</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Xb</div>
-              <div class="pair-chip__ctx test-font">Xbno</div>
-              <div class="pair-chip__metrics">зазор: 43 &rarr; <b>-17</b> | опт: 183</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Vť', 'Vťno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Vť</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Vť</div>
-              <div class="pair-chip__ctx test-font">Vťno</div>
-              <div class="pair-chip__metrics">зазор: 44 &rarr; <b>-16</b> | опт: 269</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Wì', 'Wìno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Wì</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Wì</div>
-              <div class="pair-chip__ctx test-font">Wìno</div>
-              <div class="pair-chip__metrics">зазор: 44 &rarr; <b>-16</b> | опт: 251</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('gv', 'ngvo')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">gv</span>
-                <span class="pair-chip__kern badge-danger">kern: -20</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">gv</div>
-              <div class="pair-chip__ctx test-font">ngvo</div>
-              <div class="pair-chip__metrics">зазор: 4 &rarr; <b>-16</b> | опт: 187</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('gw', 'ngwo')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">gw</span>
-                <span class="pair-chip__kern badge-danger">kern: -20</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">gw</div>
-              <div class="pair-chip__ctx test-font">ngwo</div>
-              <div class="pair-chip__metrics">зазор: 4 &rarr; <b>-16</b> | опт: 187</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Vì', 'Vìno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Vì</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Vì</div>
-              <div class="pair-chip__ctx test-font">Vìno</div>
-              <div class="pair-chip__metrics">зазор: 45 &rarr; <b>-15</b> | опт: 263</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Fï', 'Fïno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Fï</span>
-                <span class="pair-chip__kern badge-danger">kern: -40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Fï</div>
-              <div class="pair-chip__ctx test-font">Fïno</div>
-              <div class="pair-chip__metrics">зазор: 27 &rarr; <b>-13</b> | опт: 356</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Tï', 'Tïno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Tï</span>
-                <span class="pair-chip__kern badge-danger">kern: -40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Tï</div>
-              <div class="pair-chip__ctx test-font">Tïno</div>
-              <div class="pair-chip__metrics">зазор: 27 &rarr; <b>-13</b> | опт: 312</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Yř', 'Yřno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Yř</span>
-                <span class="pair-chip__kern badge-danger">kern: -70</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Yř</div>
-              <div class="pair-chip__ctx test-font">Yřno</div>
-              <div class="pair-chip__metrics">зазор: 57 &rarr; <b>-13</b> | опт: 306</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Ťï', 'Ťïno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Ťï</span>
-                <span class="pair-chip__kern badge-danger">kern: -40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Ťï</div>
-              <div class="pair-chip__ctx test-font">Ťïno</div>
-              <div class="pair-chip__metrics">зазор: 27 &rarr; <b>-13</b> | опт: 312</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Wž', 'Wžno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Wž</span>
-                <span class="pair-chip__kern badge-danger">kern: -110</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Wž</div>
-              <div class="pair-chip__ctx test-font">Wžno</div>
-              <div class="pair-chip__metrics">зазор: 98 &rarr; <b>-12</b> | опт: 173</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Cî', 'Cîno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Cî</span>
-                <span class="pair-chip__kern badge-danger">kern: -20</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Cî</div>
-              <div class="pair-chip__ctx test-font">Cîno</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>-10</b> | опт: 328</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Vž', 'Vžno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Vž</span>
-                <span class="pair-chip__kern badge-danger">kern: -110</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Vž</div>
-              <div class="pair-chip__ctx test-font">Vžno</div>
-              <div class="pair-chip__metrics">зазор: 100 &rarr; <b>-10</b> | опт: 189</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Çî', 'Çîno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Çî</span>
-                <span class="pair-chip__kern badge-danger">kern: -20</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Çî</div>
-              <div class="pair-chip__ctx test-font">Çîno</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>-10</b> | опт: 328</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Хв', 'Хвно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Хв</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Хв</div>
-              <div class="pair-chip__ctx test-font">Хвно</div>
-              <div class="pair-chip__metrics">зазор: 50 &rarr; <b>-10</b> | опт: 167</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Хг', 'Хгно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Хг</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Хг</div>
-              <div class="pair-chip__ctx test-font">Хгно</div>
-              <div class="pair-chip__metrics">зазор: 50 &rarr; <b>-10</b> | опт: 167</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Хи', 'Хино')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Хи</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Хи</div>
-              <div class="pair-chip__ctx test-font">Хино</div>
-              <div class="pair-chip__metrics">зазор: 50 &rarr; <b>-10</b> | опт: 167</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Хй', 'Хйно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Хй</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Хй</div>
-              <div class="pair-chip__ctx test-font">Хйно</div>
-              <div class="pair-chip__metrics">зазор: 50 &rarr; <b>-10</b> | опт: 167</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Хк', 'Хкно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Хк</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Хк</div>
-              <div class="pair-chip__ctx test-font">Хкно</div>
-              <div class="pair-chip__metrics">зазор: 50 &rarr; <b>-10</b> | опт: 167</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Хн', 'Хнно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Хн</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Хн</div>
-              <div class="pair-chip__ctx test-font">Хнно</div>
-              <div class="pair-chip__metrics">зазор: 50 &rarr; <b>-10</b> | опт: 167</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Хп', 'Хпно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Хп</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Хп</div>
-              <div class="pair-chip__ctx test-font">Хпно</div>
-              <div class="pair-chip__metrics">зазор: 50 &rarr; <b>-10</b> | опт: 167</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Хш', 'Хшно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Хш</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Хш</div>
-              <div class="pair-chip__ctx test-font">Хшно</div>
-              <div class="pair-chip__metrics">зазор: 50 &rarr; <b>-10</b> | опт: 167</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Хь', 'Хьно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Хь</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Хь</div>
-              <div class="pair-chip__ctx test-font">Хьно</div>
-              <div class="pair-chip__metrics">зазор: 50 &rarr; <b>-10</b> | опт: 167</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Хґ', 'Хґно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Хґ</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Хґ</div>
-              <div class="pair-chip__ctx test-font">Хґно</div>
-              <div class="pair-chip__metrics">зазор: 50 &rarr; <b>-10</b> | опт: 167</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('єл', 'нєло')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">єл</span>
-                <span class="pair-chip__kern badge-danger">kern: -30</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">єл</div>
-              <div class="pair-chip__ctx test-font">нєло</div>
-              <div class="pair-chip__metrics">зазор: 20 &rarr; <b>-10</b> | опт: 189</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('є,', 'нє,о')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">є,</span>
-                <span class="pair-chip__kern badge-danger">kern: -30</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">є,</div>
-              <div class="pair-chip__ctx test-font">нє,о</div>
-              <div class="pair-chip__metrics">зазор: 20 &rarr; <b>-10</b> | опт: 145</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Кв', 'Квно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Кв</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Кв</div>
-              <div class="pair-chip__ctx test-font">Квно</div>
-              <div class="pair-chip__metrics">зазор: 51 &rarr; <b>-9</b> | опт: 191</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Кг', 'Кгно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Кг</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Кг</div>
-              <div class="pair-chip__ctx test-font">Кгно</div>
-              <div class="pair-chip__metrics">зазор: 51 &rarr; <b>-9</b> | опт: 191</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Ки', 'Кино')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Ки</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Ки</div>
-              <div class="pair-chip__ctx test-font">Кино</div>
-              <div class="pair-chip__metrics">зазор: 51 &rarr; <b>-9</b> | опт: 191</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Кй', 'Кйно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Кй</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Кй</div>
-              <div class="pair-chip__ctx test-font">Кйно</div>
-              <div class="pair-chip__metrics">зазор: 51 &rarr; <b>-9</b> | опт: 191</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Кк', 'Ккно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Кк</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Кк</div>
-              <div class="pair-chip__ctx test-font">Ккно</div>
-              <div class="pair-chip__metrics">зазор: 51 &rarr; <b>-9</b> | опт: 191</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Кн', 'Кнно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Кн</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Кн</div>
-              <div class="pair-chip__ctx test-font">Кнно</div>
-              <div class="pair-chip__metrics">зазор: 51 &rarr; <b>-9</b> | опт: 191</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Кп', 'Кпно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Кп</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Кп</div>
-              <div class="pair-chip__ctx test-font">Кпно</div>
-              <div class="pair-chip__metrics">зазор: 51 &rarr; <b>-9</b> | опт: 191</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Кш', 'Кшно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Кш</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Кш</div>
-              <div class="pair-chip__ctx test-font">Кшно</div>
-              <div class="pair-chip__metrics">зазор: 51 &rarr; <b>-9</b> | опт: 191</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Кь', 'Кьно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Кь</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Кь</div>
-              <div class="pair-chip__ctx test-font">Кьно</div>
-              <div class="pair-chip__metrics">зазор: 51 &rarr; <b>-9</b> | опт: 191</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Кґ', 'Кґно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Кґ</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Кґ</div>
-              <div class="pair-chip__ctx test-font">Кґно</div>
-              <div class="pair-chip__metrics">зазор: 51 &rarr; <b>-9</b> | опт: 191</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('єд', 'нєдо')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">єд</span>
-                <span class="pair-chip__kern badge-danger">kern: -50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">єд</div>
-              <div class="pair-chip__ctx test-font">нєдо</div>
-              <div class="pair-chip__metrics">зазор: 41 &rarr; <b>-9</b> | опт: 137</div>
-            </div>
+      <div class="empty-ok">✓ Аномалий в этой категории не обнаружено</div>
     </div>
   </section>
 
@@ -1169,36 +570,7 @@
       <span>Контуры не пересекаются, но просвет между штрихами меньше 1–40 юнитов (слипаются в пятно)</span>
     </div>
     <div class="pair-grid">
-      
-            <div class="pair-chip" onclick="loadPairIntoInspector('Рэ', 'Рэно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Рэ</span>
-                <span class="pair-chip__kern badge-danger">kern: -60</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Рэ</div>
-              <div class="pair-chip__ctx test-font">Рэно</div>
-              <div class="pair-chip__metrics">зазор: 78 &rarr; <b>18</b> | опт: 167</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ЄА', 'НЄАН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ЄА</span>
-                <span class="pair-chip__kern badge-danger">kern: -80</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ЄА</div>
-              <div class="pair-chip__ctx test-font">НЄАН</div>
-              <div class="pair-chip__metrics">зазор: 81 &rarr; <b>1</b> | опт: 213</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ЄЧ', 'НЄЧН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ЄЧ</span>
-                <span class="pair-chip__kern badge-danger">kern: -90</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ЄЧ</div>
-              <div class="pair-chip__ctx test-font">НЄЧН</div>
-              <div class="pair-chip__metrics">зазор: 123 &rarr; <b>33</b> | опт: 237</div>
-            </div>
+      <div class="empty-ok">✓ Аномалий в этой категории не обнаружено</div>
     </div>
   </section>
 
@@ -1212,601 +584,601 @@
             <div class="pair-chip" onclick="loadPairIntoInspector('ҐЖ', 'НҐЖН')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">ҐЖ</span>
-                <span class="pair-chip__kern badge-info">kern: +70</span>
+                <span class="pair-chip__kern badge-info">kern: +60</span>
               </div>
               <div class="pair-chip__glyphs test-font">ҐЖ</div>
               <div class="pair-chip__ctx test-font">НҐЖН</div>
-              <div class="pair-chip__metrics">зазор: 65 &rarr; <b>135</b> | опт: 498</div>
+              <div class="pair-chip__metrics">зазор: 65 &rarr; <b>125</b> | опт: 488</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Сэ', 'Сэно')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Сэ</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Сэ</div>
+              <div class="pair-chip__ctx test-font">Сэно</div>
+              <div class="pair-chip__metrics">зазор: 54 &rarr; <b>84</b> | опт: 414</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('gj', 'ngjo')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">gj</span>
-                <span class="pair-chip__kern badge-info">kern: +60</span>
+                <span class="pair-chip__kern badge-info">kern: +100</span>
               </div>
               <div class="pair-chip__glyphs test-font">gj</div>
               <div class="pair-chip__ctx test-font">ngjo</div>
-              <div class="pair-chip__metrics">зазор: 120 &rarr; <b>180</b> | опт: 359</div>
+              <div class="pair-chip__metrics">зазор: 120 &rarr; <b>220</b> | опт: 399</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('CZ', 'HCZH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('КЭ', 'НКЭН')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">CZ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
+                <span class="pair-chip__code">КЭ</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
               </div>
-              <div class="pair-chip__glyphs test-font">CZ</div>
-              <div class="pair-chip__ctx test-font">HCZH</div>
-              <div class="pair-chip__metrics">зазор: 66 &rarr; <b>116</b> | опт: 311</div>
+              <div class="pair-chip__glyphs test-font">КЭ</div>
+              <div class="pair-chip__ctx test-font">НКЭН</div>
+              <div class="pair-chip__metrics">зазор: 102 &rarr; <b>132</b> | опт: 385</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('CŹ', 'HCŹH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('ґж', 'нґжо')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">CŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
+                <span class="pair-chip__code">ґж</span>
+                <span class="pair-chip__kern badge-info">kern: +60</span>
               </div>
-              <div class="pair-chip__glyphs test-font">CŹ</div>
-              <div class="pair-chip__ctx test-font">HCŹH</div>
-              <div class="pair-chip__metrics">зазор: 66 &rarr; <b>116</b> | опт: 311</div>
+              <div class="pair-chip__glyphs test-font">ґж</div>
+              <div class="pair-chip__ctx test-font">нґжо</div>
+              <div class="pair-chip__metrics">зазор: 65 &rarr; <b>125</b> | опт: 385</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('CŻ', 'HCŻH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('Со', 'Соно')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">CŻ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
+                <span class="pair-chip__code">Со</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
               </div>
-              <div class="pair-chip__glyphs test-font">CŻ</div>
-              <div class="pair-chip__ctx test-font">HCŻH</div>
-              <div class="pair-chip__metrics">зазор: 66 &rarr; <b>116</b> | опт: 311</div>
+              <div class="pair-chip__glyphs test-font">Со</div>
+              <div class="pair-chip__ctx test-font">Соно</div>
+              <div class="pair-chip__metrics">зазор: 107 &rarr; <b>137</b> | опт: 361</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('CŽ', 'HCŽH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('Сс', 'Ссно')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">CŽ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
+                <span class="pair-chip__code">Сс</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
               </div>
-              <div class="pair-chip__glyphs test-font">CŽ</div>
-              <div class="pair-chip__ctx test-font">HCŽH</div>
-              <div class="pair-chip__metrics">зазор: 66 &rarr; <b>116</b> | опт: 311</div>
+              <div class="pair-chip__glyphs test-font">Сс</div>
+              <div class="pair-chip__ctx test-font">Ссно</div>
+              <div class="pair-chip__metrics">зазор: 106 &rarr; <b>136</b> | опт: 360</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ÇZ', 'HÇZH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('Сє', 'Сєно')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">ÇZ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
+                <span class="pair-chip__code">Сє</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
               </div>
-              <div class="pair-chip__glyphs test-font">ÇZ</div>
-              <div class="pair-chip__ctx test-font">HÇZH</div>
-              <div class="pair-chip__metrics">зазор: 66 &rarr; <b>116</b> | опт: 311</div>
+              <div class="pair-chip__glyphs test-font">Сє</div>
+              <div class="pair-chip__ctx test-font">Сєно</div>
+              <div class="pair-chip__metrics">зазор: 106 &rarr; <b>136</b> | опт: 360</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ÇŹ', 'HÇŹH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('Се', 'Сено')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">ÇŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
+                <span class="pair-chip__code">Се</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
               </div>
-              <div class="pair-chip__glyphs test-font">ÇŹ</div>
-              <div class="pair-chip__ctx test-font">HÇŹH</div>
-              <div class="pair-chip__metrics">зазор: 66 &rarr; <b>116</b> | опт: 311</div>
+              <div class="pair-chip__glyphs test-font">Се</div>
+              <div class="pair-chip__ctx test-font">Сено</div>
+              <div class="pair-chip__metrics">зазор: 106 &rarr; <b>136</b> | опт: 359</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ÇŻ', 'HÇŻH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('Сё', 'Сёно')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">ÇŻ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
+                <span class="pair-chip__code">Сё</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
               </div>
-              <div class="pair-chip__glyphs test-font">ÇŻ</div>
-              <div class="pair-chip__ctx test-font">HÇŻH</div>
-              <div class="pair-chip__metrics">зазор: 66 &rarr; <b>116</b> | опт: 311</div>
+              <div class="pair-chip__glyphs test-font">Сё</div>
+              <div class="pair-chip__ctx test-font">Сёно</div>
+              <div class="pair-chip__metrics">зазор: 106 &rarr; <b>136</b> | опт: 359</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ÇŽ', 'HÇŽH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('Сф', 'Сфно')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">ÇŽ</span>
+                <span class="pair-chip__code">Сф</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Сф</div>
+              <div class="pair-chip__ctx test-font">Сфно</div>
+              <div class="pair-chip__metrics">зазор: 104 &rarr; <b>134</b> | опт: 357</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Co', 'Cono')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Co</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Co</div>
+              <div class="pair-chip__ctx test-font">Cono</div>
+              <div class="pair-chip__metrics">зазор: 97 &rarr; <b>127</b> | опт: 351</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Có', 'Cóno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Có</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Có</div>
+              <div class="pair-chip__ctx test-font">Cóno</div>
+              <div class="pair-chip__metrics">зазор: 97 &rarr; <b>127</b> | опт: 351</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Ço', 'Çono')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Ço</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Ço</div>
+              <div class="pair-chip__ctx test-font">Çono</div>
+              <div class="pair-chip__metrics">зазор: 97 &rarr; <b>127</b> | опт: 351</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Çó', 'Çóno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Çó</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Çó</div>
+              <div class="pair-chip__ctx test-font">Çóno</div>
+              <div class="pair-chip__metrics">зазор: 97 &rarr; <b>127</b> | опт: 351</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Cc', 'Ccno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Cc</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Cc</div>
+              <div class="pair-chip__ctx test-font">Ccno</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>126</b> | опт: 350</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Ce', 'Ceno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Ce</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Ce</div>
+              <div class="pair-chip__ctx test-font">Ceno</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>126</b> | опт: 350</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Cę', 'Cęno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Cę</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Cę</div>
+              <div class="pair-chip__ctx test-font">Cęno</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>126</b> | опт: 350</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Çe', 'Çeno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Çe</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Çe</div>
+              <div class="pair-chip__ctx test-font">Çeno</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>126</b> | опт: 350</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ЖЭ', 'НЖЭН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ЖЭ</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ЖЭ</div>
+              <div class="pair-chip__ctx test-font">НЖЭН</div>
+              <div class="pair-chip__metrics">зазор: 103 &rarr; <b>133</b> | опт: 350</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Cd', 'Cdno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Cd</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Cd</div>
+              <div class="pair-chip__ctx test-font">Cdno</div>
+              <div class="pair-chip__metrics">зазор: 95 &rarr; <b>125</b> | опт: 349</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Cq', 'Cqno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Cq</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Cq</div>
+              <div class="pair-chip__ctx test-font">Cqno</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>126</b> | опт: 349</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Çc', 'Çcno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Çc</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Çc</div>
+              <div class="pair-chip__ctx test-font">Çcno</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>126</b> | опт: 349</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Çd', 'Çdno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Çd</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Çd</div>
+              <div class="pair-chip__ctx test-font">Çdno</div>
+              <div class="pair-chip__metrics">зазор: 95 &rarr; <b>125</b> | опт: 349</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Çq', 'Çqno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Çq</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Çq</div>
+              <div class="pair-chip__ctx test-font">Çqno</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>126</b> | опт: 349</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Çę', 'Çęno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Çę</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Çę</div>
+              <div class="pair-chip__ctx test-font">Çęno</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>126</b> | опт: 349</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('СУ', 'НСУН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">СУ</span>
+                <span class="pair-chip__kern badge-info">kern: +60</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">СУ</div>
+              <div class="pair-chip__ctx test-font">НСУН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>156</b> | опт: 345</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('СМ', 'НСМН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">СМ</span>
                 <span class="pair-chip__kern badge-info">kern: +50</span>
               </div>
-              <div class="pair-chip__glyphs test-font">ÇŽ</div>
-              <div class="pair-chip__ctx test-font">HÇŽH</div>
-              <div class="pair-chip__metrics">зазор: 66 &rarr; <b>116</b> | опт: 311</div>
+              <div class="pair-chip__glyphs test-font">СМ</div>
+              <div class="pair-chip__ctx test-font">НСМН</div>
+              <div class="pair-chip__metrics">зазор: 145 &rarr; <b>195</b> | опт: 337</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ťu', 'nťuo')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ťu</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ťu</div>
+              <div class="pair-chip__ctx test-font">nťuo</div>
+              <div class="pair-chip__metrics">зазор: 65 &rarr; <b>115</b> | опт: 334</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ťų', 'nťųo')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ťų</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ťų</div>
+              <div class="pair-chip__ctx test-font">nťųo</div>
+              <div class="pair-chip__metrics">зазор: 65 &rarr; <b>115</b> | опт: 334</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ХЭ', 'НХЭН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ХЭ</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ХЭ</div>
+              <div class="pair-chip__ctx test-font">НХЭН</div>
+              <div class="pair-chip__metrics">зазор: 106 &rarr; <b>136</b> | опт: 334</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('CM', 'HCMH')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">CM</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">CM</div>
+              <div class="pair-chip__ctx test-font">HCMH</div>
+              <div class="pair-chip__metrics">зазор: 140 &rarr; <b>190</b> | опт: 332</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('CN', 'HCNH')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">CN</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">CN</div>
+              <div class="pair-chip__ctx test-font">HCNH</div>
+              <div class="pair-chip__metrics">зазор: 147 &rarr; <b>197</b> | опт: 332</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ÇM', 'HÇMH')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ÇM</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ÇM</div>
+              <div class="pair-chip__ctx test-font">HÇMH</div>
+              <div class="pair-chip__metrics">зазор: 140 &rarr; <b>190</b> | опт: 332</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ÇN', 'HÇNH')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ÇN</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ÇN</div>
+              <div class="pair-chip__ctx test-font">HÇNH</div>
+              <div class="pair-chip__metrics">зазор: 147 &rarr; <b>197</b> | опт: 332</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('fm', 'nfmo')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">fm</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
+                <span class="pair-chip__kern badge-info">kern: +80</span>
               </div>
               <div class="pair-chip__glyphs test-font">fm</div>
               <div class="pair-chip__ctx test-font">nfmo</div>
-              <div class="pair-chip__metrics">зазор: 34 &rarr; <b>74</b> | опт: 289</div>
+              <div class="pair-chip__metrics">зазор: 34 &rarr; <b>114</b> | опт: 329</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('fn', 'nfno')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">fn</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
+                <span class="pair-chip__kern badge-info">kern: +80</span>
               </div>
               <div class="pair-chip__glyphs test-font">fn</div>
               <div class="pair-chip__ctx test-font">nfno</div>
-              <div class="pair-chip__metrics">зазор: 34 &rarr; <b>74</b> | опт: 289</div>
+              <div class="pair-chip__metrics">зазор: 34 &rarr; <b>114</b> | опт: 329</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('fń', 'nfńo')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">fń</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
+                <span class="pair-chip__kern badge-info">kern: +80</span>
               </div>
               <div class="pair-chip__glyphs test-font">fń</div>
               <div class="pair-chip__ctx test-font">nfńo</div>
-              <div class="pair-chip__metrics">зазор: 34 &rarr; <b>74</b> | опт: 289</div>
+              <div class="pair-chip__metrics">зазор: 34 &rarr; <b>114</b> | опт: 329</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Єэ', 'Єэно')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Єэ</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Єэ</div>
+              <div class="pair-chip__ctx test-font">Єэно</div>
+              <div class="pair-chip__metrics">зазор: 35 &rarr; <b>65</b> | опт: 329</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('АХ', 'НАХН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">АХ</span>
+                <span class="pair-chip__kern badge-info">kern: +30</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">АХ</div>
+              <div class="pair-chip__ctx test-font">НАХН</div>
+              <div class="pair-chip__metrics">зазор: 20 &rarr; <b>50</b> | опт: 328</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Pv', 'Pvno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Pv</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Pv</div>
+              <div class="pair-chip__ctx test-font">Pvno</div>
+              <div class="pair-chip__metrics">зазор: 13 &rarr; <b>63</b> | опт: 326</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Pw', 'Pwno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Pw</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Pw</div>
+              <div class="pair-chip__ctx test-font">Pwno</div>
+              <div class="pair-chip__metrics">зазор: 13 &rarr; <b>63</b> | опт: 325</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('fb', 'nfbo')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">fb</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
+                <span class="pair-chip__kern badge-info">kern: +80</span>
               </div>
               <div class="pair-chip__glyphs test-font">fb</div>
               <div class="pair-chip__ctx test-font">nfbo</div>
-              <div class="pair-chip__metrics">зазор: 16 &rarr; <b>56</b> | опт: 284</div>
+              <div class="pair-chip__metrics">зазор: 16 &rarr; <b>96</b> | опт: 324</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('fh', 'nfho')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">fh</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
+                <span class="pair-chip__kern badge-info">kern: +80</span>
               </div>
               <div class="pair-chip__glyphs test-font">fh</div>
               <div class="pair-chip__ctx test-font">nfho</div>
-              <div class="pair-chip__metrics">зазор: 16 &rarr; <b>56</b> | опт: 284</div>
+              <div class="pair-chip__metrics">зазор: 16 &rarr; <b>96</b> | опт: 324</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('fl', 'nflo')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">fl</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
+                <span class="pair-chip__kern badge-info">kern: +80</span>
               </div>
               <div class="pair-chip__glyphs test-font">fl</div>
               <div class="pair-chip__ctx test-font">nflo</div>
-              <div class="pair-chip__metrics">зазор: 16 &rarr; <b>56</b> | опт: 284</div>
+              <div class="pair-chip__metrics">зазор: 16 &rarr; <b>96</b> | опт: 324</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('fp', 'nfpo')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">fp</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
+                <span class="pair-chip__kern badge-info">kern: +80</span>
               </div>
               <div class="pair-chip__glyphs test-font">fp</div>
               <div class="pair-chip__ctx test-font">nfpo</div>
-              <div class="pair-chip__metrics">зазор: 30 &rarr; <b>70</b> | опт: 284</div>
+              <div class="pair-chip__metrics">зазор: 30 &rarr; <b>110</b> | опт: 324</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('fr', 'nfro')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">fr</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
+                <span class="pair-chip__kern badge-info">kern: +80</span>
               </div>
               <div class="pair-chip__glyphs test-font">fr</div>
               <div class="pair-chip__ctx test-font">nfro</div>
-              <div class="pair-chip__metrics">зазор: 29 &rarr; <b>69</b> | опт: 284</div>
+              <div class="pair-chip__metrics">зазор: 29 &rarr; <b>109</b> | опт: 324</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('ft', 'nfto')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">ft</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
+                <span class="pair-chip__kern badge-info">kern: +80</span>
               </div>
               <div class="pair-chip__glyphs test-font">ft</div>
               <div class="pair-chip__ctx test-font">nfto</div>
-              <div class="pair-chip__metrics">зазор: 41 &rarr; <b>81</b> | опт: 284</div>
+              <div class="pair-chip__metrics">зазор: 41 &rarr; <b>121</b> | опт: 324</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('QZ', 'HQZH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('PJ', 'HPJH')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">QZ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">QZ</div>
-              <div class="pair-chip__ctx test-font">HQZH</div>
-              <div class="pair-chip__metrics">зазор: 64 &rarr; <b>114</b> | опт: 272</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('QŹ', 'HQŹH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">QŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">QŹ</div>
-              <div class="pair-chip__ctx test-font">HQŹH</div>
-              <div class="pair-chip__metrics">зазор: 64 &rarr; <b>114</b> | опт: 272</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('QŻ', 'HQŻH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">QŻ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">QŻ</div>
-              <div class="pair-chip__ctx test-font">HQŻH</div>
-              <div class="pair-chip__metrics">зазор: 64 &rarr; <b>114</b> | опт: 272</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('QŽ', 'HQŽH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">QŽ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">QŽ</div>
-              <div class="pair-chip__ctx test-font">HQŽH</div>
-              <div class="pair-chip__metrics">зазор: 64 &rarr; <b>114</b> | опт: 272</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('fî', 'nfîo')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">fî</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">fî</div>
-              <div class="pair-chip__ctx test-font">nfîo</div>
-              <div class="pair-chip__metrics">зазор: 36 &rarr; <b>76</b> | опт: 270</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ZZ', 'HZZH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ZZ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ZZ</div>
-              <div class="pair-chip__ctx test-font">HZZH</div>
-              <div class="pair-chip__metrics">зазор: 58 &rarr; <b>98</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ZŹ', 'HZŹH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ZŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ZŹ</div>
-              <div class="pair-chip__ctx test-font">HZŹH</div>
-              <div class="pair-chip__metrics">зазор: 58 &rarr; <b>98</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ZŻ', 'HZŻH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ZŻ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ZŻ</div>
-              <div class="pair-chip__ctx test-font">HZŻH</div>
-              <div class="pair-chip__metrics">зазор: 58 &rarr; <b>98</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ZŽ', 'HZŽH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ZŽ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ZŽ</div>
-              <div class="pair-chip__ctx test-font">HZŽH</div>
-              <div class="pair-chip__metrics">зазор: 58 &rarr; <b>98</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŹZ', 'HŹZH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŹZ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŹZ</div>
-              <div class="pair-chip__ctx test-font">HŹZH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŹŹ', 'HŹŹH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŹŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŹŹ</div>
-              <div class="pair-chip__ctx test-font">HŹŹH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŹŽ', 'HŹŽH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŹŽ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŹŽ</div>
-              <div class="pair-chip__ctx test-font">HŹŽH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŻZ', 'HŻZH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŻZ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŻZ</div>
-              <div class="pair-chip__ctx test-font">HŻZH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŻŹ', 'HŻŹH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŻŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŻŹ</div>
-              <div class="pair-chip__ctx test-font">HŻŹH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŻŽ', 'HŻŽH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŻŽ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŻŽ</div>
-              <div class="pair-chip__ctx test-font">HŻŽH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŽZ', 'HŽZH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŽZ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŽZ</div>
-              <div class="pair-chip__ctx test-font">HŽZH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŽŹ', 'HŽŹH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŽŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŽŹ</div>
-              <div class="pair-chip__ctx test-font">HŽŹH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŽŽ', 'HŽŽH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŽŽ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŽŽ</div>
-              <div class="pair-chip__ctx test-font">HŽŽH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 268</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŹŻ', 'HŹŻH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŹŻ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŹŻ</div>
-              <div class="pair-chip__ctx test-font">HŹŻH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 267</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŻŻ', 'HŻŻH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŻŻ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŻŻ</div>
-              <div class="pair-chip__ctx test-font">HŻŻH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 267</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ŽŻ', 'HŽŻH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ŽŻ</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ŽŻ</div>
-              <div class="pair-chip__ctx test-font">HŽŻH</div>
-              <div class="pair-chip__metrics">зазор: 59 &rarr; <b>99</b> | опт: 267</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('fi', 'nfio')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">fi</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">fi</div>
-              <div class="pair-chip__ctx test-font">nfio</div>
-              <div class="pair-chip__metrics">зазор: 33 &rarr; <b>73</b> | опт: 267</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('fį', 'nfįo')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">fį</span>
-                <span class="pair-chip__kern badge-info">kern: +40</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">fį</div>
-              <div class="pair-chip__ctx test-font">nfįo</div>
-              <div class="pair-chip__metrics">зазор: 33 &rarr; <b>73</b> | опт: 267</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('OZ', 'HOZH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">OZ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">OZ</div>
-              <div class="pair-chip__ctx test-font">HOZH</div>
-              <div class="pair-chip__metrics">зазор: 157 &rarr; <b>207</b> | опт: 251</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('OŹ', 'HOŹH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">OŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">OŹ</div>
-              <div class="pair-chip__ctx test-font">HOŹH</div>
-              <div class="pair-chip__metrics">зазор: 157 &rarr; <b>207</b> | опт: 251</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('OŻ', 'HOŻH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">OŻ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">OŻ</div>
-              <div class="pair-chip__ctx test-font">HOŻH</div>
-              <div class="pair-chip__metrics">зазор: 157 &rarr; <b>207</b> | опт: 251</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('OŽ', 'HOŽH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">OŽ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">OŽ</div>
-              <div class="pair-chip__ctx test-font">HOŽH</div>
-              <div class="pair-chip__metrics">зазор: 157 &rarr; <b>207</b> | опт: 251</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ØZ', 'HØZH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ØZ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ØZ</div>
-              <div class="pair-chip__ctx test-font">HØZH</div>
-              <div class="pair-chip__metrics">зазор: 158 &rarr; <b>208</b> | опт: 251</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ØŹ', 'HØŹH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ØŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ØŹ</div>
-              <div class="pair-chip__ctx test-font">HØŹH</div>
-              <div class="pair-chip__metrics">зазор: 157 &rarr; <b>207</b> | опт: 251</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ØŻ', 'HØŻH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ØŻ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ØŻ</div>
-              <div class="pair-chip__ctx test-font">HØŻH</div>
-              <div class="pair-chip__metrics">зазор: 157 &rarr; <b>207</b> | опт: 251</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ØŽ', 'HØŽH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ØŽ</span>
-                <span class="pair-chip__kern badge-info">kern: +50</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ØŽ</div>
-              <div class="pair-chip__ctx test-font">HØŽH</div>
-              <div class="pair-chip__metrics">зазор: 157 &rarr; <b>207</b> | опт: 251</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('AZ', 'HAZH')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">AZ</span>
+                <span class="pair-chip__code">PJ</span>
                 <span class="pair-chip__kern badge-info">kern: +30</span>
               </div>
-              <div class="pair-chip__glyphs test-font">AZ</div>
-              <div class="pair-chip__ctx test-font">HAZH</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>40</b> | опт: 246</div>
+              <div class="pair-chip__glyphs test-font">PJ</div>
+              <div class="pair-chip__ctx test-font">HPJH</div>
+              <div class="pair-chip__metrics">зазор: 282 &rarr; <b>312</b> | опт: 323</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('AŹ', 'HAŹH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('tu', 'ntuo')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">AŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +30</span>
+                <span class="pair-chip__code">tu</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
               </div>
-              <div class="pair-chip__glyphs test-font">AŹ</div>
-              <div class="pair-chip__ctx test-font">HAŹH</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>40</b> | опт: 246</div>
+              <div class="pair-chip__glyphs test-font">tu</div>
+              <div class="pair-chip__ctx test-font">ntuo</div>
+              <div class="pair-chip__metrics">зазор: 77 &rarr; <b>127</b> | опт: 323</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('AŻ', 'HAŻH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('tų', 'ntųo')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">AŻ</span>
-                <span class="pair-chip__kern badge-info">kern: +30</span>
+                <span class="pair-chip__code">tų</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
               </div>
-              <div class="pair-chip__glyphs test-font">AŻ</div>
-              <div class="pair-chip__ctx test-font">HAŻH</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>40</b> | опт: 246</div>
+              <div class="pair-chip__glyphs test-font">tų</div>
+              <div class="pair-chip__ctx test-font">ntųo</div>
+              <div class="pair-chip__metrics">зазор: 77 &rarr; <b>127</b> | опт: 323</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('AŽ', 'HAŽH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('СЪ', 'НСЪН')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">AŽ</span>
-                <span class="pair-chip__kern badge-info">kern: +30</span>
+                <span class="pair-chip__code">СЪ</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
               </div>
-              <div class="pair-chip__glyphs test-font">AŽ</div>
-              <div class="pair-chip__ctx test-font">HAŽH</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>40</b> | опт: 246</div>
+              <div class="pair-chip__glyphs test-font">СЪ</div>
+              <div class="pair-chip__ctx test-font">НСЪН</div>
+              <div class="pair-chip__metrics">зазор: 36 &rarr; <b>86</b> | опт: 323</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ÄZ', 'HÄZH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('CJ', 'HCJH')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">ÄZ</span>
-                <span class="pair-chip__kern badge-info">kern: +30</span>
+                <span class="pair-chip__code">CJ</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
               </div>
-              <div class="pair-chip__glyphs test-font">ÄZ</div>
-              <div class="pair-chip__ctx test-font">HÄZH</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>40</b> | опт: 246</div>
+              <div class="pair-chip__glyphs test-font">CJ</div>
+              <div class="pair-chip__ctx test-font">HCJH</div>
+              <div class="pair-chip__metrics">зазор: 24 &rarr; <b>74</b> | опт: 322</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ÄŹ', 'HÄŹH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('ÇJ', 'HÇJH')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">ÄŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +30</span>
+                <span class="pair-chip__code">ÇJ</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
               </div>
-              <div class="pair-chip__glyphs test-font">ÄŹ</div>
-              <div class="pair-chip__ctx test-font">HÄŹH</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>40</b> | опт: 246</div>
+              <div class="pair-chip__glyphs test-font">ÇJ</div>
+              <div class="pair-chip__ctx test-font">HÇJH</div>
+              <div class="pair-chip__metrics">зазор: 24 &rarr; <b>74</b> | опт: 322</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ÄŻ', 'HÄŻH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('АЛ', 'НАЛН')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">ÄŻ</span>
+                <span class="pair-chip__code">АЛ</span>
                 <span class="pair-chip__kern badge-info">kern: +30</span>
               </div>
-              <div class="pair-chip__glyphs test-font">ÄŻ</div>
-              <div class="pair-chip__ctx test-font">HÄŻH</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>40</b> | опт: 246</div>
+              <div class="pair-chip__glyphs test-font">АЛ</div>
+              <div class="pair-chip__ctx test-font">НАЛН</div>
+              <div class="pair-chip__metrics">зазор: 24 &rarr; <b>54</b> | опт: 321</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ÄŽ', 'HÄŽH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('СБ', 'НСБН')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">ÄŽ</span>
-                <span class="pair-chip__kern badge-info">kern: +30</span>
+                <span class="pair-chip__code">СБ</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
               </div>
-              <div class="pair-chip__glyphs test-font">ÄŽ</div>
-              <div class="pair-chip__ctx test-font">HÄŽH</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>40</b> | опт: 246</div>
+              <div class="pair-chip__glyphs test-font">СБ</div>
+              <div class="pair-chip__ctx test-font">НСБН</div>
+              <div class="pair-chip__metrics">зазор: 150 &rarr; <b>200</b> | опт: 319</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ÅZ', 'HÅZH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('СВ', 'НСВН')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">ÅZ</span>
-                <span class="pair-chip__kern badge-info">kern: +30</span>
+                <span class="pair-chip__code">СВ</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
               </div>
-              <div class="pair-chip__glyphs test-font">ÅZ</div>
-              <div class="pair-chip__ctx test-font">HÅZH</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>40</b> | опт: 246</div>
+              <div class="pair-chip__glyphs test-font">СВ</div>
+              <div class="pair-chip__ctx test-font">НСВН</div>
+              <div class="pair-chip__metrics">зазор: 150 &rarr; <b>200</b> | опт: 319</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ÅŹ', 'HÅŹH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('СГ', 'НСГН')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">ÅŹ</span>
-                <span class="pair-chip__kern badge-info">kern: +30</span>
+                <span class="pair-chip__code">СГ</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
               </div>
-              <div class="pair-chip__glyphs test-font">ÅŹ</div>
-              <div class="pair-chip__ctx test-font">HÅŹH</div>
-              <div class="pair-chip__metrics">зазор: 10 &rarr; <b>40</b> | опт: 246</div>
+              <div class="pair-chip__glyphs test-font">СГ</div>
+              <div class="pair-chip__ctx test-font">НСГН</div>
+              <div class="pair-chip__metrics">зазор: 150 &rarr; <b>200</b> | опт: 319</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('СЕ', 'НСЕН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">СЕ</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">СЕ</div>
+              <div class="pair-chip__ctx test-font">НСЕН</div>
+              <div class="pair-chip__metrics">зазор: 150 &rarr; <b>200</b> | опт: 319</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('СИ', 'НСИН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">СИ</span>
+                <span class="pair-chip__kern badge-info">kern: +50</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">СИ</div>
+              <div class="pair-chip__ctx test-font">НСИН</div>
+              <div class="pair-chip__metrics">зазор: 150 &rarr; <b>200</b> | опт: 319</div>
             </div>
     </div>
   </section>
@@ -1828,16 +1200,6 @@
               <div class="pair-chip__metrics">зазор: -46 &rarr; <b>-46</b> | опт: 420</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ҐТ', 'НҐТН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ҐТ</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ҐТ</div>
-              <div class="pair-chip__ctx test-font">НҐТН</div>
-              <div class="pair-chip__metrics">зазор: -36 &rarr; <b>-36</b> | опт: 467</div>
-            </div>
-
             <div class="pair-chip" onclick="loadPairIntoInspector('ґ?', 'нґ?о')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">ґ?</span>
@@ -1846,16 +1208,6 @@
               <div class="pair-chip__glyphs test-font">ґ?</div>
               <div class="pair-chip__ctx test-font">нґ?о</div>
               <div class="pair-chip__metrics">зазор: -31 &rarr; <b>-31</b> | опт: 403</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ґч', 'нґчо')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ґч</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ґч</div>
-              <div class="pair-chip__ctx test-font">нґчо</div>
-              <div class="pair-chip__metrics">зазор: -21 &rarr; <b>-21</b> | опт: 282</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('ҐЇ', 'НҐЇН')">
@@ -1868,26 +1220,6 @@
               <div class="pair-chip__metrics">зазор: -20 &rarr; <b>-20</b> | опт: 416</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('f?', 'nf?o')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">f?</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">f?</div>
-              <div class="pair-chip__ctx test-font">nf?o</div>
-              <div class="pair-chip__metrics">зазор: -18 &rarr; <b>-18</b> | опт: 313</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('f!', 'nf!o')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">f!</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">f!</div>
-              <div class="pair-chip__ctx test-font">nf!o</div>
-              <div class="pair-chip__metrics">зазор: -16 &rarr; <b>-16</b> | опт: 189</div>
-            </div>
-
             <div class="pair-chip" onclick="loadPairIntoInspector('ҐК', 'НҐКН')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">ҐК</span>
@@ -1897,69 +1229,9 @@
               <div class="pair-chip__ctx test-font">НҐКН</div>
               <div class="pair-chip__metrics">зазор: -11 &rarr; <b>-11</b> | опт: 386</div>
             </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ґт', 'нґто')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ґт</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ґт</div>
-              <div class="pair-chip__ctx test-font">нґто</div>
-              <div class="pair-chip__metrics">зазор: -11 &rarr; <b>-11</b> | опт: 258</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ґу', 'нґуо')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ґу</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ґу</div>
-              <div class="pair-chip__ctx test-font">нґуо</div>
-              <div class="pair-chip__metrics">зазор: -11 &rarr; <b>-11</b> | опт: 329</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ґъ', 'нґъо')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ґъ</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ґъ</div>
-              <div class="pair-chip__ctx test-font">нґъо</div>
-              <div class="pair-chip__metrics">зазор: -11 &rarr; <b>-11</b> | опт: 259</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ґў', 'нґўо')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ґў</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ґў</div>
-              <div class="pair-chip__ctx test-font">нґўо</div>
-              <div class="pair-chip__metrics">зазор: -11 &rarr; <b>-11</b> | опт: 329</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ґх', 'нґхо')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ґх</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ґх</div>
-              <div class="pair-chip__ctx test-font">нґхо</div>
-              <div class="pair-chip__metrics">зазор: -10 &rarr; <b>-10</b> | опт: 336</div>
-            </div>
     </div>
     <div class="pair-grid">
       
-            <div class="pair-chip" onclick="loadPairIntoInspector('Гл', 'Глно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Гл</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Гл</div>
-              <div class="pair-chip__ctx test-font">Глно</div>
-              <div class="pair-chip__metrics">зазор: 315 &rarr; <b>315</b> | опт: 495</div>
-            </div>
-
             <div class="pair-chip" onclick="loadPairIntoInspector('Fj', 'Fjno')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">Fj</span>
@@ -2070,6 +1342,16 @@
               <div class="pair-chip__metrics">зазор: 184 &rarr; <b>184</b> | опт: 446</div>
             </div>
 
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГМ', 'НГМН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГМ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГМ</div>
+              <div class="pair-chip__ctx test-font">НГМН</div>
+              <div class="pair-chip__metrics">зазор: 105 &rarr; <b>105</b> | опт: 438</div>
+            </div>
+
             <div class="pair-chip" onclick="loadPairIntoInspector('ҐД', 'НҐДН')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">ҐД</span>
@@ -2078,6 +1360,26 @@
               <div class="pair-chip__glyphs test-font">ҐД</div>
               <div class="pair-chip__ctx test-font">НҐДН</div>
               <div class="pair-chip__metrics">зазор: 98 &rarr; <b>98</b> | опт: 436</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Cj', 'Cjno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Cj</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Cj</div>
+              <div class="pair-chip__ctx test-font">Cjno</div>
+              <div class="pair-chip__metrics">зазор: 204 &rarr; <b>204</b> | опт: 432</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Çj', 'Çjno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Çj</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Çj</div>
+              <div class="pair-chip__ctx test-font">Çjno</div>
+              <div class="pair-chip__metrics">зазор: 181 &rarr; <b>181</b> | опт: 432</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('ГЗ', 'НГЗН')">
@@ -2100,16 +1402,6 @@
               <div class="pair-chip__metrics">зазор: 165 &rarr; <b>165</b> | опт: 429</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГМ', 'НГМН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГМ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГМ</div>
-              <div class="pair-chip__ctx test-font">НГМН</div>
-              <div class="pair-chip__metrics">зазор: 105 &rarr; <b>95</b> | опт: 428</div>
-            </div>
-
             <div class="pair-chip" onclick="loadPairIntoInspector('УА', 'НУАН')">
               <div class="pair-chip__top">
                 <span class="pair-chip__code">УА</span>
@@ -2128,16 +1420,6 @@
               <div class="pair-chip__glyphs test-font">ҐЗ</div>
               <div class="pair-chip__ctx test-font">НҐЗН</div>
               <div class="pair-chip__metrics">зазор: 141 &rarr; <b>141</b> | опт: 427</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ЎА', 'НЎАН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ЎА</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ЎА</div>
-              <div class="pair-chip__ctx test-font">НЎАН</div>
-              <div class="pair-chip__metrics">зазор: 350 &rarr; <b>350</b> | опт: 427</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('KY', 'HKYH')">
@@ -2170,14 +1452,194 @@
               <div class="pair-chip__metrics">зазор: 238 &rarr; <b>238</b> | опт: 425</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('Ґл', 'Ґлно')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('Сў', 'Сўно')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">Ґл</span>
+                <span class="pair-chip__code">Сў</span>
                 <span class="pair-chip__kern badge-warn">kern: 0</span>
               </div>
-              <div class="pair-chip__glyphs test-font">Ґл</div>
-              <div class="pair-chip__ctx test-font">Ґлно</div>
-              <div class="pair-chip__metrics">зазор: 241 &rarr; <b>241</b> | опт: 421</div>
+              <div class="pair-chip__glyphs test-font">Сў</div>
+              <div class="pair-chip__ctx test-font">Сўно</div>
+              <div class="pair-chip__metrics">зазор: 211 &rarr; <b>211</b> | опт: 425</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Fm', 'Fmno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Fm</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Fm</div>
+              <div class="pair-chip__ctx test-font">Fmno</div>
+              <div class="pair-chip__metrics">зазор: 278 &rarr; <b>278</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Fn', 'Fnno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Fn</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Fn</div>
+              <div class="pair-chip__ctx test-font">Fnno</div>
+              <div class="pair-chip__metrics">зазор: 278 &rarr; <b>278</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('Fń', 'Fńno')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">Fń</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">Fń</div>
+              <div class="pair-chip__ctx test-font">Fńno</div>
+              <div class="pair-chip__metrics">зазор: 246 &rarr; <b>246</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГБ', 'НГБН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГБ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГБ</div>
+              <div class="pair-chip__ctx test-font">НГБН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГВ', 'НГВН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГВ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГВ</div>
+              <div class="pair-chip__ctx test-font">НГВН</div>
+              <div class="pair-chip__metrics">зазор: 105 &rarr; <b>105</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГГ', 'НГГН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГГ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГГ</div>
+              <div class="pair-chip__ctx test-font">НГГН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГЕ', 'НГЕН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГЕ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГЕ</div>
+              <div class="pair-chip__ctx test-font">НГЕН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГИ', 'НГИН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГИ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГИ</div>
+              <div class="pair-chip__ctx test-font">НГИН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГЙ', 'НГЙН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГЙ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГЙ</div>
+              <div class="pair-chip__ctx test-font">НГЙН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГН', 'НГНН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГН</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГН</div>
+              <div class="pair-chip__ctx test-font">НГНН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГП', 'НГПН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГП</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГП</div>
+              <div class="pair-chip__ctx test-font">НГПН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГР', 'НГРН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГР</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГР</div>
+              <div class="pair-chip__ctx test-font">НГРН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГЦ', 'НГЦН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГЦ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГЦ</div>
+              <div class="pair-chip__ctx test-font">НГЦН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГШ', 'НГШН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГШ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГШ</div>
+              <div class="pair-chip__ctx test-font">НГШН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГЩ', 'НГЩН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГЩ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГЩ</div>
+              <div class="pair-chip__ctx test-font">НГЩН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГЫ', 'НГЫН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГЫ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГЫ</div>
+              <div class="pair-chip__ctx test-font">НГЫН</div>
+              <div class="pair-chip__metrics">зазор: 105 &rarr; <b>105</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГЬ', 'НГЬН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГЬ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГЬ</div>
+              <div class="pair-chip__ctx test-font">НГЬН</div>
+              <div class="pair-chip__metrics">зазор: 105 &rarr; <b>105</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГЮ', 'НГЮН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГЮ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГЮ</div>
+              <div class="pair-chip__ctx test-font">НГЮН</div>
+              <div class="pair-chip__metrics">зазор: 105 &rarr; <b>105</b> | опт: 420</div>
             </div>
 
             <div class="pair-chip" onclick="loadPairIntoInspector('ГІ', 'НГІН')">
@@ -2197,6 +1659,16 @@
               </div>
               <div class="pair-chip__glyphs test-font">ГЇ</div>
               <div class="pair-chip__ctx test-font">НГЇН</div>
+              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
+            </div>
+
+            <div class="pair-chip" onclick="loadPairIntoInspector('ГҐ', 'НГҐН')">
+              <div class="pair-chip__top">
+                <span class="pair-chip__code">ГҐ</span>
+                <span class="pair-chip__kern badge-warn">kern: 0</span>
+              </div>
+              <div class="pair-chip__glyphs test-font">ГҐ</div>
+              <div class="pair-chip__ctx test-font">НГҐН</div>
               <div class="pair-chip__metrics">зазор: 96 &rarr; <b>96</b> | опт: 420</div>
             </div>
 
@@ -2220,214 +1692,24 @@
               <div class="pair-chip__metrics">зазор: 237 &rarr; <b>237</b> | опт: 418</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('КЧ', 'НКЧН')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('Fp', 'Fpno')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">КЧ</span>
+                <span class="pair-chip__code">Fp</span>
                 <span class="pair-chip__kern badge-warn">kern: 0</span>
               </div>
-              <div class="pair-chip__glyphs test-font">КЧ</div>
-              <div class="pair-chip__ctx test-font">НКЧН</div>
-              <div class="pair-chip__metrics">зазор: 160 &rarr; <b>160</b> | опт: 415</div>
+              <div class="pair-chip__glyphs test-font">Fp</div>
+              <div class="pair-chip__ctx test-font">Fpno</div>
+              <div class="pair-chip__metrics">зазор: 273 &rarr; <b>273</b> | опт: 415</div>
             </div>
 
-            <div class="pair-chip" onclick="loadPairIntoInspector('LY', 'HLYH')">
+            <div class="pair-chip" onclick="loadPairIntoInspector('Fr', 'Frno')">
               <div class="pair-chip__top">
-                <span class="pair-chip__code">LY</span>
+                <span class="pair-chip__code">Fr</span>
                 <span class="pair-chip__kern badge-warn">kern: 0</span>
               </div>
-              <div class="pair-chip__glyphs test-font">LY</div>
-              <div class="pair-chip__ctx test-font">HLYH</div>
-              <div class="pair-chip__metrics">зазор: 238 &rarr; <b>238</b> | опт: 414</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГБ', 'НГБН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГБ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГБ</div>
-              <div class="pair-chip__ctx test-font">НГБН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГВ', 'НГВН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГВ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГВ</div>
-              <div class="pair-chip__ctx test-font">НГВН</div>
-              <div class="pair-chip__metrics">зазор: 105 &rarr; <b>95</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГГ', 'НГГН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГГ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГГ</div>
-              <div class="pair-chip__ctx test-font">НГГН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГЕ', 'НГЕН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГЕ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГЕ</div>
-              <div class="pair-chip__ctx test-font">НГЕН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГИ', 'НГИН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГИ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГИ</div>
-              <div class="pair-chip__ctx test-font">НГИН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГЙ', 'НГЙН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГЙ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГЙ</div>
-              <div class="pair-chip__ctx test-font">НГЙН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГН', 'НГНН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГН</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГН</div>
-              <div class="pair-chip__ctx test-font">НГНН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГП', 'НГПН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГП</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГП</div>
-              <div class="pair-chip__ctx test-font">НГПН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГР', 'НГРН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГР</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГР</div>
-              <div class="pair-chip__ctx test-font">НГРН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГЦ', 'НГЦН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГЦ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГЦ</div>
-              <div class="pair-chip__ctx test-font">НГЦН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГШ', 'НГШН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГШ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГШ</div>
-              <div class="pair-chip__ctx test-font">НГШН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГЩ', 'НГЩН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГЩ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГЩ</div>
-              <div class="pair-chip__ctx test-font">НГЩН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГЫ', 'НГЫН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГЫ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГЫ</div>
-              <div class="pair-chip__ctx test-font">НГЫН</div>
-              <div class="pair-chip__metrics">зазор: 105 &rarr; <b>95</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГЬ', 'НГЬН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГЬ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГЬ</div>
-              <div class="pair-chip__ctx test-font">НГЬН</div>
-              <div class="pair-chip__metrics">зазор: 105 &rarr; <b>95</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГЮ', 'НГЮН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГЮ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГЮ</div>
-              <div class="pair-chip__ctx test-font">НГЮН</div>
-              <div class="pair-chip__metrics">зазор: 105 &rarr; <b>95</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ГҐ', 'НГҐН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ГҐ</span>
-                <span class="pair-chip__kern badge-warn">kern: -10</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ГҐ</div>
-              <div class="pair-chip__ctx test-font">НГҐН</div>
-              <div class="pair-chip__metrics">зазор: 96 &rarr; <b>86</b> | опт: 410</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Ґр', 'Ґрно')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Ґр</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Ґр</div>
-              <div class="pair-chip__ctx test-font">Ґрно</div>
-              <div class="pair-chip__metrics">зазор: 326 &rarr; <b>326</b> | опт: 408</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('Vj', 'Vjno')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">Vj</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">Vj</div>
-              <div class="pair-chip__ctx test-font">Vjno</div>
-              <div class="pair-chip__metrics">зазор: 225 &rarr; <b>225</b> | опт: 406</div>
-            </div>
-
-            <div class="pair-chip" onclick="loadPairIntoInspector('ҐЭ', 'НҐЭН')">
-              <div class="pair-chip__top">
-                <span class="pair-chip__code">ҐЭ</span>
-                <span class="pair-chip__kern badge-warn">kern: 0</span>
-              </div>
-              <div class="pair-chip__glyphs test-font">ҐЭ</div>
-              <div class="pair-chip__ctx test-font">НҐЭН</div>
-              <div class="pair-chip__metrics">зазор: 131 &rarr; <b>131</b> | опт: 405</div>
+              <div class="pair-chip__glyphs test-font">Fr</div>
+              <div class="pair-chip__ctx test-font">Frno</div>
+              <div class="pair-chip__metrics">зазор: 273 &rarr; <b>273</b> | опт: 415</div>
             </div>
     </div>
   </section>

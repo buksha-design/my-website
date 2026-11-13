@@ -7,31 +7,31 @@
 <style>
   @font-face {
     font-family: 'Notus Display';
-    src: url('notus/Notus-Display.otf?v=test_1') format('opentype');
+    src: url('notus/Notus-Display.otf?v=20261113_4') format('opentype');
     font-weight: 100 400;
     font-style: normal;
   }
   @font-face {
     font-family: 'Notus Display Italic';
-    src: url('notus/Notus-Display Italic.otf?v=test_1') format('opentype');
+    src: url('notus/Notus-Display Italic.otf?v=20261113_4') format('opentype');
     font-weight: 100 400;
     font-style: italic;
   }
   @font-face {
     font-family: 'Notus Text';
-    src: url('notus/Notus-Text.otf?v=test_1') format('opentype');
+    src: url('notus/Notus-Text.otf?v=20261113_4') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
   @font-face {
     font-family: 'Notus Text Italic';
-    src: url('notus/Notus-Text-Italic.otf?v=test_1') format('opentype');
+    src: url('notus/Notus-Text-Italic.otf?v=20261113_4') format('opentype');
     font-weight: normal;
     font-style: italic;
   }
   @font-face {
     font-family: 'Notus Caption';
-    src: url('notus/Notus-Caption.otf?v=test_1') format('opentype');
+    src: url('notus/Notus-Caption.otf?v=20261113_4') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
@@ -325,8 +325,8 @@
 
 <header>
   <div class="title-group">
-    <h1>Notus Font Tester <span class="badge">OpenType & Kerning Inspector</span></h1>
-    <p>Проверка подменённого файла <code>01 - Notus - Display - Thin.otf</code> и анализ OpenType фич</p>
+    <h1>Notus Font Tester <span class="badge">OpenType & Kerning Inspector (Export Nov 13)</span></h1>
+    <p>Интерактивный инспектор + отдельные страницы тест-драйва для каждого из 5 шрифтов</p>
   </div>
   <div class="presets-row">
     <span style="font-size: 0.75rem; color: var(--text-muted);">Быстрый текст:</span>
@@ -338,6 +338,15 @@
     <button class="preset-btn" onclick="setText('AV Aw Ta To Tr Tu Ty Va Vo Wa Wo Ya Yo V. W, Y.')">Кернинг-пары</button>
   </div>
 </header>
+
+<div style="background: #11131a; border-bottom: 1px solid var(--panel-border); padding: 12px 28px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+  <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #8da4f7; margin-right: 6px;">Отдельные страницы тест-драйва (5 шрифтов):</span>
+  <a href="notus-test-01-display-thin.html" style="text-decoration:none; background:#1c1f2b; color:#e6e6e6; border:1px solid #2e3346; padding:6px 13px; border-radius:6px; font-size:0.8rem; font-weight:500;">01 · Display Thin</a>
+  <a href="notus-test-02-display-italic.html" style="text-decoration:none; background:#1c1f2b; color:#e6e6e6; border:1px solid #2e3346; padding:6px 13px; border-radius:6px; font-size:0.8rem; font-weight:500;">02 · Display Thin Italic</a>
+  <a href="notus-test-03-text-regular.html" style="text-decoration:none; background:#1c1f2b; color:#e6e6e6; border:1px solid #2e3346; padding:6px 13px; border-radius:6px; font-size:0.8rem; font-weight:500;">03 · Display Text</a>
+  <a href="notus-test-04-text-italic.html" style="text-decoration:none; background:#1c1f2b; color:#e6e6e6; border:1px solid #2e3346; padding:6px 13px; border-radius:6px; font-size:0.8rem; font-weight:500;">04 · Display Text Italic</a>
+  <a href="notus-test-05-caption.html" style="text-decoration:none; background:#1c1f2b; color:#e6e6e6; border:1px solid #2e3346; padding:6px 13px; border-radius:6px; font-size:0.8rem; font-weight:500;">05 · Display Caption</a>
+</div>
 
 <div class="controls-panel">
   <!-- Начертание -->

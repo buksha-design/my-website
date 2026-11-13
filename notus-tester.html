@@ -3,46 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notus Font Tester & OpenType Features Inspector</title>
+<title>Notus Unified Type Tester — Все 5 Шрифтов, Оптический Кернинг и Критические Точки</title>
 <style>
   @font-face {
     font-family: 'Notus Display';
-    src: url('notus/Notus-Display.otf?v=20261113_7') format('opentype');
-    font-weight: 100 400;
+    src: url('notus/Notus-Display.otf?v=20261113_8') format('opentype');
+    font-weight: normal;
     font-style: normal;
   }
   @font-face {
     font-family: 'Notus Display Italic';
-    src: url('notus/Notus-Display Italic.otf?v=20261113_7') format('opentype');
-    font-weight: 100 400;
+    src: url('notus/Notus-Display Italic.otf?v=20261113_8') format('opentype');
+    font-weight: normal;
     font-style: italic;
   }
   @font-face {
     font-family: 'Notus Text';
-    src: url('notus/Notus-Text.otf?v=20261113_7') format('opentype');
+    src: url('notus/Notus-Text.otf?v=20261113_8') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
   @font-face {
     font-family: 'Notus Text Italic';
-    src: url('notus/Notus-Text-Italic.otf?v=20261113_7') format('opentype');
+    src: url('notus/Notus-Text-Italic.otf?v=20261113_8') format('opentype');
     font-weight: normal;
     font-style: italic;
   }
   @font-face {
     font-family: 'Notus Caption';
-    src: url('notus/Notus-Caption.otf?v=20261113_7') format('opentype');
+    src: url('notus/Notus-Caption.otf?v=20261113_8') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
 
   :root {
-    --bg: #0f1015;
-    --panel-bg: #181920;
-    --panel-border: #282a36;
+    --bg: #0b0c10;
+    --card: #13151d;
+    --card-alt: #191c26;
+    --border: #272b3a;
+    --text: #eef0f6;
+    --muted: #8b92a8;
     --accent: #5e81f4;
-    --text: #e6e6e6;
-    --text-muted: #8a8d9b;
+    --danger: #ff5263;
+    --danger-bg: rgba(255, 82, 99, 0.14);
+    --warn: #f5a623;
+    --warn-bg: rgba(245, 166, 35, 0.14);
+    --ok: #3dd68c;
+    --ok-bg: rgba(61, 214, 140, 0.14);
+    --active-font: 'Notus Display', serif;
+    --active-style: normal;
+  }
+
+  [data-theme="light"] {
+    --bg: #f5f4ef;
+    --card: #ffffff;
+    --card-alt: #eae8e0;
+    --border: #d6d3c8;
+    --text: #121316;
+    --muted: #5f6370;
+    --accent: #254ce6;
+    --danger: #d92638;
+    --danger-bg: rgba(217, 38, 56, 0.1);
+    --warn: #c87a00;
+    --warn-bg: rgba(200, 122, 0, 0.12);
+    --ok: #158f54;
+    --ok-bg: rgba(21, 143, 84, 0.12);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,538 +75,950 @@
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    line-height: 1.5;
+    padding-bottom: 90px;
   }
 
-  header {
-    background: var(--panel-bg);
-    border-bottom: 1px solid var(--panel-border);
-    padding: 16px 28px;
+  .dyn-font {
+    font-family: var(--active-font);
+    font-style: var(--active-style);
+    font-kerning: normal;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  /* Sticky Master Header with 5 Font Tabs */
+  .master-header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: rgba(11, 12, 16, 0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  [data-theme="light"] .master-header {
+    background: rgba(245, 244, 239, 0.95);
+  }
+
+  .font-tabs-bar {
+    padding: 12px 24px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
+    gap: 14px;
     flex-wrap: wrap;
-    gap: 12px;
+    border-bottom: 1px solid var(--border);
   }
 
-  .title-group h1 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .title-group p {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
-
-  .badge {
-    background: rgba(94, 129, 244, 0.15);
-    color: #8da4f7;
-    font-size: 0.72rem;
-    padding: 2px 7px;
-    border-radius: 4px;
-    font-family: monospace;
-  }
-
-  .controls-panel {
-    background: #14151b;
-    border-bottom: 1px solid var(--panel-border);
-    padding: 16px 28px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px 32px;
-    align-items: center;
-  }
-
-  .control-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .control-group label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-muted);
-  }
-
-  select, input[type="range"], input[type="text"] {
-    background: var(--panel-bg);
-    color: var(--text);
-    border: 1px solid var(--panel-border);
-    border-radius: 6px;
-    padding: 7px 12px;
-    font-size: 0.85rem;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  select:focus, input[type="text"]:focus {
-    border-color: var(--accent);
-  }
-
-  .range-wrap {
+  .brand-title {
     display: flex;
     align-items: center;
     gap: 10px;
-  }
-  .range-val {
-    font-size: 0.82rem;
-    font-family: monospace;
-    color: var(--text-muted);
-    min-width: 44px;
-  }
-
-  .features-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .feature-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--panel-bg);
-    border: 1px solid var(--panel-border);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.15s ease;
-  }
-  .feature-pill input {
-    cursor: pointer;
-    accent-color: var(--accent);
-  }
-  .feature-pill.active {
-    background: rgba(94, 129, 244, 0.18);
-    border-color: var(--accent);
-    color: #fff;
-  }
-  .feature-pill code {
-    font-size: 0.74rem;
-    opacity: 0.7;
-    font-family: monospace;
-  }
-
-  .presets-row {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .preset-btn {
-    background: var(--panel-bg);
-    border: 1px solid var(--panel-border);
-    color: var(--text);
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .preset-btn:hover {
-    background: #232530;
-    border-color: #3b3e52;
-  }
-
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 36px 32px;
-    gap: 32px;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .canvas-card {
-    background: #111217;
-    border: 1px solid var(--panel-border);
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  }
-  .canvas-header {
-    background: rgba(255,255,255,0.02);
-    border-bottom: 1px solid var(--panel-border);
-    padding: 10px 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
-  .canvas-body {
-    padding: 48px 36px;
-    min-height: 240px;
-    position: relative;
-    overflow-x: auto;
-  }
-
-  .editable-text {
-    outline: none;
-    line-height: 1.25;
-    white-space: pre-wrap;
-    word-break: break-word;
-    transition: color 0.15s;
-  }
-  .editable-text:focus {
-    background: rgba(255, 255, 255, 0.015);
-  }
-
-  /* Overlay Comparison */
-  .comparison-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  @media (max-width: 900px) {
-    .comparison-split { grid-template-columns: 1fr; }
-  }
-
-  .split-pane {
-    background: #121318;
-    border: 1px solid var(--panel-border);
-    border-radius: 10px;
-    padding: 24px;
-    position: relative;
-  }
-  .split-label {
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    font-size: 0.72rem;
-    text-transform: uppercase;
     font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+  }
+  .brand-badge {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: 1px solid rgba(255, 82, 99, 0.35);
+    font-size: 0.7rem;
     padding: 2px 8px;
     border-radius: 4px;
-  }
-  .split-label.on {
-    background: rgba(78, 201, 176, 0.15);
-    color: #4ec9b0;
-  }
-  .split-label.off {
-    background: rgba(244, 87, 87, 0.15);
-    color: #f45757;
+    font-family: monospace;
+    text-transform: uppercase;
   }
 
-  /* Quick Test Pairs section */
-  .quick-tests {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
+  .font-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
   }
-  .pair-card {
-    background: #14151c;
-    border: 1px solid var(--panel-border);
+  .font-tab {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 8px 15px;
     border-radius: 8px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.15s;
+  }
+  .font-tab:hover {
+    border-color: var(--accent);
+  }
+  .font-tab.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 4px 16px rgba(94, 129, 244, 0.35);
+  }
+  .tab-pill {
+    font-size: 0.7rem;
+    font-family: monospace;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+  .font-tab.active .tab-pill {
+    background: rgba(255,255,255,0.22);
+    color: #fff;
+  }
+  .tab-pill.crit { background: var(--danger-bg); color: var(--danger); }
+  .tab-pill.warn { background: var(--warn-bg); color: var(--warn); }
+  .tab-pill.ok { background: var(--ok-bg); color: var(--ok); }
+
+  /* OpenType & Sliders Bar */
+  .toolbar {
+    padding: 10px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card);
+  }
+  .feat-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .feat-btn {
+    background: var(--card-alt);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 5px 11px;
+    border-radius: 6px;
+    font-size: 0.76rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .feat-btn.active {
+    background: rgba(94, 129, 244, 0.18);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .feat-btn code { font-size: 0.7rem; opacity: 0.85; }
+
+  .container {
+    max-width: 1580px;
+    margin: 0 auto;
+    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+  }
+
+  /* Hero & Critical Points Section */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 310px;
+    gap: 20px;
+    align-items: stretch;
+  }
+  @media (max-width: 1024px) { .hero-grid { grid-template-columns: 1fr; } }
+
+  .hero-main {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+  .hero-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .hero-title-row h1 { font-size: 1.55rem; }
+  .hero-meta { font-family: monospace; font-size: 0.82rem; color: var(--accent); margin-bottom: 14px; }
+  .hero-verdict {
+    background: var(--card-alt);
+    border-left: 4px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    margin-bottom: 18px;
+  }
+
+  .crit-cards-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 14px;
+  }
+  .crit-alert-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--danger);
+    border-radius: 10px;
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
-  .pair-meta {
+  .crit-alert-card.warn {
+    border-left-color: var(--warn);
+  }
+  .crit-alert-head {
     display: flex;
     justify-content: space-between;
-    font-size: 0.75rem;
-    color: var(--text-muted);
+    align-items: center;
+    gap: 8px;
   }
-  .pair-sample {
-    font-size: 2.2rem;
-    line-height: 1.2;
-    padding: 8px 0;
-    border-bottom: 1px dashed var(--panel-border);
+  .crit-tag {
+    font-size: 0.68rem;
+    font-family: monospace;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .crit-tag.CRIT { background: var(--danger-bg); color: var(--danger); border: 1px solid rgba(255,82,99,0.4); }
+  .crit-tag.WARN { background: var(--warn-bg); color: var(--warn); border: 1px solid rgba(245,166,35,0.4); }
+  .crit-alert-title { font-weight: 700; font-size: 0.92rem; }
+  .crit-alert-fix { font-size: 0.82rem; color: var(--ok); font-weight: 500; }
+  .crit-alert-sample {
+    font-size: 2.35rem;
+    line-height: 1.18;
+    padding: 10px 12px;
+    background: var(--card);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .crit-alert-pairs {
+    font-family: monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: var(--card-alt);
+    padding: 8px 10px;
+    border-radius: 6px;
+    user-select: all;
   }
 
-  .status-bar {
-    background: var(--panel-bg);
-    border-top: 1px solid var(--panel-border);
-    padding: 10px 28px;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    font-family: monospace;
+  .metrics-sidebar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
     display: flex;
-    gap: 20px;
+    flex-direction: column;
     justify-content: space-between;
+    gap: 12px;
+    font-family: monospace;
+    font-size: 0.8rem;
+  }
+  .metric-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  /* Section Headers */
+  .sec-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
     flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  .sec-head h2 { font-size: 1.12rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .sec-head span { font-size: 0.8rem; color: var(--muted); }
+
+  /* A/B Inspector */
+  .inspector-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  @media (max-width: 900px) { .inspector-grid { grid-template-columns: 1fr; } }
+  .insp-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    position: relative;
+  }
+  .insp-badge {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 0.7rem;
+    font-family: monospace;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .insp-badge.on { background: var(--ok-bg); color: var(--ok); }
+  .insp-badge.off { background: var(--danger-bg); color: var(--danger); }
+  .insp-text {
+    font-size: 5.2rem;
+    line-height: 1.15;
+    min-height: 105px;
+    outline: none;
+  }
+
+  /* Copyable Comma Table */
+  .comma-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 0.86rem;
+  }
+  .comma-table th, .comma-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+  }
+  .comma-table th {
+    width: 270px;
+    background: var(--card-alt);
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .comma-box {
+    font-family: monospace;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    border-radius: 6px;
+    user-select: all;
+  }
+  .copy-btn {
+    margin-top: 6px;
+    background: var(--card-alt);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.72rem;
+    cursor: pointer;
+  }
+  .copy-btn:hover { border-color: var(--accent); }
+
+  /* Filter Tabs for Visual Pair Cards */
+  .cat-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .cat-tab {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .cat-tab.active {
+    background: var(--card-alt);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .pair-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+    gap: 12px;
+  }
+  .pair-chip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    transition: transform 0.12s, border-color 0.12s;
+  }
+  .pair-chip.is-crit {
+    border-color: rgba(255, 82, 99, 0.55);
+    background: linear-gradient(180deg, rgba(255, 82, 99, 0.07) 0%, var(--card) 100%);
+  }
+  .pair-chip:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .pair-chip__top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    font-family: monospace;
+  }
+  .pair-chip__glyphs {
+    font-size: 3.1rem;
+    line-height: 1.15;
+    margin: 4px 0;
+  }
+  .pair-chip__ctx {
+    font-size: 1.25rem;
+    color: var(--muted);
+  }
+  .pair-chip__metrics {
+    font-size: 0.67rem;
+    font-family: monospace;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* Ligatures & Editorial Grid */
+  .ot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+  .ot-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+  .ot-card.crit-missing {
+    border: 2px solid var(--danger);
+    background: var(--danger-bg);
+  }
+  .ot-card__meta { font-size: 0.72rem; font-family: monospace; color: var(--muted); }
+  .ot-card__big { font-size: 3.2rem; line-height: 1.15; margin: 8px 0; }
+  .ot-card__word { font-size: 1rem; color: var(--muted); }
+
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 1000px) { .editorial-grid { grid-template-columns: 1fr; } }
+  .ed-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+  }
+  .ed-label {
+    font-size: 0.72rem;
+    font-family: monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .ed-display { font-size: 2.4rem; line-height: 1.22; margin-bottom: 12px; outline: none; }
+  .ed-body { font-size: 1.2rem; line-height: 1.58; outline: none; }
+
+  mark.crit-hl {
+    background: rgba(255, 82, 99, 0.22);
+    color: inherit;
+    border-bottom: 2px solid var(--danger);
+    padding: 0 2px;
+    border-radius: 3px;
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="title-group">
-    <h1>Notus Font Tester <span class="badge">OpenType & Kerning Inspector (Export Nov 13)</span></h1>
-    <p>Интерактивный инспектор + отдельные страницы тест-драйва для каждого из 5 шрифтов</p>
+<header class="master-header">
+  <div class="font-tabs-bar">
+    <div class="brand-title">
+      <span>NOTUS MASTER TEST-DRIVE</span>
+      <span class="brand-badge">5 Шрифтов в 1 Окне &bull; Экспорт 17:49</span>
+    </div>
+    <div class="font-tabs" id="fontTabs">
+      <button class="font-tab active" data-id="01" onclick="selectFont('01')">
+        01 · Display Thin <span class="tab-pill warn">9 крит.</span>
+      </button>
+      <button class="font-tab" data-id="02" onclick="selectFont('02')">
+        02 · Display Italic <span class="tab-pill crit">34 крит.</span>
+      </button>
+      <button class="font-tab" data-id="03" onclick="selectFont('03')">
+        03 · Display Text <span class="tab-pill crit">46 крит.</span>
+      </button>
+      <button class="font-tab" data-id="04" onclick="selectFont('04')">
+        04 · Text Italic <span class="tab-pill crit">27 крит.</span>
+      </button>
+      <button class="font-tab" data-id="05" onclick="selectFont('05')">
+        05 · Caption <span class="tab-pill warn">+kern дыры</span>
+      </button>
+    </div>
   </div>
-  <div class="presets-row">
-    <span style="font-size: 0.75rem; color: var(--text-muted);">Быстрый текст:</span>
-    <button class="preset-btn" onclick="setText('Skärpa i mörker,\nmjuk i rörelse.')">Скриншот (Skärpa...)</button>
-    <button class="preset-btn" onclick="setText('ct st fb fh fj fk ft ffb ffh ffj ffk')">Лигатуры dlig</button>
-    <button class="preset-btn" onclick="setText('Th fi fl ff ffi ffl')">Лигатуры liga</button>
-    <button class="preset-btn" onclick="setText('1234567890 1/2 3/4 x² H₂O')">Цифры / Frac</button>
-    <button class="preset-btn" onclick="setText('SMALL CAPS & LOREM IPSUM DOLOR')">Капитель (smcp)</button>
-    <button class="preset-btn" onclick="setText('AV Aw Ta To Tr Tu Ty Va Vo Wa Wo Ya Yo V. W, Y.')">Кернинг-пары</button>
+
+  <div class="toolbar">
+    <div class="feat-group">
+      <span style="font-size:0.72rem; color:var(--muted); text-transform:uppercase; font-weight:700;">Фичи:</span>
+      <button class="feat-btn active" id="btn-kern" onclick="toggleFeat('kern')">Кернинг <code>kern</code></button>
+      <button class="feat-btn active" id="btn-liga" onclick="toggleFeat('liga')">Лигатуры <code>liga</code></button>
+      <button class="feat-btn" id="btn-dlig" onclick="toggleFeat('dlig')">Дискреционные <code>dlig</code></button>
+      <button class="feat-btn" id="btn-smcp" onclick="toggleFeat('smcp')">Капитель <code>smcp</code></button>
+      <button class="feat-btn" id="btn-onum" onclick="toggleFeat('onum')">Цифры <code>onum</code></button>
+      <button class="feat-btn" id="btn-frac" onclick="toggleFeat('frac')">Дроби <code>frac</code></button>
+      <button class="feat-btn" id="btn-sups" onclick="toggleFeat('sups')">Индекс <code>sups</code></button>
+    </div>
+    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+      <label style="font-size:0.76rem; color:var(--muted);">Кегль инспектора:
+        <input type="range" min="36" max="130" value="84" oninput="setInspSize(this.value)" style="vertical-align:middle; width:85px;">
+      </label>
+      <label style="font-size:0.76rem; color:var(--muted);">Трекинг:
+        <input type="range" min="-0.06" max="0.15" step="0.005" value="0" oninput="setTracking(this.value)" style="vertical-align:middle; width:80px;">
+        <span id="trackVal" style="font-family:monospace;">0.00em</span>
+      </label>
+      <button class="feat-btn" onclick="toggleTheme()">Тема ◐</button>
+    </div>
   </div>
 </header>
 
-<div style="background: #11131a; border-bottom: 1px solid var(--panel-border); padding: 12px 28px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
-  <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #8da4f7; margin-right: 6px;">Отдельные страницы тест-драйва (5 шрифтов):</span>
-  <a href="notus-test-01-display-thin.html" style="text-decoration:none; background:#1c1f2b; color:#e6e6e6; border:1px solid #2e3346; padding:6px 13px; border-radius:6px; font-size:0.8rem; font-weight:500;">01 · Display Thin</a>
-  <a href="notus-test-02-display-italic.html" style="text-decoration:none; background:#1c1f2b; color:#e6e6e6; border:1px solid #2e3346; padding:6px 13px; border-radius:6px; font-size:0.8rem; font-weight:500;">02 · Display Thin Italic</a>
-  <a href="notus-test-03-text-regular.html" style="text-decoration:none; background:#1c1f2b; color:#e6e6e6; border:1px solid #2e3346; padding:6px 13px; border-radius:6px; font-size:0.8rem; font-weight:500;">03 · Display Text</a>
-  <a href="notus-test-04-text-italic.html" style="text-decoration:none; background:#1c1f2b; color:#e6e6e6; border:1px solid #2e3346; padding:6px 13px; border-radius:6px; font-size:0.8rem; font-weight:500;">04 · Display Text Italic</a>
-  <a href="notus-test-05-caption.html" style="text-decoration:none; background:#1c1f2b; color:#e6e6e6; border:1px solid #2e3346; padding:6px 13px; border-radius:6px; font-size:0.8rem; font-weight:500;">05 · Display Caption</a>
-</div>
+<div class="container">
 
-<div class="controls-panel">
-  <!-- Начертание -->
-  <div class="control-group">
-    <label>Шрифт / Начертание</label>
-    <select id="fontSelect" onchange="updateStyles()">
-      <option value="'Notus Display', serif" selected>Notus Display (Thin Replaced)</option>
-      <option value="'Notus Display Italic', serif">Notus Display Italic</option>
-      <option value="'Notus Text', serif">Notus Text</option>
-      <option value="'Notus Text Italic', serif">Notus Text Italic</option>
-      <option value="'Notus Caption', serif">Notus Caption</option>
-    </select>
-  </div>
+  <!-- 1. БЛОК КРИТИЧЕСКИХ МОМЕНТОВ ВЫБРАННОГО ШРИФТА -->
+  <div class="hero-grid">
+    <div class="hero-main">
+      <div class="hero-title-row">
+        <h1 id="heroName">01 — Notus Display Thin</h1>
+        <span id="heroFile" style="font-family:monospace; font-size:0.8rem; color:var(--muted);"></span>
+      </div>
+      <div class="hero-meta" id="heroRole"></div>
+      <div class="hero-verdict" id="heroVerdict"></div>
 
-  <!-- Размер кегля -->
-  <div class="control-group">
-    <label>Размер кегля: <span id="sizeVal" class="range-val">64px</span></label>
-    <div class="range-wrap">
-      <input type="range" id="sizeRange" min="16" max="140" value="64" oninput="updateStyles()">
+      <h3 style="font-size:0.82rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--danger); margin-bottom:10px;">
+        🔥 Критические моменты выбранного начертания (кликните по примеру для загрузки в A/B инспектор):
+      </h3>
+      <div class="crit-cards-list" id="critPointsContainer"></div>
+    </div>
+
+    <div class="metrics-sidebar">
+      <div>
+        <div style="color:var(--accent); font-weight:700; margin-bottom:8px; text-transform:uppercase;">Паспорт и Метрики:</div>
+        <div class="metric-row"><span>GPOS пар:</span> <strong id="mGpos">—</strong></div>
+        <div class="metric-row"><span>Лигатура Th (liga):</span> <strong id="mTh">—</strong></div>
+        <div class="metric-row"><span>Капитель (smcp):</span> <strong id="mSmcp">—</strong></div>
+        <div class="metric-row"><span>Эталон o+o:</span> <strong id="mOO">—</strong></div>
+        <div class="metric-row"><span>Эталон n+o:</span> <strong id="mNO">—</strong></div>
+        <div class="metric-row"><span>Эталон n+n:</span> <strong id="mNN">—</strong></div>
+        <div class="metric-row"><span>Эталон H+H:</span> <strong id="mHH">—</strong></div>
+      </div>
+      <div>
+        <div style="color:var(--danger); font-weight:700; margin-bottom:6px; text-transform:uppercase;">Сводка ошибок:</div>
+        <div class="metric-row"><span>🔴 Наезды (-kern):</span> <strong id="cNeg" style="color:var(--danger);">0</strong></div>
+        <div class="metric-row"><span>🟠 Слипания ядра:</span> <strong id="cTight" style="color:var(--warn);">0</strong></div>
+        <div class="metric-row"><span>🟣 Дыры от +kern:</span> <strong id="cPos" style="color:var(--accent);">0</strong></div>
+        <div class="metric-row"><span>🟡 Наезды (kern=0):</span> <strong id="cNat">0</strong></div>
+      </div>
     </div>
   </div>
 
-  <!-- Tracking -->
-  <div class="control-group">
-    <label>Letter-spacing: <span id="spacingVal" class="range-val">0.00em</span></label>
-    <div class="range-wrap">
-      <input type="range" id="spacingRange" min="-0.1" max="0.3" step="0.005" value="0" oninput="updateStyles()">
+  <!-- 2. ИНТЕРАКТИВНЫЙ A/B ИНСПЕКТОР (KERN ON vs KERN OFF) -->
+  <section>
+    <div class="sec-head">
+      <h2>1. A/B Инспектор Критических Пар (С кернингом vs Без кернинга)</h2>
+      <span>Кликните на любую карточку ошибки или введите свой текст</span>
     </div>
-  </div>
-
-  <!-- Цвет фона / темы -->
-  <div class="control-group">
-    <label>Тема</label>
-    <select id="themeSelect" onchange="toggleTheme()">
-      <option value="dark" selected>Тёмная (Космос)</option>
-      <option value="light">Светлая</option>
-    </select>
-  </div>
-</div>
-
-<div class="controls-panel" style="padding-top: 10px; padding-bottom: 14px; background: #101116;">
-  <div class="control-group" style="width: 100%;">
-    <label>OpenType Features (включить / выключить):</label>
-    <div class="features-grid">
-      <label class="feature-pill active" id="lbl-kern">
-        <input type="checkbox" id="feat-kern" checked onchange="handlePill('kern')">
-        <strong>Кернинг</strong> <code>kern</code>
-      </label>
-
-      <label class="feature-pill active" id="lbl-liga">
-        <input type="checkbox" id="feat-liga" checked onchange="handlePill('liga')">
-        <strong>Стандартные лигатуры</strong> <code>liga</code>
-      </label>
-
-      <label class="feature-pill" id="lbl-dlig">
-        <input type="checkbox" id="feat-dlig" onchange="handlePill('dlig')">
-        <strong>Дискреционные лигатуры</strong> <code>dlig</code>
-      </label>
-
-      <label class="feature-pill" id="lbl-smcp">
-        <input type="checkbox" id="feat-smcp" onchange="handlePill('smcp')">
-        <strong>Капитель</strong> <code>smcp</code>
-      </label>
-
-      <label class="feature-pill" id="lbl-onum">
-        <input type="checkbox" id="feat-onum" onchange="handlePill('onum')">
-        <strong>Минускульные цифры</strong> <code>onum</code>
-      </label>
-
-      <label class="feature-pill" id="lbl-frac">
-        <input type="checkbox" id="feat-frac" onchange="handlePill('frac')">
-        <strong>Дроби</strong> <code>frac</code>
-      </label>
-
-      <label class="feature-pill" id="lbl-sups">
-        <input type="checkbox" id="feat-sups" onchange="handlePill('sups')">
-        <strong>Верхний индекс</strong> <code>sups</code>
-      </label>
+    <div class="inspector-grid">
+      <div class="insp-box">
+        <span class="insp-badge on">KERN: ON (GPOS активен)</span>
+        <div id="inspOn" class="insp-text dyn-font" contenteditable="true" spellcheck="false" style="font-feature-settings:'kern' 1; font-kerning:normal;">Cîroc Oława СЛОВО fm fn</div>
+      </div>
+      <div class="insp-box">
+        <span class="insp-badge off">KERN: OFF (Сырые апроши hmtx)</span>
+        <div id="inspOff" class="insp-text dyn-font" contenteditable="true" spellcheck="false" style="font-feature-settings:'kern' 0; font-kerning:none;">Cîroc Oława СЛОВО fm fn</div>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<main>
-  <!-- Главное интерактивное поле -->
-  <div class="canvas-card">
-    <div class="canvas-header">
-      <span>Интерактивный холст (кликните, чтобы редактировать текст)</span>
-      <span id="appliedFeaturesCss" style="font-family: monospace; color: #8da4f7;">font-feature-settings: ...</span>
+  <!-- 3. ТАБЛИЦА ПАР ЧЕРЕЗ ЗАПЯТУЮ (ДЛЯ FONTLAB) -->
+  <section>
+    <div class="sec-head">
+      <h2>2. Таблица проблемных пар через запятую (для копирования в FontLab)</h2>
+      <span>Автоматически обновляется при переключении вкладки шрифта</span>
     </div>
-    <div class="canvas-body" id="canvasBg">
-      <div id="targetText" class="editable-text" contenteditable="true" spellcheck="false">Skärpa i mörker,
-mjuk i rörelse.</div>
-    </div>
-  </div>
+    <table class="comma-table">
+      <tbody>
+        <tr>
+          <th>
+            <span style="color:var(--danger);">🔴 A. Наезды из-за -kern</span><br>
+            <small id="lblCountNeg">Контуры пересекаются</small>
+          </th>
+          <td>
+            <div class="comma-box" id="commaNeg"></div>
+            <button class="copy-btn" onclick="copyBox('commaNeg', this)">Скопировать пары через запятую</button>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <span style="color:var(--warn);">🟠 B. Оптическое слипание</span><br>
+            <small id="lblCountTight">Слишком узкий просвет ядра</small>
+          </th>
+          <td>
+            <div class="comma-box" id="commaTight"></div>
+            <button class="copy-btn" onclick="copyBox('commaTight', this)">Скопировать пары через запятую</button>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <span style="color:var(--accent);">🟣 C. Дыры из-за лишнего +kern</span><br>
+            <small id="lblCountPos">Плюсовой кернинг разрывает слово</small>
+          </th>
+          <td>
+            <div class="comma-box" id="commaPos"></div>
+            <button class="copy-btn" onclick="copyBox('commaPos', this)">Скопировать пары через запятую</button>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <span style="color:var(--warn);">🟡 D. Наезды (kern=0) + Пропущенный минус</span><br>
+            <small id="lblCountOpt">Оптические дыры</small>
+          </th>
+          <td>
+            <div class="comma-box" id="commaOpt"></div>
+            <button class="copy-btn" onclick="copyBox('commaOpt', this)">Скопировать пары через запятую</button>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <span style="color:var(--ok);">📋 E. ВСЕ ПАРЫ ЭТОГО ШРИФТА</span><br>
+            <small>Единый список через запятую</small>
+          </th>
+          <td>
+            <div class="comma-box" id="commaAll"></div>
+            <button class="copy-btn" onclick="copyBox('commaAll', this)">Скопировать весь список</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
-  <!-- A/B Сравнение: Кернинг ВКЛ против Кернинг ВЫКЛ -->
-  <h2 style="font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">A/B Тест: С Кернингом vs Без Кернинга</h2>
-  <div class="comparison-split">
-    <div class="split-pane">
-      <span class="split-label on">Кернинг ВКЛ (kern: 1)</span>
-      <div id="previewKernOn" class="editable-text" style="font-feature-settings: 'kern' 1; font-kerning: normal;"></div>
+  <!-- 4. ВИЗУАЛЬНЫЕ КАРТОЧКИ ПАР С ПОМЕТКОЙ КРИТИЧЕСКИХ -->
+  <section>
+    <div class="sec-head">
+      <h2>3. Визуальные карточки пар с ошибками (клик загружает пару в A/B инспектор)</h2>
+      <span>Красной рамкой помечены критические аномалии</span>
     </div>
-    <div class="split-pane">
-      <span class="split-label off">Кернинг ВЫКЛ (kern: 0)</span>
-      <div id="previewKernOff" class="editable-text" style="font-feature-settings: 'kern' 0; font-kerning: none;"></div>
+    <div class="cat-tabs">
+      <button class="cat-tab active" data-cat="crashes_neg" onclick="selectCategory('crashes_neg')">🔴 Наезды из-за -kern (<span id="tabCntNeg">0</span>)</button>
+      <button class="cat-tab" data-cat="over_tight" onclick="selectCategory('over_tight')">🟠 Оптическое слипание (<span id="tabCntTight">0</span>)</button>
+      <button class="cat-tab" data-cat="pos_holes" onclick="selectCategory('pos_holes')">🟣 Дыры из-за +kern (<span id="tabCntPos">0</span>)</button>
+      <button class="cat-tab" data-cat="opt_holes" onclick="selectCategory('opt_holes')">🟡 Наезды (0) и Оптические дыры (<span id="tabCntOpt">0</span>)</button>
     </div>
-  </div>
+    <div class="pair-grid" id="pairCardsGrid"></div>
+  </section>
 
-  <!-- Специальные тесты лигатур и умлаутов -->
-  <h2 style="font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Характерные пары Notus Display</h2>
-  <div class="quick-tests">
-    <div class="pair-card">
-      <div class="pair-meta"><span>Диакритика & Овалы</span><code>Skärpa / mörker</code></div>
-      <div class="pair-sample sample-font">Skärpa mörker rörelse</div>
+  <!-- 5. ТЕСТ-ДРАЙВ ЛИГАТУР И КАПИТЕЛИ -->
+  <section>
+    <div class="sec-head">
+      <h2>4. Тест-Драйв Лигатур (liga / dlig) и Капители (smcp)</h2>
+      <span id="thStatusBanner"></span>
     </div>
-    <div class="pair-card">
-      <div class="pair-meta"><span>Стандартные лигатуры</span><code>fi fl ffi ffl Th</code></div>
-      <div class="pair-sample sample-font">Th fi fl ffi ffl</div>
+    <div class="ot-grid" style="margin-bottom:18px;">
+      <div class="ot-card" id="thCard">
+        <div class="ot-card__meta">liga: T + h &rarr; T_h</div>
+        <div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">Th</div>
+        <div class="ot-card__word dyn-font" style="font-feature-settings:'liga' 1;">The Theater</div>
+      </div>
+      <div class="ot-card"><div class="ot-card__meta">liga: fi</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">fi</div><div class="ot-card__word dyn-font">fine profile</div></div>
+      <div class="ot-card"><div class="ot-card__meta">liga: fl</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">fl</div><div class="ot-card__word dyn-font">fluid flame</div></div>
+      <div class="ot-card"><div class="ot-card__meta">liga: ff</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">ff</div><div class="ot-card__word dyn-font">effect affair</div></div>
+      <div class="ot-card"><div class="ot-card__meta">liga: ffi</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">ffi</div><div class="ot-card__word dyn-font">office affinity</div></div>
+      <div class="ot-card"><div class="ot-card__meta">liga: ffl</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">ffl</div><div class="ot-card__word dyn-font">Souffle baffle</div></div>
+      <div class="ot-card"><div class="ot-card__meta">dlig: ct / st</div><div class="ot-card__big dyn-font" style="font-feature-settings:'dlig' 1;">ct st</div><div class="ot-card__word dyn-font" style="font-feature-settings:'dlig' 1;">nocturne stone</div></div>
+      <div class="ot-card"><div class="ot-card__meta">dlig: fb fh fj fk ft</div><div class="ot-card__big dyn-font" style="font-feature-settings:'dlig' 1;">fj ft</div><div class="ot-card__word dyn-font" style="font-feature-settings:'dlig' 1;">fjord softly</div></div>
     </div>
-    <div class="pair-card">
-      <div class="pair-meta"><span>Дискреционные (dlig)</span><code>ct st fb fh fj fk</code></div>
-      <div class="pair-sample sample-font" style="font-feature-settings: 'dlig' 1;">ct st fb fh fj fk ft</div>
-    </div>
-    <div class="pair-card">
-      <div class="pair-meta"><span>Критичные пары</span><code>Ta Te To Tr Tu Ty</code></div>
-      <div class="pair-sample sample-font">Ta Te To Tr Tu Ty Va Vo</div>
-    </div>
-  </div>
-</main>
 
-<div class="status-bar">
-  <div>Файл: <code>01 - Notus - Display - Thin.otf</code> &rarr; <code>notus/Notus-Display.otf</code> (Заменён успешно)</div>
-  <div id="featureSummary">Active: kern, liga</div>
+    <div class="editorial-grid">
+      <div class="ed-card">
+        <div class="ed-label">Капитель (smcp = 1) — Проверка кернинга Прописная + Капитель</div>
+        <div class="ed-display dyn-font" contenteditable="true" spellcheck="false" style="font-feature-settings:'kern' 1, 'smcp' 1; font-variant-caps:small-caps;">
+          The Notus Times &bull; Anno Domini 1894
+        </div>
+        <div class="ed-body dyn-font" contenteditable="true" spellcheck="false" style="font-feature-settings:'kern' 1, 'smcp' 1; font-variant-caps:small-caps;">
+          abcdefghijklmnopqrstuvwxyz &bull; Vavuniya, Warsaw, Kyoto, Zurich, Florence, Palais, Typographie
+        </div>
+      </div>
+      <div class="ed-card">
+        <div class="ed-label">Минускульные цифры (onum = 1), Дроби (frac = 1) и Индексы (sups = 1)</div>
+        <div class="ed-display dyn-font" contenteditable="true" spellcheck="false" style="font-feature-settings:'kern' 1, 'onum' 1, 'frac' 1;">
+          0123456789 &bull; 1/2 3/4 5/8
+        </div>
+        <div class="ed-body dyn-font" contenteditable="true" spellcheck="false" style="font-feature-settings:'kern' 1, 'onum' 1;">
+          1928, 2026, €4,850.00, ₽96,340.50 &bull; Примечание<span style="font-feature-settings:'sups' 1;">14</span>, м<span style="font-feature-settings:'sups' 1;">2</span>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. МНОГОЯЗЫЧНЫЙ ТЕСТ-ДРАЙВ С ПОДСВЕТКОЙ КРИТИЧЕСКИХ МЕСТ -->
+  <section>
+    <div class="sec-head">
+      <h2>5. Многоязычный Тест-Драйв в Фразах и Текстах (с пометкой критических пар в словах)</h2>
+      <span>Подсвеченные маркером места показывают, где критические пары встречаются в реальном наборе</span>
+    </div>
+    <div class="editorial-grid">
+      <div class="ed-card">
+        <div class="ed-label">01. Стресс-тест критических мест (Латиница + Диакритика)</div>
+        <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
+          <mark class="crit-hl">Cî</mark>roc, <mark class="crit-hl">Qx</mark>ford, <mark class="crit-hl">Ox</mark>ford, <mark class="crit-hl">Oł</mark>awa, <mark class="crit-hl">Tî</mark>rgu, <mark class="crit-hl">Yì</mark>n, <mark class="crit-hl">Vš</mark>e, <mark class="crit-hl">Wš</mark>e
+        </div>
+        <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
+          Проверка плюсовых дыр после <b>g, j, f</b>: <mark class="crit-hl">go</mark>ld, <mark class="crit-hl">gd</mark>zie, <mark class="crit-hl">gr</mark>ace, <mark class="crit-hl">gl</mark>ass, <mark class="crit-hl">gm</mark>ach, <mark class="crit-hl">gj</mark>ord, <mark class="crit-hl">jm</mark>éno, <mark class="crit-hl">jr</mark>, <mark class="crit-hl">fm</mark>, <mark class="crit-hl">fn</mark>, <mark class="crit-hl">fr</mark>ame, <mark class="crit-hl">fp</mark>, <mark class="crit-hl">łw</mark>, <mark class="crit-hl">łv</mark>, <mark class="crit-hl">ťw</mark>.
+        </div>
+      </div>
+
+      <div class="ed-card">
+        <div class="ed-label">02. Стресс-тест критических мест (Кириллица RU / BY / UA)</div>
+        <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
+          <mark class="crit-hl">Сл</mark>оварь, <mark class="crit-hl">Сї</mark>вер, <mark class="crit-hl">Ож</mark>ог, <mark class="crit-hl">Юж</mark>ный, <mark class="crit-hl">Ох</mark>вата, <mark class="crit-hl">Юх</mark>нов, <mark class="crit-hl">Сз</mark>ади
+        </div>
+        <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
+          Проверка <b>С+прямые</b> и <b>Р+строчные</b>: <mark class="crit-hl">Св</mark>ет, <mark class="crit-hl">Ск</mark>возь, <mark class="crit-hl">Сн</mark>ег, <mark class="crit-hl">Си</mark>ла, <mark class="crit-hl">Сп</mark>ор, <mark class="crit-hl">Сц</mark>ена, <mark class="crit-hl">Ру</mark>ка, <mark class="crit-hl">Рм</mark>, <mark class="crit-hl">Рп</mark>, <mark class="crit-hl">Рр</mark>, <mark class="crit-hl">Ри</mark>тм, <mark class="crit-hl">Рн</mark>, <mark class="crit-hl">Рв</mark>, <mark class="crit-hl">Со</mark>н, <mark class="crit-hl">Се</mark>ть, <mark class="crit-hl">СМ</mark>И, <mark class="crit-hl">СБ</mark>ОР.
+        </div>
+      </div>
+
+      <div class="ed-card">
+        <div class="ed-label">03. Broadsheet Hero Slogans (Слоганы с главной страницы)</div>
+        <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
+          Silent rhythm, tactile grace.<br>
+          Souffle doré, beauté pure.<br>
+          Skärpa i mörker, mjuk i rörelse.<br>
+          Czułe światło, żywa forma.<br>
+          Жыве Беларусь! Жыве вечна!
+        </div>
+      </div>
+
+      <div class="ed-card">
+        <div class="ed-label">04. Редакционный текст (English / Polish / Czech / Russian / Ukrainian)</div>
+        <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
+          Named after the ancient deity of the southern gale, Notus dissolves the cold severity of neoclassical letterforms with fluid, kinetic terminations. Wśród nocnej ciszy, żółć, źródło, szczęście, dźwig. Příliš žluťoučký kůň úpěl ďábelské ódy. Плавность текучих капель и непоколебимая строгость высокого контраста. Чуєш їх, доцю, га? Кумедна ж ти, прощайся без ґольфів!
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
 <script>
-  const targetText = document.getElementById('targetText');
-  const previewKernOn = document.getElementById('previewKernOn');
-  const previewKernOff = document.getElementById('previewKernOff');
-  const fontSelect = document.getElementById('fontSelect');
-  const sizeRange = document.getElementById('sizeRange');
-  const sizeVal = document.getElementById('sizeVal');
-  const spacingRange = document.getElementById('spacingRange');
-  const spacingVal = document.getElementById('spacingVal');
-  const appliedFeaturesCss = document.getElementById('appliedFeaturesCss');
-  const featureSummary = document.getElementById('featureSummary');
-  const canvasBg = document.getElementById('canvasBg');
+  const DB = {"01": {"cfg": {"id": "01", "name": "01 — Notus Display Thin", "short": "01 · Display Thin", "file": "01 - Notus - Display - Thin.otf", "web_path": "notus/Notus-Display.otf?v=20261113_8", "family": "Notus Display", "style": "normal", "role": "Headline & Monumental Display (48–160pt)", "has_Th": true, "gpos_pairs": "61 418", "smcp_count": 342, "status_color": "ok", "crit_count": 9, "verdict": "Самое чистое начертание после экспорта 17:31 (исправлены Tî, Ťî, Pî, Qx, Xf и пережатия От, Фт, Эт, Ют, Ca, Ож, Эж, Юж). Осталось всего 5 пересечений диакритики и 4 пережатые пары.", "critical_points": [{"level": "CRIT", "title": "1. Пересечения C/Ç с циркумфлексом и трема (-70) + įj (-40)", "fix": "Ослабить с -70 до -15 (для įj поставить 0)", "pairs": "Cî, Çî, įj, Cï, Çï", "sample": "Cîroc Çî įj Cïty"}, {"level": "CRIT", "title": "2. Пережатые пары с польской ł (-70) и кириллической СЛ (-50)", "fix": "Ослабить Oł, Øł, ßł с -70 до -30; СЛ с -50 до -25", "pairs": "Oł, Øł, ßł, СЛ", "sample": "Oława Øł ßł СЛОВО"}, {"level": "WARN", "title": "3. Избыточный плюсовой кернинг +30 после f перед строчными", "fix": "Обнулить (+30 → 0), иначе внутри слова образуется дыра 295–300u (при норме no = 161u)", "pairs": "fm, fn, fń, fb, fh, fk, fl, fp, fr, fi, fį, fî, ff, fł", "sample": "fm fn fp fr fb fh fk"}, {"level": "WARN", "title": "4. Оптические дыры (пропущен минусовой кернинг)", "fix": "Добавить -35…-70 для открытых прописных Г, Є, С, F, L, T", "pairs": "Єл, ГЗ, Єх, Єж, ЄЗ, ЄЭ, Єэ, ГХ, FX, FY, Cj, Çj, Сх, ГЖ, Єт, СЗ, ГУ, ГЎ, КЗ, ГМ, ЄТ, ГЯ, Єю, FV, LT, LŤ, Cx, Fx, Çx, ЕЧ, Сж, ЕЗ, FW, Cv, Cw, LY, Fj, Yj, Tj, ET", "sample": "ГЗ ГХ FX FY LT ET Fj Cj"}]}, "refs": {"oo": 136, "no": 161, "nn": 239, "OO": 117, "HH": 256}, "counts": {"crashes_neg": 5, "crashes_nat": 0, "over_tight": 4, "pos_holes": 14, "opt_holes": 1505}, "crashes_neg": [{"p": "Cî", "k": -70, "gnk": 24, "gk": -46, "ck": 71, "ok": 386, "ctx": "Cîno"}, {"p": "Çî", "k": -70, "gnk": 24, "gk": -46, "ck": 71, "ok": 386, "ctx": "Çîno"}, {"p": "įj", "k": -40, "gnk": 21, "gk": -19, "ck": 273, "ok": 273, "ctx": "nįjo"}, {"p": "Cï", "k": -70, "gnk": 64, "gk": -6, "ck": 72, "ok": 387, "ctx": "Cïno"}, {"p": "Çï", "k": -70, "gnk": 64, "gk": -6, "ck": 72, "ok": 387, "ctx": "Çïno"}], "crashes_nat": [], "over_tight": [{"p": "Oł", "k": -70, "gnk": 93, "gk": 23, "ck": 25, "ok": 82, "ctx": "Ołno"}, {"p": "Øł", "k": -70, "gnk": 93, "gk": 23, "ck": 25, "ok": 81, "ctx": "Øłno"}, {"p": "СЛ", "k": -50, "gnk": 70, "gk": 20, "ck": 28, "ok": 420, "ctx": "НСЛН"}, {"p": "ßł", "k": -70, "gnk": 95, "gk": 25, "ck": 29, "ok": 96, "ctx": "nßło"}], "pos_holes": [{"p": "fm", "k": 30, "gnk": 57, "gk": 87, "ck": 300, "ok": 300, "ctx": "nfmo"}, {"p": "fn", "k": 30, "gnk": 57, "gk": 87, "ck": 300, "ok": 300, "ctx": "nfno"}, {"p": "fń", "k": 30, "gnk": 57, "gk": 87, "ck": 300, "ok": 300, "ctx": "nfńo"}, {"p": "fb", "k": 30, "gnk": 60, "gk": 90, "ck": 295, "ok": 295, "ctx": "nfbo"}, {"p": "fh", "k": 30, "gnk": 43, "gk": 73, "ck": 295, "ok": 295, "ctx": "nfho"}, {"p": "fk", "k": 30, "gnk": 43, "gk": 73, "ck": 295, "ok": 295, "ctx": "nfko"}, {"p": "fl", "k": 30, "gnk": 43, "gk": 73, "ck": 295, "ok": 295, "ctx": "nflo"}, {"p": "fp", "k": 30, "gnk": 52, "gk": 82, "ck": 295, "ok": 295, "ctx": "nfpo"}, {"p": "fr", "k": 30, "gnk": 52, "gk": 82, "ck": 295, "ok": 295, "ctx": "nfro"}, {"p": "fi", "k": 30, "gnk": 54, "gk": 84, "ck": 282, "ok": 282, "ctx": "nfio"}, {"p": "fį", "k": 30, "gnk": 54, "gk": 84, "ck": 282, "ok": 282, "ctx": "nfįo"}, {"p": "fî", "k": 30, "gnk": 53, "gk": 83, "ck": 281, "ok": 281, "ctx": "nfîo"}, {"p": "ff", "k": 30, "gnk": 29, "gk": 59, "ck": 268, "ok": 268, "ctx": "nffo"}, {"p": "fł", "k": 30, "gnk": 42, "gk": 72, "ck": 194, "ok": 257, "ctx": "nfło"}], "opt_holes": [{"p": "Єл", "k": -10, "gnk": 133, "gk": 123, "ck": 131, "ok": 558, "ctx": "Єлно"}, {"p": "ГЗ", "k": -30, "gnk": 102, "gk": 72, "ck": 85, "ok": 549, "ctx": "НГЗН"}, {"p": "Єх", "k": 0, "gnk": 228, "gk": 228, "ck": 243, "ok": 545, "ctx": "Єхно"}, {"p": "Єж", "k": 0, "gnk": 226, "gk": 226, "ck": 230, "ok": 544, "ctx": "Єжно"}, {"p": "Ґї", "k": 0, "gnk": 459, "gk": 459, "ck": 542, "ok": 542, "ctx": "Ґїно"}, {"p": "ЄЗ", "k": -20, "gnk": 153, "gk": 133, "ck": 141, "ok": 536, "ctx": "НЄЗН"}, {"p": "ЄЭ", "k": -20, "gnk": 132, "gk": 112, "ck": 112, "ok": 522, "ctx": "НЄЭН"}, {"p": "Єэ", "k": -30, "gnk": 145, "gk": 115, "ck": 355, "ok": 519, "ctx": "Єэно"}, {"p": "ГХ", "k": 0, "gnk": 101, "gk": 101, "ck": 182, "ok": 516, "ctx": "НГХН"}, {"p": "FX", "k": 0, "gnk": 101, "gk": 101, "ck": 182, "ok": 510, "ctx": "HFXH"}, {"p": "Єї", "k": 0, "gnk": 158, "gk": 158, "ck": 219, "ok": 510, "ctx": "Єїно"}, {"p": "FY", "k": 0, "gnk": 91, "gk": 91, "ck": 162, "ok": 508, "ctx": "HFYH"}, {"p": "Cj", "k": -30, "gnk": 213, "gk": 183, "ck": 186, "ok": 507, "ctx": "Cjno"}, {"p": "Çj", "k": -30, "gnk": 191, "gk": 161, "ck": 186, "ok": 507, "ctx": "Çjno"}, {"p": "Сх", "k": 0, "gnk": 162, "gk": 162, "ck": 179, "ok": 506, "ctx": "Схно"}, {"p": "ГЖ", "k": 0, "gnk": 101, "gk": 101, "ck": 309, "ok": 505, "ctx": "НГЖН"}, {"p": "Єт", "k": 20, "gnk": 303, "gk": 323, "ck": 323, "ok": 501, "ctx": "Єтно"}, {"p": "СЗ", "k": -20, "gnk": 90, "gk": 70, "ck": 78, "ok": 500, "ctx": "НСЗН"}, {"p": "Гў", "k": 0, "gnk": 192, "gk": 192, "ck": 474, "ok": 500, "ctx": "Гўно"}, {"p": "Ґъ", "k": 0, "gnk": 454, "gk": 454, "ck": 454, "ok": 499, "ctx": "Ґъно"}, {"p": "ГУ", "k": 0, "gnk": 91, "gk": 91, "ck": 158, "ok": 497, "ctx": "НГУН"}, {"p": "ГЎ", "k": 0, "gnk": 91, "gk": 91, "ck": 158, "ok": 497, "ctx": "НГЎН"}, {"p": "Ґт", "k": 0, "gnk": 454, "gk": 454, "ck": 454, "ok": 496, "ctx": "Ґтно"}, {"p": "КЗ", "k": -20, "gnk": 161, "gk": 141, "ck": 172, "ok": 494, "ctx": "НКЗН"}, {"p": "ГМ", "k": -10, "gnk": 155, "gk": 145, "ck": 182, "ok": 490, "ctx": "НГМН"}, {"p": "ЄТ", "k": -20, "gnk": 149, "gk": 129, "ck": 129, "ok": 490, "ctx": "НЄТН"}, {"p": "ГЯ", "k": 0, "gnk": 184, "gk": 184, "ck": 192, "ok": 489, "ctx": "НГЯН"}, {"p": "Єю", "k": -20, "gnk": 212, "gk": 192, "ck": 192, "ok": 489, "ctx": "Єюно"}, {"p": "FV", "k": 0, "gnk": 91, "gk": 91, "ck": 153, "ok": 486, "ctx": "HFVH"}, {"p": "LT", "k": 0, "gnk": 278, "gk": 278, "ck": 289, "ok": 486, "ctx": "HLTH"}, {"p": "LŤ", "k": 0, "gnk": 278, "gk": 278, "ck": 289, "ok": 486, "ctx": "HLŤH"}, {"p": "Cx", "k": 0, "gnk": 142, "gk": 142, "ck": 159, "ok": 486, "ctx": "Cxno"}, {"p": "Fx", "k": 0, "gnk": 271, "gk": 271, "ck": 278, "ok": 486, "ctx": "Fxno"}, {"p": "Çx", "k": 0, "gnk": 141, "gk": 141, "ck": 159, "ok": 486, "ctx": "Çxno"}, {"p": "ЕЧ", "k": 0, "gnk": 157, "gk": 157, "ck": 183, "ok": 485, "ctx": "НЕЧН"}, {"p": "ЁЧ", "k": 0, "gnk": 157, "gk": 157, "ck": 183, "ok": 485, "ctx": "НЁЧН"}, {"p": "Сж", "k": 0, "gnk": 159, "gk": 159, "ck": 163, "ok": 485, "ctx": "Сжно"}, {"p": "Єъ", "k": 0, "gnk": 312, "gk": 312, "ck": 312, "ok": 483, "ctx": "Єъно"}, {"p": "ЕЗ", "k": 0, "gnk": 70, "gk": 70, "ck": 71, "ok": 481, "ctx": "НЕЗН"}, {"p": "ЁЗ", "k": 0, "gnk": 70, "gk": 70, "ck": 71, "ok": 481, "ctx": "НЁЗН"}, {"p": "FW", "k": 0, "gnk": 91, "gk": 91, "ck": 150, "ok": 480, "ctx": "HFWH"}, {"p": "Cv", "k": -30, "gnk": 242, "gk": 212, "ck": 216, "ok": 477, "ctx": "Cvno"}, {"p": "Çv", "k": -30, "gnk": 242, "gk": 212, "ck": 216, "ok": 477, "ctx": "Çvno"}, {"p": "Cw", "k": -30, "gnk": 234, "gk": 204, "ck": 208, "ok": 475, "ctx": "Cwno"}, {"p": "Çw", "k": -30, "gnk": 234, "gk": 204, "ck": 208, "ok": 475, "ctx": "Çwno"}, {"p": "LY", "k": 0, "gnk": 293, "gk": 293, "ck": 304, "ok": 473, "ctx": "HLYH"}, {"p": "ГБ", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГБН"}, {"p": "ГВ", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГВН"}, {"p": "ГГ", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГГН"}, {"p": "ГЕ", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГЕН"}, {"p": "ГЁ", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГЁН"}, {"p": "ГИ", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГИН"}, {"p": "ГЙ", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГЙН"}, {"p": "ГН", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГНН"}, {"p": "ГП", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГПН"}, {"p": "ГР", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГРН"}, {"p": "ГЦ", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГЦН"}, {"p": "ГШ", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГШН"}, {"p": "ГЩ", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГЩН"}, {"p": "ГЫ", "k": -10, "gnk": 146, "gk": 136, "ck": 162, "ok": 472, "ctx": "НГЫН"}]}, "02": {"cfg": {"id": "02", "name": "02 — Notus Display Thin Italic", "short": "02 · Display Thin Italic", "file": "02 - Notus - Display - Thin - Italic.otf", "web_path": "notus/Notus-Display Italic.otf?v=20261113_8", "family": "Notus Display Italic", "style": "italic", "role": "Expressive Editorial & Kinetic Subheads", "has_Th": true, "gpos_pairs": "49 457", "smcp_count": 324, "status_color": "danger", "crit_count": 34, "verdict": "В экспорте 17:23 ушли почти все 117 пересечений со строчными, НО остались экстремальные значения -100…-130 у круглых прописных перед x/х/ж/ъ/ч, а также появился гигантский плюсовой кернинг +80…+140 после строчных g и j.", "critical_points": [{"level": "CRIT", "title": "1. КРИТИЧНО: Наезды круглых прописных перед x / х / ъ / ч (-100…-130)", "fix": "Ослабить кернинг с -130 / -100 до -25…-35 (сейчас буквы врезаются друг в друга на -65…-11u)", "pairs": "Qx, Øx, Ox, Юх, Ох, Эх, Tî, Ťî, Сл, Сї, Фх, Оъ, Юъ, Фъ, Эъ, Gx, Юч, Оч, łw, Эч, įj", "sample": "Qx Ox Øx Gx Ох Юх Эх Фх Сл Сї Оъ Оч"}, {"level": "CRIT", "title": "2. КРИТИЧНО: Слипание без просвета перед ж / x / з / Л (-70…-130)", "fix": "Ослабить с -130 до -30…-40 (сейчас просвет между штрихами всего 1–8 юнитов!)", "pairs": "Ож, Юж, Сз, Эж, Фж, СЛ, СЭ, СУ, Cx, Çx, Сж, Аъ, Фч", "sample": "Ож Юж Эж Фж Сж Сз СЛ Cx СУ"}, {"level": "CRIT", "title": "3. КРИТИЧНО: Огромный плюсовой кернинг +80…+140 после строчных g и j", "fix": "Убрать ошибочный плюсовой класс (+80…+140 → 0), который разрывает слова пополам после g и j", "pairs": "gx, gc, gd, go, gq, gę, gó, gz, gk, gu, gų, gy, gj, gh, gm, gn, gń, gb, gl, gp, gr, gř, jm, jn, jń, jb, jh, jk, jl, jr, jř, jp, jt, jť, ji, jį, jf, jì, jî, jï, jł, jx", "sample": "go gd gc gx gk gu gy gj gm gn gr gl jm jn jr jp ji"}, {"level": "WARN", "title": "4. Ошибочный плюсовой кернинг +30 после прописной Р и латинской Py / f", "fix": "Для Р+строчные и Py заменить +30 на -20…-25; для f+строчные обнулить +30 → 0", "pairs": "Рм, Рп, Рр, Py, Ри, Рй, Рш, Рг, Рн, Рґ, Рв, Рк, Рь, fb, fh, fm, fn, fń, fk, fl, fp, fr, fy, fi, fį, ff, fî, fł, ťz, ťg, ťe, tz, cz, cź, cż, cž, ce, kz, xy, жў, кў, хў, гу", "sample": "Рм Рп Рр Ри Рн Рв Рк Py fm fn fp fr"}]}, "refs": {"oo": 136, "no": 179, "nn": 228, "OO": 87, "HH": 216}, "counts": {"crashes_neg": 21, "crashes_nat": 0, "over_tight": 13, "pos_holes": 120, "opt_holes": 1189}, "crashes_neg": [{"p": "Qx", "k": -130, "gnk": 65, "gk": -65, "ck": 37, "ok": 78, "ctx": "Qxno"}, {"p": "Øx", "k": -130, "gnk": 89, "gk": -41, "ck": 29, "ok": 69, "ctx": "Øxno"}, {"p": "Ox", "k": -130, "gnk": 90, "gk": -40, "ck": 29, "ok": 70, "ctx": "Oxno"}, {"p": "Юх", "k": -130, "gnk": 98, "gk": -32, "ck": 39, "ok": 79, "ctx": "Юхно"}, {"p": "Ох", "k": -130, "gnk": 100, "gk": -30, "ck": 39, "ok": 80, "ctx": "Охно"}, {"p": "Эх", "k": -130, "gnk": 100, "gk": -30, "ck": 41, "ok": 81, "ctx": "Эхно"}, {"p": "Tî", "k": -20, "gnk": 1, "gk": -19, "ck": 345, "ok": 345, "ctx": "Tîno"}, {"p": "Ťî", "k": -20, "gnk": 1, "gk": -19, "ck": 345, "ok": 345, "ctx": "Ťîno"}, {"p": "Сл", "k": -80, "gnk": 61, "gk": -19, "ck": -12, "ok": 429, "ctx": "Слно"}, {"p": "Сї", "k": -110, "gnk": 92, "gk": -18, "ck": 42, "ok": 357, "ctx": "Сїно"}, {"p": "Фх", "k": -130, "gnk": 113, "gk": -17, "ck": 43, "ok": 82, "ctx": "Фхно"}, {"p": "Оъ", "k": -100, "gnk": 85, "gk": -15, "ck": -15, "ok": 36, "ctx": "Оъно"}, {"p": "Юъ", "k": -100, "gnk": 85, "gk": -15, "ck": -15, "ok": 35, "ctx": "Юъно"}, {"p": "Фъ", "k": -100, "gnk": 86, "gk": -14, "ck": -14, "ok": 38, "ctx": "Фъно"}, {"p": "Эъ", "k": -100, "gnk": 86, "gk": -14, "ck": -14, "ok": 37, "ctx": "Эъно"}, {"p": "Gx", "k": -130, "gnk": 117, "gk": -13, "ck": 79, "ok": 128, "ctx": "Gxno"}, {"p": "Юч", "k": -100, "gnk": 87, "gk": -13, "ck": 38, "ok": 40, "ctx": "Ючно"}, {"p": "Оч", "k": -100, "gnk": 88, "gk": -12, "ck": 38, "ok": 40, "ctx": "Очно"}, {"p": "łw", "k": -40, "gnk": 29, "gk": -11, "ck": 158, "ok": 192, "ctx": "nłwo"}, {"p": "Эч", "k": -100, "gnk": 89, "gk": -11, "ck": 40, "ok": 41, "ctx": "Эчно"}, {"p": "įj", "k": -30, "gnk": 22, "gk": -8, "ck": 283, "ok": 283, "ctx": "nįjo"}], "crashes_nat": [], "over_tight": [{"p": "Ож", "k": -130, "gnk": 125, "gk": -5, "ck": 1, "ok": 112, "ctx": "Ожно"}, {"p": "Юж", "k": -130, "gnk": 126, "gk": -4, "ck": 1, "ok": 108, "ctx": "Южно"}, {"p": "Сз", "k": -70, "gnk": 72, "gk": 2, "ck": 2, "ok": 345, "ctx": "Сзно"}, {"p": "Эж", "k": -130, "gnk": 127, "gk": -3, "ck": 3, "ok": 110, "ctx": "Эжно"}, {"p": "Фж", "k": -130, "gnk": 130, "gk": 0, "ck": 5, "ok": 138, "ctx": "Фжно"}, {"p": "СЛ", "k": -70, "gnk": 70, "gk": 0, "ck": 8, "ok": 401, "ctx": "НСЛН"}, {"p": "СЭ", "k": -50, "gnk": 65, "gk": 15, "ck": 15, "ok": 455, "ctx": "НСЭН"}, {"p": "СУ", "k": -100, "gnk": 118, "gk": 18, "ck": 26, "ok": 328, "ctx": "НСУН"}, {"p": "Cx", "k": -130, "gnk": 141, "gk": 11, "ck": 29, "ok": 356, "ctx": "Cxno"}, {"p": "Çx", "k": -130, "gnk": 141, "gk": 11, "ck": 29, "ok": 356, "ctx": "Çxno"}, {"p": "Сж", "k": -130, "gnk": 159, "gk": 29, "ck": 33, "ok": 355, "ctx": "Сжно"}, {"p": "Аъ", "k": -100, "gnk": 135, "gk": 35, "ck": 37, "ok": 82, "ctx": "Аъно"}, {"p": "Фч", "k": -100, "gnk": 102, "gk": 2, "ck": 39, "ok": 42, "ctx": "Фчно"}], "pos_holes": [{"p": "Рм", "k": 30, "gnk": 104, "gk": 134, "ck": 235, "ok": 385, "ctx": "Рмно"}, {"p": "Рп", "k": 30, "gnk": 74, "gk": 104, "ck": 231, "ok": 378, "ctx": "Рпно"}, {"p": "Рр", "k": 30, "gnk": 69, "gk": 99, "ck": 225, "ok": 373, "ctx": "Ррно"}, {"p": "Py", "k": 30, "gnk": 33, "gk": 63, "ck": 183, "ok": 366, "ctx": "Pyno"}, {"p": "Ри", "k": 30, "gnk": 56, "gk": 86, "ck": 216, "ok": 363, "ctx": "Рино"}, {"p": "Рй", "k": 30, "gnk": 56, "gk": 86, "ck": 216, "ok": 363, "ctx": "Рйно"}, {"p": "Рш", "k": 30, "gnk": 56, "gk": 86, "ck": 216, "ok": 363, "ctx": "Ршно"}, {"p": "Рг", "k": 30, "gnk": 74, "gk": 104, "ck": 209, "ok": 361, "ctx": "Ргно"}, {"p": "Рн", "k": 30, "gnk": 73, "gk": 103, "ck": 210, "ok": 361, "ctx": "Рнно"}, {"p": "Рґ", "k": 30, "gnk": 74, "gk": 104, "ck": 209, "ok": 361, "ctx": "Рґно"}, {"p": "Рв", "k": 30, "gnk": 68, "gk": 98, "ck": 205, "ok": 356, "ctx": "Рвно"}, {"p": "Рк", "k": 30, "gnk": 68, "gk": 98, "ck": 205, "ok": 356, "ctx": "Ркно"}, {"p": "Рь", "k": 30, "gnk": 68, "gk": 98, "ck": 205, "ok": 356, "ctx": "Рьно"}, {"p": "gj", "k": 100, "gnk": 61, "gk": 161, "ck": 345, "ok": 345, "ctx": "ngjo"}, {"p": "жў", "k": 30, "gnk": 55, "gk": 85, "ck": 148, "ok": 329, "ctx": "нжўо"}, {"p": "ťz", "k": 30, "gnk": 75, "gk": 105, "ck": 116, "ok": 326, "ctx": "nťzo"}, {"p": "кў", "k": 30, "gnk": 55, "gk": 85, "ck": 149, "ok": 324, "ctx": "нкўо"}, {"p": "xy", "k": 30, "gnk": 31, "gk": 61, "ck": 240, "ok": 320, "ctx": "nxyo"}, {"p": "ťg", "k": 40, "gnk": 146, "gk": 186, "ck": 194, "ok": 316, "ctx": "nťgo"}, {"p": "gx", "k": 140, "gnk": 60, "gk": 200, "ck": 281, "ok": 314, "ctx": "ngxo"}, {"p": "ťe", "k": 40, "gnk": 135, "gk": 175, "ck": 182, "ok": 307, "ctx": "nťeo"}, {"p": "fb", "k": 30, "gnk": 48, "gk": 78, "ck": 302, "ok": 302, "ctx": "nfbo"}, {"p": "fh", "k": 30, "gnk": 48, "gk": 78, "ck": 302, "ok": 302, "ctx": "nfho"}, {"p": "fm", "k": 30, "gnk": 56, "gk": 86, "ck": 302, "ok": 302, "ctx": "nfmo"}, {"p": "fn", "k": 30, "gnk": 57, "gk": 87, "ck": 302, "ok": 302, "ctx": "nfno"}, {"p": "fń", "k": 30, "gnk": 57, "gk": 87, "ck": 302, "ok": 302, "ctx": "nfńo"}, {"p": "хў", "k": 30, "gnk": 11, "gk": 41, "ck": 220, "ok": 300, "ctx": "нхўо"}, {"p": "jm", "k": 120, "gnk": 99, "gk": 219, "ck": 298, "ok": 298, "ctx": "njmo"}, {"p": "jn", "k": 120, "gnk": 99, "gk": 219, "ck": 298, "ok": 298, "ctx": "njno"}, {"p": "jń", "k": 120, "gnk": 99, "gk": 219, "ck": 298, "ok": 298, "ctx": "njńo"}, {"p": "fk", "k": 30, "gnk": 43, "gk": 73, "ck": 297, "ok": 297, "ctx": "nfko"}, {"p": "fl", "k": 30, "gnk": 43, "gk": 73, "ck": 297, "ok": 297, "ctx": "nflo"}, {"p": "fp", "k": 30, "gnk": 52, "gk": 82, "ck": 297, "ok": 297, "ctx": "nfpo"}, {"p": "fr", "k": 30, "gnk": 52, "gk": 82, "ck": 297, "ok": 297, "ctx": "nfro"}, {"p": "jb", "k": 120, "gnk": 100, "gk": 220, "ck": 297, "ok": 297, "ctx": "njbo"}, {"p": "jh", "k": 120, "gnk": 114, "gk": 234, "ck": 297, "ok": 297, "ctx": "njho"}, {"p": "fy", "k": 30, "gnk": 19, "gk": 49, "ck": 262, "ok": 293, "ctx": "nfyo"}, {"p": "jk", "k": 120, "gnk": 109, "gk": 229, "ck": 293, "ok": 293, "ctx": "njko"}, {"p": "jl", "k": 120, "gnk": 172, "gk": 292, "ck": 293, "ok": 293, "ctx": "njlo"}, {"p": "jr", "k": 120, "gnk": 94, "gk": 214, "ck": 293, "ok": 293, "ctx": "njro"}, {"p": "jř", "k": 120, "gnk": 94, "gk": 214, "ck": 293, "ok": 293, "ctx": "njřo"}, {"p": "gk", "k": 120, "gnk": 108, "gk": 228, "ck": 292, "ok": 292, "ctx": "ngko"}, {"p": "jp", "k": 120, "gnk": 95, "gk": 215, "ck": 292, "ok": 292, "ctx": "njpo"}, {"p": "jt", "k": 120, "gnk": 100, "gk": 220, "ck": 292, "ok": 292, "ctx": "njto"}, {"p": "jť", "k": 120, "gnk": 100, "gk": 220, "ck": 292, "ok": 292, "ctx": "njťo"}, {"p": "fi", "k": 30, "gnk": 54, "gk": 84, "ck": 284, "ok": 284, "ctx": "nfio"}, {"p": "fį", "k": 30, "gnk": 54, "gk": 84, "ck": 284, "ok": 284, "ctx": "nfįo"}, {"p": "ff", "k": 30, "gnk": 44, "gk": 74, "ck": 283, "ok": 283, "ctx": "nffo"}, {"p": "гу", "k": 30, "gnk": 44, "gk": 74, "ck": 107, "ok": 283, "ctx": "нгуо"}, {"p": "fî", "k": 30, "gnk": 52, "gk": 82, "ck": 282, "ok": 282, "ctx": "nfîo"}, {"p": "gu", "k": 120, "gnk": 82, "gk": 202, "ck": 282, "ok": 282, "ctx": "nguo"}, {"p": "gų", "k": 120, "gnk": 82, "gk": 202, "ck": 282, "ok": 282, "ctx": "ngųo"}, {"p": "jï", "k": 120, "gnk": 81, "gk": 201, "ck": 282, "ok": 282, "ctx": "njïo"}, {"p": "ji", "k": 120, "gnk": 96, "gk": 216, "ck": 280, "ok": 280, "ctx": "njio"}, {"p": "jį", "k": 120, "gnk": 96, "gk": 216, "ck": 280, "ok": 280, "ctx": "njįo"}, {"p": "jf", "k": 120, "gnk": 86, "gk": 206, "ck": 279, "ok": 279, "ctx": "njfo"}, {"p": "jì", "k": 120, "gnk": 95, "gk": 215, "ck": 279, "ok": 279, "ctx": "njìo"}, {"p": "gy", "k": 110, "gnk": 60, "gk": 170, "ck": 246, "ok": 278, "ctx": "ngyo"}, {"p": "jî", "k": 120, "gnk": 89, "gk": 209, "ck": 278, "ok": 278, "ctx": "njîo"}, {"p": "tz", "k": 30, "gnk": 76, "gk": 106, "ck": 230, "ok": 276, "ctx": "ntzo"}, {"p": "cz", "k": 40, "gnk": 55, "gk": 95, "ck": 97, "ok": 268, "ctx": "nczo"}, {"p": "jx", "k": 90, "gnk": 61, "gk": 151, "ck": 232, "ok": 265, "ctx": "njxo"}, {"p": "cź", "k": 40, "gnk": 50, "gk": 90, "ck": 92, "ok": 263, "ctx": "ncźo"}, {"p": "cż", "k": 40, "gnk": 50, "gk": 90, "ck": 92, "ok": 263, "ctx": "ncżo"}, {"p": "cž", "k": 40, "gnk": 50, "gk": 90, "ck": 92, "ok": 263, "ctx": "ncžo"}, {"p": "fł", "k": 30, "gnk": 42, "gk": 72, "ck": 196, "ok": 259, "ctx": "nfło"}, {"p": "gc", "k": 140, "gnk": 116, "gk": 256, "ck": 256, "ok": 258, "ctx": "ngco"}, {"p": "gd", "k": 140, "gnk": 116, "gk": 256, "ck": 256, "ok": 258, "ctx": "ngdo"}, {"p": "go", "k": 140, "gnk": 116, "gk": 256, "ck": 256, "ok": 258, "ctx": "ngoo"}, {"p": "gq", "k": 140, "gnk": 116, "gk": 256, "ck": 256, "ok": 258, "ctx": "ngqo"}, {"p": "gę", "k": 140, "gnk": 116, "gk": 256, "ck": 256, "ok": 258, "ctx": "ngęo"}, {"p": "gó", "k": 140, "gnk": 116, "gk": 256, "ck": 256, "ok": 258, "ctx": "ngóo"}, {"p": "gh", "k": 80, "gnk": 113, "gk": 193, "ck": 257, "ok": 257, "ctx": "ngho"}, {"p": "gm", "k": 80, "gnk": 98, "gk": 178, "ck": 257, "ok": 257, "ctx": "ngmo"}, {"p": "gn", "k": 80, "gnk": 98, "gk": 178, "ck": 257, "ok": 257, "ctx": "ngno"}, {"p": "gń", "k": 80, "gnk": 98, "gk": 178, "ck": 257, "ok": 257, "ctx": "ngńo"}, {"p": "gb", "k": 80, "gnk": 99, "gk": 179, "ck": 256, "ok": 256, "ctx": "ngbo"}, {"p": "jł", "k": 120, "gnk": 72, "gk": 192, "ck": 192, "ok": 255, "ctx": "njło"}, {"p": "ce", "k": 50, "gnk": 80, "gk": 130, "ck": 135, "ok": 254, "ctx": "nceo"}, {"p": "gz", "k": 140, "gnk": 65, "gk": 205, "ck": 205, "ok": 253, "ctx": "ngzo"}, {"p": "gl", "k": 80, "gnk": 172, "gk": 252, "ck": 252, "ok": 252, "ctx": "nglo"}, {"p": "gp", "k": 80, "gnk": 94, "gk": 174, "ck": 252, "ok": 252, "ctx": "ngpo"}, {"p": "gr", "k": 80, "gnk": 93, "gk": 173, "ck": 252, "ok": 252, "ctx": "ngro"}, {"p": "gř", "k": 80, "gnk": 93, "gk": 173, "ck": 252, "ok": 252, "ctx": "ngřo"}, {"p": "kz", "k": 40, "gnk": 56, "gk": 96, "ck": 114, "ok": 252, "ctx": "nkzo"}, {"p": "gt", "k": 80, "gnk": 99, "gk": 179, "ck": 251, "ok": 251, "ctx": "ngto"}, {"p": "gť", "k": 80, "gnk": 99, "gk": 179, "ck": 251, "ok": 251, "ctx": "ngťo"}, {"p": "jy", "k": 80, "gnk": 61, "gk": 141, "ck": 217, "ok": 249, "ctx": "njyo"}, {"p": "tg", "k": 40, "gnk": 143, "gk": 183, "ck": 247, "ok": 249, "ctx": "ntgo"}, {"p": "fz", "k": 40, "gnk": 62, "gk": 102, "ck": 201, "ok": 248, "ctx": "nfzo"}], "opt_holes": [{"p": "ЄЗ", "k": -20, "gnk": 234, "gk": 214, "ck": 222, "ok": 613, "ctx": "НЄЗН"}, {"p": "Єу", "k": 0, "gnk": 394, "gk": 394, "ck": 399, "ok": 594, "ctx": "Єуно"}, {"p": "Єм", "k": 0, "gnk": 309, "gk": 309, "ck": 311, "ok": 588, "ctx": "Ємно"}, {"p": "Єп", "k": 0, "gnk": 302, "gk": 302, "ck": 302, "ok": 579, "ctx": "Єпно"}, {"p": "Єў", "k": -20, "gnk": 319, "gk": 299, "ck": 379, "ok": 574, "ctx": "Єўно"}, {"p": "Єр", "k": 0, "gnk": 297, "gk": 297, "ck": 297, "ok": 573, "ctx": "Єрно"}, {"p": "Єи", "k": 0, "gnk": 297, "gk": 297, "ck": 299, "ok": 570, "ctx": "Єино"}, {"p": "Єй", "k": 0, "gnk": 297, "gk": 297, "ck": 299, "ok": 570, "ctx": "Єйно"}, {"p": "Єш", "k": 0, "gnk": 296, "gk": 296, "ck": 299, "ok": 569, "ctx": "Єшно"}, {"p": "ЄТ", "k": -20, "gnk": 206, "gk": 186, "ck": 186, "ok": 566, "ctx": "НЄТН"}, {"p": "Єн", "k": 0, "gnk": 290, "gk": 290, "ck": 290, "ok": 565, "ctx": "Єнно"}, {"p": "Єг", "k": 0, "gnk": 289, "gk": 289, "ck": 289, "ok": 564, "ctx": "Єгно"}, {"p": "Єґ", "k": 0, "gnk": 289, "gk": 289, "ck": 289, "ok": 564, "ctx": "Єґно"}, {"p": "Єв", "k": 0, "gnk": 285, "gk": 285, "ck": 285, "ok": 560, "ctx": "Євно"}, {"p": "Єк", "k": 0, "gnk": 285, "gk": 285, "ck": 285, "ok": 560, "ctx": "Єкно"}, {"p": "Єь", "k": 0, "gnk": 285, "gk": 285, "ck": 285, "ok": 560, "ctx": "Єьно"}, {"p": "ҐЭ", "k": 0, "gnk": 207, "gk": 207, "ck": 337, "ok": 551, "ctx": "НҐЭН"}, {"p": "Єц", "k": -20, "gnk": 297, "gk": 277, "ck": 279, "ok": 550, "ctx": "Єцно"}, {"p": "Єщ", "k": -20, "gnk": 296, "gk": 276, "ck": 279, "ok": 549, "ctx": "Єщно"}, {"p": "Fj", "k": 0, "gnk": 186, "gk": 186, "ck": 350, "ok": 547, "ctx": "Fjno"}, {"p": "Єю", "k": -20, "gnk": 290, "gk": 270, "ck": 270, "ok": 545, "ctx": "Єюно"}, {"p": "ҐЗ", "k": 0, "gnk": 200, "gk": 200, "ck": 355, "ok": 540, "ctx": "НҐЗН"}, {"p": "Cj", "k": 0, "gnk": 213, "gk": 213, "ck": 217, "ok": 538, "ctx": "Cjno"}, {"p": "Çj", "k": 0, "gnk": 191, "gk": 191, "ck": 217, "ok": 538, "ctx": "Çjno"}, {"p": "Єі", "k": -30, "gnk": 281, "gk": 251, "ck": 266, "ok": 536, "ctx": "Єіно"}, {"p": "ГХ", "k": 0, "gnk": 119, "gk": 119, "ck": 200, "ok": 534, "ctx": "НГХН"}, {"p": "ЄЪ", "k": 0, "gnk": 196, "gk": 196, "ck": 196, "ok": 533, "ctx": "НЄЪН"}, {"p": "ЄМ", "k": 0, "gnk": 334, "gk": 334, "ck": 336, "ok": 531, "ctx": "НЄМН"}, {"p": "ГД", "k": 0, "gnk": 245, "gk": 245, "ck": 270, "ok": 528, "ctx": "НГДН"}, {"p": "Єб", "k": -20, "gnk": 282, "gk": 262, "ck": 267, "ok": 527, "ctx": "Єбно"}, {"p": "ГЖ", "k": 0, "gnk": 119, "gk": 119, "ck": 326, "ok": 523, "ctx": "НГЖН"}, {"p": "Єд", "k": -20, "gnk": 276, "gk": 256, "ck": 262, "ok": 523, "ctx": "Єдно"}, {"p": "ГУ", "k": 0, "gnk": 109, "gk": 109, "ck": 175, "ok": 515, "ctx": "НГУН"}, {"p": "ГЎ", "k": 0, "gnk": 109, "gk": 109, "ck": 175, "ok": 515, "ctx": "НГЎН"}, {"p": "ГМ", "k": -10, "gnk": 178, "gk": 168, "ck": 205, "ok": 513, "ctx": "НГМН"}, {"p": "ҐЛ", "k": 0, "gnk": 196, "gk": 196, "ck": 335, "ok": 511, "ctx": "НҐЛН"}, {"p": "ЄЯ", "k": -20, "gnk": 287, "gk": 267, "ck": 288, "ok": 510, "ctx": "НЄЯН"}, {"p": "ЄГ", "k": 0, "gnk": 315, "gk": 315, "ck": 315, "ok": 509, "ctx": "НЄГН"}, {"p": "ЄҐ", "k": 0, "gnk": 315, "gk": 315, "ck": 315, "ok": 509, "ctx": "НЄҐН"}, {"p": "ЄВ", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 508, "ctx": "НЄВН"}, {"p": "ЄЕ", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 508, "ctx": "НЄЕН"}, {"p": "ЄЁ", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 508, "ctx": "НЄЁН"}, {"p": "ЄИ", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 508, "ctx": "НЄИН"}, {"p": "ЄЙ", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 508, "ctx": "НЄЙН"}, {"p": "ЄК", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 508, "ctx": "НЄКН"}, {"p": "ЄН", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 508, "ctx": "НЄНН"}, {"p": "ЄР", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 508, "ctx": "НЄРН"}, {"p": "ЄБ", "k": 0, "gnk": 315, "gk": 315, "ck": 315, "ok": 507, "ctx": "НЄБН"}, {"p": "ЄП", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 507, "ctx": "НЄПН"}, {"p": "ЄЦ", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 507, "ctx": "НЄЦН"}, {"p": "ЄШ", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 507, "ctx": "НЄШН"}, {"p": "ЄЩ", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 507, "ctx": "НЄЩН"}, {"p": "ЄЫ", "k": 0, "gnk": 315, "gk": 315, "ck": 315, "ok": 507, "ctx": "НЄЫН"}, {"p": "ЄЬ", "k": 0, "gnk": 315, "gk": 315, "ck": 315, "ok": 507, "ctx": "НЄЬН"}, {"p": "ЄЮ", "k": 0, "gnk": 314, "gk": 314, "ck": 314, "ok": 507, "ctx": "НЄЮН"}, {"p": "Гї", "k": 0, "gnk": 82, "gk": 82, "ck": 505, "ok": 505, "ctx": "Гїно"}, {"p": "ЄЧ", "k": -30, "gnk": 269, "gk": 239, "ck": 239, "ok": 504, "ctx": "НЄЧН"}, {"p": "FX", "k": 0, "gnk": 95, "gk": 95, "ck": 176, "ok": 503, "ctx": "HFXH"}, {"p": "Cy", "k": -20, "gnk": 271, "gk": 251, "ck": 256, "ok": 499, "ctx": "Cyno"}, {"p": "Çy", "k": -20, "gnk": 231, "gk": 211, "ck": 256, "ok": 499, "ctx": "Çyno"}]}, "03": {"cfg": {"id": "03", "name": "03 — Notus Display Text", "short": "03 · Display Text", "file": "03 - Notus - Display - Text.otf", "web_path": "notus/Notus-Text.otf?v=20261113_8", "family": "Notus Text", "style": "normal", "role": "Editorial Body Copy & Longform Reading (10–24pt)", "has_Th": false, "gpos_pairs": "45 179", "smcp_count": 342, "status_color": "danger", "crit_count": 46, "verdict": "В экспорте 17:38 исправлены Гї и Уї, но на класс круглых прописных (C, G, O, Q, ß, С, О, Э, Ю, Ф) выставлен слишком резкий минус -80…-90 со строчными, а с прописными — наоборот лишний плюс +30.", "critical_points": [{"level": "CRIT", "title": "1. КРИТИЧНО: Наезды из-за -80 на круглых прописных (18 пар)", "fix": "Ослабить -80 до -25…-30 (для Cî, Çî, Сї поставить -15)", "pairs": "Cî, Çî, Сї, Cï, Çï, Сл, Qf, Эч, Юч, Оч, ßł, УХ, УЪ, Фч, Oł, Øł, įj, Рх", "sample": "Cî Сї Cï Сл Qf Оч Эч Юч Фч Oł ßł УХ"}, {"level": "CRIT", "title": "2. КРИТИЧНО: Сильное слипание С и C с прямыми штрихами (-80…-90)", "fix": "Ослабить класс С/C + прямые строчные с -80…-90 до -30…-35 (сейчас Сз имеет нахлёст ядра -4u, а Св, Ск, Сн, Си, Сп, Сц, Сщ зажаты)", "pairs": "Сз, Cf, Çf, Qł, Сц, Сщ, Cp, Çp, Gł, Св, Сг, Си, Сй, Ск, Сн, Сп, Сш, Сь, Сю, Сґ, СУ, СЎ, Ci, Cį, Çi, Çį, Сі, СЧ", "sample": "Сз Сл Св Ск Сн Си Сп Сц Сщ Cf Cp Ci Qł Gł"}, {"level": "CRIT", "title": "3. КРИТИЧНО: Отсутствует лигатура Th (T_h) в GSUB liga + наезд ґї, ґх", "fix": "Добавить sub T h by T_h; в фичу liga (сейчас там 5 лигатур вместо 6). Для ґї и ґх дать +20", "pairs": "Th, ґї, ґх", "sample": "The Theater ґї ґх"}, {"level": "WARN", "title": "4. Дыры из-за лишнего плюсового кернинга +30 на C/С/Є + Прописные и +60 на ZZ", "fix": "Обнулить +30 на C/С/Є + прописные (CM, CN, CB, CD, CE, СМ, СБ, СВ, СГ, СЕ, СИ, СН, СП, СР) и +60 на ZZ → 0", "pairs": "CJ, ÇJ, CM, CN, ÇM, ÇN, СМ, СЪ, ZZ, ZŹ, ZŻ, ZŽ, ŹZ, ŻZ, ŽZ, CR, ÇR, CB, CD, CE, CF, CH, CI, CK, CL, CP, СБ, СВ, СГ, СЕ, СИ, СЙ, СН, СП, СР, СЦ, СШ, СЩ, СЫ, СЬ, СЮ, ЄМ, ЄЪ, ЄБ, ЄВ, ЄГ, ЄЕ, ЄИ, ЄК, ЄН, ЄП, ЄР, ҐМ, ҐЖ, ҐБ, ҐВ, ҐГ, ҐЕ, ҐИ, ҐК, ҐН, ҐП, ҐР", "sample": "CM CN CB CD CE СМ СБ СВ СГ СЕ СН СП СР ZZ"}]}, "refs": {"oo": 106, "no": 141, "nn": 211, "OO": 117, "HH": 254}, "counts": {"crashes_neg": 18, "crashes_nat": 2, "over_tight": 28, "pos_holes": 303, "opt_holes": 1292}, "crashes_neg": [{"p": "Cî", "k": -80, "gnk": 20, "gk": -60, "ck": 42, "ok": 299, "ctx": "Cîno"}, {"p": "Çî", "k": -80, "gnk": 20, "gk": -60, "ck": 42, "ok": 299, "ctx": "Çîno"}, {"p": "Сї", "k": -80, "gnk": 27, "gk": -53, "ck": 39, "ok": 296, "ctx": "Сїно"}, {"p": "Cï", "k": -80, "gnk": 38, "gk": -42, "ck": 39, "ok": 296, "ctx": "Cïno"}, {"p": "Çï", "k": -80, "gnk": 38, "gk": -42, "ck": 39, "ok": 296, "ctx": "Çïno"}, {"p": "Сл", "k": -80, "gnk": 39, "gk": -41, "ck": -34, "ok": 337, "ctx": "Слно"}, {"p": "Qf", "k": -80, "gnk": 59, "gk": -21, "ck": 79, "ok": 81, "ctx": "Qfno"}, {"p": "Эч", "k": -80, "gnk": 64, "gk": -16, "ck": 37, "ok": 39, "ctx": "Эчно"}, {"p": "Юч", "k": -80, "gnk": 64, "gk": -16, "ck": 37, "ok": 39, "ctx": "Ючно"}, {"p": "Оч", "k": -80, "gnk": 65, "gk": -15, "ck": 37, "ok": 39, "ctx": "Очно"}, {"p": "ßł", "k": -80, "gnk": 68, "gk": -12, "ck": -9, "ok": 49, "ctx": "nßło"}, {"p": "УХ", "k": -40, "gnk": 30, "gk": -10, "ck": 215, "ok": 313, "ctx": "НУХН"}, {"p": "УЪ", "k": -20, "gnk": 10, "gk": -10, "ck": 102, "ok": 283, "ctx": "НУЪН"}, {"p": "Фч", "k": -80, "gnk": 72, "gk": -8, "ck": 37, "ok": 41, "ctx": "Фчно"}, {"p": "Oł", "k": -80, "gnk": 73, "gk": -7, "ck": -5, "ok": 35, "ctx": "Ołno"}, {"p": "Øł", "k": -80, "gnk": 73, "gk": -7, "ck": -5, "ok": 35, "ctx": "Øłno"}, {"p": "įj", "k": -20, "gnk": 13, "gk": -7, "ck": 280, "ok": 280, "ctx": "nįjo"}, {"p": "Рх", "k": -20, "gnk": 14, "gk": -6, "ck": 109, "ok": 277, "ctx": "Рхно"}], "crashes_nat": [{"p": "ґї", "k": 0, "gnk": -18, "gk": -18, "ck": 331, "ok": 331, "ctx": "нґїо"}, {"p": "ґх", "k": 0, "gnk": -9, "gk": -9, "ck": 310, "ok": 342, "ctx": "нґхо"}], "over_tight": [{"p": "Сз", "k": -50, "gnk": 46, "gk": -4, "ck": -4, "ok": 274, "ctx": "Сзно"}, {"p": "Cf", "k": -80, "gnk": 94, "gk": 14, "ck": 14, "ok": 275, "ctx": "Cfno"}, {"p": "Çf", "k": -80, "gnk": 94, "gk": 14, "ck": 14, "ok": 275, "ctx": "Çfno"}, {"p": "Qł", "k": -80, "gnk": 88, "gk": 8, "ck": 15, "ok": 55, "ctx": "Qłno"}, {"p": "Сц", "k": -90, "gnk": 113, "gk": 23, "ck": 23, "ok": 284, "ctx": "Сцно"}, {"p": "Сщ", "k": -90, "gnk": 113, "gk": 23, "ck": 23, "ok": 284, "ctx": "Сщно"}, {"p": "Cp", "k": -80, "gnk": 104, "gk": 24, "ck": 24, "ok": 285, "ctx": "Cpno"}, {"p": "Çp", "k": -80, "gnk": 104, "gk": 24, "ck": 24, "ok": 285, "ctx": "Çpno"}, {"p": "Gł", "k": -80, "gnk": 96, "gk": 16, "ck": 27, "ok": 60, "ctx": "Głno"}, {"p": "Св", "k": -80, "gnk": 113, "gk": 33, "ck": 33, "ok": 294, "ctx": "Свно"}, {"p": "Сг", "k": -80, "gnk": 113, "gk": 33, "ck": 33, "ok": 294, "ctx": "Сгно"}, {"p": "Си", "k": -80, "gnk": 113, "gk": 33, "ck": 33, "ok": 294, "ctx": "Сино"}, {"p": "Сй", "k": -80, "gnk": 113, "gk": 33, "ck": 33, "ok": 294, "ctx": "Сйно"}, {"p": "Ск", "k": -80, "gnk": 113, "gk": 33, "ck": 33, "ok": 294, "ctx": "Скно"}, {"p": "Сн", "k": -80, "gnk": 113, "gk": 33, "ck": 33, "ok": 294, "ctx": "Снно"}, {"p": "Сп", "k": -80, "gnk": 113, "gk": 33, "ck": 33, "ok": 294, "ctx": "Спно"}, {"p": "Сш", "k": -80, "gnk": 113, "gk": 33, "ck": 33, "ok": 294, "ctx": "Сшно"}, {"p": "Сь", "k": -80, "gnk": 113, "gk": 33, "ck": 33, "ok": 294, "ctx": "Сьно"}, {"p": "Сю", "k": -80, "gnk": 113, "gk": 33, "ck": 33, "ok": 294, "ctx": "Сюно"}, {"p": "Сґ", "k": -80, "gnk": 113, "gk": 33, "ck": 33, "ok": 294, "ctx": "Сґно"}, {"p": "СУ", "k": -60, "gnk": 87, "gk": 27, "ck": 35, "ok": 246, "ctx": "НСУН"}, {"p": "СЎ", "k": -60, "gnk": 87, "gk": 27, "ck": 35, "ok": 246, "ctx": "НСЎН"}, {"p": "Ci", "k": -80, "gnk": 108, "gk": 28, "ck": 39, "ok": 296, "ctx": "Cino"}, {"p": "Cį", "k": -80, "gnk": 108, "gk": 28, "ck": 39, "ok": 296, "ctx": "Cįno"}, {"p": "Çi", "k": -80, "gnk": 108, "gk": 28, "ck": 39, "ok": 296, "ctx": "Çino"}, {"p": "Çį", "k": -80, "gnk": 108, "gk": 28, "ck": 39, "ok": 296, "ctx": "Çįno"}, {"p": "Сі", "k": -80, "gnk": 108, "gk": 28, "ck": 39, "ok": 296, "ctx": "Сіно"}, {"p": "СЧ", "k": -90, "gnk": 131, "gk": 41, "ck": 41, "ok": 285, "ctx": "НСЧН"}], "pos_holes": [{"p": "ҐМ", "k": 40, "gnk": 51, "gk": 91, "ck": 487, "ok": 494, "ctx": "НҐМН"}, {"p": "ҐЖ", "k": 30, "gnk": 83, "gk": 113, "ck": 444, "ok": 474, "ctx": "НҐЖН"}, {"p": "ҐБ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐБН"}, {"p": "ҐВ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐВН"}, {"p": "ҐГ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐГН"}, {"p": "ҐЕ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐЕН"}, {"p": "ҐЁ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐЁН"}, {"p": "ҐИ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐИН"}, {"p": "ҐЙ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐЙН"}, {"p": "ҐК", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐКН"}, {"p": "ҐН", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐНН"}, {"p": "ҐП", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐПН"}, {"p": "ҐР", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐРН"}, {"p": "ҐЦ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐЦН"}, {"p": "ҐШ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐШН"}, {"p": "ҐЩ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐЩН"}, {"p": "ҐЫ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐЫН"}, {"p": "ҐЬ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐЬН"}, {"p": "ҐЮ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐЮН"}, {"p": "ҐІ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐІН"}, {"p": "ҐҐ", "k": 40, "gnk": 37, "gk": 77, "ck": 470, "ok": 470, "ctx": "НҐҐН"}, {"p": "ЄМ", "k": 30, "gnk": 300, "gk": 330, "ck": 342, "ok": 445, "ctx": "НЄМН"}, {"p": "ЄЪ", "k": 30, "gnk": 175, "gk": 205, "ck": 205, "ok": 436, "ctx": "НЄЪН"}, {"p": "ЄБ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄБН"}, {"p": "ЄВ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄВН"}, {"p": "ЄГ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄГН"}, {"p": "ЄЕ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄЕН"}, {"p": "ЄЁ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄЁН"}, {"p": "ЄИ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄИН"}, {"p": "ЄЙ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄЙН"}, {"p": "ЄК", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄКН"}, {"p": "ЄН", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄНН"}, {"p": "ЄП", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄПН"}, {"p": "ЄР", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄРН"}, {"p": "ЄЦ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄЦН"}, {"p": "ЄШ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄШН"}, {"p": "ЄЩ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄЩН"}, {"p": "ЄЫ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄЫН"}, {"p": "ЄЬ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄЬН"}, {"p": "ЄЮ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄЮН"}, {"p": "ЄІ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄІН"}, {"p": "ЄЇ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄЇН"}, {"p": "ЄҐ", "k": 30, "gnk": 289, "gk": 319, "ck": 319, "ok": 421, "ctx": "НЄҐН"}, {"p": "CJ", "k": 30, "gnk": 21, "gk": 51, "ck": 52, "ok": 338, "ctx": "HCJH"}, {"p": "ÇJ", "k": 30, "gnk": 21, "gk": 51, "ck": 52, "ok": 338, "ctx": "HÇJH"}, {"p": "CM", "k": 30, "gnk": 149, "gk": 179, "ck": 191, "ok": 335, "ctx": "HCMH"}, {"p": "CN", "k": 30, "gnk": 149, "gk": 179, "ck": 191, "ok": 335, "ctx": "HCNH"}, {"p": "ÇM", "k": 30, "gnk": 149, "gk": 179, "ck": 191, "ok": 335, "ctx": "HÇMH"}, {"p": "ÇN", "k": 30, "gnk": 149, "gk": 179, "ck": 191, "ok": 335, "ctx": "HÇNH"}, {"p": "СМ", "k": 30, "gnk": 149, "gk": 179, "ck": 191, "ok": 335, "ctx": "НСМН"}, {"p": "СЪ", "k": 30, "gnk": 24, "gk": 54, "ck": 54, "ok": 326, "ctx": "НСЪН"}, {"p": "ZZ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HZZH"}, {"p": "ZŹ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HZŹH"}, {"p": "ZŻ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HZŻH"}, {"p": "ZŽ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HZŽH"}, {"p": "ŹZ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŹZH"}, {"p": "ŹŹ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŹŹH"}, {"p": "ŹŻ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŹŻH"}, {"p": "ŹŽ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŹŽH"}, {"p": "ŻZ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŻZH"}, {"p": "ŻŹ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŻŹH"}, {"p": "ŻŻ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŻŻH"}, {"p": "ŻŽ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŻŽH"}, {"p": "ŽZ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŽZH"}, {"p": "ŽŹ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŽŹH"}, {"p": "ŽŻ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŽŻH"}, {"p": "ŽŽ", "k": 60, "gnk": 56, "gk": 116, "ck": 128, "ok": 320, "ctx": "HŽŽH"}, {"p": "CR", "k": 30, "gnk": 139, "gk": 169, "ck": 169, "ok": 312, "ctx": "HCRH"}, {"p": "ÇR", "k": 30, "gnk": 139, "gk": 169, "ck": 169, "ok": 312, "ctx": "HÇRH"}, {"p": "CB", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HCBH"}, {"p": "CD", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HCDH"}, {"p": "CE", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HCEH"}, {"p": "CF", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HCFH"}, {"p": "CH", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HCHH"}, {"p": "CI", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HCIH"}, {"p": "CK", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HCKH"}, {"p": "CL", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HCLH"}, {"p": "CP", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HCPH"}, {"p": "ÇB", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HÇBH"}, {"p": "ÇD", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HÇDH"}, {"p": "ÇE", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HÇEH"}, {"p": "ÇF", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HÇFH"}, {"p": "ÇH", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HÇHH"}, {"p": "ÇI", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HÇIH"}, {"p": "ÇK", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HÇKH"}, {"p": "ÇL", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HÇLH"}, {"p": "ÇP", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "HÇPH"}, {"p": "СБ", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "НСБН"}, {"p": "СВ", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "НСВН"}, {"p": "СГ", "k": 30, "gnk": 138, "gk": 168, "ck": 168, "ok": 311, "ctx": "НСГН"}], "opt_holes": [{"p": "Єу", "k": 0, "gnk": 368, "gk": 368, "ck": 373, "ok": 514, "ctx": "Єуно"}, {"p": "Fj", "k": 0, "gnk": 181, "gk": 181, "ck": 347, "ok": 509, "ctx": "Fjno"}, {"p": "ГЛ", "k": 0, "gnk": 229, "gk": 229, "ck": 275, "ok": 500, "ctx": "НГЛН"}, {"p": "Гм", "k": 10, "gnk": 328, "gk": 338, "ck": 485, "ok": 491, "ctx": "Гмно"}, {"p": "Гр", "k": 10, "gnk": 396, "gk": 406, "ck": 489, "ok": 489, "ctx": "Грно"}, {"p": "ҐЛ", "k": 0, "gnk": 165, "gk": 165, "ck": 318, "ok": 486, "ctx": "НҐЛН"}, {"p": "Гв", "k": 10, "gnk": 343, "gk": 353, "ck": 478, "ok": 478, "ctx": "Гвно"}, {"p": "Гг", "k": 10, "gnk": 343, "gk": 353, "ck": 478, "ok": 478, "ctx": "Ггно"}, {"p": "Ги", "k": 10, "gnk": 343, "gk": 353, "ck": 478, "ok": 478, "ctx": "Гино"}, {"p": "Гй", "k": 10, "gnk": 203, "gk": 213, "ck": 478, "ok": 478, "ctx": "Гйно"}, {"p": "Гк", "k": 10, "gnk": 343, "gk": 353, "ck": 478, "ok": 478, "ctx": "Гкно"}, {"p": "Гн", "k": 10, "gnk": 343, "gk": 353, "ck": 478, "ok": 478, "ctx": "Гнно"}, {"p": "Гп", "k": 10, "gnk": 343, "gk": 353, "ck": 478, "ok": 478, "ctx": "Гпно"}, {"p": "Гш", "k": 10, "gnk": 343, "gk": 353, "ck": 478, "ok": 478, "ctx": "Гшно"}, {"p": "Гь", "k": 10, "gnk": 343, "gk": 353, "ck": 478, "ok": 478, "ctx": "Гьно"}, {"p": "Гґ", "k": 10, "gnk": 343, "gk": 353, "ck": 478, "ok": 478, "ctx": "Гґно"}, {"p": "ГЗ", "k": 0, "gnk": 82, "gk": 82, "ck": 90, "ok": 476, "ctx": "НГЗН"}, {"p": "Гі", "k": 10, "gnk": 91, "gk": 101, "ck": 473, "ok": 473, "ctx": "Гіно"}, {"p": "ГД", "k": 0, "gnk": 181, "gk": 181, "ck": 226, "ok": 469, "ctx": "НГДН"}, {"p": "ҐЭ", "k": 0, "gnk": 159, "gk": 159, "ck": 324, "ok": 467, "ctx": "НҐЭН"}, {"p": "ҐЗ", "k": 0, "gnk": 163, "gk": 163, "ck": 345, "ok": 466, "ctx": "НҐЗН"}, {"p": "ГМ", "k": 0, "gnk": 115, "gk": 115, "ck": 171, "ok": 464, "ctx": "НГМН"}, {"p": "Гў", "k": 0, "gnk": 159, "gk": 159, "ck": 438, "ok": 464, "ctx": "Гўно"}, {"p": "ЄА", "k": 0, "gnk": 240, "gk": 240, "ck": 266, "ok": 463, "ctx": "НЄАН"}, {"p": "Єы", "k": 0, "gnk": 264, "gk": 264, "ck": 264, "ok": 463, "ctx": "Єыно"}, {"p": "Єъ", "k": 0, "gnk": 331, "gk": 331, "ck": 331, "ok": 461, "ctx": "Єъно"}, {"p": "ЄТ", "k": 0, "gnk": 185, "gk": 185, "ck": 185, "ok": 456, "ctx": "НЄТН"}, {"p": "Cj", "k": -10, "gnk": 198, "gk": 188, "ck": 193, "ok": 454, "ctx": "Cjno"}, {"p": "Çj", "k": -10, "gnk": 178, "gk": 168, "ck": 193, "ok": 454, "ctx": "Çjno"}, {"p": "ҐД", "k": 0, "gnk": 117, "gk": 117, "ck": 421, "ok": 453, "ctx": "НҐДН"}, {"p": "Yj", "k": 0, "gnk": 264, "gk": 264, "ck": 425, "ok": 452, "ctx": "Yjno"}, {"p": "Cy", "k": 20, "gnk": 217, "gk": 237, "ck": 242, "ok": 451, "ctx": "Cyno"}, {"p": "Cý", "k": 20, "gnk": 217, "gk": 237, "ck": 242, "ok": 451, "ctx": "Cýno"}, {"p": "Çy", "k": 20, "gnk": 177, "gk": 197, "ck": 242, "ok": 451, "ctx": "Çyno"}, {"p": "Çý", "k": 20, "gnk": 177, "gk": 197, "ck": 242, "ok": 451, "ctx": "Çýno"}, {"p": "Сў", "k": 20, "gnk": 192, "gk": 212, "ck": 242, "ok": 451, "ctx": "Сўно"}, {"p": "Tj", "k": 0, "gnk": 181, "gk": 181, "ck": 449, "ok": 449, "ctx": "Tjno"}, {"p": "Ťj", "k": 0, "gnk": 181, "gk": 181, "ck": 449, "ok": 449, "ctx": "Ťjno"}, {"p": "Ґл", "k": 0, "gnk": 256, "gk": 256, "ck": 318, "ok": 449, "ctx": "Ґлно"}, {"p": "Єб", "k": 0, "gnk": 255, "gk": 255, "ck": 259, "ok": 446, "ctx": "Єбно"}, {"p": "ЕЧ", "k": 0, "gnk": 131, "gk": 131, "ck": 176, "ok": 442, "ctx": "НЕЧН"}, {"p": "KY", "k": 0, "gnk": 128, "gk": 128, "ck": 416, "ok": 440, "ctx": "HKYH"}, {"p": "ГБ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГБН"}, {"p": "ГВ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГВН"}, {"p": "ГГ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГГН"}, {"p": "ГЕ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГЕН"}, {"p": "ГЁ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГЁН"}, {"p": "ГИ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГИН"}, {"p": "ГЙ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГЙН"}, {"p": "ГК", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГКН"}, {"p": "ГН", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГНН"}, {"p": "ГП", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГПН"}, {"p": "ГР", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГРН"}, {"p": "ГЦ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГЦН"}, {"p": "ГШ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГШН"}, {"p": "ГЩ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГЩН"}, {"p": "ГЫ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГЫН"}, {"p": "ГЬ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГЬН"}, {"p": "ГЮ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГЮН"}, {"p": "ГІ", "k": 0, "gnk": 101, "gk": 101, "ck": 146, "ok": 440, "ctx": "НГІН"}]}, "04": {"cfg": {"id": "04", "name": "04 — Notus Display Text Italic", "short": "04 · Display Text Italic", "file": "04 - Notus - Display - Text - Italic.otf", "web_path": "notus/Notus-Text-Italic.otf?v=20261113_8", "family": "Notus Text Italic", "style": "italic", "role": "Emphasis, Quotes & Literary Marginalia", "has_Th": true, "gpos_pairs": "50 590", "smcp_count": 324, "status_color": "warn", "crit_count": 27, "verdict": "В экспорте 17:42 полностью устранены все 64 пережатия круглых прописных (0 пережатий ядра!). Остались 27 пересечений диакритики/диагоналей и лишний плюсовой кернинг +60…+100 после g, f и Р.", "critical_points": [{"level": "CRIT", "title": "1. КРИТИЧНО: 27 наездов диакритики и диагональных строчных (łw, łv, ťw, Vš, Wš, Уд)", "fix": "Ослабить минусовой кернинг в парах с высокой диакритикой и после ł / ť / У", "pairs": "Tî, Ťî, Yì, Fî, łw, Fï, Vš, Wš, ťw, įj, łv, Tï, Ťï, ťv, Уд, QA, QÄ, îî, Yt, Yř, Yť, єъ, Tì, Ťì, tw, єл, ły", "sample": "Tî Yì Fî łw łv ťw ťv Vš Wš įj Уд QA"}, {"level": "CRIT", "title": "2. КРИТИЧНО: Огромный плюсовой кернинг +80…+100 после строчной g и +60 после f", "fix": "Обнулить (+80…+100 → 0 для g+строчные и +60 → 0 для f+строчные), иначе внутри слова образуется разрыв 320–329u", "pairs": "gc, gd, ge, go, gq, gę, gó, gb, gh, gm, gn, gń, gk, gr, gt, gř, gť, gl, gp, gf, gi, gì, gî, gï, gį, gł, gw, gv, fb, fm, fn, fń, fh, fr, fk, fl, fp, ff, fi, fî, fį, fł", "sample": "go ge gd gb gh gm gn gr gt gl gp gi fm fn fh fr fl fp"}, {"level": "CRIT", "title": "3. КРИТИЧНО: Плюсовой кернинг +30…+50 после прописной Р (вместо минуса)", "fix": "Заменить +30…+50 на -20…-30 для Р + строчные", "pairs": "Рж, Рх, Ру, Рм, Рп, Рр, Ри, Рй, Рш, Рг, Рн, Рґ, Рв, Рь, Рк", "sample": "Ру Рж Рх Рм Рп Рр Ри Рн Рв Рк"}]}, "refs": {"oo": 136, "no": 179, "nn": 228, "OO": 118, "HH": 216}, "counts": {"crashes_neg": 27, "crashes_nat": 0, "over_tight": 0, "pos_holes": 127, "opt_holes": 793}, "crashes_neg": [{"p": "Tî", "k": -40, "gnk": -10, "gk": -50, "ck": 324, "ok": 324, "ctx": "Tîno"}, {"p": "Ťî", "k": -40, "gnk": -10, "gk": -50, "ck": 324, "ok": 324, "ctx": "Ťîno"}, {"p": "Yì", "k": -70, "gnk": 30, "gk": -40, "ck": 269, "ok": 297, "ctx": "Yìno"}, {"p": "Fî", "k": -50, "gnk": 14, "gk": -36, "ck": 210, "ok": 373, "ctx": "Fîno"}, {"p": "łw", "k": -70, "gnk": 36, "gk": -34, "ck": 127, "ok": 169, "ctx": "nłwo"}, {"p": "Fï", "k": -50, "gnk": 18, "gk": -32, "ck": 210, "ok": 373, "ctx": "Fïno"}, {"p": "Vš", "k": -120, "gnk": 90, "gk": -30, "ck": 155, "ok": 175, "ctx": "Všno"}, {"p": "Wš", "k": -120, "gnk": 90, "gk": -30, "ck": 146, "ok": 162, "ctx": "Wšno"}, {"p": "ťw", "k": -70, "gnk": 40, "gk": -30, "ck": 72, "ok": 252, "ctx": "nťwo"}, {"p": "įj", "k": -60, "gnk": 34, "gk": -26, "ck": 254, "ok": 254, "ctx": "nįjo"}, {"p": "łv", "k": -60, "gnk": 35, "gk": -25, "ck": 135, "ok": 177, "ctx": "nłvo"}, {"p": "Tï", "k": -40, "gnk": 18, "gk": -22, "ck": 324, "ok": 324, "ctx": "Tïno"}, {"p": "Ťï", "k": -40, "gnk": 18, "gk": -22, "ck": 324, "ok": 324, "ctx": "Ťïno"}, {"p": "ťv", "k": -60, "gnk": 39, "gk": -21, "ck": 80, "ok": 261, "ctx": "nťvo"}, {"p": "Уд", "k": -150, "gnk": 130, "gk": -20, "ck": 169, "ok": 172, "ctx": "Удно"}, {"p": "QA", "k": -60, "gnk": 46, "gk": -14, "ck": 195, "ok": 199, "ctx": "HQAH"}, {"p": "QÄ", "k": -60, "gnk": 46, "gk": -14, "ck": 195, "ok": 199, "ctx": "HQÄH"}, {"p": "îî", "k": -10, "gnk": -4, "gk": -14, "ck": 200, "ok": 201, "ctx": "nîîo"}, {"p": "Yt", "k": -70, "gnk": 59, "gk": -11, "ck": 284, "ok": 312, "ctx": "Ytno"}, {"p": "Yř", "k": -70, "gnk": 59, "gk": -11, "ck": 293, "ok": 316, "ctx": "Yřno"}, {"p": "Yť", "k": -70, "gnk": 59, "gk": -11, "ck": 284, "ok": 312, "ctx": "Yťno"}, {"p": "єъ", "k": -40, "gnk": 29, "gk": -11, "ck": -11, "ok": 97, "ctx": "нєъо"}, {"p": "Tì", "k": -40, "gnk": 31, "gk": -9, "ck": 324, "ok": 324, "ctx": "Tìno"}, {"p": "Ťì", "k": -40, "gnk": 31, "gk": -9, "ck": 324, "ok": 324, "ctx": "Ťìno"}, {"p": "tw", "k": -70, "gnk": 61, "gk": -9, "ck": 203, "ok": 234, "ctx": "ntwo"}, {"p": "єл", "k": -30, "gnk": 22, "gk": -8, "ck": 183, "ok": 219, "ctx": "нєло"}, {"p": "ły", "k": -40, "gnk": 34, "gk": -6, "ck": 153, "ok": 195, "ctx": "nłyo"}], "crashes_nat": [], "over_tight": [], "pos_holes": [{"p": "Рж", "k": 50, "gnk": 92, "gk": 142, "ck": 172, "ok": 416, "ctx": "Ржно"}, {"p": "qj", "k": 60, "gnk": 81, "gk": 141, "ck": 376, "ok": 376, "ctx": "nqjo"}, {"p": "Рх", "k": 50, "gnk": 33, "gk": 83, "ck": 199, "ok": 368, "ctx": "Рхно"}, {"p": "Рм", "k": 30, "gnk": 103, "gk": 133, "ck": 230, "ok": 365, "ctx": "Рмно"}, {"p": "Рп", "k": 30, "gnk": 71, "gk": 101, "ck": 227, "ok": 359, "ctx": "Рпно"}, {"p": "Ру", "k": 40, "gnk": 31, "gk": 71, "ck": 186, "ok": 354, "ctx": "Руно"}, {"p": "Рр", "k": 30, "gnk": 63, "gk": 93, "ck": 220, "ok": 353, "ctx": "Ррно"}, {"p": "Ри", "k": 30, "gnk": 54, "gk": 84, "ck": 214, "ok": 346, "ctx": "Рино"}, {"p": "Рй", "k": 30, "gnk": 54, "gk": 84, "ck": 214, "ok": 346, "ctx": "Рйно"}, {"p": "Рш", "k": 30, "gnk": 57, "gk": 87, "ck": 213, "ok": 345, "ctx": "Ршно"}, {"p": "Рг", "k": 30, "gnk": 73, "gk": 103, "ck": 206, "ok": 342, "ctx": "Ргно"}, {"p": "Рн", "k": 30, "gnk": 72, "gk": 102, "ck": 206, "ok": 342, "ctx": "Рнно"}, {"p": "Рґ", "k": 30, "gnk": 73, "gk": 103, "ck": 206, "ok": 342, "ctx": "Рґно"}, {"p": "ťg", "k": 40, "gnk": 180, "gk": 220, "ck": 227, "ok": 337, "ctx": "nťgo"}, {"p": "Рв", "k": 30, "gnk": 67, "gk": 97, "ck": 201, "ok": 337, "ctx": "Рвно"}, {"p": "Рь", "k": 30, "gnk": 67, "gk": 97, "ck": 201, "ok": 337, "ctx": "Рьно"}, {"p": "Рк", "k": 30, "gnk": 66, "gk": 96, "ck": 200, "ok": 336, "ctx": "Ркно"}, {"p": "zj", "k": 60, "gnk": 181, "gk": 241, "ck": 285, "ok": 331, "ctx": "nzjo"}, {"p": "źj", "k": 60, "gnk": 181, "gk": 241, "ck": 285, "ok": 331, "ctx": "nźjo"}, {"p": "žj", "k": 60, "gnk": 181, "gk": 241, "ck": 285, "ok": 331, "ctx": "nžjo"}, {"p": "fb", "k": 60, "gnk": 26, "gk": 86, "ck": 329, "ok": 329, "ctx": "nfbo"}, {"p": "fm", "k": 60, "gnk": 50, "gk": 110, "ck": 329, "ok": 329, "ctx": "nfmo"}, {"p": "fn", "k": 60, "gnk": 53, "gk": 113, "ck": 329, "ok": 329, "ctx": "nfno"}, {"p": "fń", "k": 60, "gnk": 53, "gk": 113, "ck": 329, "ok": 329, "ctx": "nfńo"}, {"p": "fh", "k": 60, "gnk": 32, "gk": 92, "ck": 328, "ok": 328, "ctx": "nfho"}, {"p": "gb", "k": 90, "gnk": 155, "gk": 245, "ck": 325, "ok": 325, "ctx": "ngbo"}, {"p": "gh", "k": 90, "gnk": 172, "gk": 262, "ck": 325, "ok": 325, "ctx": "ngho"}, {"p": "gm", "k": 90, "gnk": 152, "gk": 242, "ck": 325, "ok": 325, "ctx": "ngmo"}, {"p": "gn", "k": 90, "gnk": 155, "gk": 245, "ck": 325, "ok": 325, "ctx": "ngno"}, {"p": "gń", "k": 90, "gnk": 155, "gk": 245, "ck": 325, "ok": 325, "ctx": "ngńo"}, {"p": "fr", "k": 60, "gnk": 48, "gk": 108, "ck": 324, "ok": 324, "ctx": "nfro"}, {"p": "fk", "k": 60, "gnk": 18, "gk": 78, "ck": 323, "ok": 323, "ctx": "nfko"}, {"p": "fl", "k": 60, "gnk": 26, "gk": 86, "ck": 323, "ok": 323, "ctx": "nflo"}, {"p": "fp", "k": 60, "gnk": 45, "gk": 105, "ck": 322, "ok": 322, "ctx": "nfpo"}, {"p": "gk", "k": 90, "gnk": 167, "gk": 257, "ck": 320, "ok": 320, "ctx": "ngko"}, {"p": "gr", "k": 90, "gnk": 150, "gk": 240, "ck": 320, "ok": 320, "ctx": "ngro"}, {"p": "gt", "k": 90, "gnk": 157, "gk": 247, "ck": 320, "ok": 320, "ctx": "ngto"}, {"p": "gř", "k": 90, "gnk": 150, "gk": 240, "ck": 320, "ok": 320, "ctx": "ngřo"}, {"p": "gť", "k": 90, "gnk": 157, "gk": 247, "ck": 320, "ok": 320, "ctx": "ngťo"}, {"p": "gl", "k": 90, "gnk": 229, "gk": 319, "ck": 319, "ok": 319, "ctx": "nglo"}, {"p": "gp", "k": 90, "gnk": 147, "gk": 237, "ck": 318, "ok": 318, "ctx": "ngpo"}, {"p": "ťe", "k": 30, "gnk": 168, "gk": 198, "ck": 205, "ok": 317, "ctx": "nťeo"}, {"p": "ff", "k": 60, "gnk": 41, "gk": 101, "ck": 308, "ok": 308, "ctx": "nffo"}, {"p": "fi", "k": 60, "gnk": 50, "gk": 110, "ck": 307, "ok": 308, "ctx": "nfio"}, {"p": "fî", "k": 60, "gnk": 46, "gk": 106, "ck": 307, "ok": 308, "ctx": "nfîo"}, {"p": "fį", "k": 60, "gnk": 50, "gk": 110, "ck": 307, "ok": 308, "ctx": "nfįo"}, {"p": "gw", "k": 80, "gnk": 120, "gk": 200, "ck": 276, "ok": 308, "ctx": "ngwo"}, {"p": "gv", "k": 80, "gnk": 119, "gk": 199, "ck": 275, "ok": 306, "ctx": "ngvo"}, {"p": "gf", "k": 90, "gnk": 143, "gk": 233, "ck": 305, "ok": 305, "ctx": "ngfo"}, {"p": "gi", "k": 90, "gnk": 153, "gk": 243, "ck": 304, "ok": 305, "ctx": "ngio"}, {"p": "gì", "k": 90, "gnk": 153, "gk": 243, "ck": 304, "ok": 305, "ctx": "ngìo"}, {"p": "gî", "k": 90, "gnk": 153, "gk": 243, "ck": 304, "ok": 305, "ctx": "ngîo"}, {"p": "gï", "k": 90, "gnk": 153, "gk": 243, "ck": 304, "ok": 305, "ctx": "ngïo"}, {"p": "gį", "k": 90, "gnk": 153, "gk": 243, "ck": 304, "ok": 305, "ctx": "ngįo"}, {"p": "tg", "k": 40, "gnk": 191, "gk": 231, "ck": 299, "ok": 302, "ctx": "ntgo"}, {"p": "cg", "k": 60, "gnk": 138, "gk": 198, "ck": 202, "ok": 300, "ctx": "ncgo"}, {"p": "ťz", "k": 30, "gnk": 67, "gk": 97, "ck": 108, "ok": 298, "ctx": "nťzo"}, {"p": "jx", "k": 90, "gnk": 96, "gk": 186, "ck": 263, "ok": 295, "ctx": "njxo"}, {"p": "żj", "k": 60, "gnk": 145, "gk": 205, "ck": 249, "ok": 295, "ctx": "nżjo"}, {"p": "гу", "k": 30, "gnk": 59, "gk": 89, "ck": 136, "ok": 291, "ctx": "нгуо"}, {"p": "fy", "k": 30, "gnk": 16, "gk": 46, "ck": 256, "ok": 288, "ctx": "nfyo"}, {"p": "fý", "k": 30, "gnk": 16, "gk": 46, "ck": 256, "ok": 288, "ctx": "nfýo"}, {"p": "jy", "k": 80, "gnk": 96, "gk": 176, "ck": 250, "ok": 282, "ctx": "njyo"}, {"p": "jý", "k": 80, "gnk": 96, "gk": 176, "ck": 250, "ok": 282, "ctx": "njýo"}, {"p": "te", "k": 30, "gnk": 177, "gk": 207, "ck": 280, "ok": 282, "ctx": "nteo"}, {"p": "ce", "k": 50, "gnk": 128, "gk": 178, "ck": 182, "ok": 280, "ctx": "nceo"}, {"p": "tz", "k": 30, "gnk": 74, "gk": 104, "ck": 238, "ok": 280, "ctx": "ntzo"}, {"p": "gc", "k": 100, "gnk": 175, "gk": 275, "ck": 275, "ok": 277, "ctx": "ngco"}, {"p": "gd", "k": 100, "gnk": 173, "gk": 273, "ck": 273, "ok": 276, "ctx": "ngdo"}, {"p": "ge", "k": 100, "gnk": 173, "gk": 273, "ck": 273, "ok": 276, "ctx": "ngeo"}, {"p": "go", "k": 100, "gnk": 173, "gk": 273, "ck": 273, "ok": 276, "ctx": "ngoo"}, {"p": "gq", "k": 100, "gnk": 174, "gk": 274, "ck": 274, "ok": 276, "ctx": "ngqo"}, {"p": "gę", "k": 100, "gnk": 173, "gk": 273, "ck": 273, "ok": 276, "ctx": "ngęo"}, {"p": "gó", "k": 100, "gnk": 173, "gk": 273, "ck": 273, "ok": 276, "ctx": "ngóo"}, {"p": "fł", "k": 60, "gnk": 26, "gk": 86, "ck": 226, "ok": 269, "ctx": "nfło"}, {"p": "gł", "k": 90, "gnk": 132, "gk": 222, "ck": 222, "ok": 266, "ctx": "ngło"}, {"p": "xg", "k": 30, "gnk": 190, "gk": 220, "ck": 252, "ok": 264, "ctx": "nxgo"}, {"p": "xe", "k": 40, "gnk": 175, "gk": 215, "ck": 249, "ok": 263, "ctx": "nxeo"}, {"p": "cz", "k": 40, "gnk": 64, "gk": 104, "ck": 106, "ok": 257, "ctx": "nczo"}, {"p": "cź", "k": 40, "gnk": 64, "gk": 104, "ck": 106, "ok": 257, "ctx": "ncźo"}, {"p": "cż", "k": 40, "gnk": 64, "gk": 104, "ck": 106, "ok": 257, "ctx": "ncżo"}, {"p": "cž", "k": 40, "gnk": 64, "gk": 104, "ck": 106, "ok": 257, "ctx": "ncžo"}, {"p": "Ng", "k": 40, "gnk": 206, "gk": 246, "ck": 246, "ok": 249, "ctx": "Ngno"}, {"p": "fz", "k": 40, "gnk": 46, "gk": 86, "ck": 205, "ok": 249, "ctx": "nfzo"}, {"p": "fź", "k": 40, "gnk": 46, "gk": 86, "ck": 205, "ok": 249, "ctx": "nfźo"}, {"p": "fż", "k": 40, "gnk": 46, "gk": 86, "ck": 205, "ok": 249, "ctx": "nfżo"}, {"p": "fž", "k": 40, "gnk": 28, "gk": 68, "ck": 205, "ok": 249, "ctx": "nfžo"}, {"p": "jw", "k": 40, "gnk": 98, "gk": 138, "ck": 214, "ok": 245, "ctx": "njwo"}, {"p": "jv", "k": 40, "gnk": 97, "gk": 137, "ck": 212, "ok": 244, "ctx": "njvo"}, {"p": "js", "k": 90, "gnk": 151, "gk": 241, "ck": 241, "ok": 243, "ctx": "njso"}], "opt_holes": [{"p": "Єч", "k": 0, "gnk": 435, "gk": 435, "ck": 435, "ok": 564, "ctx": "Єчно"}, {"p": "ҐЛ", "k": 0, "gnk": 240, "gk": 240, "ck": 380, "ok": 549, "ctx": "НҐЛН"}, {"p": "Єу", "k": 0, "gnk": 415, "gk": 415, "ck": 421, "ok": 534, "ctx": "Єуно"}, {"p": "ҐЭ", "k": 0, "gnk": 228, "gk": 228, "ck": 385, "ok": 530, "ctx": "НҐЭН"}, {"p": "ҐЖ", "k": 0, "gnk": 202, "gk": 202, "ck": 498, "ok": 529, "ctx": "НҐЖН"}, {"p": "ҐХ", "k": 0, "gnk": 72, "gk": 72, "ck": 490, "ok": 528, "ctx": "НҐХН"}, {"p": "ҐД", "k": 0, "gnk": 192, "gk": 192, "ck": 484, "ok": 517, "ctx": "НҐДН"}, {"p": "ҐЗ", "k": 0, "gnk": 214, "gk": 214, "ck": 394, "ok": 517, "ctx": "НҐЗН"}, {"p": "ГЖ", "k": 0, "gnk": 129, "gk": 129, "ck": 349, "ok": 515, "ctx": "НГЖН"}, {"p": "Єў", "k": -20, "gnk": 330, "gk": 310, "ck": 401, "ok": 514, "ctx": "Єўно"}, {"p": "Fj", "k": 0, "gnk": 187, "gk": 187, "ck": 348, "ok": 510, "ctx": "Fjno"}, {"p": "Єл", "k": 0, "gnk": 196, "gk": 196, "ck": 204, "ok": 508, "ctx": "Єлно"}, {"p": "ҐЯ", "k": 0, "gnk": 316, "gk": 316, "ck": 480, "ok": 501, "ctx": "НҐЯН"}, {"p": "Ґл", "k": 0, "gnk": 316, "gk": 316, "ck": 369, "ok": 499, "ctx": "Ґлно"}, {"p": "ҐА", "k": 0, "gnk": 304, "gk": 304, "ck": 451, "ok": 495, "ctx": "НҐАН"}, {"p": "Єм", "k": 0, "gnk": 295, "gk": 295, "ck": 308, "ok": 495, "ctx": "Ємно"}, {"p": "ГХ", "k": 0, "gnk": 82, "gk": 82, "ck": 177, "ok": 494, "ctx": "НГХН"}, {"p": "ҐБ", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐБН"}, {"p": "ҐГ", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐГН"}, {"p": "ҐИ", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐИН"}, {"p": "ҐЙ", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐЙН"}, {"p": "ҐП", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐПН"}, {"p": "ҐЦ", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐЦН"}, {"p": "ҐШ", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐШН"}, {"p": "ҐЩ", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐЩН"}, {"p": "ҐЫ", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐЫН"}, {"p": "ҐЬ", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐЬН"}, {"p": "ҐЮ", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐЮН"}, {"p": "ҐҐ", "k": 0, "gnk": 113, "gk": 113, "ck": 494, "ok": 494, "ctx": "НҐҐН"}, {"p": "Сч", "k": 0, "gnk": 397, "gk": 397, "ck": 398, "ok": 494, "ctx": "Счно"}, {"p": "Гў", "k": 0, "gnk": 145, "gk": 145, "ck": 459, "ok": 491, "ctx": "Гўно"}, {"p": "ГД", "k": 0, "gnk": 203, "gk": 203, "ck": 245, "ok": 488, "ctx": "НГДН"}, {"p": "ҐМ", "k": 0, "gnk": 97, "gk": 97, "ck": 481, "ok": 488, "ctx": "НҐМН"}, {"p": "Єп", "k": 0, "gnk": 299, "gk": 299, "ck": 299, "ok": 488, "ctx": "Єпно"}, {"p": "ЄЖ", "k": -30, "gnk": 265, "gk": 235, "ck": 297, "ok": 487, "ctx": "НЄЖН"}, {"p": "ГЗ", "k": 0, "gnk": 89, "gk": 89, "ck": 96, "ok": 483, "ctx": "НГЗН"}, {"p": "Ґт", "k": 0, "gnk": 358, "gk": 358, "ck": 482, "ok": 483, "ctx": "Ґтно"}, {"p": "Єи", "k": 0, "gnk": 295, "gk": 295, "ck": 298, "ok": 482, "ctx": "Єино"}, {"p": "Єй", "k": 0, "gnk": 295, "gk": 295, "ck": 298, "ok": 482, "ctx": "Єйно"}, {"p": "ЄЛ", "k": 0, "gnk": 207, "gk": 207, "ck": 215, "ok": 481, "ctx": "НЄЛН"}, {"p": "Гі", "k": 0, "gnk": 110, "gk": 110, "ck": 481, "ok": 481, "ctx": "Гіно"}, {"p": "Єр", "k": 0, "gnk": 292, "gk": 292, "ck": 292, "ok": 481, "ctx": "Єрно"}, {"p": "Єш", "k": 0, "gnk": 294, "gk": 294, "ck": 297, "ok": 481, "ctx": "Єшно"}, {"p": "Єщ", "k": 0, "gnk": 294, "gk": 294, "ck": 297, "ok": 481, "ctx": "Єщно"}, {"p": "Ґя", "k": 0, "gnk": 314, "gk": 314, "ck": 468, "ok": 481, "ctx": "Ґяно"}, {"p": "Єж", "k": -30, "gnk": 272, "gk": 242, "ck": 274, "ok": 479, "ctx": "Єжно"}, {"p": "Єц", "k": 0, "gnk": 292, "gk": 292, "ck": 295, "ok": 479, "ctx": "Єцно"}, {"p": "Єъ", "k": 0, "gnk": 380, "gk": 380, "ck": 380, "ok": 476, "ctx": "Єъно"}, {"p": "Cj", "k": 0, "gnk": 216, "gk": 216, "ck": 216, "ok": 475, "ctx": "Cjno"}, {"p": "Çj", "k": 0, "gnk": 167, "gk": 167, "ck": 216, "ok": 475, "ctx": "Çjno"}, {"p": "Ґх", "k": 0, "gnk": 305, "gk": 305, "ck": 443, "ok": 475, "ctx": "Ґхно"}, {"p": "Єг", "k": 0, "gnk": 286, "gk": 286, "ck": 286, "ok": 473, "ctx": "Єгно"}, {"p": "Єн", "k": 0, "gnk": 286, "gk": 286, "ck": 286, "ok": 473, "ctx": "Єнно"}, {"p": "Єі", "k": 0, "gnk": 280, "gk": 280, "ck": 291, "ok": 473, "ctx": "Єіно"}, {"p": "Єї", "k": 0, "gnk": 221, "gk": 221, "ck": 291, "ok": 473, "ctx": "Єїно"}, {"p": "Єґ", "k": 0, "gnk": 286, "gk": 286, "ck": 286, "ok": 473, "ctx": "Єґно"}, {"p": "ЎЖ", "k": 0, "gnk": 152, "gk": 152, "ck": 454, "ok": 472, "ctx": "НЎЖН"}, {"p": "Ґж", "k": 0, "gnk": 314, "gk": 314, "ck": 416, "ok": 472, "ctx": "Ґжно"}, {"p": "Ґу", "k": 0, "gnk": 366, "gk": 366, "ck": 440, "ok": 472, "ctx": "Ґуно"}, {"p": "Ґў", "k": 0, "gnk": 366, "gk": 366, "ck": 440, "ok": 472, "ctx": "Ґўно"}]}, "05": {"cfg": {"id": "05", "name": "05 — Notus Display Caption", "short": "05 · Display Caption", "file": "05 - Notus - Display - Caption.otf", "web_path": "notus/Notus-Caption.otf?v=20261113_8", "family": "Notus Caption", "style": "normal", "role": "Micro-Typography, Footnotes & Folios (6–12pt)", "has_Th": false, "gpos_pairs": "26 343", "smcp_count": 342, "status_color": "warn", "crit_count": 4, "verdict": "В экспорте 17:49 устранены ВСЕ 74 наезда от минусового кернинга (0 пересечений!) и ВСЕ пережатия ядра (0!). Главная оставшаяся проблема — ошибочный плюсовой кернинг +30…+100 на C/С, f и gj.", "critical_points": [{"level": "CRIT", "title": "1. КРИТИЧНО: Плюсовой кернинг +30 на C / С + круглые строчные и +50 на C / С + прописные", "fix": "Убрать +30 на Co, Ce, Cc, Cd, Cq, Со, Се, Сс, Сэ, Сф (должно быть -15…-20) и убрать +50 на CM, CN, CB, CD, CE, СМ, СБ, СВ, СГ, СЕ, СИ, СН, СП, СР (должно быть 0)", "pairs": "Сэ, Со, Сс, Сє, Се, Сё, Сф, Co, Có, Ço, Çó, Cc, Ce, Cę, Çe, Cd, Cq, СУ, СМ, CM, CN, ÇM, ÇN, СЪ, CJ, ÇJ, СБ, СВ, СГ, СЕ, СИ, СЙ, СН, СП, СР, СЦ, СШ, СЩ, СЫ, СЬ, СЮ, CB, CD, CE, CF, CH, CI, CK, CL, CP, CR", "sample": "Co Ce Cc Со Се Сс Сэ CM CN CB CE СМ СБ СВ СЕ СН СП СР"}, {"level": "CRIT", "title": "2. КРИТИЧНО: Огромный плюсовой кернинг +80 после f, +100 на gj и +50 на tu / ťu / Pv / Pw", "fix": "Обнулить +80 после f (fm, fn, fb, fh, fl, fp, fr, ft → 0), +100 на gj → 0, +50 на tu, ťu, Pv, Pw, KZ → 0", "pairs": "gj, fm, fn, fń, fb, fh, fl, fp, fr, ft, tu, tų, ťu, ťų, Pv, Pw, PJ, KZ, KŹ, KŻ, KŽ, ҐЖ, ґж, КЭ, ЖЭ, ХЭ, ФУ", "sample": "fm fn fb fh fl fp fr ft gj tu ťu Pv Pw KZ"}, {"level": "CRIT", "title": "3. КРИТИЧНО: Отсутствует лигатура Th (T_h) в GSUB liga + 4 наезда с Ґ/ґ", "fix": "Добавить sub T h by T_h; в фичу liga. Для ҐЪ, ґ?, ҐЇ, ҐК добавить плюсовой кернинг +25…+45", "pairs": "Th, ҐЪ, ґ?, ҐЇ, ҐК", "sample": "The Theater ҐЪ ґ? ҐЇ ҐК"}]}, "refs": {"oo": 116, "no": 149, "nn": 210, "OO": 117, "HH": 254}, "counts": {"crashes_neg": 0, "crashes_nat": 4, "over_tight": 0, "pos_holes": 739, "opt_holes": 1209}, "crashes_neg": [], "crashes_nat": [{"p": "ҐЪ", "k": 0, "gnk": -46, "gk": -46, "ck": 289, "ok": 420, "ctx": "НҐЪН"}, {"p": "ґ?", "k": 0, "gnk": -31, "gk": -31, "ck": 393, "ok": 403, "ctx": "нґ?о"}, {"p": "ҐЇ", "k": 0, "gnk": -20, "gk": -20, "ck": 416, "ok": 416, "ctx": "НҐЇН"}, {"p": "ҐК", "k": 0, "gnk": -11, "gk": -11, "ck": 386, "ok": 386, "ctx": "НҐКН"}], "over_tight": [], "pos_holes": [{"p": "ҐЖ", "k": 60, "gnk": 65, "gk": 125, "ck": 459, "ok": 488, "ctx": "НҐЖН"}, {"p": "Сэ", "k": 30, "gnk": 54, "gk": 84, "ck": 92, "ok": 414, "ctx": "Сэно"}, {"p": "gj", "k": 100, "gnk": 120, "gk": 220, "ck": 294, "ok": 399, "ctx": "ngjo"}, {"p": "КЭ", "k": 30, "gnk": 102, "gk": 132, "ck": 193, "ok": 385, "ctx": "НКЭН"}, {"p": "ґж", "k": 60, "gnk": 65, "gk": 125, "ck": 331, "ok": 385, "ctx": "нґжо"}, {"p": "Со", "k": 30, "gnk": 107, "gk": 137, "ck": 143, "ok": 361, "ctx": "Соно"}, {"p": "Сс", "k": 30, "gnk": 106, "gk": 136, "ck": 141, "ok": 360, "ctx": "Ссно"}, {"p": "Сє", "k": 30, "gnk": 106, "gk": 136, "ck": 141, "ok": 360, "ctx": "Сєно"}, {"p": "Се", "k": 30, "gnk": 106, "gk": 136, "ck": 141, "ok": 359, "ctx": "Сено"}, {"p": "Сё", "k": 30, "gnk": 106, "gk": 136, "ck": 141, "ok": 359, "ctx": "Сёно"}, {"p": "Сф", "k": 30, "gnk": 104, "gk": 134, "ck": 138, "ok": 357, "ctx": "Сфно"}, {"p": "Co", "k": 30, "gnk": 97, "gk": 127, "ck": 133, "ok": 351, "ctx": "Cono"}, {"p": "Có", "k": 30, "gnk": 97, "gk": 127, "ck": 133, "ok": 351, "ctx": "Cóno"}, {"p": "Ço", "k": 30, "gnk": 97, "gk": 127, "ck": 133, "ok": 351, "ctx": "Çono"}, {"p": "Çó", "k": 30, "gnk": 97, "gk": 127, "ck": 133, "ok": 351, "ctx": "Çóno"}, {"p": "Cc", "k": 30, "gnk": 96, "gk": 126, "ck": 131, "ok": 350, "ctx": "Ccno"}, {"p": "Ce", "k": 30, "gnk": 96, "gk": 126, "ck": 131, "ok": 350, "ctx": "Ceno"}, {"p": "Cę", "k": 30, "gnk": 96, "gk": 126, "ck": 131, "ok": 350, "ctx": "Cęno"}, {"p": "Çe", "k": 30, "gnk": 96, "gk": 126, "ck": 131, "ok": 350, "ctx": "Çeno"}, {"p": "ЖЭ", "k": 30, "gnk": 103, "gk": 133, "ck": 173, "ok": 350, "ctx": "НЖЭН"}, {"p": "Cd", "k": 30, "gnk": 95, "gk": 125, "ck": 130, "ok": 349, "ctx": "Cdno"}, {"p": "Cq", "k": 30, "gnk": 96, "gk": 126, "ck": 130, "ok": 349, "ctx": "Cqno"}, {"p": "Çc", "k": 30, "gnk": 96, "gk": 126, "ck": 131, "ok": 349, "ctx": "Çcno"}, {"p": "Çd", "k": 30, "gnk": 95, "gk": 125, "ck": 130, "ok": 349, "ctx": "Çdno"}, {"p": "Çq", "k": 30, "gnk": 96, "gk": 126, "ck": 130, "ok": 349, "ctx": "Çqno"}, {"p": "Çę", "k": 30, "gnk": 96, "gk": 126, "ck": 131, "ok": 349, "ctx": "Çęno"}, {"p": "СУ", "k": 60, "gnk": 96, "gk": 156, "ck": 163, "ok": 345, "ctx": "НСУН"}, {"p": "СМ", "k": 50, "gnk": 145, "gk": 195, "ck": 217, "ok": 337, "ctx": "НСМН"}, {"p": "ťu", "k": 50, "gnk": 65, "gk": 115, "ck": 203, "ok": 334, "ctx": "nťuo"}, {"p": "ťų", "k": 50, "gnk": 65, "gk": 115, "ck": 203, "ok": 334, "ctx": "nťųo"}, {"p": "ХЭ", "k": 30, "gnk": 106, "gk": 136, "ck": 158, "ok": 334, "ctx": "НХЭН"}, {"p": "CM", "k": 50, "gnk": 140, "gk": 190, "ck": 212, "ok": 332, "ctx": "HCMH"}, {"p": "CN", "k": 50, "gnk": 147, "gk": 197, "ck": 212, "ok": 332, "ctx": "HCNH"}, {"p": "ÇM", "k": 50, "gnk": 140, "gk": 190, "ck": 212, "ok": 332, "ctx": "HÇMH"}, {"p": "ÇN", "k": 50, "gnk": 147, "gk": 197, "ck": 212, "ok": 332, "ctx": "HÇNH"}, {"p": "fm", "k": 80, "gnk": 34, "gk": 114, "ck": 329, "ok": 329, "ctx": "nfmo"}, {"p": "fn", "k": 80, "gnk": 34, "gk": 114, "ck": 329, "ok": 329, "ctx": "nfno"}, {"p": "fń", "k": 80, "gnk": 34, "gk": 114, "ck": 329, "ok": 329, "ctx": "nfńo"}, {"p": "Єэ", "k": 30, "gnk": 35, "gk": 65, "ck": 73, "ok": 329, "ctx": "Єэно"}, {"p": "АХ", "k": 30, "gnk": 20, "gk": 50, "ck": 225, "ok": 328, "ctx": "НАХН"}, {"p": "Pv", "k": 50, "gnk": 13, "gk": 63, "ck": 171, "ok": 326, "ctx": "Pvno"}, {"p": "Pw", "k": 50, "gnk": 13, "gk": 63, "ck": 173, "ok": 325, "ctx": "Pwno"}, {"p": "fb", "k": 80, "gnk": 16, "gk": 96, "ck": 324, "ok": 324, "ctx": "nfbo"}, {"p": "fh", "k": 80, "gnk": 16, "gk": 96, "ck": 324, "ok": 324, "ctx": "nfho"}, {"p": "fl", "k": 80, "gnk": 16, "gk": 96, "ck": 324, "ok": 324, "ctx": "nflo"}, {"p": "fp", "k": 80, "gnk": 30, "gk": 110, "ck": 324, "ok": 324, "ctx": "nfpo"}, {"p": "fr", "k": 80, "gnk": 29, "gk": 109, "ck": 324, "ok": 324, "ctx": "nfro"}, {"p": "ft", "k": 80, "gnk": 41, "gk": 121, "ck": 324, "ok": 324, "ctx": "nfto"}, {"p": "PJ", "k": 30, "gnk": 282, "gk": 312, "ck": 312, "ok": 323, "ctx": "HPJH"}, {"p": "tu", "k": 50, "gnk": 77, "gk": 127, "ck": 323, "ok": 323, "ctx": "ntuo"}, {"p": "tų", "k": 50, "gnk": 77, "gk": 127, "ck": 323, "ok": 323, "ctx": "ntųo"}, {"p": "СЪ", "k": 50, "gnk": 36, "gk": 86, "ck": 86, "ok": 323, "ctx": "НСЪН"}, {"p": "CJ", "k": 50, "gnk": 24, "gk": 74, "ck": 74, "ok": 322, "ctx": "HCJH"}, {"p": "ÇJ", "k": 50, "gnk": 24, "gk": 74, "ck": 74, "ok": 322, "ctx": "HÇJH"}, {"p": "АЛ", "k": 30, "gnk": 24, "gk": 54, "ck": 125, "ok": 321, "ctx": "НАЛН"}, {"p": "СБ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСБН"}, {"p": "СВ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСВН"}, {"p": "СГ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСГН"}, {"p": "СЕ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСЕН"}, {"p": "СИ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСИН"}, {"p": "СЙ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСЙН"}, {"p": "СН", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСНН"}, {"p": "СП", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСПН"}, {"p": "СР", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСРН"}, {"p": "СЦ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСЦН"}, {"p": "СШ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСШН"}, {"p": "СЩ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСЩН"}, {"p": "СЫ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСЫН"}, {"p": "СЬ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСЬН"}, {"p": "СЮ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСЮН"}, {"p": "СҐ", "k": 50, "gnk": 150, "gk": 200, "ck": 200, "ok": 319, "ctx": "НСҐН"}, {"p": "ХФ", "k": 30, "gnk": 271, "gk": 301, "ck": 307, "ok": 319, "ctx": "НХФН"}, {"p": "KZ", "k": 50, "gnk": 28, "gk": 78, "ck": 234, "ok": 317, "ctx": "HKZH"}, {"p": "KŹ", "k": 50, "gnk": 28, "gk": 78, "ck": 234, "ok": 317, "ctx": "HKŹH"}, {"p": "KŻ", "k": 50, "gnk": 28, "gk": 78, "ck": 234, "ok": 317, "ctx": "HKŻH"}, {"p": "KŽ", "k": 50, "gnk": 28, "gk": 78, "ck": 234, "ok": 317, "ctx": "HKŽH"}, {"p": "ťy", "k": 30, "gnk": 30, "gk": 60, "ck": 158, "ok": 316, "ctx": "nťyo"}, {"p": "ťý", "k": 30, "gnk": 30, "gk": 60, "ck": 158, "ok": 316, "ctx": "nťýo"}, {"p": "ФУ", "k": 60, "gnk": 241, "gk": 301, "ck": 306, "ok": 315, "ctx": "НФУН"}, {"p": "уж", "k": 30, "gnk": 61, "gk": 91, "ck": 167, "ok": 315, "ctx": "нужо"}, {"p": "CB", "k": 50, "gnk": 140, "gk": 190, "ck": 190, "ok": 310, "ctx": "HCBH"}, {"p": "CD", "k": 50, "gnk": 140, "gk": 190, "ck": 190, "ok": 310, "ctx": "HCDH"}, {"p": "CE", "k": 50, "gnk": 140, "gk": 190, "ck": 190, "ok": 310, "ctx": "HCEH"}, {"p": "CF", "k": 50, "gnk": 140, "gk": 190, "ck": 190, "ok": 310, "ctx": "HCFH"}, {"p": "CH", "k": 50, "gnk": 140, "gk": 190, "ck": 190, "ok": 310, "ctx": "HCHH"}, {"p": "CI", "k": 50, "gnk": 140, "gk": 190, "ck": 190, "ok": 310, "ctx": "HCIH"}, {"p": "CK", "k": 50, "gnk": 140, "gk": 190, "ck": 190, "ok": 310, "ctx": "HCKH"}, {"p": "CL", "k": 50, "gnk": 140, "gk": 190, "ck": 190, "ok": 310, "ctx": "HCLH"}, {"p": "CP", "k": 50, "gnk": 140, "gk": 190, "ck": 190, "ok": 310, "ctx": "HCPH"}, {"p": "CR", "k": 50, "gnk": 140, "gk": 190, "ck": 190, "ok": 310, "ctx": "HCRH"}], "opt_holes": [{"p": "Fj", "k": 0, "gnk": 184, "gk": 184, "ck": 345, "ok": 490, "ctx": "Fjno"}, {"p": "Гў", "k": 0, "gnk": 168, "gk": 168, "ck": 445, "ok": 472, "ctx": "Гўно"}, {"p": "ГЛ", "k": 0, "gnk": 223, "gk": 223, "ck": 271, "ok": 471, "ctx": "НГЛН"}, {"p": "Сч", "k": 0, "gnk": 384, "gk": 384, "ck": 384, "ok": 471, "ctx": "Счно"}, {"p": "ҐЛ", "k": 0, "gnk": 146, "gk": 146, "ck": 302, "ok": 461, "ctx": "НҐЛН"}, {"p": "Гі", "k": 0, "gnk": 90, "gk": 90, "ck": 460, "ok": 460, "ctx": "Гіно"}, {"p": "ГЖ", "k": 0, "gnk": 82, "gk": 82, "ck": 278, "ok": 453, "ctx": "НГЖН"}, {"p": "Yj", "k": 0, "gnk": 225, "gk": 225, "ck": 421, "ok": 449, "ctx": "Yjno"}, {"p": "ГД", "k": 0, "gnk": 184, "gk": 184, "ck": 222, "ok": 447, "ctx": "НГДН"}, {"p": "Tj", "k": 0, "gnk": 184, "gk": 184, "ck": 446, "ok": 446, "ctx": "Tjno"}, {"p": "Ťj", "k": 0, "gnk": 184, "gk": 184, "ck": 446, "ok": 446, "ctx": "Ťjno"}, {"p": "ГМ", "k": 0, "gnk": 105, "gk": 105, "ck": 163, "ok": 438, "ctx": "НГМН"}, {"p": "ҐД", "k": 0, "gnk": 98, "gk": 98, "ck": 399, "ok": 436, "ctx": "НҐДН"}, {"p": "Cj", "k": 0, "gnk": 204, "gk": 204, "ck": 204, "ok": 432, "ctx": "Cjno"}, {"p": "Çj", "k": 0, "gnk": 181, "gk": 181, "ck": 204, "ok": 432, "ctx": "Çjno"}, {"p": "ГЗ", "k": 0, "gnk": 87, "gk": 87, "ck": 92, "ok": 430, "ctx": "НГЗН"}, {"p": "ГЯ", "k": 0, "gnk": 165, "gk": 165, "ck": 168, "ok": 429, "ctx": "НГЯН"}, {"p": "УА", "k": 0, "gnk": 350, "gk": 350, "ck": 423, "ok": 427, "ctx": "НУАН"}, {"p": "ҐЗ", "k": 0, "gnk": 141, "gk": 141, "ck": 330, "ok": 427, "ctx": "НҐЗН"}, {"p": "KY", "k": 0, "gnk": 125, "gk": 125, "ck": 397, "ok": 426, "ctx": "HKYH"}, {"p": "ҐЯ", "k": 0, "gnk": 240, "gk": 240, "ck": 403, "ok": 425, "ctx": "НҐЯН"}, {"p": "Су", "k": 0, "gnk": 238, "gk": 238, "ck": 242, "ok": 425, "ctx": "Суно"}, {"p": "Сў", "k": 0, "gnk": 211, "gk": 211, "ck": 242, "ok": 425, "ctx": "Сўно"}, {"p": "Fm", "k": 0, "gnk": 278, "gk": 278, "ck": 279, "ok": 420, "ctx": "Fmno"}, {"p": "Fn", "k": 0, "gnk": 278, "gk": 278, "ck": 279, "ok": 420, "ctx": "Fnno"}, {"p": "Fń", "k": 0, "gnk": 246, "gk": 246, "ck": 279, "ok": 420, "ctx": "Fńno"}, {"p": "ГБ", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГБН"}, {"p": "ГВ", "k": 0, "gnk": 105, "gk": 105, "ck": 144, "ok": 420, "ctx": "НГВН"}, {"p": "ГГ", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГГН"}, {"p": "ГЕ", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГЕН"}, {"p": "ГИ", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГИН"}, {"p": "ГЙ", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГЙН"}, {"p": "ГН", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГНН"}, {"p": "ГП", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГПН"}, {"p": "ГР", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГРН"}, {"p": "ГЦ", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГЦН"}, {"p": "ГШ", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГШН"}, {"p": "ГЩ", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГЩН"}, {"p": "ГЫ", "k": 0, "gnk": 105, "gk": 105, "ck": 144, "ok": 420, "ctx": "НГЫН"}, {"p": "ГЬ", "k": 0, "gnk": 105, "gk": 105, "ck": 144, "ok": 420, "ctx": "НГЬН"}, {"p": "ГЮ", "k": 0, "gnk": 105, "gk": 105, "ck": 144, "ok": 420, "ctx": "НГЮН"}, {"p": "ГІ", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГІН"}, {"p": "ГЇ", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГЇН"}, {"p": "ГҐ", "k": 0, "gnk": 96, "gk": 96, "ck": 144, "ok": 420, "ctx": "НГҐН"}, {"p": "ЎЖ", "k": 0, "gnk": 79, "gk": 79, "ck": 380, "ok": 419, "ctx": "НЎЖН"}, {"p": "Ґд", "k": 0, "gnk": 237, "gk": 237, "ck": 398, "ok": 418, "ctx": "Ґдно"}, {"p": "Fp", "k": 0, "gnk": 273, "gk": 273, "ck": 274, "ok": 415, "ctx": "Fpno"}, {"p": "Fr", "k": 0, "gnk": 273, "gk": 273, "ck": 274, "ok": 415, "ctx": "Frno"}, {"p": "Fř", "k": 0, "gnk": 70, "gk": 70, "ck": 274, "ok": 415, "ctx": "Fřno"}, {"p": "КЧ", "k": 0, "gnk": 160, "gk": 160, "ck": 394, "ok": 415, "ctx": "НКЧН"}, {"p": "LY", "k": 0, "gnk": 238, "gk": 238, "ck": 280, "ok": 414, "ctx": "HLYH"}, {"p": "Cv", "k": 10, "gnk": 216, "gk": 226, "ck": 230, "ok": 414, "ctx": "Cvno"}, {"p": "Fx", "k": 10, "gnk": 236, "gk": 246, "ck": 253, "ok": 414, "ctx": "Fxno"}, {"p": "Çv", "k": 10, "gnk": 216, "gk": 226, "ck": 230, "ok": 414, "ctx": "Çvno"}, {"p": "Fb", "k": 0, "gnk": 124, "gk": 124, "ck": 268, "ok": 413, "ctx": "Fbno"}, {"p": "Fh", "k": 0, "gnk": 124, "gk": 124, "ck": 268, "ok": 413, "ctx": "Fhno"}, {"p": "Fl", "k": 0, "gnk": 124, "gk": 124, "ck": 268, "ok": 413, "ctx": "Flno"}, {"p": "Ft", "k": 0, "gnk": 178, "gk": 178, "ck": 268, "ok": 413, "ctx": "Ftno"}, {"p": "Cw", "k": 10, "gnk": 209, "gk": 219, "ck": 223, "ok": 411, "ctx": "Cwno"}, {"p": "Çw", "k": 10, "gnk": 209, "gk": 219, "ck": 223, "ok": 411, "ctx": "Çwno"}]}};
+  let curFontId = '01';
+  let curCat = 'crashes_neg';
+  const featState = { kern: true, liga: true, dlig: false, smcp: false, onum: false, frac: false, sups: false };
 
-  const features = ['kern', 'liga', 'dlig', 'smcp', 'onum', 'frac', 'sups'];
+  function selectFont(id) {
+    curFontId = id;
+    document.querySelectorAll('.font-tab').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-id') === id);
+    });
 
-  function handlePill(feat) {
-    const cb = document.getElementById('feat-' + feat);
-    const pill = document.getElementById('lbl-' + feat);
-    if (cb.checked) {
-      pill.classList.add('active');
+    const entry = DB[id];
+    const cfg = entry.cfg;
+    const refs = entry.refs;
+    const cnt = entry.counts;
+
+    document.documentElement.style.setProperty('--active-font', `'${cfg.family}', serif`);
+    document.documentElement.style.setProperty('--active-style', cfg.style);
+
+    document.getElementById('heroName').textContent = cfg.name;
+    document.getElementById('heroFile').textContent = cfg.file;
+    document.getElementById('heroRole').textContent = `${cfg.role} • GPOS: ${cfg.gpos_pairs} пар`;
+    document.getElementById('heroVerdict').textContent = cfg.verdict;
+
+    // Render Critical Points Cards
+    const critHtml = cfg.critical_points.map(cp => `
+      <div class="crit-alert-card ${cp.level === 'WARN' ? 'warn' : ''}">
+        <div class="crit-alert-head">
+          <span class="crit-alert-title">${cp.title}</span>
+          <span class="crit-tag ${cp.level}">${cp.level === 'CRIT' ? 'КРИТИЧНО' : 'ВНИМАНИЕ'}</span>
+        </div>
+        <div class="crit-alert-fix">&rarr; Решение: ${cp.fix}</div>
+        <div class="crit-alert-sample dyn-font" onclick="loadSample('${cp.sample.replace(/'/g, "\'")}')" title="Нажмите, чтобы загрузить в A/B Инспектор">${cp.sample}</div>
+        <div class="crit-alert-pairs">${cp.pairs}</div>
+      </div>
+    `).join('');
+    document.getElementById('critPointsContainer').innerHTML = critHtml;
+
+    // Update Sidebar Metrics
+    document.getElementById('mGpos').textContent = cfg.gpos_pairs;
+    const thEl = document.getElementById('mTh');
+    thEl.textContent = cfg.has_Th ? '✓ ЕСТЬ (6/6)' : '⚠️ НЕТ (5/6)';
+    thEl.style.color = cfg.has_Th ? 'var(--ok)' : 'var(--danger)';
+    document.getElementById('mSmcp').textContent = cfg.smcp_count + ' глифов';
+    document.getElementById('mOO').textContent = refs.oo + ' u';
+    document.getElementById('mNO').textContent = refs.no + ' u';
+    document.getElementById('mNN').textContent = refs.nn + ' u';
+    document.getElementById('mHH').textContent = refs.HH + ' u';
+
+    document.getElementById('cNeg').textContent = cnt.crashes_neg;
+    document.getElementById('cTight').textContent = cnt.over_tight;
+    document.getElementById('cPos').textContent = cnt.pos_holes;
+    document.getElementById('cNat').textContent = cnt.crashes_nat;
+
+    // Update Ligature Th Card highlight
+    const thCard = document.getElementById('thCard');
+    const thBanner = document.getElementById('thStatusBanner');
+    if (cfg.has_Th) {
+      thCard.classList.remove('crit-missing');
+      thBanner.innerHTML = '<span style="color:var(--ok);">✓ Все 6 стандартных лигатур (включая Th) присутствуют</span>';
     } else {
-      pill.classList.remove('active');
+      thCard.classList.add('crit-missing');
+      thBanner.innerHTML = '<span style="color:var(--danger); font-weight:700;">🔥 КРИТИЧНО: В этом файле отсутствует лигатура T + h &rarr; T_h в таблице GSUB liga!</span>';
     }
-    updateStyles();
+
+    // Update Comma-Separated Tables
+    const negList = entry.crashes_neg.map(x => x.p);
+    const tightList = entry.over_tight.map(x => x.p);
+    const posList = entry.pos_holes.map(x => x.p);
+    const optList = [...entry.crashes_nat.map(x => x.p), ...entry.opt_holes.slice(0, 45).map(x => x.p)];
+    const allList = [...new Set([...negList, ...tightList, ...posList, ...optList])];
+
+    document.getElementById('lblCountNeg').textContent = `${cnt.crashes_neg} пар`;
+    document.getElementById('lblCountTight').textContent = `${cnt.over_tight} пар`;
+    document.getElementById('lblCountPos').textContent = `${cnt.pos_holes} пар (показаны топ-${posList.length})`;
+    document.getElementById('lblCountOpt').textContent = `Наезды при 0 (${cnt.crashes_nat}) + топ оптических дыр`;
+
+    document.getElementById('commaNeg').textContent = negList.length ? negList.join(', ') : '— (нет пересечений)';
+    document.getElementById('commaTight').textContent = tightList.length ? tightList.join(', ') : '— (нет пережатий)';
+    document.getElementById('commaPos').textContent = posList.length ? posList.join(', ') : '—';
+    document.getElementById('commaOpt').textContent = optList.length ? optList.join(', ') : '—';
+    document.getElementById('commaAll').textContent = allList.join(', ');
+
+    // Update Category Counts & Auto-Select First Non-Empty Critical Category
+    document.getElementById('tabCntNeg').textContent = cnt.crashes_neg;
+    document.getElementById('tabCntTight').textContent = cnt.over_tight;
+    document.getElementById('tabCntPos').textContent = cnt.pos_holes;
+    document.getElementById('tabCntOpt').textContent = cnt.crashes_nat + cnt.opt_holes;
+
+    if (cnt.crashes_neg > 0) selectCategory('crashes_neg');
+    else if (cnt.pos_holes > 0) selectCategory('pos_holes');
+    else selectCategory('opt_holes');
+
+    // Load first critical sample into A/B inspector
+    if (cfg.critical_points.length > 0) {
+      loadSample(cfg.critical_points[0].sample, false);
+    }
+    applyFeatures();
   }
 
-  function getFeatureString() {
-    const list = [];
-    features.forEach(f => {
-      const cb = document.getElementById('feat-' + f);
-      if (cb) {
-        list.push(`"${f}" ${cb.checked ? 1 : 0}`);
-      }
-    });
-    return list.join(', ');
-  }
-
-  function updateStyles() {
-    const font = fontSelect.value;
-    const size = sizeRange.value + 'px';
-    const spacing = spacingRange.value + 'em';
-    const featStr = getFeatureString();
-
-    sizeVal.textContent = size;
-    spacingVal.textContent = (spacingRange.value >= 0 ? '+' : '') + spacing;
-
-    // Main Canvas
-    targetText.style.fontFamily = font;
-    targetText.style.fontSize = size;
-    targetText.style.letterSpacing = spacing;
-    targetText.style.fontFeatureSettings = featStr;
-    const kernChecked = document.getElementById('feat-kern').checked;
-    targetText.style.fontKerning = kernChecked ? 'normal' : 'none';
-
-    appliedFeaturesCss.textContent = `font-feature-settings: ${featStr}`;
-
-    // A/B previews
-    previewKernOn.style.fontFamily = font;
-    previewKernOn.style.fontSize = Math.min(parseInt(sizeRange.value), 48) + 'px';
-    previewKernOn.style.letterSpacing = spacing;
-    previewKernOn.innerText = targetText.innerText;
-
-    previewKernOff.style.fontFamily = font;
-    previewKernOff.style.fontSize = Math.min(parseInt(sizeRange.value), 48) + 'px';
-    previewKernOff.style.letterSpacing = spacing;
-    previewKernOff.innerText = targetText.innerText;
-
-    // Quick samples
-    document.querySelectorAll('.sample-font').forEach(el => {
-      el.style.fontFamily = font;
+  function selectCategory(cat) {
+    curCat = cat;
+    document.querySelectorAll('.cat-tab').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-cat') === cat);
     });
 
-    // Active summary
-    const active = features.filter(f => document.getElementById('feat-' + f).checked);
-    featureSummary.textContent = 'Активные фичи: ' + (active.join(', ') || 'нет');
+    const entry = DB[curFontId];
+    let items = [];
+    if (cat === 'crashes_neg') items = entry.crashes_neg;
+    else if (cat === 'over_tight') items = entry.over_tight;
+    else if (cat === 'pos_holes') items = entry.pos_holes;
+    else if (cat === 'opt_holes') items = [...entry.crashes_nat, ...entry.opt_holes];
+
+    const grid = document.getElementById('pairCardsGrid');
+    if (!items.length) {
+      grid.innerHTML = '<div style="grid-column:1/-1; padding:18px; background:var(--ok-bg); color:var(--ok); border-radius:8px; font-weight:600;">✓ В этой категории у выбранного шрифта аномалий нет!</div>';
+      return;
+    }
+
+    grid.innerHTML = items.map((it, idx) => {
+      const kStr = it.k > 0 ? `+${it.k}` : `${it.k}`;
+      const isCrit = (cat === 'crashes_neg' || cat === 'over_tight' || idx < 18);
+      return `
+        <div class="pair-chip ${isCrit ? 'is-crit' : ''}" onclick="loadSample('${it.p}   ${it.ctx}')">
+          <div class="pair-chip__top">
+            <strong>${it.p} ${isCrit ? '🔥' : ''}</strong>
+            <span style="color:${it.k < 0 ? 'var(--danger)' : (it.k > 0 ? 'var(--accent)' : 'var(--warn)')}">kern: ${kStr}</span>
+          </div>
+          <div class="pair-chip__glyphs dyn-font">${it.p}</div>
+          <div class="pair-chip__ctx dyn-font">${it.ctx}</div>
+          <div class="pair-chip__metrics">зазор: ${it.gnk} &rarr; <b>${it.gk}</b> | опт: ${it.ok}</div>
+        </div>
+      `;
+    }).join('');
+    applyFeatures();
   }
 
-  function setText(val) {
-    targetText.innerText = val;
-    updateStyles();
+  function loadSample(txt, scroll = true) {
+    const onEl = document.getElementById('inspOn');
+    const offEl = document.getElementById('inspOff');
+    onEl.textContent = txt;
+    offEl.textContent = txt;
+    if (scroll) {
+      onEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  document.getElementById('inspOn').addEventListener('input', e => {
+    document.getElementById('inspOff').textContent = e.target.textContent;
+  });
+  document.getElementById('inspOff').addEventListener('input', e => {
+    document.getElementById('inspOn').textContent = e.target.textContent;
+  });
+
+  function toggleFeat(tag) {
+    featState[tag] = !featState[tag];
+    document.getElementById('btn-' + tag).classList.toggle('active', featState[tag]);
+    applyFeatures();
+  }
+
+  function applyFeatures() {
+    const fStr = Object.entries(featState).map(([k, v]) => `"${k}" ${v ? 1 : 0}`).join(', ');
+    document.querySelectorAll('.dyn-font').forEach(el => {
+      if (el.id === 'inspOn' || el.id === 'inspOff') return;
+      el.style.fontFeatureSettings = fStr;
+      el.style.fontKerning = featState.kern ? 'normal' : 'none';
+    });
+  }
+
+  function setInspSize(px) {
+    document.getElementById('inspOn').style.fontSize = px + 'px';
+    document.getElementById('inspOff').style.fontSize = px + 'px';
+  }
+
+  function setTracking(em) {
+    document.getElementById('trackVal').textContent = (em >= 0 ? '+' : '') + parseFloat(em).toFixed(3) + 'em';
+    document.querySelectorAll('.dyn-font').forEach(el => {
+      el.style.letterSpacing = em + 'em';
+    });
+  }
+
+  function copyBox(id, btn) {
+    const txt = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(txt).then(() => {
+      const old = btn.textContent;
+      btn.textContent = '✓ Скопировано!';
+      setTimeout(() => btn.textContent = old, 1400);
+    });
   }
 
   function toggleTheme() {
-    const val = document.getElementById('themeSelect').value;
-    if (val === 'light') {
-      canvasBg.style.background = '#ffffff';
-      targetText.style.color = '#111111';
-    } else {
-      canvasBg.style.background = '#111217';
-      targetText.style.color = '#ffffff';
-    }
+    const cur = document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', cur === 'light' ? 'dark' : 'light');
   }
 
-  targetText.addEventListener('input', () => {
-    previewKernOn.innerText = targetText.innerText;
-    previewKernOff.innerText = targetText.innerText;
-  });
-
-  // Init
-  updateStyles();
+  // Initialize with Font 01
+  selectFont('01');
 </script>
 </body>
 </html>

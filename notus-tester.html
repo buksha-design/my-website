@@ -86,7 +86,7 @@
     font-feature-settings: "kern" 1, "liga" 1;
   }
 
-  /* Sticky Master Header with 5 Font Tabs */
+  /* Master Header */
   .master-header {
     position: sticky;
     top: 0;
@@ -171,7 +171,7 @@
   .tab-pill.warn { background: var(--warn-bg); color: var(--warn); }
   .tab-pill.ok { background: var(--ok-bg); color: var(--ok); }
 
-  /* OpenType & Sliders Bar */
+  /* Toolbar */
   .toolbar {
     padding: 10px 24px;
     display: flex;
@@ -216,7 +216,7 @@
     gap: 34px;
   }
 
-  /* Hero & Critical Points Section */
+  /* Hero & Critical Points */
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr 310px;
@@ -375,7 +375,7 @@
     outline: none;
   }
 
-  /* Copyable Comma Table */
+  /* Comma Table */
   .comma-table {
     width: 100%;
     border-collapse: collapse;
@@ -407,6 +407,7 @@
     padding: 10px 12px;
     border-radius: 6px;
     user-select: all;
+    word-break: break-all;
   }
   .copy-btn {
     margin-top: 6px;
@@ -420,7 +421,7 @@
   }
   .copy-btn:hover { border-color: var(--accent); }
 
-  /* Filter Tabs for Visual Pair Cards */
+  /* Filter Tabs & Cards */
   .cat-tabs {
     display: flex;
     gap: 8px;
@@ -492,7 +493,7 @@
     margin-top: 3px;
   }
 
-  /* Ligatures & Editorial Grid */
+  /* Ligatures & Editorial */
   .ot-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -542,6 +543,129 @@
     padding: 0 2px;
     border-radius: 3px;
   }
+
+  /* ==========================================================================
+     GLOBAL FAMILY DASHBOARD STYLES
+     ========================================================================== */
+  .global-hero {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .global-hero__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 14px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+  }
+  .global-kpis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .kpi-card {
+    background: var(--card-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .kpi-label {
+    font-size: 0.72rem;
+    font-family: monospace;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .kpi-val {
+    font-size: 1.9rem;
+    font-weight: 800;
+    font-family: monospace;
+    line-height: 1.2;
+  }
+  .kpi-sub {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .global-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 0.85rem;
+  }
+  .global-table th, .global-table td {
+    padding: 14px 14px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: middle;
+  }
+  .global-table th {
+    background: var(--card-alt);
+    font-size: 0.73rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .global-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .stack-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .stack-row {
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stack-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.74rem;
+    font-family: monospace;
+    color: var(--muted);
+  }
+  .stack-text {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    outline: none;
+    cursor: text;
+  }
+
+  .pill-preset {
+    background: var(--card-alt);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+  .pill-preset:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 </style>
 </head>
 <body>
@@ -567,6 +691,9 @@
       </button>
       <button class="font-tab" data-id="05" onclick="selectFont('05')">
         05 · Caption <span class="tab-pill ok">✓ 0 наездов / Th ✓</span>
+      </button>
+      <button class="font-tab" data-id="all" onclick="selectFont('all')">
+        📊 Все 5 Шрифтов <span class="tab-pill ok">Глобально</span>
       </button>
     </div>
   </div>
@@ -597,213 +724,608 @@
 
 <div class="container">
 
-  <!-- 1. БЛОК КРИТИЧЕСКИХ МОМЕНТОВ ВЫБРАННОГО ШРИФТА -->
-  <div class="hero-grid">
-    <div class="hero-main">
-      <div class="hero-title-row">
-        <h1 id="heroName">01 — Notus Display Thin</h1>
-        <span id="heroFile" style="font-family:monospace; font-size:0.8rem; color:var(--muted);"></span>
-      </div>
-      <div class="hero-meta" id="heroRole"></div>
-      <div class="hero-verdict" id="heroVerdict"></div>
+  <!-- ========================================================================
+       1. SINGLE FONT VIEW (Показывается при выборе 01, 02, 03, 04, 05)
+       ======================================================================== -->
+  <div id="singleFontView" style="display:flex; flex-direction:column; gap:34px;">
 
-      <h3 style="font-size:0.82rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--danger); margin-bottom:10px;">
-        🔥 Точки внимания и статус начертания (кликните по примеру для загрузки в A/B инспектор):
-      </h3>
-      <div class="crit-cards-list" id="critPointsContainer"></div>
+    <!-- 1.1 БЛОК КРИТИЧЕСКИХ МОМЕНТОВ ВЫБРАННОГО ШРИФТА -->
+    <div class="hero-grid">
+      <div class="hero-main">
+        <div class="hero-title-row">
+          <h1 id="heroName">01 — Notus Display Thin</h1>
+          <span id="heroFile" style="font-family:monospace; font-size:0.8rem; color:var(--muted);"></span>
+        </div>
+        <div class="hero-meta" id="heroRole"></div>
+        <div class="hero-verdict" id="heroVerdict"></div>
+
+        <h3 style="font-size:0.82rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--danger); margin-bottom:10px;">
+          🔥 Точки внимания и статус начертания (кликните по примеру для загрузки в A/B инспектор):
+        </h3>
+        <div class="crit-cards-list" id="critPointsContainer"></div>
+      </div>
+
+      <div class="metrics-sidebar">
+        <div>
+          <div style="color:var(--accent); font-weight:700; margin-bottom:8px; text-transform:uppercase;">Паспорт и Метрики:</div>
+          <div class="metric-row"><span>GPOS пар:</span> <strong id="mGpos">—</strong></div>
+          <div class="metric-row"><span>Лигатура Th (liga):</span> <strong id="mTh">—</strong></div>
+          <div class="metric-row"><span>Капитель (smcp):</span> <strong id="mSmcp">—</strong></div>
+          <div class="metric-row"><span>Эталон o+o:</span> <strong id="mOO">—</strong></div>
+          <div class="metric-row"><span>Эталон n+o:</span> <strong id="mNO">—</strong></div>
+          <div class="metric-row"><span>Эталон n+n:</span> <strong id="mNN">—</strong></div>
+          <div class="metric-row"><span>Эталон H+H:</span> <strong id="mHH">—</strong></div>
+        </div>
+        <div>
+          <div style="color:var(--danger); font-weight:700; margin-bottom:6px; text-transform:uppercase;">Сводка анализа:</div>
+          <div class="metric-row"><span>🔴 Наезды (-kern):</span> <strong id="cNeg" style="color:var(--danger);">0</strong></div>
+          <div class="metric-row"><span>🟠 Слипания ядра:</span> <strong id="cTight" style="color:var(--warn);">0</strong></div>
+          <div class="metric-row"><span>🟣 Дыры от +kern:</span> <strong id="cPos" style="color:var(--accent);">0</strong></div>
+          <div class="metric-row"><span>🟡 Наезды (kern=0):</span> <strong id="cNat">0</strong></div>
+        </div>
+      </div>
     </div>
 
-    <div class="metrics-sidebar">
-      <div>
-        <div style="color:var(--accent); font-weight:700; margin-bottom:8px; text-transform:uppercase;">Паспорт и Метрики:</div>
-        <div class="metric-row"><span>GPOS пар:</span> <strong id="mGpos">—</strong></div>
-        <div class="metric-row"><span>Лигатура Th (liga):</span> <strong id="mTh">—</strong></div>
-        <div class="metric-row"><span>Капитель (smcp):</span> <strong id="mSmcp">—</strong></div>
-        <div class="metric-row"><span>Эталон o+o:</span> <strong id="mOO">—</strong></div>
-        <div class="metric-row"><span>Эталон n+o:</span> <strong id="mNO">—</strong></div>
-        <div class="metric-row"><span>Эталон n+n:</span> <strong id="mNN">—</strong></div>
-        <div class="metric-row"><span>Эталон H+H:</span> <strong id="mHH">—</strong></div>
+    <!-- 1.2 ИНТЕРАКТИВНЫЙ A/B ИНСПЕКТОР (KERN ON vs KERN OFF) -->
+    <section>
+      <div class="sec-head">
+        <h2>1. A/B Инспектор Критических Пар (С кернингом vs Без кернинга)</h2>
+        <span>Кликните на любую карточку ошибки или введите свой текст</span>
       </div>
-      <div>
-        <div style="color:var(--danger); font-weight:700; margin-bottom:6px; text-transform:uppercase;">Сводка анализа:</div>
-        <div class="metric-row"><span>🔴 Наезды (-kern):</span> <strong id="cNeg" style="color:var(--danger);">0</strong></div>
-        <div class="metric-row"><span>🟠 Слипания ядра:</span> <strong id="cTight" style="color:var(--warn);">0</strong></div>
-        <div class="metric-row"><span>🟣 Дыры от +kern:</span> <strong id="cPos" style="color:var(--accent);">0</strong></div>
-        <div class="metric-row"><span>🟡 Наезды (kern=0):</span> <strong id="cNat">0</strong></div>
+      <div class="inspector-grid">
+        <div class="insp-box">
+          <span class="insp-badge on">KERN: ON (GPOS активен)</span>
+          <div id="inspOn" class="insp-text dyn-font" contenteditable="true" spellcheck="false" style="font-feature-settings:'kern' 1; font-kerning:normal;">įj nįjo Cîroc Oława СЛОВО fm fn</div>
+        </div>
+        <div class="insp-box">
+          <span class="insp-badge off">KERN: OFF (Сырые апроши hmtx)</span>
+          <div id="inspOff" class="insp-text dyn-font" contenteditable="true" spellcheck="false" style="font-feature-settings:'kern' 0; font-kerning:none;">įj nįjo Cîroc Oława СЛОВО fm fn</div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- 1.3 ТАБЛИЦА ПАР ЧЕРЕЗ ЗАПЯТУЮ (ДЛЯ FONTLAB) -->
+    <section>
+      <div class="sec-head">
+        <h2>2. Таблица проблемных пар через запятую (для копирования в FontLab)</h2>
+        <span>Автоматически обновляется при переключении вкладки шрифта</span>
+      </div>
+      <table class="comma-table">
+        <tbody>
+          <tr>
+            <th>
+              <span style="color:var(--danger);">🔴 A. Наезды из-за -kern</span><br>
+              <small id="lblCountNeg">Контуры пересекаются</small>
+            </th>
+            <td>
+              <div class="comma-box" id="commaNeg"></div>
+              <button class="copy-btn" onclick="copyBox('commaNeg', this)">Скопировать пары через запятую</button>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span style="color:var(--warn);">🟠 B. Оптическое слипание</span><br>
+              <small id="lblCountTight">Слишком узкий просвет ядра</small>
+            </th>
+            <td>
+              <div class="comma-box" id="commaTight"></div>
+              <button class="copy-btn" onclick="copyBox('commaTight', this)">Скопировать пары через запятую</button>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span style="color:var(--accent);">🟣 C. Дыры из-за лишнего +kern</span><br>
+              <small id="lblCountPos">Плюсовой кернинг разрывает слово</small>
+            </th>
+            <td>
+              <div class="comma-box" id="commaPos"></div>
+              <button class="copy-btn" onclick="copyBox('commaPos', this)">Скопировать пары через запятую</button>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span style="color:var(--warn);">🟡 D. Наезды (kern=0) + Пропущенный минус</span><br>
+              <small id="lblCountOpt">Оптические дыры</small>
+            </th>
+            <td>
+              <div class="comma-box" id="commaOpt"></div>
+              <button class="copy-btn" onclick="copyBox('commaOpt', this)">Скопировать пары через запятую</button>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span style="color:var(--ok);">📋 E. ВСЕ ПАРЫ ЭТОГО ШРИФТА</span><br>
+              <small>Единый список через запятую</small>
+            </th>
+            <td>
+              <div class="comma-box" id="commaAll"></div>
+              <button class="copy-btn" onclick="copyBox('commaAll', this)">Скопировать весь список</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 1.4 ВИЗУАЛЬНЫЕ КАРТОЧКИ ПАР -->
+    <section>
+      <div class="sec-head">
+        <h2>3. Визуальные карточки пар (клик загружает пару в A/B инспектор)</h2>
+        <span>Красной рамкой помечены критические аномалии</span>
+      </div>
+      <div class="cat-tabs">
+        <button class="cat-tab active" data-cat="crashes_neg" onclick="selectCategory('crashes_neg')">🔴 Наезды из-за -kern (<span id="tabCntNeg">0</span>)</button>
+        <button class="cat-tab" data-cat="over_tight" onclick="selectCategory('over_tight')">🟠 Оптическое слипание (<span id="tabCntTight">0</span>)</button>
+        <button class="cat-tab" data-cat="pos_holes" onclick="selectCategory('pos_holes')">🟣 Дыры из-за +kern (<span id="tabCntPos">0</span>)</button>
+        <button class="cat-tab" data-cat="opt_holes" onclick="selectCategory('opt_holes')">🟡 Наезды (0) и Оптические дыры (<span id="tabCntOpt">0</span>)</button>
+      </div>
+      <div class="pair-grid" id="pairCardsGrid"></div>
+    </section>
+
+    <!-- 1.5 ТЕСТ-ДРАЙВ ЛИГАТУР И КАПИТЕЛИ -->
+    <section>
+      <div class="sec-head">
+        <h2>4. Тест-Драйв Лигатур (liga / dlig) и Капители (smcp)</h2>
+        <span id="thStatusBanner"></span>
+      </div>
+      <div class="ot-grid" style="margin-bottom:18px;">
+        <div class="ot-card" id="thCard">
+          <div class="ot-card__meta">liga: T + h &rarr; T_h</div>
+          <div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">Th</div>
+          <div class="ot-card__word dyn-font" style="font-feature-settings:'liga' 1;">The Theater</div>
+        </div>
+        <div class="ot-card"><div class="ot-card__meta">liga: fi</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">fi</div><div class="ot-card__word dyn-font">fine profile</div></div>
+        <div class="ot-card"><div class="ot-card__meta">liga: fl</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">fl</div><div class="ot-card__word dyn-font">fluid flame</div></div>
+        <div class="ot-card"><div class="ot-card__meta">liga: ff</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">ff</div><div class="ot-card__word dyn-font">effect affair</div></div>
+        <div class="ot-card"><div class="ot-card__meta">liga: ffi</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">ffi</div><div class="ot-card__word dyn-font">office affinity</div></div>
+        <div class="ot-card"><div class="ot-card__meta">liga: ffl</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">ffl</div><div class="ot-card__word dyn-font">Souffle baffle</div></div>
+        <div class="ot-card"><div class="ot-card__meta">dlig: ct / st</div><div class="ot-card__big dyn-font" style="font-feature-settings:'dlig' 1;">ct st</div><div class="ot-card__word dyn-font">architect aesthetic</div></div>
+        <div class="ot-card"><div class="ot-card__meta">dlig: ch / ck / sp</div><div class="ot-card__big dyn-font" style="font-feature-settings:'dlig' 1;">ch ck sp</div><div class="ot-card__word dyn-font">echo block speak</div></div>
+      </div>
+
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:12px;">
+        <div style="font-size:0.75rem; font-family:monospace; color:var(--muted); text-transform:uppercase;">Капитель (smcp) + Старостильные цифры (onum) + Дроби (frac):</div>
+        <div class="dyn-font" style="font-size:1.6rem; letter-spacing:0.04em;" contenteditable="true" spellcheck="false">
+          THE QUICK BROWN FOX JUMPS OVER 1234567890 &bull; СЪЕШЬ ЖЕ ЕЩЁ ЭТИХ МЯГКИХ БУЛОК &bull; 1/2 3/4 7/8
+        </div>
+      </div>
+    </section>
+
+    <!-- 1.6 МНОГОЯЗЫЧНЫЙ ТЕСТ-ДРАЙВ С ПОДСВЕТКОЙ КРИТИЧЕСКИХ МЕСТ -->
+    <section>
+      <div class="sec-head">
+        <h2>5. Многоязычный Тест-Драйв в Фразах и Текстах (с пометкой критических пар в словах)</h2>
+        <span>Подсвеченные маркером места показывают, где ключевые пары встречаются в реальном наборе</span>
+      </div>
+      <div class="editorial-grid">
+        <div class="ed-card">
+          <div class="ed-label">01. Стресс-тест критических мест (Латиница + Диакритика)</div>
+          <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
+            <mark class="crit-hl">Cî</mark>roc, <mark class="crit-hl">Qx</mark>ford, <mark class="crit-hl">Ox</mark>ford, <mark class="crit-hl">Oł</mark>awa, <mark class="crit-hl">Tî</mark>rgu, <mark class="crit-hl">Yì</mark>n, <mark class="crit-hl">Vš</mark>e, <mark class="crit-hl">Wš</mark>e
+          </div>
+          <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
+            Проверка плюсовых дыр после <b>g, j, f</b>: <mark class="crit-hl">go</mark>ld, <mark class="crit-hl">gd</mark>zie, <mark class="crit-hl">gr</mark>ace, <mark class="crit-hl">gl</mark>ass, <mark class="crit-hl">gm</mark>ach, <mark class="crit-hl">gj</mark>ord, <mark class="crit-hl">jm</mark>éno, <mark class="crit-hl">jr</mark>, <mark class="crit-hl">fm</mark>, <mark class="crit-hl">fn</mark>, <mark class="crit-hl">fr</mark>ame, <mark class="crit-hl">fp</mark>, <mark class="crit-hl">łw</mark>, <mark class="crit-hl">łv</mark>, <mark class="crit-hl">ťw</mark>.
+          </div>
+        </div>
+
+        <div class="ed-card">
+          <div class="ed-label">02. Стресс-тест критических мест (Кириллица RU / BY / UA)</div>
+          <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
+            <mark class="crit-hl">Сл</mark>оварь, <mark class="crit-hl">Сї</mark>вер, <mark class="crit-hl">Ож</mark>ог, <mark class="crit-hl">Юж</mark>ный, <mark class="crit-hl">Ох</mark>вата, <mark class="crit-hl">Юх</mark>нов, <mark class="crit-hl">Сз</mark>ади
+          </div>
+          <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
+            Проверка <b>С+прямые</b> и <b>Р+строчные</b>: <mark class="crit-hl">Св</mark>ет, <mark class="crit-hl">Ск</mark>возь, <mark class="crit-hl">Сн</mark>ег, <mark class="crit-hl">Си</mark>ла, <mark class="crit-hl">Сп</mark>ор, <mark class="crit-hl">Сц</mark>ена, <mark class="crit-hl">Ру</mark>ка, <mark class="crit-hl">Рм</mark>, <mark class="crit-hl">Рп</mark>, <mark class="crit-hl">Рр</mark>, <mark class="crit-hl">Ри</mark>тм, <mark class="crit-hl">Рн</mark>, <mark class="crit-hl">Рв</mark>, <mark class="crit-hl">Со</mark>н, <mark class="crit-hl">Се</mark>ть, <mark class="crit-hl">СМ</mark>И, <mark class="crit-hl">СБ</mark>ОР.
+          </div>
+        </div>
+
+        <div class="ed-card">
+          <div class="ed-label">03. Broadsheet Hero Slogans (Слоганы с главной страницы)</div>
+          <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
+            Silent rhythm, tactile grace.<br>
+            Souffle doré, beauté pure.<br>
+            Skärpa i mörker, mjuk i rörelse.<br>
+            Czułe światło, żywa forma.<br>
+            Жыве Беларусь! Жыве вечна!
+          </div>
+        </div>
+
+        <div class="ed-card">
+          <div class="ed-label">04. Редакционный текст (English / Polish / Czech / Russian / Ukrainian)</div>
+          <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
+            Named after the ancient deity of the southern gale, Notus dissolves the cold severity of neoclassical letterforms with fluid, kinetic terminations. Wśród nocnej ciszy, żółć, źródło, szczęście, dźwig. Příliš žluťoučký kůň úpěl ďábelské ódy. Плавность текучих капель и непоколебимая строгость высокого контраста. Чуєш їх, доцю, га? Кумедна ж ти, прощайся без ґольфів!
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 
-  <!-- 2. ИНТЕРАКТИВНЫЙ A/B ИНСПЕКТОР (KERN ON vs KERN OFF) -->
-  <section>
-    <div class="sec-head">
-      <h2>1. A/B Инспектор Критических Пар (С кернингом vs Без кернинга)</h2>
-      <span>Кликните на любую карточку ошибки или введите свой текст</span>
-    </div>
-    <div class="inspector-grid">
-      <div class="insp-box">
-        <span class="insp-badge on">KERN: ON (GPOS активен)</span>
-        <div id="inspOn" class="insp-text dyn-font" contenteditable="true" spellcheck="false" style="font-feature-settings:'kern' 1; font-kerning:normal;">įj nįjo Cîroc Oława СЛОВО fm fn</div>
-      </div>
-      <div class="insp-box">
-        <span class="insp-badge off">KERN: OFF (Сырые апроши hmtx)</span>
-        <div id="inspOff" class="insp-text dyn-font" contenteditable="true" spellcheck="false" style="font-feature-settings:'kern' 0; font-kerning:none;">įj nįjo Cîroc Oława СЛОВО fm fn</div>
-      </div>
-    </div>
-  </section>
 
-  <!-- 3. ТАБЛИЦА ПАР ЧЕРЕЗ ЗАПЯТУЮ (ДЛЯ FONTLAB) -->
-  <section>
-    <div class="sec-head">
-      <h2>2. Таблица проблемных пар через запятую (для копирования в FontLab)</h2>
-      <span>Автоматически обновляется при переключении вкладки шрифта</span>
+  <!-- ========================================================================
+       2. GLOBAL VIEW (Вкладка "📊 Все 5 Шрифтов")
+       ======================================================================== -->
+  <div id="globalView" style="display:none; flex-direction:column; gap:34px;">
+
+    <!-- 2.1 СВОДКА И СТАТИСТИЧЕСКИЙ ПАСПОРТ СЕМЕЙСТВА -->
+    <div class="global-hero">
+      <div class="global-hero__head">
+        <div>
+          <h1 style="font-size:1.65rem; font-weight:800; margin-bottom:6px;">📊 Глобальный Аудит и Статистика Семейства Notus</h1>
+          <p style="color:var(--muted); font-size:0.9rem;">
+            Сводная аналитика по всем 5 начертаниям гарнитуры Notus &bull; Версия экспорта: 15–16.11 (22:21) &bull; Суммарно 223 407 GPOS-пар кернинга
+          </p>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span class="brand-badge" style="background:var(--ok-bg); color:var(--ok); border-color:var(--ok);">ГОТОВНОСТЬ СЕМЕЙСТВА: 99.9%</span>
+        </div>
+      </div>
+
+      <div class="global-kpis-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Шрифтов в семействе</div>
+          <div class="kpi-val" style="color:var(--accent);">5 / 5</div>
+          <div class="kpi-sub">Display Thin, Italic, Text, Text Italic, Caption</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Всего пар GPOS в коде</div>
+          <div class="kpi-val">223,407</div>
+          <div class="kpi-sub">Суммарный объем кернинга гарнитуры</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">🔴 Наезды от -kern</div>
+          <div class="kpi-val" style="color:var(--ok);">2</div>
+          <div class="kpi-sub">На всё семейство! (<code style="color:var(--danger)">įj</code> в 01, <code style="color:var(--danger)">îî</code> в 04)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">🟠 Слипания ядра</div>
+          <div class="kpi-val" style="color:var(--ok);">1</div>
+          <div class="kpi-sub">Единственная пара (<code style="color:var(--warn)">СЛ</code> в 02 Display Italic)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Лигатура Th (GSUB liga)</div>
+          <div class="kpi-val" style="color:var(--ok);">5 / 5</div>
+          <div class="kpi-sub">100% покрытие во всех 5 файлах шрифта</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Капитель (smcp)</div>
+          <div class="kpi-val" style="color:var(--ok);">100%</div>
+          <div class="kpi-sub">Поддерживается во всех 5 начертаниях</div>
+        </div>
+      </div>
     </div>
-    <table class="comma-table">
-      <tbody>
+
+    <!-- 2.2 СВОДНАЯ МАТРИЦА 5 НАЧЕРТАНИЙ -->
+    <section>
+      <div class="sec-head">
+        <h2>1. Сводная Сравнительная Таблица 5 Начертаний</h2>
+        <span>Нажмите на название шрифта для перехода в его индивидуальный профиль</span>
+      </div>
+      <table class="global-table">
+        <thead>
+          <tr>
+            <th>Начертание & Файл</th>
+            <th>Оптический Диапазон</th>
+            <th>GPOS Пар</th>
+            <th>Лигатура Th</th>
+            <th>🔴 Наезды (-kern)</th>
+            <th>🟠 Слипания</th>
+            <th>🟣 Дыры +kern</th>
+            <th>🟡 Контакт (0)</th>
+            <th>Эталоны</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+        <tbody>
+
         <tr>
-          <th>
-            <span style="color:var(--danger);">🔴 A. Наезды из-за -kern</span><br>
-            <small id="lblCountNeg">Контуры пересекаются</small>
-          </th>
           <td>
-            <div class="comma-box" id="commaNeg"></div>
-            <button class="copy-btn" onclick="copyBox('commaNeg', this)">Скопировать пары через запятую</button>
+            <a href="javascript:void(0)" onclick="selectFont('01')" style="color:var(--accent); text-decoration:none; font-weight:700;">
+              01 — Notus Display Thin &rarr;
+            </a><br>
+            <small style="color:var(--muted); font-family:monospace;">01 - Notus - Display - Thin.otf</small>
+          </td>
+          <td>Headline & Monumental Display (48–160pt)</td>
+          <td style="font-family:monospace; font-weight:700;">57 068</td>
+          <td style="color:var(--ok); font-weight:700;">✓ Есть (6/6)</td>
+          <td style="color:var(--danger); font-family:monospace; font-weight:700;">
+            1 (įj)
+          </td>
+          <td style="color:var(--ok); font-family:monospace; font-weight:700;">
+            0 ✓ 0
+          </td>
+          <td style="font-family:monospace; color:var(--accent); font-weight:600;">0</td>
+          <td style="font-family:monospace;">0</td>
+          <td style="font-family:monospace; font-size:0.75rem;">o+o: <b>136</b>u<br>n+o: <b>161</b>u</td>
+          <td>
+            <span class="tab-pill ok">✓ 1 микр.</span>
           </td>
         </tr>
+    
+
         <tr>
-          <th>
-            <span style="color:var(--warn);">🟠 B. Оптическое слипание</span><br>
-            <small id="lblCountTight">Слишком узкий просвет ядра</small>
-          </th>
           <td>
-            <div class="comma-box" id="commaTight"></div>
-            <button class="copy-btn" onclick="copyBox('commaTight', this)">Скопировать пары через запятую</button>
+            <a href="javascript:void(0)" onclick="selectFont('02')" style="color:var(--accent); text-decoration:none; font-weight:700;">
+              02 — Notus Display Thin Italic &rarr;
+            </a><br>
+            <small style="color:var(--muted); font-family:monospace;">02 - Notus - Display - Thin - Italic.otf</small>
+          </td>
+          <td>Expressive Editorial & Kinetic Subheads</td>
+          <td style="font-family:monospace; font-weight:700;">49 467</td>
+          <td style="color:var(--ok); font-weight:700;">✓ Есть (6/6)</td>
+          <td style="color:var(--ok); font-family:monospace; font-weight:700;">
+            0 ✓ 0
+          </td>
+          <td style="color:var(--warn); font-family:monospace; font-weight:700;">
+            1 (СЛ)
+          </td>
+          <td style="font-family:monospace; color:var(--accent); font-weight:600;">95</td>
+          <td style="font-family:monospace;">0</td>
+          <td style="font-family:monospace; font-size:0.75rem;">o+o: <b>146</b>u<br>n+o: <b>179</b>u</td>
+          <td>
+            <span class="tab-pill ok">✓ 0 наездов / +kern</span>
           </td>
         </tr>
+    
+
         <tr>
-          <th>
-            <span style="color:var(--accent);">🟣 C. Дыры из-за лишнего +kern</span><br>
-            <small id="lblCountPos">Плюсовой кернинг разрывает слово</small>
-          </th>
           <td>
-            <div class="comma-box" id="commaPos"></div>
-            <button class="copy-btn" onclick="copyBox('commaPos', this)">Скопировать пары через запятую</button>
+            <a href="javascript:void(0)" onclick="selectFont('03')" style="color:var(--accent); text-decoration:none; font-weight:700;">
+              03 — Notus Display Text &rarr;
+            </a><br>
+            <small style="color:var(--muted); font-family:monospace;">03 - Notus - Display - Text.otf</small>
+          </td>
+          <td>Editorial Body Copy & Longform Reading (10–24pt)</td>
+          <td style="font-family:monospace; font-weight:700;">42 847</td>
+          <td style="color:var(--ok); font-weight:700;">✓ Есть (6/6)</td>
+          <td style="color:var(--ok); font-family:monospace; font-weight:700;">
+            0 ✓ 0
+          </td>
+          <td style="color:var(--ok); font-family:monospace; font-weight:700;">
+            0 ✓ 0
+          </td>
+          <td style="font-family:monospace; color:var(--accent); font-weight:600;">101</td>
+          <td style="font-family:monospace;">0</td>
+          <td style="font-family:monospace; font-size:0.75rem;">o+o: <b>106</b>u<br>n+o: <b>141</b>u</td>
+          <td>
+            <span class="tab-pill ok">✓ 0 наездов / ИДЕАЛ</span>
           </td>
         </tr>
+    
+
         <tr>
-          <th>
-            <span style="color:var(--warn);">🟡 D. Наезды (kern=0) + Пропущенный минус</span><br>
-            <small id="lblCountOpt">Оптические дыры</small>
-          </th>
           <td>
-            <div class="comma-box" id="commaOpt"></div>
-            <button class="copy-btn" onclick="copyBox('commaOpt', this)">Скопировать пары через запятую</button>
+            <a href="javascript:void(0)" onclick="selectFont('04')" style="color:var(--accent); text-decoration:none; font-weight:700;">
+              04 — Notus Display Text Italic &rarr;
+            </a><br>
+            <small style="color:var(--muted); font-family:monospace;">04 - Notus - Display - Text - Italic.otf</small>
+          </td>
+          <td>Emphasis, Quotes & Literary Marginalia</td>
+          <td style="font-family:monospace; font-weight:700;">51 579</td>
+          <td style="color:var(--ok); font-weight:700;">✓ Есть (6/6)</td>
+          <td style="color:var(--danger); font-family:monospace; font-weight:700;">
+            1 (îî)
+          </td>
+          <td style="color:var(--ok); font-family:monospace; font-weight:700;">
+            0 ✓ 0
+          </td>
+          <td style="font-family:monospace; color:var(--accent); font-weight:600;">96</td>
+          <td style="font-family:monospace;">6</td>
+          <td style="font-family:monospace; font-size:0.75rem;">o+o: <b>136</b>u<br>n+o: <b>179</b>u</td>
+          <td>
+            <span class="tab-pill ok">✓ 1 микр. / +kern</span>
           </td>
         </tr>
+    
+
         <tr>
-          <th>
-            <span style="color:var(--ok);">📋 E. ВСЕ ПАРЫ ЭТОГО ШРИФТА</span><br>
-            <small>Единый список через запятую</small>
-          </th>
           <td>
-            <div class="comma-box" id="commaAll"></div>
-            <button class="copy-btn" onclick="copyBox('commaAll', this)">Скопировать весь список</button>
+            <a href="javascript:void(0)" onclick="selectFont('05')" style="color:var(--accent); text-decoration:none; font-weight:700;">
+              05 — Notus Display Caption &rarr;
+            </a><br>
+            <small style="color:var(--muted); font-family:monospace;">05 - Notus - Display - Caption.otf</small>
+          </td>
+          <td>Micro-Typography, Footnotes & Folios (6–12pt)</td>
+          <td style="font-family:monospace; font-weight:700;">22 446</td>
+          <td style="color:var(--ok); font-weight:700;">✓ Есть (6/6)</td>
+          <td style="color:var(--ok); font-family:monospace; font-weight:700;">
+            0 ✓ 0
+          </td>
+          <td style="color:var(--ok); font-family:monospace; font-weight:700;">
+            0 ✓ 0
+          </td>
+          <td style="font-family:monospace; color:var(--accent); font-weight:600;">453</td>
+          <td style="font-family:monospace;">6</td>
+          <td style="font-family:monospace; font-size:0.75rem;">o+o: <b>116</b>u<br>n+o: <b>149</b>u</td>
+          <td>
+            <span class="tab-pill ok">✓ 0 наездов / Th ✓</span>
           </td>
         </tr>
-      </tbody>
-    </table>
-  </section>
+    
+        </tbody>
+      </table>
+    </section>
 
-  <!-- 4. ВИЗУАЛЬНЫЕ КАРТОЧКИ ПАР С ПОМЕТКОЙ КРИТИЧЕСКИХ -->
-  <section>
-    <div class="sec-head">
-      <h2>3. Визуальные карточки пар (клик загружает пару в A/B инспектор)</h2>
-      <span>Красной рамкой помечены критические аномалии</span>
-    </div>
-    <div class="cat-tabs">
-      <button class="cat-tab active" data-cat="crashes_neg" onclick="selectCategory('crashes_neg')">🔴 Наезды из-за -kern (<span id="tabCntNeg">0</span>)</button>
-      <button class="cat-tab" data-cat="over_tight" onclick="selectCategory('over_tight')">🟠 Оптическое слипание (<span id="tabCntTight">0</span>)</button>
-      <button class="cat-tab" data-cat="pos_holes" onclick="selectCategory('pos_holes')">🟣 Дыры из-за +kern (<span id="tabCntPos">0</span>)</button>
-      <button class="cat-tab" data-cat="opt_holes" onclick="selectCategory('opt_holes')">🟡 Наезды (0) и Оптические дыры (<span id="tabCntOpt">0</span>)</button>
-    </div>
-    <div class="pair-grid" id="pairCardsGrid"></div>
-  </section>
-
-  <!-- 5. ТЕСТ-ДРАЙВ ЛИГАТУР И КАПИТЕЛИ -->
-  <section>
-    <div class="sec-head">
-      <h2>4. Тест-Драйв Лигатур (liga / dlig) и Капители (smcp)</h2>
-      <span id="thStatusBanner"></span>
-    </div>
-    <div class="ot-grid" style="margin-bottom:18px;">
-      <div class="ot-card" id="thCard">
-        <div class="ot-card__meta">liga: T + h &rarr; T_h</div>
-        <div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">Th</div>
-        <div class="ot-card__word dyn-font" style="font-feature-settings:'liga' 1;">The Theater</div>
-      </div>
-      <div class="ot-card"><div class="ot-card__meta">liga: fi</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">fi</div><div class="ot-card__word dyn-font">fine profile</div></div>
-      <div class="ot-card"><div class="ot-card__meta">liga: fl</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">fl</div><div class="ot-card__word dyn-font">fluid flame</div></div>
-      <div class="ot-card"><div class="ot-card__meta">liga: ff</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">ff</div><div class="ot-card__word dyn-font">effect affair</div></div>
-      <div class="ot-card"><div class="ot-card__meta">liga: ffi</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">ffi</div><div class="ot-card__word dyn-font">office affinity</div></div>
-      <div class="ot-card"><div class="ot-card__meta">liga: ffl</div><div class="ot-card__big dyn-font" style="font-feature-settings:'liga' 1;">ffl</div><div class="ot-card__word dyn-font">Souffle baffle</div></div>
-      <div class="ot-card"><div class="ot-card__meta">dlig: ct / st</div><div class="ot-card__big dyn-font" style="font-feature-settings:'dlig' 1;">ct st</div><div class="ot-card__word dyn-font">architect aesthetic</div></div>
-      <div class="ot-card"><div class="ot-card__meta">dlig: ch / ck / sp</div><div class="ot-card__big dyn-font" style="font-feature-settings:'dlig' 1;">ch ck sp</div><div class="ot-card__word dyn-font">echo block speak</div></div>
-    </div>
-
-    <div style="background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:12px;">
-      <div style="font-size:0.75rem; font-family:monospace; color:var(--muted); text-transform:uppercase;">Капитель (smcp) + Старостильные цифры (onum) + Дроби (frac):</div>
-      <div class="dyn-font" style="font-size:1.6rem; letter-spacing:0.04em;" contenteditable="true" spellcheck="false">
-        THE QUICK BROWN FOX JUMPS OVER 1234567890 &bull; СЪЕШЬ ЖЕ ЕЩЁ ЭТИХ МЯГКИХ БУЛОК &bull; 1/2 3/4 7/8
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. МНОГОЯЗЫЧНЫЙ ТЕСТ-ДРАЙВ С ПОДСВЕТКОЙ КРИТИЧЕСКИХ МЕСТ -->
-  <section>
-    <div class="sec-head">
-      <h2>5. Многоязычный Тест-Драйв в Фразах и Текстах (с пометкой критических пар в словах)</h2>
-      <span>Подсвеченные маркером места показывают, где ключевые пары встречаются в реальном наборе</span>
-    </div>
-    <div class="editorial-grid">
-      <div class="ed-card">
-        <div class="ed-label">01. Стресс-тест критических мест (Латиница + Диакритика)</div>
-        <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
-          <mark class="crit-hl">Cî</mark>roc, <mark class="crit-hl">Qx</mark>ford, <mark class="crit-hl">Ox</mark>ford, <mark class="crit-hl">Oł</mark>awa, <mark class="crit-hl">Tî</mark>rgu, <mark class="crit-hl">Yì</mark>n, <mark class="crit-hl">Vš</mark>e, <mark class="crit-hl">Wš</mark>e
-        </div>
-        <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
-          Проверка плюсовых дыр после <b>g, j, f</b>: <mark class="crit-hl">go</mark>ld, <mark class="crit-hl">gd</mark>zie, <mark class="crit-hl">gr</mark>ace, <mark class="crit-hl">gl</mark>ass, <mark class="crit-hl">gm</mark>ach, <mark class="crit-hl">gj</mark>ord, <mark class="crit-hl">jm</mark>éno, <mark class="crit-hl">jr</mark>, <mark class="crit-hl">fm</mark>, <mark class="crit-hl">fn</mark>, <mark class="crit-hl">fr</mark>ame, <mark class="crit-hl">fp</mark>, <mark class="crit-hl">łw</mark>, <mark class="crit-hl">łv</mark>, <mark class="crit-hl">ťw</mark>.
-        </div>
+    <!-- 2.3 ЖИВОЙ СТЕК СРАВНЕНИЯ ВСЕХ 5 ШРИФТОВ В РЕАЛЬНОМ ВРЕМЕНИ -->
+    <section>
+      <div class="sec-head">
+        <h2>2. Живое Синхронное Сравнение Всех 5 Шрифтов</h2>
+        <span>Введите любой текст ниже — он мгновенно отобразится во всех 5 начертаниях одновременно</span>
       </div>
 
-      <div class="ed-card">
-        <div class="ed-label">02. Стресс-тест критических мест (Кириллица RU / BY / UA)</div>
-        <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
-          <mark class="crit-hl">Сл</mark>оварь, <mark class="crit-hl">Сї</mark>вер, <mark class="crit-hl">Ож</mark>ог, <mark class="crit-hl">Юж</mark>ный, <mark class="crit-hl">Ох</mark>вата, <mark class="crit-hl">Юх</mark>нов, <mark class="crit-hl">Сз</mark>ади
+      <div class="stack-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; background:var(--card-alt); padding:12px 16px; border-radius:8px;">
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <span style="font-size:0.75rem; font-weight:700; color:var(--muted); text-transform:uppercase;">Пресеты:</span>
+            <button class="pill-preset" onclick="setGlobalSample('Cîroc Oława Czułe światło Souffle doré Жыве')">Стресс-пары</button>
+            <button class="pill-preset" onclick="setGlobalSample('Silent rhythm, tactile grace, monumental discipline')">Headline EN</button>
+            <button class="pill-preset" onclick="setGlobalSample('Жыве Беларусь! Жыве вечна! Чуєш їх, доцю?')">Кириллица BY/UA</button>
+            <button class="pill-preset" onclick="setGlobalSample('The Theater of Ancient Winds — Notus 2026')">Лигатура Th</button>
+            <button class="pill-preset" onclick="setGlobalSample('СЛОВО СЛАВА СОЛНЦЕ СВЕТ СНЕГ СИЛА')">С-кластер</button>
+          </div>
+          <div style="font-size:0.75rem; color:var(--muted); font-family:monospace;">Синхронный ввод активен</div>
         </div>
-        <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
-          Проверка <b>С+прямые</b> и <b>Р+строчные</b>: <mark class="crit-hl">Св</mark>ет, <mark class="crit-hl">Ск</mark>возь, <mark class="crit-hl">Сн</mark>ег, <mark class="crit-hl">Си</mark>ла, <mark class="crit-hl">Сп</mark>ор, <mark class="crit-hl">Сц</mark>ена, <mark class="crit-hl">Ру</mark>ка, <mark class="crit-hl">Рм</mark>, <mark class="crit-hl">Рп</mark>, <mark class="crit-hl">Рр</mark>, <mark class="crit-hl">Ри</mark>тм, <mark class="crit-hl">Рн</mark>, <mark class="crit-hl">Рв</mark>, <mark class="crit-hl">Со</mark>н, <mark class="crit-hl">Се</mark>ть, <mark class="crit-hl">СМ</mark>И, <mark class="crit-hl">СБ</mark>ОР.
-        </div>
-      </div>
 
-      <div class="ed-card">
-        <div class="ed-label">03. Broadsheet Hero Slogans (Слоганы с главной страницы)</div>
-        <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
-          Silent rhythm, tactile grace.<br>
-          Souffle doré, beauté pure.<br>
-          Skärpa i mörker, mjuk i rörelse.<br>
-          Czułe światło, żywa forma.<br>
-          Жыве Беларусь! Жыве вечна!
+        <div class="stack-row">
+          <div class="stack-meta">
+            <span style="font-weight:700; color:var(--accent);">01 · Notus Display Thin (48–160pt)</span>
+            <span>font-style: normal</span>
+          </div>
+          <div class="stack-text global-sync-text" contenteditable="true" spellcheck="false" style="font-family:'Notus Display', serif; font-style:normal;">
+            Cîroc Oława Czułe światło Souffle doré Жыве Беларусь! The Theater
+          </div>
         </div>
-      </div>
 
-      <div class="ed-card">
-        <div class="ed-label">04. Редакционный текст (English / Polish / Czech / Russian / Ukrainian)</div>
-        <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
-          Named after the ancient deity of the southern gale, Notus dissolves the cold severity of neoclassical letterforms with fluid, kinetic terminations. Wśród nocnej ciszy, żółć, źródło, szczęście, dźwig. Příliš žluťoučký kůň úpěl ďábelské ódy. Плавность текучих капель и непоколебимая строгость высокого контраста. Чуєш їх, доцю, га? Кумедна ж ти, прощайся без ґольфів!
+        <div class="stack-row">
+          <div class="stack-meta">
+            <span style="font-weight:700; color:var(--accent);">02 · Notus Display Thin Italic (Editorial & Kinetic)</span>
+            <span>font-style: italic</span>
+          </div>
+          <div class="stack-text global-sync-text" contenteditable="true" spellcheck="false" style="font-family:'Notus Display Italic', serif; font-style:italic;">
+            Cîroc Oława Czułe światło Souffle doré Жыве Беларусь! The Theater
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-meta">
+            <span style="font-weight:700; color:var(--accent);">03 · Notus Display Text (10–24pt Body & Longform)</span>
+            <span>font-style: normal</span>
+          </div>
+          <div class="stack-text global-sync-text" contenteditable="true" spellcheck="false" style="font-family:'Notus Text', serif; font-style:normal;">
+            Cîroc Oława Czułe światło Souffle doré Жыве Беларусь! The Theater
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-meta">
+            <span style="font-weight:700; color:var(--accent);">04 · Notus Display Text Italic (Emphasis & Marginalia)</span>
+            <span>font-style: italic</span>
+          </div>
+          <div class="stack-text global-sync-text" contenteditable="true" spellcheck="false" style="font-family:'Notus Text Italic', serif; font-style:italic;">
+            Cîroc Oława Czułe światło Souffle doré Жыве Беларусь! The Theater
+          </div>
+        </div>
+
+        <div class="stack-row" style="border-bottom:none; padding-bottom:0;">
+          <div class="stack-meta">
+            <span style="font-weight:700; color:var(--accent);">05 · Notus Display Caption (6–12pt Micro-Typography)</span>
+            <span>font-style: normal</span>
+          </div>
+          <div class="stack-text global-sync-text" contenteditable="true" spellcheck="false" style="font-family:'Notus Caption', serif; font-style:normal;">
+            Cîroc Oława Czułe światło Souffle doré Жыве Беларусь! The Theater
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- 2.4 СВОДНЫЕ СПИСКИ FONTLAB ПО ВСЕМУ СЕМЕЙСТВУ (DEDUPLICATED) -->
+    <section>
+      <div class="sec-head">
+        <h2>3. Сводные Списки для FontLab по Всему Семейству (Без Дубликатов)</h2>
+        <span>Удобно скопировать все проблемные пары семейства одной кнопкой</span>
+      </div>
+      <table class="comma-table">
+        <tbody>
+          <tr>
+            <th>
+              <span style="color:var(--danger);">🔴 Все наезды семейств (-kern)</span><br>
+              <small>Всего 2 уникальные пары</small>
+            </th>
+            <td>
+              <div class="comma-box" id="globalBoxNeg">îî, įj</div>
+              <button class="copy-btn" onclick="copyBox('globalBoxNeg', this)">Скопировать наезды семейства</button>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span style="color:var(--warn);">🟠 Все слипания ядер (core)</span><br>
+              <small>Всего 1 уникальная пара</small>
+            </th>
+            <td>
+              <div class="comma-box" id="globalBoxTight">СЛ</div>
+              <button class="copy-btn" onclick="copyBox('globalBoxTight', this)">Скопировать слипания семейства</button>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span style="color:var(--warn);">🟡 Естественные касания (kern=0)</span><br>
+              <small>9 уникальных пар (штрих/капля касается акцента)</small>
+            </th>
+            <td>
+              <div class="comma-box" id="globalBoxNat">Tî, ft, fì, fï, fř, fť, Ťî, ҐХ, ґх</div>
+              <button class="copy-btn" onclick="copyBox('globalBoxNat', this)">Скопировать естественные касания</button>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <span style="color:var(--accent);">🟣 Топ плюсовых дыр (+kern)</span><br>
+              <small>Показаны топ-60 уникальных пар семейства</small>
+            </th>
+            <td>
+              <div class="comma-box" id="globalBoxPos">AB, AD, AE, AF, AH, AI, AJ, AK, AL, AM, AN, AP, AR, AZ, AŁ, AŹ, AŻ, AŽ, BZ, BŹ, BŻ, BŽ, DB, DD, DE, DF, DH, DI, DJ, DK, DL, DM, DN, DP, DR, HC, HG, HO, HQ, Hg, HÇ, HØ, IC, IG, IO, IQ, Ig, IÇ, IØ, JC, JG, JO, JQ, JÇ, JØ, MC, MG, MO, MQ, Mg</div>
+              <button class="copy-btn" onclick="copyBox('globalBoxPos', this)">Скопировать топ-60 дыр</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 2.5 ЭТАЛОННАЯ ШКАЛА ПРОСВЕТОВ ГАРНИТУРЫ -->
+    <section>
+      <div class="sec-head">
+        <h2>4. Эволюция Оптического Ритма по Оптическим Размерам (Optical Sizing)</h2>
+        <span>Показывает, как естественный просвет раскрывается от монументального Display к микро-набору Caption</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:14px;">
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px;">
+          <h4 style="font-size:0.85rem; color:var(--accent); text-transform:uppercase; margin-bottom:10px;">Эталон o+o (Круглые строчные)</h4>
+          <p style="font-size:0.82rem; color:var(--muted); margin-bottom:10px;">Базовый просвет между овалами:</p>
+          <div style="font-family:monospace; font-size:0.85rem; line-height:1.7;">
+            01 Thin: <b>136u</b><br>
+            02 Thin Italic: <b>146u</b><br>
+            03 Text: <b>106u</b><br>
+            04 Text Italic: <b>136u</b><br>
+            05 Caption: <b>116u</b>
+          </div>
+        </div>
+
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px;">
+          <h4 style="font-size:0.85rem; color:var(--accent); text-transform:uppercase; margin-bottom:10px;">Эталон n+o (Прямой + Круглый)</h4>
+          <p style="font-size:0.82rem; color:var(--muted); margin-bottom:10px;">Главный эталон текстовой строки:</p>
+          <div style="font-family:monospace; font-size:0.85rem; line-height:1.7;">
+            01 Thin: <b>161u</b><br>
+            02 Thin Italic: <b>179u</b><br>
+            03 Text: <b>141u</b><br>
+            04 Text Italic: <b>179u</b><br>
+            05 Caption: <b>149u</b>
+          </div>
+        </div>
+
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px;">
+          <h4 style="font-size:0.85rem; color:var(--accent); text-transform:uppercase; margin-bottom:10px;">Эталон n+n (Прямые строчные)</h4>
+          <p style="font-size:0.82rem; color:var(--muted); margin-bottom:10px;">Максимальный межколонный зазор:</p>
+          <div style="font-family:monospace; font-size:0.85rem; line-height:1.7;">
+            01 Thin: <b>229u</b><br>
+            02 Thin Italic: <b>228u</b><br>
+            03 Text: <b>211u</b><br>
+            04 Text Italic: <b>228u</b><br>
+            05 Caption: <b>210u</b>
+          </div>
+        </div>
+
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px;">
+          <h4 style="font-size:0.85rem; color:var(--accent); text-transform:uppercase; margin-bottom:10px;">Эталон H+H (Прописные прямые)</h4>
+          <p style="font-size:0.82rem; color:var(--muted); margin-bottom:10px;">Апроши маюскулов:</p>
+          <div style="font-family:monospace; font-size:0.85rem; line-height:1.7;">
+            01 Thin: <b>256u</b><br>
+            02 Thin Italic: <b>216u</b><br>
+            03 Text: <b>254u</b><br>
+            04 Text Italic: <b>216u</b><br>
+            05 Caption: <b>254u</b>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
 
 </div>
 
@@ -818,6 +1340,18 @@
     document.querySelectorAll('.font-tab').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-id') === id);
     });
+
+    if (id === 'all') {
+      document.getElementById('singleFontView').style.display = 'none';
+      document.getElementById('globalView').style.display = 'flex';
+      applyFeatures();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Single font mode
+    document.getElementById('singleFontView').style.display = 'flex';
+    document.getElementById('globalView').style.display = 'none';
 
     const entry = DB[id];
     const cfg = entry.cfg;
@@ -916,6 +1450,7 @@
     });
 
     const entry = DB[curFontId];
+    if (!entry) return;
     let items = [];
     if (cat === 'crashes_neg') items = entry.crashes_neg;
     else if (cat === 'over_tight') items = entry.over_tight;
@@ -949,9 +1484,9 @@
   function loadSample(txt, scroll = true) {
     const onEl = document.getElementById('inspOn');
     const offEl = document.getElementById('inspOff');
-    onEl.textContent = txt;
-    offEl.textContent = txt;
-    if (scroll) {
+    if (onEl) onEl.textContent = txt;
+    if (offEl) offEl.textContent = txt;
+    if (scroll && onEl) {
       onEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
@@ -963,6 +1498,22 @@
     document.getElementById('inspOn').textContent = e.target.textContent;
   });
 
+  // Global Sync Stack
+  document.querySelectorAll('.global-sync-text').forEach(el => {
+    el.addEventListener('input', e => {
+      const val = e.target.textContent;
+      document.querySelectorAll('.global-sync-text').forEach(other => {
+        if (other !== e.target) other.textContent = val;
+      });
+    });
+  });
+
+  function setGlobalSample(txt) {
+    document.querySelectorAll('.global-sync-text').forEach(el => {
+      el.textContent = txt;
+    });
+  }
+
   function toggleFeat(tag) {
     featState[tag] = !featState[tag];
     document.getElementById('btn-' + tag).classList.toggle('active', featState[tag]);
@@ -971,7 +1522,7 @@
 
   function applyFeatures() {
     const fStr = Object.entries(featState).map(([k, v]) => `"${k}" ${v ? 1 : 0}`).join(', ');
-    document.querySelectorAll('.dyn-font').forEach(el => {
+    document.querySelectorAll('.dyn-font, .stack-text').forEach(el => {
       if (el.id === 'inspOn' || el.id === 'inspOff') return;
       el.style.fontFeatureSettings = fStr;
       el.style.fontKerning = featState.kern ? 'normal' : 'none';
@@ -981,11 +1532,14 @@
   function setInspSize(px) {
     document.getElementById('inspOn').style.fontSize = px + 'px';
     document.getElementById('inspOff').style.fontSize = px + 'px';
+    document.querySelectorAll('.stack-text').forEach(el => {
+      el.style.fontSize = (px * 0.45) + 'px';
+    });
   }
 
   function setTracking(em) {
     document.getElementById('trackVal').textContent = (em >= 0 ? '+' : '') + parseFloat(em).toFixed(3) + 'em';
-    document.querySelectorAll('.dyn-font').forEach(el => {
+    document.querySelectorAll('.dyn-font, .stack-text').forEach(el => {
       el.style.letterSpacing = em + 'em';
     });
   }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notus Unified Type Tester — Все 5 Шрифтов, Оптический Кернинг и Критические Точки</title>
+<title>Notus Unified Type Tester — Все 5 Шрифтов, Оптический Кернинг и Литературный Набор</title>
 <style>
   @font-face {
     font-family: 'Notus Display';
@@ -527,14 +527,26 @@
     padding: 22px;
   }
   .ed-label {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-family: monospace;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .ed-display { font-size: 2.4rem; line-height: 1.22; margin-bottom: 12px; outline: none; }
-  .ed-body { font-size: 1.2rem; line-height: 1.58; outline: none; }
+  .ed-lang-badge {
+    background: var(--card-alt);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 0.68rem;
+    font-family: monospace;
+  }
+  .ed-display { font-size: 2.1rem; line-height: 1.24; margin-bottom: 12px; outline: none; }
+  .ed-body { font-size: 1.12rem; line-height: 1.62; outline: none; color: var(--text); }
 
   mark.crit-hl {
     background: rgba(255, 82, 99, 0.22);
@@ -544,9 +556,7 @@
     border-radius: 3px;
   }
 
-  /* ==========================================================================
-     GLOBAL FAMILY DASHBOARD STYLES
-     ========================================================================== */
+  /* Global Family Dashboard */
   .global-hero {
     background: var(--card);
     border: 1px solid var(--border);
@@ -657,7 +667,7 @@
     background: var(--card-alt);
     border: 1px solid var(--border);
     color: var(--text);
-    padding: 4px 10px;
+    padding: 4px 11px;
     border-radius: 12px;
     font-size: 0.75rem;
     cursor: pointer;
@@ -890,50 +900,126 @@
       </div>
     </section>
 
-    <!-- 1.6 МНОГОЯЗЫЧНЫЙ ТЕСТ-ДРАЙВ С ПОДСВЕТКОЙ КРИТИЧЕСКИХ МЕСТ -->
+    <!-- 1.6 МНОГОЯЗЫЧНЫЙ ЛИТЕРАТУРНЫЙ ТЕСТ-ДРАЙВ -->
     <section>
       <div class="sec-head">
-        <h2>5. Многоязычный Тест-Драйв в Фразах и Текстах (с пометкой критических пар в словах)</h2>
-        <span>Подсвеченные маркером места показывают, где ключевые пары встречаются в реальном наборе</span>
+        <h2>5. Литературные Тексты и Многоязычный Набор (Literary Specimen & Book Typography)</h2>
+        <span>Редакционные отрывки в типографическом наборе на 8 европейских языках (редактируемые блоки)</span>
       </div>
       <div class="editorial-grid">
+
+        <!-- 01. English Prose -->
         <div class="ed-card">
-          <div class="ed-label">01. Стресс-тест критических мест (Латиница + Диакритика)</div>
+          <div class="ed-label">
+            <span>01. English &bull; Classical Essay</span>
+            <span class="ed-lang-badge">EN &bull; Latin Standard</span>
+          </div>
           <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
-            <mark class="crit-hl">Cî</mark>roc, <mark class="crit-hl">Qx</mark>ford, <mark class="crit-hl">Ox</mark>ford, <mark class="crit-hl">Oł</mark>awa, <mark class="crit-hl">Tî</mark>rgu, <mark class="crit-hl">Yì</mark>n, <mark class="crit-hl">Vš</mark>e, <mark class="crit-hl">Wš</mark>e
+            The Architecture of Wind and Whispers
           </div>
           <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
-            Проверка плюсовых дыр после <b>g, j, f</b>: <mark class="crit-hl">go</mark>ld, <mark class="crit-hl">gd</mark>zie, <mark class="crit-hl">gr</mark>ace, <mark class="crit-hl">gl</mark>ass, <mark class="crit-hl">gm</mark>ach, <mark class="crit-hl">gj</mark>ord, <mark class="crit-hl">jm</mark>éno, <mark class="crit-hl">jr</mark>, <mark class="crit-hl">fm</mark>, <mark class="crit-hl">fn</mark>, <mark class="crit-hl">fr</mark>ame, <mark class="crit-hl">fp</mark>, <mark class="crit-hl">łw</mark>, <mark class="crit-hl">łv</mark>, <mark class="crit-hl">ťw</mark>.
+            In the quietest hours of autumn, when the gale from the Mediterranean bends the maritime pines along the coast, the air grows dense with salt and cedar. Antiquity called this wandering breeze Notus—the bearer of rain and warmth, sweeping away the brittle chill of northern plains. Every curve of a letterform carries a memory of that motion: strokes that taper like water running across marble, serifs that rise with the effortless symmetry of wings in flight.
           </div>
         </div>
 
+        <!-- 02. Polish Prose -->
         <div class="ed-card">
-          <div class="ed-label">02. Стресс-тест критических мест (Кириллица RU / BY / UA)</div>
+          <div class="ed-label">
+            <span>02. Polski &bull; Proza Literacka</span>
+            <span class="ed-lang-badge">PL &bull; Diakrytyka Środkowoeuropejska</span>
+          </div>
           <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
-            <mark class="crit-hl">Сл</mark>оварь, <mark class="crit-hl">Сї</mark>вер, <mark class="crit-hl">Ож</mark>ог, <mark class="crit-hl">Юж</mark>ный, <mark class="crit-hl">Ох</mark>вата, <mark class="crit-hl">Юх</mark>нов, <mark class="crit-hl">Сз</mark>ади
+            Czułe Światło i Źródło Poranka
           </div>
           <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
-            Проверка <b>С+прямые</b> и <b>Р+строчные</b>: <mark class="crit-hl">Св</mark>ет, <mark class="crit-hl">Ск</mark>возь, <mark class="crit-hl">Сн</mark>ег, <mark class="crit-hl">Си</mark>ла, <mark class="crit-hl">Сп</mark>ор, <mark class="crit-hl">Сц</mark>ена, <mark class="crit-hl">Ру</mark>ка, <mark class="crit-hl">Рм</mark>, <mark class="crit-hl">Рп</mark>, <mark class="crit-hl">Рр</mark>, <mark class="crit-hl">Ри</mark>тм, <mark class="crit-hl">Рн</mark>, <mark class="crit-hl">Рв</mark>, <mark class="crit-hl">Со</mark>н, <mark class="crit-hl">Се</mark>ть, <mark class="crit-hl">СМ</mark>И, <mark class="crit-hl">СБ</mark>ОР.
+            Wśród mglistych lasów Mazowsza, gdzie rzeki płyną cicho pośród trzcin, budzi się dzień pełen chłodu i żółtych liści. Dźwięk dzwonów niesie się wzdłuż wilgotnych dróg, budząc ze snu małe dworki i uśpione stawy. W pamięci pozostaje tylko czyste spojrzenie, dotyk szorstkiej kory dębu i niewyczerpana tęsknota za światem, który trwa wiecznie w słowach zapisanych przez poetów minionych stuleci.
           </div>
         </div>
 
+        <!-- 03. French Prose -->
         <div class="ed-card">
-          <div class="ed-label">03. Broadsheet Hero Slogans (Слоганы с главной страницы)</div>
+          <div class="ed-label">
+            <span>03. Français &bull; Prose Poétique</span>
+            <span class="ed-lang-badge">FR &bull; Accents &amp; Ligatures</span>
+          </div>
           <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
-            Silent rhythm, tactile grace.<br>
-            Souffle doré, beauté pure.<br>
-            Skärpa i mörker, mjuk i rörelse.<br>
-            Czułe światło, żywa forma.<br>
-            Жыве Беларусь! Жыве вечна!
+            L’Écho des Souffles et la Beauté Pure
+          </div>
+          <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
+            Sous les voûtes de pierre dorée, la lumière de fin d’après-midi glisse avec une douceur infinie. Le vent du sud s’infiltre par les persiennes entrouvertes, soulevant à peine le coin des feuilles manuscrites posées sur la table de noyer. On entend dans le lointain le murmure de la fontaine et le pas régulier d’un marcheur solitaire qui traverse la cour silencieuse.
           </div>
         </div>
 
+        <!-- 04. German Prose -->
         <div class="ed-card">
-          <div class="ed-label">04. Редакционный текст (English / Polish / Czech / Russian / Ukrainian)</div>
+          <div class="ed-label">
+            <span>04. Deutsch &bull; Literarisches Feuilleton</span>
+            <span class="ed-lang-badge">DE &bull; Umlaute &amp; Eszett ß</span>
+          </div>
+          <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
+            Stille Rhythmen im Schein der Dämmerung
+          </div>
           <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
-            Named after the ancient deity of the southern gale, Notus dissolves the cold severity of neoclassical letterforms with fluid, kinetic terminations. Wśród nocnej ciszy, żółć, źródło, szczęście, dźwig. Příliš žluťoučký kůň úpěl ďábelské ódy. Плавность текучих капель и непоколебимая строгость высокого контраста. Чуєш їх, доцю, га? Кумедна ж ти, прощайся без ґольфів!
+            Es war jene Übergangsstunde zwischen Tag und Nacht, in welcher die Umrisse alter Häuser im sanften Nebel verschwimmen. Aus den Alleen wehte ein feuchter Hauch von Lindenblüten und frischem Regen herüber. Jeder Schritt auf dem Pflaster klang merkwürdig hohl und klar, als ob die ganze Stadt den Atem angehalten hätte, um dem fernen Rauschen des Stromes zu lauschen.
           </div>
         </div>
+
+        <!-- 05. Czech Prose -->
+        <div class="ed-card">
+          <div class="ed-label">
+            <span>05. Čeština &bull; Knižní Typografie</span>
+            <span class="ed-lang-badge">CZ &bull; Háčky &amp; Čárky</span>
+          </div>
+          <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
+            Kouzlo Soumraku a Starých Uliček
+          </div>
+          <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
+            Staroměstské věže se tyčily proti nachovému nebi jako tiché stráže dávno minulých věků. Příliš žluťoučký kůň na starém erbu hleděl do hlubokého stínu podloubí, kde vítr rozfoukával spadané listí a vůni pečených kaštanů. V tom tichu zněla každá myšlenka jako ozvěna v prázdném chrámě, v němž čas ztrácí svůj neúprosný spěch.
+          </div>
+        </div>
+
+        <!-- 06. Belarusian Prose -->
+        <div class="ed-card">
+          <div class="ed-label">
+            <span>06. Беларуская &bull; Літаратурны Нарыс</span>
+            <span class="ed-lang-badge">BY &bull; Нескладовае Ў і Літара І</span>
+          </div>
+          <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
+            Светлы Подых Ранішняга Ветру
+          </div>
+          <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
+            Над ціхімі плёсамі Нёмана туман разыходзіўся паволі, адкрываючы залатыя шаты восеньскіх бяроз і дубоў. Пахла мокрым верасам, сасновай смалой і свежай раллёй. Здавалася, што сама зямля дыхае глыбока і спакойна, захоўваючы ў сваіх глыбінях непарушную мудрасць прадзедаў і вечную песню вольнага паўднёвага ветру. Жыве дух роднага краю, жыве ў кожным родным слове!
+          </div>
+        </div>
+
+        <!-- 07. Ukrainian Prose -->
+        <div class="ed-card">
+          <div class="ed-label">
+            <span>07. Українська &bull; Літературна Новелістика</span>
+            <span class="ed-lang-badge">UA &bull; Літери Є, І, Ї та Ґ</span>
+          </div>
+          <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
+            Степова Велич і Гомін Води
+          </div>
+          <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
+            Широкі степи дихали полином та нагрітим сонцем чебрецем. Десь далеко на обрії блищало срібне плесо Дніпра, а над ним кружляли чайки, вітаючи теплий південний легіт. У кожному шелесті ковили, у кожній пісні, що линула над вечірнім хутором, бриніла нездоланна жага до волі й глибока ніжність рідної землі. Чуєш їх, доцю? Кумедна ж ти, прощайся без ґольфів!
+          </div>
+        </div>
+
+        <!-- 08. Russian Prose -->
+        <div class="ed-card">
+          <div class="ed-label">
+            <span>08. Русский &bull; Классическая Романная Проза</span>
+            <span class="ed-lang-badge">RU &bull; Кириллический Баланс</span>
+          </div>
+          <div class="ed-display dyn-font" contenteditable="true" spellcheck="false">
+            Осенний Полдень и Шелест Старинных Лип
+          </div>
+          <div class="ed-body dyn-font" contenteditable="true" spellcheck="false">
+            В саду стояла совершенная тишина, какая бывает только в ясные дни позднего сентября. Прозрачный воздух был напоен ароматом антоновских яблок и сухой березовой листвы. Далекий звон колокола доносился с того берега реки, медленно тая среди освещенных солнцем перелесков и пустых деревенских проселков, где каждый след казался запечатленным навсегда.
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1144,22 +1230,26 @@
       </table>
     </section>
 
-    <!-- 2.3 ЖИВОЙ СТЕК СРАВНЕНИЯ ВСЕХ 5 ШРИФТОВ В РЕАЛЬНОМ ВРЕМЕНИ -->
+    <!-- 2.3 ЖИВОЙ СТЕК СРАВНЕНИЯ ВСЕХ 5 ШРИФТОВ В РЕАЛЬНОМ ВРЕМЕНИ С ЛИТЕРАТУРНЫМИ ПРЕСЕТАМИ -->
     <section>
       <div class="sec-head">
-        <h2>2. Живое Синхронное Сравнение Всех 5 Шрифтов</h2>
-        <span>Введите любой текст ниже — он мгновенно отобразится во всех 5 начертаниях одновременно</span>
+        <h2>2. Живое Синхронное Сравнение Всех 5 Шрифтов (с литературными пресетами)</h2>
+        <span>Выберите язык или введите свой текст — он мгновенно отобразится во всех 5 начертаниях гарнитуры</span>
       </div>
 
       <div class="stack-card">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; background:var(--card-alt); padding:12px 16px; border-radius:8px;">
           <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-            <span style="font-size:0.75rem; font-weight:700; color:var(--muted); text-transform:uppercase;">Пресеты:</span>
-            <button class="pill-preset" onclick="setGlobalSample('Cîroc Oława Czułe światło Souffle doré Жыве')">Стресс-пары</button>
-            <button class="pill-preset" onclick="setGlobalSample('Silent rhythm, tactile grace, monumental discipline')">Headline EN</button>
-            <button class="pill-preset" onclick="setGlobalSample('Жыве Беларусь! Жыве вечна! Чуєш їх, доцю?')">Кириллица BY/UA</button>
-            <button class="pill-preset" onclick="setGlobalSample('The Theater of Ancient Winds — Notus 2026')">Лигатура Th</button>
-            <button class="pill-preset" onclick="setGlobalSample('СЛОВО СЛАВА СОЛНЦЕ СВЕТ СНЕГ СИЛА')">С-кластер</button>
+            <span style="font-size:0.75rem; font-weight:700; color:var(--muted); text-transform:uppercase;">Языковые пресеты:</span>
+            <button class="pill-preset" onclick="setGlobalSample('The Architecture of Wind and Whispers: Notus sweeps away the brittle chill.')">English Prose</button>
+            <button class="pill-preset" onclick="setGlobalSample('Wśród mglistych lasów Mazowsza budzi się dzień pełen chłodu i żółtych liści.')">Polska Proza</button>
+            <button class="pill-preset" onclick="setGlobalSample('Sous les voûtes de pierre dorée, la lumière glisse avec une douceur infinie.')">Français</button>
+            <button class="pill-preset" onclick="setGlobalSample('Светлы подых ранішняга ветру над ціхімі плёсамі Нёмана і вольны дух.')">Беларуская</button>
+            <button class="pill-preset" onclick="setGlobalSample('Широкі степи дихали полином та нагрітим сонцем чебрецем над Дніпром.')">Українська</button>
+            <button class="pill-preset" onclick="setGlobalSample('В саду стояла совершенная тишина, напоенная ароматом антоновских яблок.')">Русская Проза</button>
+            <button class="pill-preset" onclick="setGlobalSample('Es war jene Übergangsstunde, in welcher die Umrisse im Nebel verschwimmen.')">Deutsch</button>
+            <button class="pill-preset" onclick="setGlobalSample('Staroměstské věže se tyčily proti nachovému nebi jako tiché stráže věků.')">Čeština</button>
+            <button class="pill-preset" onclick="setGlobalSample('Cîroc Oława Czułe światło Souffle doré Жыве Беларусь! The Theater')">Стресс-пары</button>
           </div>
           <div style="font-size:0.75rem; color:var(--muted); font-family:monospace;">Синхронный ввод активен</div>
         </div>
@@ -1170,7 +1260,7 @@
             <span>font-style: normal</span>
           </div>
           <div class="stack-text global-sync-text" contenteditable="true" spellcheck="false" style="font-family:'Notus Display', serif; font-style:normal;">
-            Cîroc Oława Czułe światło Souffle doré Жыве Беларусь! The Theater
+            The Architecture of Wind and Whispers: Notus sweeps away the brittle chill.
           </div>
         </div>
 
@@ -1180,7 +1270,7 @@
             <span>font-style: italic</span>
           </div>
           <div class="stack-text global-sync-text" contenteditable="true" spellcheck="false" style="font-family:'Notus Display Italic', serif; font-style:italic;">
-            Cîroc Oława Czułe światło Souffle doré Жыве Беларусь! The Theater
+            The Architecture of Wind and Whispers: Notus sweeps away the brittle chill.
           </div>
         </div>
 
@@ -1190,7 +1280,7 @@
             <span>font-style: normal</span>
           </div>
           <div class="stack-text global-sync-text" contenteditable="true" spellcheck="false" style="font-family:'Notus Text', serif; font-style:normal;">
-            Cîroc Oława Czułe światło Souffle doré Жыве Беларусь! The Theater
+            The Architecture of Wind and Whispers: Notus sweeps away the brittle chill.
           </div>
         </div>
 
@@ -1200,7 +1290,7 @@
             <span>font-style: italic</span>
           </div>
           <div class="stack-text global-sync-text" contenteditable="true" spellcheck="false" style="font-family:'Notus Text Italic', serif; font-style:italic;">
-            Cîroc Oława Czułe światło Souffle doré Жыве Беларусь! The Theater
+            The Architecture of Wind and Whispers: Notus sweeps away the brittle chill.
           </div>
         </div>
 
@@ -1210,7 +1300,7 @@
             <span>font-style: normal</span>
           </div>
           <div class="stack-text global-sync-text" contenteditable="true" spellcheck="false" style="font-family:'Notus Caption', serif; font-style:normal;">
-            Cîroc Oława Czułe światło Souffle doré Жыве Беларусь! The Theater
+            The Architecture of Wind and Whispers: Notus sweeps away the brittle chill.
           </div>
         </div>
       </div>

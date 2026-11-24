@@ -2,16 +2,20 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 0%;
+    width: 100%;
     height: 1px;
     background-color: #000;
     z-index: 10000;
-    transition: width 0.08s ease-out;
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    will-change: transform;
+    pointer-events: none;
 }
 
 @font-face {
     font-family: 'Notus Display';
-    src: url('notus/Notus-Display.otf?v=20261116_2221') format('opentype');
+    src: url('notus/Notus-Display.woff?v=20261124_perf') format('woff'),
+         url('notus/Notus-Display.otf?v=20261116_2221') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -19,7 +23,8 @@
 
 @font-face {
     font-family: 'Notus Display Italic';
-    src: url('notus/Notus-Display Italic.otf?v=20261116_2221') format('opentype');
+    src: url('notus/Notus-Display Italic.woff?v=20261124_perf') format('woff'),
+         url('notus/Notus-Display Italic.otf?v=20261116_2221') format('opentype');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -27,7 +32,8 @@
 
 @font-face {
     font-family: 'Notus Text';
-    src: url('notus/Notus-Text.otf?v=20261116_2221') format('opentype');
+    src: url('notus/Notus-Text.woff?v=20261124_perf') format('woff'),
+         url('notus/Notus-Text.otf?v=20261116_2221') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -35,7 +41,8 @@
 
 @font-face {
     font-family: 'Notus Text Italic';
-    src: url('notus/Notus-Text-Italic.otf?v=20261116_2221') format('opentype');
+    src: url('notus/Notus-Text-Italic.woff?v=20261124_perf') format('woff'),
+         url('notus/Notus-Text-Italic.otf?v=20261116_2221') format('opentype');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -43,7 +50,8 @@
 
 @font-face {
     font-family: 'Notus Caption';
-    src: url('notus/Notus-Caption.otf?v=20261116_2221') format('opentype');
+    src: url('notus/Notus-Caption.woff?v=20261124_perf') format('woff'),
+         url('notus/Notus-Caption.otf?v=20261116_2221') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -57,6 +65,8 @@
     --grid-gap: 1.2rem;
     --section-spacing: 8rem;
     --container-padding: 4rem;
+    --media-radius-lg: 28px;
+    --media-radius-sm: 20px;
     --font-main: 'Instrument Sans', sans-serif;
 }
 
@@ -71,6 +81,8 @@ html {
     text-rendering: optimizeLegibility;
     font-kerning: normal;
     font-feature-settings: "kern" 1;
+    overflow-x: clip;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -79,11 +91,9 @@ body {
     font-family: var(--font-main);
     line-height: 1.2;
     -webkit-font-smoothing: antialiased;
-    overflow-x: clip;
     max-width: 1800px;
     margin: 0 auto;
     position: relative;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.02); /* optional subtle edge to define it, wait, user said 'fill with white' and body is white, so it will just blend in seamlessly. No shadow needed. */
 }
 
 /* Header */
@@ -91,13 +101,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem var(--container-padding);
+    padding: 2rem max(var(--container-padding), calc((100% - 1800px) / 2 + var(--container-padding)));
     position: fixed;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
     width: 100%;
-    max-width: 1800px;
     background: rgba(255, 255, 255, 0.8);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
@@ -130,6 +139,44 @@ body {
     height: 40px;
     display: block;
     pointer-events: none;
+}
+
+.wb-logo-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.wb-logo-bar--mid {
+    clip-path: inset(50% 0 0 0);
+    animation: wbLogoBar 4s infinite;
+    will-change: clip-path;
+}
+
+@keyframes wbLogoBar {
+    0% {
+        clip-path: inset(50% 0 0 0);
+        animation-timing-function: cubic-bezier(1, 0, 0.667, 1);
+    }
+    27% {
+        clip-path: inset(0% 0 0 0);
+        animation-timing-function: cubic-bezier(0.953, 0, 0.63, 1);
+    }
+    49% {
+        clip-path: inset(0% 0 100% 0);
+        animation-timing-function: steps(1, end);
+    }
+    50% {
+        clip-path: inset(100% 0 0 0);
+        animation-timing-function: cubic-bezier(0.333, 0, 0, 1);
+    }
+    74% {
+        clip-path: inset(50% 0 0 0);
+        animation-timing-function: linear;
+    }
+    100% {
+        clip-path: inset(50% 0 0 0);
+    }
 }
 
 .header__author-name {
@@ -345,6 +392,8 @@ body {
     position: relative;
     overflow: hidden;
     background: #f5f5f5;
+    border-radius: var(--media-radius-sm);
+    isolation: isolate;
 }
 
 .project-card img,
@@ -353,7 +402,14 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: var(--media-radius-sm);
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card--large,
+.project-card--large img,
+.project-card--large video {
+    border-radius: var(--media-radius-lg);
 }
 
 .project-card:hover img,
@@ -617,7 +673,7 @@ body {
     height: 713px; /* Увеличено ровно на +15% от 620px */
     background-color: #e6e7e9;
     border-top: none;
-    border-radius: 32px; /* Закругление углов секции */
+    border-radius: var(--media-radius-lg); /* Закругление больших секций (32px) */
     overflow: hidden;
     pointer-events: none; /* Без интеракций с мышкой */
 }
@@ -628,7 +684,7 @@ body {
     height: 100%;
     background-color: #e6e7e9;
     color: #0d0d0d;
-    border-radius: 32px;
+    border-radius: var(--media-radius-lg);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -752,7 +808,7 @@ body {
         calc(var(--y, 0px) - 50%),
         var(--z, 0px)
     ) scale(1);
-    border-radius: 18px;
+    border-radius: var(--media-radius-sm);
     overflow: hidden;
     background: transparent;
     border: none;
@@ -769,7 +825,7 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-    border-radius: 18px;
+    border-radius: var(--media-radius-sm);
     border: none;
     outline: none;
     pointer-events: none;
@@ -1019,19 +1075,15 @@ body {
 .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    
-    /* Оптимизация рендеринга и аппаратное ускорение в Safari */
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
 }
 
 .reveal-active {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+    will-change: auto;
 }
 
 /* Каскадное (stagger) появление элементов витрины начертаний шрифта Notus */
@@ -1131,6 +1183,8 @@ body {
     width: 100%;
     overflow: hidden;
     background: #f5f5f5;
+    border-radius: var(--media-radius-lg);
+    isolation: isolate;
 }
 
 .antigravity-media__large video {
@@ -1138,6 +1192,7 @@ body {
     display: block;
     object-fit: cover;
     aspect-ratio: 16 / 9;
+    border-radius: var(--media-radius-lg);
 }
 
 .antigravity-media__row {
@@ -1150,6 +1205,8 @@ body {
     width: 100%;
     overflow: hidden;
     background: #f5f5f5;
+    border-radius: var(--media-radius-sm);
+    isolation: isolate;
 }
 
 .antigravity-media__small img {
@@ -1158,6 +1215,7 @@ body {
     display: block;
     object-fit: cover;
     aspect-ratio: 16 / 9;
+    border-radius: var(--media-radius-sm);
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1178,6 +1236,8 @@ body {
     width: 100%;
     overflow: hidden;
     position: relative;
+    border-radius: var(--media-radius-sm);
+    isolation: isolate;
     
     /* Стабилизация клиппинга и рендеринга в Safari */
     -webkit-transform: translate3d(0, 0, 0);
@@ -1209,6 +1269,8 @@ body {
     aspect-ratio: 1 / 1;
     overflow: hidden;
     background: #f5f5f5;
+    border-radius: var(--media-radius-sm);
+    isolation: isolate;
     
     /* Ускорение рендеринга дочерних медиа в Safari */
     -webkit-transform: translate3d(0, 0, 0);
@@ -1223,6 +1285,7 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: var(--media-radius-sm);
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1808,12 +1871,320 @@ body {
     margin: 0;
 }
 
-/* Анимационный блок Notus Lottie (16:9) */
+/* =========================================================
+   NOTUS CINEMATIC ON-SCROLL SHOWCASE (In-Place Frame Swap & Scale to Page Width)
+   ========================================================= */
+
+.notus-scroll-showcase {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    height: calc(100vh + 480px); /* 1 wheel scroll (~120px) per image swap */
+    flex-shrink: 0;
+    margin-top: 2rem;
+    margin-bottom: 0;
+    background-color: var(--bg-color, #ffffff);
+    box-sizing: border-box;
+}
+
+.notus-scroll-showcase__sticky {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--bg-color, #ffffff);
+}
+
+/* The frame that transitions from full screen (100vw x 100vh) to Services block width */
+.notus-scroll-frame {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+    background-color: #0c0c0e;
+    transform-origin: center center;
+    contain: layout paint;
+    box-sizing: border-box;
+}
+
+/* In-place slides (fixed pixel size set on resize, scaled purely on GPU via transform) */
+.notus-scroll-slide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate3d(-50%, -50%, 0) scale(1);
+    transform-origin: center center;
+    overflow: hidden;
+    will-change: transform, opacity;
+    pointer-events: none;
+    background-color: #0c0c0e;
+    opacity: 0;
+}
+
+.notus-scroll-slide--1 {
+    z-index: 10;
+    opacity: 1;
+}
+
+.notus-scroll-slide--2 {
+    z-index: 20;
+    opacity: 0;
+}
+
+.notus-scroll-slide--3 {
+    z-index: 30;
+    opacity: 0;
+}
+
+.notus-scroll-slide--4 {
+    z-index: 40;
+    opacity: 0;
+}
+
+.notus-scroll-slide__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+/* Central NOTUS Typography Overlay (Scales proportionally with image, no hover effect) */
+.notus-scroll-center-title {
+    position: absolute;
+    top: 49.2%;
+    left: 49.2%;
+    transform: translate3d(-50%, -50%, 0) scale(1);
+    transform-origin: center center;
+    will-change: transform;
+    z-index: 50;
+    pointer-events: none;
+    text-align: center;
+    user-select: none;
+    line-height: 0.88;
+}
+
+.notus-scroll-center-title__word {
+    font-family: 'Notus Display', serif;
+    font-size: clamp(3.84rem, 18vw, 17.4rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: -0.015em;
+    display: inline-block;
+    pointer-events: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1, "clig" 1;
+}
+
+/* Editorial HUD Overlay */
+.notus-scroll-hud {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    padding: 2.2rem 2.8rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    box-sizing: border-box;
+}
+
+.notus-scroll-hud__meta {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-family: var(--font-main);
+}
+
+.notus-scroll-hud__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.notus-scroll-hud__pill::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #2ecc71;
+    box-shadow: 0 0 8px #2ecc71;
+}
+
+.notus-scroll-hud__title {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.25s ease;
+}
+
+.notus-scroll-hud__badge {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+}
+
+.notus-scroll-hud__badge-text {
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    font-family: var(--font-main);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Nav Steps */
+.notus-scroll-hud__nav {
+    grid-column: 1;
+    grid-row: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: auto;
+}
+
+.notus-scroll-hud__step {
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.65);
+    border-radius: 999px;
+    padding: 0.35rem 0.8rem;
+    font-family: var(--font-main);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.notus-scroll-hud__step:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.notus-scroll-hud__step.is-active {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Hint */
+.notus-scroll-hud__hint {
+    grid-column: 2;
+    grid-row: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-main);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: all 0.3s ease;
+}
+
+.notus-scroll-hud__arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    animation: notusHintBounce 1.8s infinite ease-in-out;
+}
+
+@keyframes notusHintBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
+}
+
+.notus-scroll-hud__hint.is-locked {
+    background: rgba(46, 204, 113, 0.2);
+    border-color: rgba(46, 204, 113, 0.4);
+    color: #ffffff;
+}
+
+.notus-scroll-hud__hint.is-locked .notus-scroll-hud__arrow {
+    animation: none;
+    transform: translateY(0);
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+    .notus-scroll-hud {
+        padding: 1.2rem;
+    }
+
+    .notus-scroll-hud__badge {
+        display: none;
+    }
+
+    .notus-scroll-center-title__word {
+        font-size: clamp(3.36rem, 19.2vw, 7.8rem);
+    }
+}
+
+@media (max-width: 600px) {
+    .notus-scroll-showcase {
+        height: calc(100vh + 420px);
+    }
+
+    .notus-scroll-hud__hint {
+        display: none;
+    }
+}
+
+/* Legacy Lottie fallback (retained if needed elsewhere) */
 .type-lab__animation-container {
     width: 100%;
     max-width: 100%;
     height: 0;
-    padding-bottom: 56.25%; /* Абсолютно надежное 16:9 соотношение сторон для всех браузеров, исключающее схлопывание */
+    padding-bottom: 56.25%;
     background-color: #ffffff !important;
     border: none !important;
     box-shadow: none !important;
@@ -1838,7 +2209,7 @@ body {
     column-gap: 0;
     width: 100%;
     border-top: none;
-    margin-top: 1.5rem;
+    margin-top: 0;
     margin-bottom: 3.5rem;
     
     /* Профессиональный рендеринг и встроенный OpenType-кернинг */
@@ -1851,7 +2222,7 @@ body {
 .type-lab__showcase-header {
     grid-column: span 2;
     border-bottom: 1px solid #000;
-    padding: 3rem 0;
+    padding: 0 0 2rem 0;
     margin-bottom: 1rem;
 }
 
@@ -2551,6 +2922,8 @@ body {
     :root {
         --container-padding: 1.5rem;
         --section-spacing: 4rem;
+        --media-radius-lg: 22px;
+        --media-radius-sm: 16px;
     }
     
     /* Hero Section */
@@ -2658,13 +3031,13 @@ body {
     .stats--showcase {
         height: 598px; /* +15% от 520px на мобильных */
         padding: 0;
-        border-radius: 24px;
+        border-radius: var(--media-radius-lg);
     }
 
     .stats--showcase .showcase-stage {
         width: 100%;
         height: 100%;
-        border-radius: 24px;
+        border-radius: var(--media-radius-lg);
     }
 
     /* Stats White Section */

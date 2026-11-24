@@ -1,17 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Данные Lottie-анимации (общие для хедера и футера)
-    const logoAnimationData = {"v":"5.12.1","fr":25,"ip":0,"op":100,"w":500,"h":500,"nm":"WB Animation","ddd":0,"assets":[],"layers":[{"ddd":0,"ind":1,"ty":4,"nm":"W3","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[250,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":1,"k":[{"i":{"x":0.667,"y":1},"o":{"x":1,"y":0},"t":0,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,-1.095],[50,150],[-50,150],[-49.818,-1.095]],"c":true}]},{"i":{"x":0.63,"y":1},"o":{"x":0.953,"y":0},"t":27,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true}]},{"i":{"x":1,"y":1},"o":{"x":0.333,"y":0},"t":49,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50.182,-148.905],[-49.818,-148.905],[-50,-150]],"c":true}]},{"i":{"x":0,"y":1},"o":{"x":0.333,"y":0},"t":50,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.182,148.905],[50.365,150],[-49.635,150],[-49.818,148.905]],"c":true}]},{"t":74,"s":[{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50.183,-2.19],[50.365,150],[-49.635,150],[-49.817,-2.19]],"c":true}]}],"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":2,"ty":4,"nm":"W2","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[370,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0},{"ddd":0,"ind":3,"ty":4,"nm":"W1","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[130,250,0],"ix":2,"l":2},"a":{"a":0,"k":[0,0,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"shapes":[{"ty":"gr","it":[{"ind":0,"ty":"sh","ix":1,"ks":{"a":0,"k":{"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"v":[[50,-150],[50,150],[-50,150],[-50,-150]],"c":true},"ix":2},"nm":"Path 1","mn":"ADBE Vector Shape - Group","hd":false},{"ty":"st","c":{"a":0,"k":[0.921568986481,1,0.317646998985,1],"ix":3},"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":0,"ix":5},"lc":1,"lj":1,"ml":4,"bm":0,"nm":"Stroke 1","mn":"ADBE Vector Graphic - Stroke","hd":false},{"ty":"fl","c":{"a":0,"k":[0.070587001127,0.070587001127,0.070587001127,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"bm":0,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[0,0],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"bm":0,"ix":1,"mn":"ADBE Vector Group","hd":false}],"ip":0,"op":250,"st":0,"ct":1,"bm":0}],"markers":[],"props":{}};
+    // Лёгкий SVG+CSS логотип (замена ~300KB lottie-web — точная копия анимации 3 полос)
+    const wbLogoMarkup = '<svg class="wb-logo-svg" viewBox="0 0 500 500" aria-hidden="true" focusable="false"><rect x="80" y="100" width="100" height="300" fill="#121212"/><rect class="wb-logo-bar--mid" x="200" y="100" width="100" height="300" fill="#121212"/><rect x="320" y="100" width="100" height="300" fill="#121212"/></svg>';
 
-    // Инициализация Lottie логотипа — хедер
     const logoContainer = document.getElementById('lottie-logo');
-    if (logoContainer && typeof lottie !== 'undefined') {
-        lottie.loadAnimation({
-            container: logoContainer,
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            animationData: logoAnimationData
-        });
+    if (logoContainer && !logoContainer.querySelector('.wb-logo-svg')) {
+        logoContainer.innerHTML = wbLogoMarkup;
     }
 
     // Клик на логотип — переход на главную страницу (или плавный скролл наверх, если уже на главной)
@@ -32,116 +25,270 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Инициализация Lottie логотипа — футер
     const footerLogoContainer = document.getElementById('lottie-logo-footer');
-    if (footerLogoContainer && typeof lottie !== 'undefined') {
-        lottie.loadAnimation({
-            container: footerLogoContainer,
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            animationData: logoAnimationData
-        });
+    if (footerLogoContainer && !footerLogoContainer.querySelector('.wb-logo-svg')) {
+        footerLogoContainer.innerHTML = wbLogoMarkup;
     }
 
-    // Инициализация Lottie анимации Notus с гибридной обработкой (без CORS блокировок)
-    const notusContainer = document.getElementById('lottie-notus');
-    if (notusContainer && typeof lottie !== 'undefined') {
-        // 1. Сначала пробуем использовать встроенные данные из data.js (работает мгновенно локально без CORS)
-        if (window.notusAnimationData) {
-            lottie.loadAnimation({
-                container: notusContainer,
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                animationData: window.notusAnimationData
+    // =========================================================================
+    // Notus On-Scroll Cinematic Showcase (Zero-Lag GPU Scaling & In-Place Swap)
+    // =========================================================================
+    function initNotusScrollShowcase() {
+        const showcase = document.getElementById('notusScrollShowcase');
+        if (!showcase) return;
+
+        const frame = document.getElementById('notusScrollFrame');
+        const servicesBlock = document.getElementById('services-showcase');
+        const slides = [
+            document.querySelector('.notus-scroll-slide--1'),
+            document.querySelector('.notus-scroll-slide--2'),
+            document.querySelector('.notus-scroll-slide--3'),
+            document.querySelector('.notus-scroll-slide--4')
+        ];
+
+        const centerTitle = document.getElementById('notusScrollTitle');
+        const titleWord = centerTitle ? centerTitle.querySelector('.notus-scroll-center-title__word') : null;
+
+        // Pre-decode all 4 slide images into GPU/bitmap memory as soon as user approaches the section
+        // (avoids competing with initial above-the-fold load while preventing any scroll decode stutter)
+        const domImgs = showcase.querySelectorAll('.notus-scroll-slide__img');
+        const warmupNotusImages = () => {
+            domImgs.forEach(img => {
+                if (img.loading === 'lazy') img.loading = 'eager';
+                if (typeof img.decode === 'function') {
+                    img.decode().catch(() => {});
+                }
             });
+        };
+        if ('IntersectionObserver' in window) {
+            const warmupObserver = new IntersectionObserver((entries) => {
+                if (entries.some(e => e.isIntersecting)) {
+                    warmupNotusImages();
+                    warmupObserver.disconnect();
+                }
+            }, { rootMargin: '1000px 0px 1000px 0px' });
+            warmupObserver.observe(showcase);
         } else {
-            // 2. Резервный динамический fetch для веб-серверов, если data.js отсутствует
-            fetch('json/Notus/data.json')
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    return response.json();
-                })
-                .then(data => {
-                    lottie.loadAnimation({
-                        container: notusContainer,
-                        renderer: 'svg',
-                        loop: true,
-                        autoplay: true,
-                        animationData: data
-                    });
-                })
-                .catch(error => {
-                    console.warn('Lottie Notus loading failed:', error);
-                    notusContainer.innerHTML = `
-                        <div style="
-                            padding: 2rem; 
-                            text-align: center; 
-                            font-family: var(--font-main); 
-                            color: #c0392b; 
-                            font-size: 0.95rem;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            height: 100%;
-                        ">
-                            Не удалось загрузить файл анимации Notus. Убедитесь, что файл <code>json/Notus/data.json</code> существует.
-                        </div>
-                    `;
-                });
+            warmupNotusImages();
         }
+
+        const IMG_NATURAL_W = 1920;
+        const IMG_NATURAL_H = 1043;
+
+        // Cached layout metrics (recalculated ONLY on resize/load, never during scroll)
+        let showcaseTop = 0;
+        let totalDist = 1;
+        let fullW = window.innerWidth;
+        let fullH = window.innerHeight;
+        let targetW = fullW;
+        let targetH = 713;
+        let targetRadius = 28;
+        let baseImgScale = 1;
+
+        function measureShowcaseLayout() {
+            const scrollY = window.scrollY || document.documentElement.scrollTop;
+            const rect = showcase.getBoundingClientRect();
+            showcaseTop = rect.top + scrollY;
+            fullW = document.documentElement.clientWidth || window.innerWidth;
+            fullH = window.innerHeight;
+            totalDist = Math.max(1, showcase.offsetHeight - fullH);
+
+            if (servicesBlock) {
+                const servicesRect = servicesBlock.getBoundingClientRect();
+                const servicesStyle = window.getComputedStyle(servicesBlock);
+                targetW = servicesRect.width;
+                targetRadius = parseFloat(servicesStyle.borderRadius) || (fullW <= 768 ? 22 : 28);
+            } else {
+                const padX = fullW <= 768 ? 24 : 64;
+                const bodyW = Math.min(fullW, 1800);
+                targetW = bodyW - (padX * 2);
+                targetRadius = fullW <= 768 ? 22 : 28;
+            }
+
+            // Keep the height in the exact same proportion as the full-screen frame (do not squash to Services height)
+            targetH = Math.round(fullH * (targetW / fullW));
+
+            // Fix each slide's layout size to the uncropped cover dimensions at full screen
+            // so the <img> elements NEVER change width/height or re-rasterize during scroll!
+            baseImgScale = Math.max(fullW / IMG_NATURAL_W, fullH / IMG_NATURAL_H);
+            const baseSlideW = Math.ceil(IMG_NATURAL_W * baseImgScale);
+            const baseSlideH = Math.ceil(IMG_NATURAL_H * baseImgScale);
+
+            slides.forEach(slide => {
+                if (slide) {
+                    slide.style.width = `${baseSlideW}px`;
+                    slide.style.height = `${baseSlideH}px`;
+                }
+            });
+        }
+
+        let currentP = -1;
+        let rafId = null;
+
+        function onScrollTick() {
+            rafId = null;
+            const scrollY = window.scrollY || document.documentElement.scrollTop;
+            const scrolled = scrollY - showcaseTop;
+
+            // Skip work if far outside the showcase scroll range
+            if (scrolled < -fullH && currentP === 0) return;
+            if (scrolled > totalDist + fullH && currentP === 1) return;
+
+            const p = Math.min(Math.max(scrolled / totalDist, 0), 1);
+            if (Math.abs(p - currentP) < 0.0001) return;
+
+            currentP = p;
+            applyProgress(p);
+        }
+
+        function requestScrollUpdate() {
+            if (!rafId) {
+                rafId = requestAnimationFrame(onScrollTick);
+            }
+        }
+
+        function applyProgress(p) {
+            // =================================================================
+            // 1. Instant In-Place Image Cut (ZERO opacity overlap!)
+            //    Total scroll distance is ~480px (~120px / 1 wheel notch per step):
+            //    - Slide 0 (01_hala.jpg):    p < 0.22
+            //    - Slide 1 (02_iphone.jpg):  0.22 <= p < 0.48
+            //    - Slide 2 (03_street.jpg):  0.48 <= p < 0.74
+            //    - Slide 3 (04_macbook.jpg): p >= 0.74
+            // =================================================================
+            let activeIdx = 0;
+            if (p >= 0.74) {
+                activeIdx = 3;
+            } else if (p >= 0.48) {
+                activeIdx = 2;
+            } else if (p >= 0.22) {
+                activeIdx = 1;
+            }
+
+            // =================================================================
+            // 2. Smoothly Scale Frame from Full Screen to SERVICES block width & border-radius
+            //    while scaling images and NOTUS proportionally on the GPU
+            // =================================================================
+            const k = Math.min(Math.max((p - 0.05) / 0.75, 0), 1);
+            const easeK = k * k * (3 - 2 * k);
+
+            const currentW = fullW - ((fullW - targetW) * easeK);
+            const currentH = fullH - ((fullH - targetH) * easeK);
+            const currentRadius = targetRadius * easeK;
+
+            if (frame) {
+                frame.style.width = `${currentW.toFixed(1)}px`;
+                frame.style.height = `${currentH.toFixed(1)}px`;
+                frame.style.borderRadius = `${currentRadius.toFixed(1)}px`;
+            }
+
+            // Exact proportional scale of the image at (currentW x currentH) relative to full screen
+            const currentImgScale = Math.max(currentW / IMG_NATURAL_W, currentH / IMG_NATURAL_H);
+            const scaleRatio = currentImgScale / baseImgScale;
+            const scaleTransform = `translate3d(-50%, -50%, 0) scale(${scaleRatio.toFixed(4)})`;
+
+            for (let i = 0; i < slides.length; i++) {
+                const s = slides[i];
+                if (!s) continue;
+                if (i === activeIdx) {
+                    s.style.opacity = '1';
+                    s.style.visibility = 'visible';
+                    s.style.transform = scaleTransform;
+                } else {
+                    s.style.opacity = '0';
+                    s.style.visibility = 'hidden';
+                }
+            }
+
+            // Scale NOTUS in exact 1:1 proportion with the image
+            if (centerTitle) {
+                centerTitle.style.transform = scaleTransform;
+            }
+
+            // =================================================================
+            // 3. Central NOTUS Color based on background (crisp switch, no gray blend)
+            //    Slide 1: White (#ffffff), Slides 2..4: Deep Black (#000000)
+            // =================================================================
+            if (titleWord) {
+                titleWord.style.color = activeIdx === 0 ? '#ffffff' : '#000000';
+            }
+        }
+
+        measureShowcaseLayout();
+        onScrollTick();
+
+        window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+        window.addEventListener('resize', () => {
+            measureShowcaseLayout();
+            currentP = -1;
+            onScrollTick();
+        }, { passive: true });
+        window.addEventListener('load', () => {
+            measureShowcaseLayout();
+            currentP = -1;
+            onScrollTick();
+        }, { passive: true });
     }
 
+    initNotusScrollShowcase();
 
-    // Scroll Progress Bar & Header Scrolled state
+
+    // Scroll Progress Bar & Header Scrolled state (Zero-Layout-Read on Scroll)
     const progressBar = document.querySelector('.scroll-progress');
     const header = document.querySelector('.header');
+    const worksTitleEl = document.querySelector('#works h2');
 
-    const checkScrollState = () => {
-        if (!header) return;
-        const worksTitle = document.querySelector('#works h2');
-        if (worksTitle) {
-            const rect = worksTitle.getBoundingClientRect();
+    let worksTitleTriggerY = 200;
+    let maxPageScroll = 1;
+    let isHeaderScrolled = false;
+
+    const measureHeaderAndPage = () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        maxPageScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        if (worksTitleEl && header) {
+            const rect = worksTitleEl.getBoundingClientRect();
             const headerHeight = header.offsetHeight || 80;
-            if (rect.bottom <= headerHeight) {
-                header.classList.add('header--scrolled');
-            } else {
-                header.classList.remove('header--scrolled');
-            }
+            worksTitleTriggerY = (rect.bottom + scrollTop) - headerHeight;
         } else {
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            if (scrollTop > 200) {
-                header.classList.add('header--scrolled');
-            } else {
-                header.classList.remove('header--scrolled');
+            worksTitleTriggerY = 200;
+        }
+    };
+
+    const updateHeaderAndProgress = () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        if (progressBar) {
+            const ratio = Math.min(Math.max(scrollTop / maxPageScroll, 0), 1);
+            progressBar.style.transform = `scaleX(${ratio.toFixed(4)})`;
+        }
+        if (header) {
+            const shouldBeScrolled = scrollTop >= worksTitleTriggerY;
+            if (shouldBeScrolled !== isHeaderScrolled) {
+                isHeaderScrolled = shouldBeScrolled;
+                header.classList.toggle('header--scrolled', shouldBeScrolled);
             }
         }
     };
 
-    // Инициализация при загрузке
-    checkScrollState();
+    measureHeaderAndPage();
+    updateHeaderAndProgress();
 
-    let scrollTimeout;
+    let scrollTimeout = null;
     window.addEventListener('scroll', () => {
         if (scrollTimeout) return;
         scrollTimeout = requestAnimationFrame(() => {
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            
-            if (progressBar) {
-                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrollPercentage = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-                progressBar.style.width = `${scrollPercentage}%`;
-            }
-
-            checkScrollState();
-
+            updateHeaderAndProgress();
             scrollTimeout = null;
         });
     }, { passive: true });
 
-    // Пересчет при ресайзе страницы
-    window.addEventListener('resize', checkScrollState, { passive: true });
+    window.addEventListener('resize', () => {
+        measureHeaderAndPage();
+        updateHeaderAndProgress();
+    }, { passive: true });
+    window.addEventListener('load', () => {
+        measureHeaderAndPage();
+        updateHeaderAndProgress();
+    }, { passive: true });
 
     // Утилита: разбить текст элемента на символы для анимации
     function splitTextToChars(element) {
@@ -176,23 +323,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scroll Reveal Animation (IntersectionObserver)
     const observerOptions = {
         threshold: 0,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '80px 0px 80px 0px'
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('reveal-active');
-                observer.unobserve(entry.target);
+    const revealElements = document.querySelectorAll('.project-card, .project-antigravity, .project-dclex, .project-verity, .hero__title, .stats__title, .stats-white__title, .cta__title, .type-lab__header, .type-lab__showcase-header, .type-lab__showcase-item, .type-lab__toggle, .type-lab__slider-container-wide');
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-active');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        revealElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight + 80 && rect.bottom > -80) {
+                el.classList.add('reveal', 'reveal-active');
+            } else {
+                el.classList.add('reveal');
+                observer.observe(el);
             }
         });
-    }, observerOptions);
-
-    const revealElements = document.querySelectorAll('.project-card, .project-antigravity, .project-dclex, .project-verity, .hero__title, .stats__title, .stats-white__title, .cta__title, .type-lab__header, .type-lab__showcase-header, .type-lab__showcase-item, .type-lab__toggle, .type-lab__slider-container-wide');
-    revealElements.forEach(el => {
-        el.classList.add('reveal');
-        observer.observe(el);
-    });
+    } else {
+        revealElements.forEach(el => {
+            el.classList.add('reveal', 'reveal-active');
+        });
+    }
 
     // =============================================
     // ЛОГИКА КОНТАКТНОЙ ФОРМЫ
@@ -1106,6 +1264,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dFrom = Math.hypot(item.x + fromT.camX, item.y + fromT.camY);
                 const dTo = Math.hypot(item.x + toT.camX, item.y + toT.camY);
                 if (dFrom < 1150 || dTo < 1150) {
+                    if (item.videoEl.getAttribute('preload') === 'none') {
+                        item.videoEl.setAttribute('preload', 'auto');
+                    }
                     if (item.videoEl.paused) {
                         item.videoEl.play().catch(() => {});
                     }
@@ -1117,6 +1278,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
+        const pauseAllShowcaseVideos = () => {
+            for (let i = 0; i < cardData.length; i++) {
+                const item = cardData[i];
+                if (item.videoEl && !item.videoEl.paused) {
+                    item.videoEl.pause();
+                }
+            }
+        };
+
         let isShowcaseVisible = false;
         let isShowcaseAnimating = false;
         let activeNodeIndex = 0;
@@ -1124,14 +1294,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const showcaseObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 isShowcaseVisible = entry.isIntersecting;
-                if (isShowcaseVisible && !isShowcaseAnimating) {
-                    isShowcaseAnimating = true;
-                    animationStartTime = performance.now() - pausedElapsed;
-                    updateNearbyVideos(currentFromTarget, currentToTarget);
-                    requestAnimationFrame(animateShowcaseMetaverse);
+                if (isShowcaseVisible) {
+                    if (!isShowcaseAnimating) {
+                        isShowcaseAnimating = true;
+                        animationStartTime = performance.now() - pausedElapsed;
+                        updateNearbyVideos(currentFromTarget, currentToTarget);
+                        requestAnimationFrame(animateShowcaseMetaverse);
+                    }
+                } else {
+                    pauseAllShowcaseVideos();
                 }
             });
-        }, { threshold: 0.05 });
+        }, { threshold: 0.01, rootMargin: '250px 0px 250px 0px' });
 
         showcaseObserver.observe(showcaseSection);
 
@@ -1819,33 +1993,88 @@ document.addEventListener('DOMContentLoaded', () => {
     // =============================================
     // ЛЕНИВАЯ ЗАГРУЗКА И УПРАВЛЕНИЕ ВИДЕО (PLAY/PAUSE)
     // =============================================
-    const videoObserverOptions = {
-        threshold: 0.05, // Запускаем, если видно хотя бы 5% видео
-        rootMargin: '150px 0px 150px 0px' // Подгружаем и запускаем чуть заранее
-    };
-
-    const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const video = entry.target;
-            if (entry.isIntersecting) {
-                if (video.paused) {
-                    video.play().catch(err => {
-                        console.log('Autoplay prevented:', err);
+    const projectBlocks = document.querySelectorAll('.project-antigravity, .project-dclex, .project-verity');
+    if (projectBlocks.length > 0 && 'IntersectionObserver' in window) {
+        const projectVideoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const videos = entry.target.querySelectorAll('video');
+                if (entry.isIntersecting) {
+                    videos.forEach(video => {
+                        if (video.getAttribute('preload') !== 'auto') {
+                            video.setAttribute('preload', 'auto');
+                            if (video.readyState === 0) {
+                                video.load();
+                            }
+                        }
+                        if (video.paused) {
+                            video.play().catch(() => {});
+                        }
+                    });
+                } else {
+                    videos.forEach(video => {
+                        if (!video.paused) {
+                            video.pause();
+                        }
                     });
                 }
-            } else {
-                if (!video.paused) {
-                    video.pause();
-                }
-            }
+            });
+        }, {
+            threshold: 0.01,
+            rootMargin: '250px 0px 250px 0px'
         });
-    }, videoObserverOptions);
 
-    const allVideos = document.querySelectorAll('video');
-    allVideos.forEach(video => {
-        video.setAttribute('preload', 'auto');
-        videoObserver.observe(video);
-    });
+        projectBlocks.forEach(block => {
+            projectVideoObserver.observe(block);
+        });
+    }
+
+    // Пауза бесконечных CSS-слайдеров (.dclex-slider__track), когда они вне области видимости
+    const marqueeSliders = document.querySelectorAll('.dclex-slider');
+    if (marqueeSliders.length > 0 && 'IntersectionObserver' in window) {
+        const marqueeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const track = entry.target.querySelector('.dclex-slider__track');
+                if (track) {
+                    track.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+                }
+            });
+        }, {
+            threshold: 0.01,
+            rootMargin: '80px 0px 80px 0px'
+        });
+
+        marqueeSliders.forEach(slider => {
+            marqueeObserver.observe(slider);
+        });
+    }
+
+    // Управление остальными видео вне карточек проектов и 3D-витрины
+    const standaloneVideos = Array.from(document.querySelectorAll('video')).filter(
+        video => !video.closest('#works') && !video.closest('#services-showcase')
+    );
+    if (standaloneVideos.length > 0 && 'IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+                if (entry.isIntersecting) {
+                    if (video.paused) {
+                        video.play().catch(() => {});
+                    }
+                } else {
+                    if (!video.paused) {
+                        video.pause();
+                    }
+                }
+            });
+        }, {
+            threshold: 0.05,
+            rootMargin: '150px 0px 150px 0px'
+        });
+
+        standaloneVideos.forEach(video => {
+            videoObserver.observe(video);
+        });
+    }
 
     // =============================================
     // RODO / POLISH PKE COOKIE CONSENT CONTROLLER

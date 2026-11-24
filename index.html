@@ -36,15 +36,15 @@
     <title>Wiktor Buksza | Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261106_5">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20261124_perf">
 </head>
 <body>
     <div class="scroll-progress" aria-hidden="true"></div>
     <header class="header">
         <a href="index.html" class="header__logo-container" id="logoLink" aria-label="Wiktor Buksza - Home">
             <div class="header__logo" id="lottie-logo">
-                <!-- Lottie animation will be injected here -->
+                <svg class="wb-logo-svg" viewBox="0 0 500 500" aria-hidden="true" focusable="false"><rect x="80" y="100" width="100" height="300" fill="#121212"/><rect class="wb-logo-bar--mid" x="200" y="100" width="100" height="300" fill="#121212"/><rect x="320" y="100" width="100" height="300" fill="#121212"/></svg>
             </div>
             <span class="header__author-name">Wiktor Buksza</span>
         </a>
@@ -69,12 +69,11 @@ emotion and visual precision.
             <h2 class="display-button">Selected works</h2>
 
             <!-- Проект Antigravity -->
-            <div class="project-antigravity reveal">
+            <div class="project-antigravity">
                 <div class="antigravity-media">
                     <div class="antigravity-media__large">
                         <div class="video-loader"></div>
-                        <video autoplay muted loop playsinline>
-                            <source src="optimized_assets/Antigravity/Levitation_mobile.mp4" type="video/mp4" media="(max-width: 768px)">
+                        <video autoplay muted loop playsinline preload="metadata" poster="optimized_assets/Antigravity/Levitation_poster.jpg">
                             <source src="optimized_assets/Antigravity/Levitation_Scene_Final_Render.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -105,12 +104,12 @@ emotion and visual precision.
             </div>
 
             <!-- Проект DCLEX с бесконечным слайдером -->
-            <div class="project-dclex reveal">
+            <div class="project-dclex">
                 <div class="dclex-slider">
                     <div class="dclex-slider__track">
                         <!-- Основной набор из 4 элементов -->
                         <div class="dclex-slider__item">
-                            <video autoplay muted loop playsinline preload="auto">
+                            <video muted loop playsinline preload="none">
                                 <source src="optimized_assets/dclex/DCLEX_Dribbble_1.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -118,7 +117,7 @@ emotion and visual precision.
                             <img src="optimized_assets/dclex/DCLEX_Dribbble_2.webp" alt="DCLEX Screen 1" loading="lazy" decoding="async">
                         </div>
                         <div class="dclex-slider__item">
-                            <video autoplay muted loop playsinline preload="auto">
+                            <video muted loop playsinline preload="none">
                                 <source src="optimized_assets/dclex/DCLEX_Dribbble_3.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -127,7 +126,7 @@ emotion and visual precision.
                         </div>
                         <!-- Дублирующий набор для бесшовного зацикливания -->
                         <div class="dclex-slider__item">
-                            <video autoplay muted loop playsinline preload="auto">
+                            <video muted loop playsinline preload="none">
                                 <source src="optimized_assets/dclex/DCLEX_Dribbble_1.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -135,7 +134,7 @@ emotion and visual precision.
                             <img src="optimized_assets/dclex/DCLEX_Dribbble_2.webp" alt="DCLEX Screen 1" loading="lazy" decoding="async">
                         </div>
                         <div class="dclex-slider__item">
-                            <video autoplay muted loop playsinline preload="auto">
+                            <video muted loop playsinline preload="none">
                                 <source src="optimized_assets/dclex/DCLEX_Dribbble_3.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -162,38 +161,38 @@ emotion and visual precision.
             </div>
 
             <!-- Проект Verity -->
-            <div class="project-verity reveal">
+            <div class="project-verity">
                 <div class="dclex-slider">
                     <div class="dclex-slider__track">
                         <!-- Оригинальный набор (3 ассета) -->
                         <div class="dclex-slider__item">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="optimized_assets/Verity/Verity_Website_1.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="dclex-slider__item">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="optimized_assets/Verity/Verity_Website_2.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="dclex-slider__item">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="optimized_assets/Verity/Verity_Website_3.mp4" type="video/mp4">
                             </video>
                         </div>
                         <!-- Дублирующий набор для бесшовного зацикливания -->
                         <div class="dclex-slider__item">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="optimized_assets/Verity/Verity_Website_1.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="dclex-slider__item">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="optimized_assets/Verity/Verity_Website_2.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="dclex-slider__item">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="optimized_assets/Verity/Verity_Website_3.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -237,9 +236,37 @@ emotion and visual precision.
                 </div>
             </div>
 
-            <!-- Анимационный блок Notus Lottie (16:9) -->
-            <div class="type-lab__animation-container">
-                <div id="lottie-notus" class="type-lab__lottie-player"></div>
+            <!-- On-scroll Editorial Showcase (In-Place Frame Swap & Scale to Page Width) -->
+            <div class="notus-scroll-showcase" id="notusScrollShowcase">
+                <div class="notus-scroll-showcase__sticky">
+                    <!-- Dynamic Frame: transitions from 100vw full screen to page width -->
+                    <div class="notus-scroll-frame" id="notusScrollFrame">
+                        <!-- Layer 1: Hala (Base, starts full screen) -->
+                        <div class="notus-scroll-slide notus-scroll-slide--1" data-index="0">
+                            <img src="optimized_assets/Notus/scroll/01_hala.jpg?v=20261124_perf" alt="Notus in Architecture - Hala" class="notus-scroll-slide__img" loading="lazy" decoding="async">
+                        </div>
+
+                        <!-- Layer 2: iPhone (In-place transition) -->
+                        <div class="notus-scroll-slide notus-scroll-slide--2" data-index="1">
+                            <img src="optimized_assets/Notus/scroll/02_iphone.jpg?v=20261124_perf" alt="Notus on Mobile - iPhone" class="notus-scroll-slide__img" loading="lazy" decoding="async">
+                        </div>
+
+                        <!-- Layer 3: Street (In-place transition) -->
+                        <div class="notus-scroll-slide notus-scroll-slide--3" data-index="2">
+                            <img src="optimized_assets/Notus/scroll/03_street.jpg?v=20261124_perf" alt="Notus in Public Space - Street Poster" class="notus-scroll-slide__img" loading="lazy" decoding="async">
+                        </div>
+
+                        <!-- Layer 4: MacBook (Locks in at page width) -->
+                        <div class="notus-scroll-slide notus-scroll-slide--4" data-index="3">
+                            <img src="optimized_assets/Notus/scroll/04_macbook.jpg?v=20261124_perf" alt="Notus Digital Specimen - MacBook" class="notus-scroll-slide__img" loading="lazy" decoding="async">
+                        </div>
+
+                        <!-- Central NOTUS Typography Overlay -->
+                        <div class="notus-scroll-center-title" id="notusScrollTitle">
+                            <span class="notus-scroll-center-title__word" data-text="Notus">Notus</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Витрина начертаний шрифта Notus Type -->
@@ -287,7 +314,7 @@ emotion and visual precision.
             </div>
 
             <!-- Бесконечный слайдер для Notus Type -->
-            <div class="type-lab__slider-container-wide reveal" style="margin-top: 1rem; margin-bottom: 2rem;">
+            <div class="type-lab__slider-container-wide" style="margin-top: 1rem; margin-bottom: 2rem;">
                 <div class="type-lab__slider-info">
                     <h4 class="type-lab__slider-title">
                         Visual specimens and editorial layouts
@@ -492,89 +519,89 @@ emotion and visual precision.
                     <div class="showcase-camera" id="showcase-camera">
                         <!-- 01: Animation / Altalogy Showreel — 16:9 (384x216, Z = 0px) -->
                         <div class="showcase-card is-focused" data-node="0" data-ratio="16:9" style="--x: 0px; --y: 0px; --z: 0px; --w: 384px; --h: 216px;">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="showcase_assets/Animation/Altalogy Showreel.mp4" type="video/mp4">
                             </video>
                         </div>
 
                         <!-- 02: Branding / Crescent — 4:5 (264x330, Z = -80px) -->
                         <div class="showcase-card" data-node="1" data-ratio="4:5" style="--x: -440px; --y: 210px; --z: -80px; --w: 264px; --h: 330px;">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="showcase_assets/Branding/Crescent.mp4" type="video/mp4">
                             </video>
                         </div>
 
                         <!-- 03: Illustration / Metaverse — 16:10 (340x202, Z = +95px) -->
                         <div class="showcase-card" data-node="2" data-ratio="16:10" style="--x: 110px; --y: -365px; --z: 95px; --w: 340px; --h: 202px;">
-                            <img src="showcase_assets/Illustration/Metaverse.png" alt="Metaverse Illustration" loading="lazy" decoding="async">
+                            <img src="showcase_assets/Illustration/Metaverse.jpg" alt="Metaverse Illustration" loading="lazy" decoding="async">
                         </div>
 
                         <!-- 04: Animation / Monn Mortgage — 4:3 (348x261, Z = -110px) -->
                         <div class="showcase-card" data-node="3" data-ratio="4:3" style="--x: 410px; --y: 355px; --z: -110px; --w: 348px; --h: 261px;">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="showcase_assets/Animation/Monn Mortgage.mp4" type="video/mp4">
                             </video>
                         </div>
 
                         <!-- 05: Animation / Verity AI — 9:16 (204x362, Z = +75px) -->
                         <div class="showcase-card" data-node="4" data-ratio="9:16" style="--x: -755px; --y: -225px; --z: 75px; --w: 204px; --h: 362px;">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="showcase_assets/Animation/work_03_sub1.mp4" type="video/mp4">
                             </video>
                         </div>
 
                         <!-- 06: Branding / SIDE Branding — 16:9 (352x198, Z = -65px) -->
                         <div class="showcase-card" data-node="5" data-ratio="16:9" style="--x: 630px; --y: -185px; --z: -65px; --w: 352px; --h: 198px;">
-                            <img src="showcase_assets/Branding/SIDE Branding.png" alt="SIDE Branding" loading="lazy" decoding="async">
+                            <img src="showcase_assets/Branding/SIDE Branding.jpg" alt="SIDE Branding" loading="lazy" decoding="async">
                         </div>
 
                         <!-- 07: Illustration / Antigravity Study I — 16:9 (304x171, Z = +110px) -->
                         <div class="showcase-card" data-node="6" data-ratio="16:9" style="--x: -185px; --y: 585px; --z: 110px; --w: 304px; --h: 171px;">
-                            <img src="showcase_assets/Illustration/work_01_sub1.webp" alt="Antigravity Study I" loading="lazy" decoding="async">
+                            <img src="optimized_assets/Antigravity/Image_2.webp" alt="Antigravity Study I" loading="lazy" decoding="async">
                         </div>
 
                         <!-- 08: Animation / Engine — 4:3 (348x261, Z = -95px) -->
                         <div class="showcase-card" data-node="7" data-ratio="4:3" style="--x: -435px; --y: -690px; --z: -95px; --w: 348px; --h: 261px;">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="showcase_assets/Animation/Engine.mp4" type="video/mp4">
                             </video>
                         </div>
 
                         <!-- 09: Branding / DCLEX Brand — 4:3 (340x255, Z = +80px) -->
                         <div class="showcase-card" data-node="8" data-ratio="4:3" style="--x: 900px; --y: 265px; --z: 80px; --w: 340px; --h: 255px;">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="showcase_assets/Branding/DCLEX Dribbble.mp4" type="video/mp4">
                             </video>
                         </div>
 
                         <!-- 10: Animation / DCLEX Motion — 4:3 (336x252, Z = -75px) -->
                         <div class="showcase-card" data-node="9" data-ratio="4:3" style="--x: -920px; --y: 395px; --z: -75px; --w: 336px; --h: 252px;">
-                            <video autoplay muted loop playsinline>
-                                <source src="showcase_assets/Animation/work_02_main.mp4" type="video/mp4">
+                            <video muted loop playsinline preload="none">
+                                <source src="optimized_assets/dclex/DCLEX_Dribbble_1.mp4" type="video/mp4">
                             </video>
                         </div>
 
                         <!-- 11: Typography / Notus Type — 4:5 (260x325, Z = +105px) -->
                         <div class="showcase-card" data-node="10" data-ratio="4:5" style="--x: 540px; --y: -665px; --z: 105px; --w: 260px; --h: 325px;">
-                            <img src="showcase_assets/Typography/work_03_sub2.webp" alt="Notus Type" loading="lazy" decoding="async">
+                            <img src="optimized_assets/Notus/Notus_1.webp" alt="Notus Type" loading="lazy" decoding="async">
                         </div>
 
                         <!-- 12: Animation / SpaceX — 4:3 (336x252, Z = -90px) -->
                         <div class="showcase-card" data-node="11" data-ratio="4:3" style="--x: 290px; --y: 925px; --z: -90px; --w: 336px; --h: 252px;">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="showcase_assets/Animation/SpaceX.mp4" type="video/mp4">
                             </video>
                         </div>
 
                         <!-- 13: Illustration / Antigravity Study II — 3:4 (228x304, Z = -105px) -->
                         <div class="showcase-card" data-node="12" data-ratio="3:4" style="--x: 1310px; --y: -160px; --z: -105px; --w: 228px; --h: 304px;">
-                            <img src="showcase_assets/Illustration/work_01_sub2.webp" alt="Antigravity Study II" loading="lazy" decoding="async">
+                            <img src="optimized_assets/Antigravity/Image_3.webp" alt="Antigravity Study II" loading="lazy" decoding="async">
                         </div>
 
                         <!-- 14: Animation / DCLEX Exchange — 16:10 (340x212, Z = +90px) -->
                         <div class="showcase-card" data-node="13" data-ratio="16:10" style="--x: -670px; --y: 885px; --z: 90px; --w: 340px; --h: 212px;">
-                            <video autoplay muted loop playsinline>
-                                <source src="showcase_assets/Animation/work_02_sub2.mp4" type="video/mp4">
+                            <video muted loop playsinline preload="none">
+                                <source src="optimized_assets/dclex/DCLEX_Dribbble_3.mp4" type="video/mp4">
                             </video>
                         </div>
 
@@ -585,20 +612,20 @@ emotion and visual precision.
 
                         <!-- 16: Animation / SpaceX Orbital — 4:3 (348x261, Z = +95px) -->
                         <div class="showcase-card" data-node="15" data-ratio="4:3" style="--x: 925px; --y: 780px; --z: 95px; --w: 348px; --h: 261px;">
-                            <video autoplay muted loop playsinline>
+                            <video muted loop playsinline preload="none">
                                 <source src="showcase_assets/Animation/SpaceX_2.mp4" type="video/mp4">
                             </video>
                         </div>
 
                         <!-- 17: Branding / DCLEX Interface — 4:3 (296x222, Z = -100px) -->
                         <div class="showcase-card" data-node="16" data-ratio="4:3" style="--x: -1290px; --y: 20px; --z: -100px; --w: 296px; --h: 222px;">
-                            <img src="showcase_assets/Branding/work_02_sub1.webp" alt="DCLEX Interface" loading="lazy" decoding="async">
+                            <img src="optimized_assets/dclex/DCLEX_Dribbble_2.webp" alt="DCLEX Interface" loading="lazy" decoding="async">
                         </div>
 
                         <!-- 18: Animation / Verity Autonomy — 4:5 (264x330, Z = +75px) -->
                         <div class="showcase-card" data-node="17" data-ratio="4:5" style="--x: 1045px; --y: -670px; --z: 75px; --w: 264px; --h: 330px;">
-                            <video autoplay muted loop playsinline>
-                                <source src="showcase_assets/Animation/work_03_main.mp4" type="video/mp4">
+                            <video muted loop playsinline preload="none">
+                                <source src="optimized_assets/Verity/Verity_Website_1.mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -758,7 +785,9 @@ emotion and visual precision.
     <footer class="footer">
         <div class="footer__grid">
             <div class="footer__logo-container">
-                <div id="lottie-logo-footer"></div>
+                <div id="lottie-logo-footer">
+                    <svg class="wb-logo-svg" viewBox="0 0 500 500" aria-hidden="true" focusable="false"><rect x="80" y="100" width="100" height="300" fill="#121212"/><rect class="wb-logo-bar--mid" x="200" y="100" width="100" height="300" fill="#121212"/><rect x="320" y="100" width="100" height="300" fill="#121212"/></svg>
+                </div>
                 <p class="footer__author-name">Wiktor Buksza</p>
             </div>
             <div class="footer__content">
@@ -807,8 +836,6 @@ emotion and visual precision.
         </div>
     </aside>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-    <script src="json/Notus/data.js"></script>
-    <script src="main.js?v=20261105_4"></script>
+    <script src="main.js?v=20261124_perf" defer></script>
 </body>
 </html>

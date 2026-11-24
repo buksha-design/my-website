@@ -49,28 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const centerTitle = document.getElementById('notusScrollTitle');
         const titleWord = centerTitle ? centerTitle.querySelector('.notus-scroll-center-title__word') : null;
 
-        // Pre-decode all 4 slide images into GPU/bitmap memory as soon as user approaches the section
-        // (avoids competing with initial above-the-fold load while preventing any scroll decode stutter)
+        // Pre-decode all 4 slide images into GPU/bitmap memory immediately so scrolling into Notus is 0ms instant
         const domImgs = showcase.querySelectorAll('.notus-scroll-slide__img');
-        const warmupNotusImages = () => {
-            domImgs.forEach(img => {
-                if (img.loading === 'lazy') img.loading = 'eager';
-                if (typeof img.decode === 'function') {
-                    img.decode().catch(() => {});
-                }
-            });
-        };
-        if ('IntersectionObserver' in window) {
-            const warmupObserver = new IntersectionObserver((entries) => {
-                if (entries.some(e => e.isIntersecting)) {
-                    warmupNotusImages();
-                    warmupObserver.disconnect();
-                }
-            }, { rootMargin: '1000px 0px 1000px 0px' });
-            warmupObserver.observe(showcase);
-        } else {
-            warmupNotusImages();
-        }
+        domImgs.forEach(img => {
+            if (typeof img.decode === 'function') {
+                img.decode().catch(() => {});
+            }
+        });
 
         const IMG_NATURAL_W = 1920;
         const IMG_NATURAL_H = 1043;
@@ -2000,12 +1985,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const videos = entry.target.querySelectorAll('video');
                 if (entry.isIntersecting) {
                     videos.forEach(video => {
-                        if (video.getAttribute('preload') !== 'auto') {
-                            video.setAttribute('preload', 'auto');
-                            if (video.readyState === 0) {
-                                video.load();
-                            }
-                        }
                         if (video.paused) {
                             video.play().catch(() => {});
                         }
